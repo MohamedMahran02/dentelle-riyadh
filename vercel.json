@@ -2,9 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/preview.html" }
-  ],
   "headers": [
     {
       "source": "/(.*)\\.(webp|jpg|jpeg|png|gif|avif|svg|mov|mp4|ico|pdf)",
