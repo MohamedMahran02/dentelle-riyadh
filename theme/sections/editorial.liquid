@@ -1,0 +1,30 @@
+<section class="editorial" data-reveal>
+  <div class="editorial__media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '600,900,1200,1600', sizes: '(max-width:960px) 100vw, 55vw', alt: section.settings.heading | strip_html }}
+    {%- endif -%}
+  </div>
+  <div class="editorial__text">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="h-display">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.body != blank -%}<p>{{ section.settings.body }}</p>{%- endif -%}
+    {%- if section.settings.link_label != blank -%}
+      <a href="{{ section.settings.link_url }}" class="link-underline">{{ section.settings.link_label }} ›</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial split",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La Maison" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p><em>A whisper</em><br>of Arabian<br>couture.</p>" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Founded in Riyadh, Dentelle is a study in opposites — the restraint of Najdi geometry meeting the extravagance of French lace." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read our story" },
+    { "type": "url", "id": "link_url", "label": "Link URL" }
+  ],
+  "presets": [{ "name": "Editorial split" }]
+}
+{% endschema %}

@@ -1,0 +1,69 @@
+<section class="hero" id="hero-{{ section.id }}">
+  <div class="hero__media" data-parallax>
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2400 | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        widths: '800,1200,1600,2000,2400',
+        sizes: '100vw',
+        alt: section.settings.image.alt | default: section.settings.heading_line_1
+      }}
+    {%- else -%}
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#2A2521,#0E0B09);"></div>
+    {%- endif -%}
+    <div class="hero__scrim" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero__content">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow reveal-stagger" style="--d:.1s">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+
+    <h1 class="display reveal-stagger" style="--d:.25s">
+      {%- if section.settings.heading_line_1 != blank -%}
+        <span class="display__line"><em>{{ section.settings.heading_line_1 }}</em></span>
+      {%- endif -%}
+      {%- if section.settings.heading_line_2 != blank -%}
+        <span class="display__line">{{ section.settings.heading_line_2 }}</span>
+      {%- endif -%}
+    </h1>
+
+    {%- if section.settings.lede != blank -%}
+      <p class="hero__lede reveal-stagger" style="--d:.45s">{{ section.settings.lede }}</p>
+    {%- endif -%}
+
+    <div class="hero__cta reveal-stagger" style="--d:.6s">
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="btn btn--light">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link_url }}" class="link-underline">{{ section.settings.link_label }} ›</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="hero__scroll reveal-stagger" style="--d:.9s" aria-hidden="true">
+    <span>{{ section.settings.scroll_label | default: 'Scroll' }}</span>
+    <span class="hero__scroll-line"></span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Haute Couture — Autumn / Winter" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1 (italic)", "default": "Dentelle" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "de la nuit" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "An Arabian atelier composed in lace, silk and silence — where every thread is drawn for the woman who dresses for herself." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Discover the collection" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "link_label", "label": "Secondary link label", "default": "La maison" },
+    { "type": "url", "id": "link_url", "label": "Secondary link URL" },
+    { "type": "text", "id": "scroll_label", "label": "Scroll indicator text", "default": "Scroll" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

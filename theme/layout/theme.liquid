@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{% if request.locale.iso_code == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="{{ settings.color_bg | default: '#FBF8F2' }}">
+
+  <title>
+    {%- if template.name == 'index' -%}
+      {{ shop.name }} — {{ shop.description | default: 'Arabian luxury lingerie' }}
+    {%- else -%}
+      {{ page_title }} — {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+  {%- endif -%}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  {{ content_for_header }}
+</head>
+
+<body class="template-{{ template.name }}">
+  <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+
+  {% sections 'header-group' %}
+
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>

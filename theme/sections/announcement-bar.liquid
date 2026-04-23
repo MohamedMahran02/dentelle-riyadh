@@ -1,0 +1,33 @@
+{%- if section.blocks.size > 0 -%}
+<div class="announcement" data-reveal>
+  <div class="announcement__inner">
+    {%- for block in section.blocks -%}
+      <span class="announcement__item" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
+      {%- unless forloop.last -%}<span class="announcement__sep" aria-hidden="true">·</span>{%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Complimentary shipping across the Gulf" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "message", "settings": { "text": "Complimentary shipping across the Gulf" } },
+      { "type": "message", "settings": { "text": "Atelier by appointment — Riyadh" } },
+      { "type": "message", "settings": { "text": "EN / AR" } }
+    ]
+  }
+}
+{% endschema %}

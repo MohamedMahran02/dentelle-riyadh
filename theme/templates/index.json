@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Haute Couture — Autumn / Winter",
+        "heading_line_1": "Dentelle",
+        "heading_line_2": "de la nuit",
+        "lede": "An Arabian atelier composed in lace, silk and silence — where every thread is drawn for the woman who dresses for herself.",
+        "button_label": "Discover the collection",
+        "link_label": "La maison",
+        "scroll_label": "Scroll"
+      }
+    },
+    "marquee": { "type": "marquee" },
+    "featured-duo": { "type": "featured-duo" },
+    "editorial": { "type": "editorial" },
+    "product-grid": { "type": "product-grid" },
+    "full-bleed": { "type": "full-bleed" },
+    "story-bilingual": { "type": "story-bilingual" }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "featured-duo",
+    "editorial",
+    "product-grid",
+    "full-bleed",
+    "story-bilingual"
+  ]
+}

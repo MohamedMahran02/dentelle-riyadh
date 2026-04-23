@@ -1,0 +1,58 @@
+<section class="featured-duo" data-reveal>
+  <div class="featured-duo__intro">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="h-display">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+  </div>
+
+  <div class="featured-duo__grid">
+    {%- for block in section.blocks -%}
+      {%- assign col = block.settings.collection -%}
+      <a href="{{ col.url | default: block.settings.link }}" class="collection-card {% if forloop.index == 2 %}collection-card--offset{% endif %}" {{ block.shopify_attributes }}>
+        <div class="collection-card__media">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1400 | image_tag: widths: '600,900,1200,1400', sizes: '(max-width:960px) 100vw, 50vw', alt: block.settings.title }}
+          {%- elsif col.featured_image != blank -%}
+            {{ col.featured_image | image_url: width: 1400 | image_tag: widths: '600,900,1200,1400', sizes: '(max-width:960px) 100vw, 50vw', alt: col.title }}
+          {%- endif -%}
+        </div>
+        <div class="collection-card__meta">
+          <span class="collection-card__index">{{ forloop.index | prepend: '0' | slice: -2, 2 }} —</span>
+          <h3>{{ block.settings.title | default: col.title }}</h3>
+          <span class="link-underline">{{ block.settings.link_label | default: 'Explore' }} ›</span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured duo",
+  "max_blocks": 2,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Les Collections" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Two stories,<br><em>one signature.</em></p>" }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection card",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image (overrides collection image)" },
+        { "type": "text", "id": "title", "label": "Title override" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore" },
+        { "type": "url", "id": "link", "label": "Custom link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured duo",
+      "blocks": [{ "type": "collection" }, { "type": "collection" }]
+    }
+  ]
+}
+{% endschema %}

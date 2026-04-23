@@ -1,0 +1,20 @@
+{
+  "general": {
+    "search": "بحث",
+    "cart": "السلة",
+    "close": "إغلاق",
+    "menu": "القائمة"
+  },
+  "accessibility": {
+    "skip_to_text": "تخطي إلى المحتوى"
+  },
+  "sections": {
+    "header-group": { "name": "الرأس" },
+    "footer-group": { "name": "التذييل" }
+  },
+  "newsletter": {
+    "placeholder": "بريدك الإلكتروني",
+    "submit": "اشتراك",
+    "success": "شكراً — ستصلك رسائلنا قريباً."
+  }
+}

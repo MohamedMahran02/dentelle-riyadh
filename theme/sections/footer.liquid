@@ -1,0 +1,64 @@
+<footer class="site-footer">
+  <div class="site-footer__top">
+    <div class="site-footer__brand">
+      <svg class="logo-mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
+        <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
+      </svg>
+      <span class="site-logo__wordmark">{{ section.settings.wordmark | default: 'Dentelle' }}</span>
+      <span class="site-logo__city">{{ section.settings.city | default: 'Riyadh' }}</span>
+      {%- if section.settings.tagline != blank -%}<p class="site-footer__tagline">{{ section.settings.tagline }}</p>{%- endif -%}
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'menu' -%}
+        <div class="site-footer__col" {{ block.shopify_attributes }}>
+          <h4>{{ block.settings.title }}</h4>
+          {%- for link in block.settings.menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="site-footer__base">
+    <small>© {{ 'now' | date: '%Y' }} {{ shop.name }} — {{ section.settings.copyright | default: 'All rights reserved.' }}</small>
+    <small>{{ section.settings.cities | default: 'Riyadh · Jeddah · by appointment' }}</small>
+    <small>
+      {%- for locale in shop.published_locales -%}
+        <a class="locale-btn {% if locale.iso_code == request.locale.iso_code %}is-active{% endif %}" href="/{{ locale.iso_code }}">{{ locale.iso_code | upcase }}</a>
+        {%- unless forloop.last -%} · {%- endunless -%}
+      {%- endfor -%}
+    </small>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "Dentelle" },
+    { "type": "text", "id": "city", "label": "City", "default": "Riyadh" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Arabian luxury lingerie" },
+    { "type": "text", "id": "copyright", "label": "Copyright text", "default": "All rights reserved." },
+    { "type": "text", "id": "cities", "label": "Cities line", "default": "Riyadh · Jeddah · by appointment" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Column title", "default": "Maison" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "title": "Maison" } },
+      { "type": "menu", "settings": { "title": "Client care" } },
+      { "type": "menu", "settings": { "title": "Follow" } }
+    ]
+  }
+}
+{% endschema %}

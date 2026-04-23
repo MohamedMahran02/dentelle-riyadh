@@ -1,0 +1,17 @@
+{
+  "current": {
+    "color_bg": "#FBF8F2",
+    "color_ink": "#0E0B09",
+    "color_muted": "#7A726B",
+    "color_gold": "#A88A5C",
+    "max_width": 1480
+  },
+  "presets": {
+    "Default": {
+      "color_bg": "#FBF8F2",
+      "color_ink": "#0E0B09",
+      "color_muted": "#7A726B",
+      "color_gold": "#A88A5C"
+    }
+  }
+}

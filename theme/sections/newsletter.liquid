@@ -1,0 +1,26 @@
+<section class="newsletter" data-reveal>
+  <div class="newsletter__inner">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="h-display">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.body != blank -%}<p>{{ section.settings.body }}</p>{%- endif -%}
+
+    {% form 'customer', class: 'newsletter__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" placeholder="{{ section.settings.placeholder | default: 'Your email' }}" required aria-label="Email">
+      <button type="submit">{{ section.settings.button_label | default: 'Subscribe' }}</button>
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Rejoignez la Maison" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Private correspondence.</p>" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Invitations to private views, atelier releases, and letters from Riyadh." },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Your email" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" }
+  ]
+}
+{% endschema %}

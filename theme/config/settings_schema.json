@@ -1,0 +1,37 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Dentelle Riyadh",
+    "theme_version": "1.0.0",
+    "theme_author": "Dentelle Atelier",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_bg", "label": "Page background", "default": "#FBF8F2" },
+      { "type": "color", "id": "color_ink", "label": "Ink", "default": "#0E0B09" },
+      { "type": "color", "id": "color_muted", "label": "Muted", "default": "#7A726B" },
+      { "type": "color", "id": "color_gold", "label": "Accent — gold", "default": "#A88A5C" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "paragraph", "content": "Fonts are loaded from Google Fonts in theme.liquid — Bodoni Moda (display), Cormorant Garamond (serif), Jost (sans labels), Noto Naskh Arabic + IBM Plex Sans Arabic." }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "max_width", "label": "Content max width (px)", "min": 1200, "max": 1600, "step": 20, "default": 1480 }
+    ]
+  }
+]

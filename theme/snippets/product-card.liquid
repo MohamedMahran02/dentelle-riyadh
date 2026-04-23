@@ -1,0 +1,35 @@
+{%- comment -%} Usage: {% render 'product-card', product: product %} {%- endcomment -%}
+{%- if product -%}
+  {%- assign img_a = product.featured_image -%}
+  {%- assign img_b = product.images[1] | default: img_a -%}
+  <article class="product-card">
+    <a href="{{ product.url }}" class="product-card__media" aria-label="{{ product.title }}">
+      {%- if img_a -%}
+        {{ img_a | image_url: width: 900 | image_tag: class: 'product-card__img product-card__img--a', widths: '400,600,900', sizes: '(max-width:560px) 100vw, (max-width:960px) 50vw, 25vw', alt: product.title, loading: 'lazy' }}
+      {%- endif -%}
+      {%- if img_b -%}
+        {{ img_b | image_url: width: 900 | image_tag: class: 'product-card__img product-card__img--b', widths: '400,600,900', sizes: '(max-width:560px) 100vw, (max-width:960px) 50vw, 25vw', alt: product.title, loading: 'lazy' }}
+      {%- endif -%}
+    </a>
+    <div class="product-card__meta">
+      <h3>{{ product.title }}</h3>
+      {%- if product.metafields.custom.subtitle != blank -%}
+        <p>{{ product.metafields.custom.subtitle }}</p>
+      {%- elsif product.type != blank -%}
+        <p>{{ product.type }}</p>
+      {%- endif -%}
+      <span class="price">{{ product.price | money_without_trailing_zeros }}</span>
+    </div>
+  </article>
+{%- else -%}
+  <article class="product-card">
+    <a href="#" class="product-card__media" aria-label="Placeholder">
+      <div class="product-card__img product-card__img--a" style="background:linear-gradient(135deg,#E8E1D5,#DCD3C4);"></div>
+    </a>
+    <div class="product-card__meta">
+      <h3>Pièce signature</h3>
+      <p>Coming soon</p>
+      <span class="price">—</span>
+    </div>
+  </article>
+{%- endif -%}

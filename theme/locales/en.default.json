@@ -1,0 +1,20 @@
+{
+  "general": {
+    "search": "Search",
+    "cart": "Bag",
+    "close": "Close",
+    "menu": "Menu"
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content"
+  },
+  "sections": {
+    "header-group": { "name": "Header" },
+    "footer-group": { "name": "Footer" }
+  },
+  "newsletter": {
+    "placeholder": "Your email",
+    "submit": "Subscribe",
+    "success": "Thank you — letters will arrive soon."
+  }
+}

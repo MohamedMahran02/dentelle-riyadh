@@ -1,0 +1,30 @@
+<section class="story" data-reveal>
+  <div class="story__column">
+    {%- if section.settings.eyebrow_en != blank -%}<span class="eyebrow">{{ section.settings.eyebrow_en }}</span>{%- endif -%}
+    {%- if section.settings.heading_en != blank -%}<h2 class="h-display">{{ section.settings.heading_en }}</h2>{%- endif -%}
+    {%- if section.settings.body_en != blank -%}<p>{{ section.settings.body_en }}</p>{%- endif -%}
+  </div>
+
+  <div class="story__column story__column--ar" dir="rtl" lang="ar">
+    {%- if section.settings.eyebrow_ar != blank -%}<span class="eyebrow eyebrow--ar">{{ section.settings.eyebrow_ar }}</span>{%- endif -%}
+    {%- if section.settings.heading_ar != blank -%}<h2 class="h-display-ar">{{ section.settings.heading_ar }}</h2>{%- endif -%}
+    {%- if section.settings.body_ar != blank -%}<p class="body-ar">{{ section.settings.body_ar }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Story (bilingual)",
+  "settings": [
+    { "type": "header", "content": "English column" },
+    { "type": "text", "id": "eyebrow_en", "label": "Eyebrow", "default": "Notre Philosophie" },
+    { "type": "richtext", "id": "heading_en", "label": "Heading", "default": "<p>A quiet <em>intimacy.</em></p>" },
+    { "type": "textarea", "id": "body_en", "label": "Body", "default": "We believe the most refined garments are the ones no one sees. Dentelle is an act of private luxury — a devotion to craft that answers only to the woman who wears it." },
+    { "type": "header", "content": "Arabic column" },
+    { "type": "text", "id": "eyebrow_ar", "label": "Eyebrow (AR)", "default": "فلسفتنا" },
+    { "type": "richtext", "id": "heading_ar", "label": "Heading (AR)", "default": "<p>هدوءٌ <em>حَميم.</em></p>" },
+    { "type": "textarea", "id": "body_ar", "label": "Body (AR)", "default": "نؤمن بأن أرقى الأناقة هي تلك التي لا تُرى. دانتيل تصوغ للمرأة لحظةً لا تخصّ سواها — حرفةٌ صامتة، وخيطٌ من الحرير لا يُجيب إلا لها." }
+  ],
+  "presets": [{ "name": "Story (bilingual)" }]
+}
+{% endschema %}

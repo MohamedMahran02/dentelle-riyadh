@@ -1,0 +1,34 @@
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {%- unless forloop.last -%}<span class="marquee__dot">✦</span>{%- endunless -%}
+      {%- endfor -%}
+      <span class="marquee__dot">✦</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Riyadh" }]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "text": "Riyadh" } },
+      { "type": "item", "settings": { "text": "Maison de Dentelle" } },
+      { "type": "item", "settings": { "text": "Arabian Luxury Lingerie" } },
+      { "type": "item", "settings": { "text": "Est. MMXXIV" } }
+    ]
+  },
+  "presets": [{ "name": "Marquee" }]
+}
+{% endschema %}

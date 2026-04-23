@@ -1,0 +1,38 @@
+<section class="product-grid" data-reveal>
+  <header class="product-grid__head">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="h-display">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.view_all_label != blank -%}
+      <a href="{{ section.settings.view_all_link | default: routes.all_products_collection_url }}" class="link-underline">{{ section.settings.view_all_label }} ›</a>
+    {%- endif -%}
+  </header>
+
+  <div class="product-grid__items">
+    {%- assign col = collections[section.settings.collection] -%}
+    {%- assign limit = section.settings.products_to_show | default: 4 -%}
+    {%- if col != blank -%}
+      {%- for product in col.products limit: limit -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..limit) -%}
+        {% render 'product-card', product: null %}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pièces Signature" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>The <em>essentials.</em></p>" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "All pieces" },
+    { "type": "url", "id": "view_all_link", "label": "View all link" }
+  ],
+  "presets": [{ "name": "Product grid" }]
+}
+{% endschema %}
