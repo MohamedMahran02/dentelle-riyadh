@@ -33,26 +33,32 @@
 </div>
 
 <!-- HEADER -->
-<header class="site-header site-header--stack" id="siteHeader">
-  <div class="site-header__row">
-    <div class="site-header__icons site-header__icons--left">
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
-        <span></span><span></span>
-      </button>
-      <a href="#" class="icon-link" aria-label="Search">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      </a>
-    </div>
-
-    <a href="#" class="site-logo site-logo--lg" aria-label="Dentelle Riyadh — Home">
+<header class="site-header site-header--left" id="siteHeader">
+  <div class="site-header__top">
+    <a href="#" class="site-logo site-logo--lg site-logo--left" aria-label="Dentelle Riyadh — Home">
       <svg class="logo-mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
         <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
       </svg>
       <span class="site-logo__wordmark">Dentelle</span>
       <span class="site-logo__city">Riyadh</span>
     </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
+      <span></span><span></span>
+    </button>
+  </div>
 
-    <div class="site-header__icons site-header__icons--right">
+  <div class="site-header__bottom">
+    <nav class="site-nav site-nav--row" aria-label="Primary">
+      <a href="#philosophy">Philosophy</a>
+      <a href="#brand">The Brand</a>
+      <a href="#pieces">Mohrah Collection</a>
+      <a href="#size">Size Consultation</a>
+      <a href="#offers">Offers</a>
+    </nav>
+    <div class="site-header__icons">
+      <a href="#" class="icon-link" aria-label="Search">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
       <a href="#" class="icon-link" aria-label="Account">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
       </a>
@@ -64,15 +70,6 @@
       </a>
     </div>
   </div>
-
-  <nav class="site-nav site-nav--below" aria-label="Primary">
-    <a href="#philosophy">Philosophy</a>
-    <a href="#brand">The Brand</a>
-    <a href="#mohrah">Mohrah Collection</a>
-    <a href="#pieces">The Pieces</a>
-    <a href="#size">Size Consultation</a>
-    <a href="#offers">Offers</a>
-  </nav>
 </header>
 
 <!-- MOBILE PANEL -->
@@ -130,51 +127,6 @@
     <span>Made in the Kingdom</span><span class="marquee__dot">✦</span>
   </div>
 </div>
-
-<!-- MOHRAH CHAPTERS — brand narrative (replaces Leçons) -->
-<section class="lecons" id="mohrah" data-reveal>
-  <header class="lecons__header">
-    <span class="eyebrow">The story of Mohrah · حكاية مُهره</span>
-    <h2 class="h-display">Chapters of <em>Mohrah.</em></h2>
-    <p class="lecons__intro">Mohrah — a word evoking graceful movement, natural nobility, and effortless presence. She was born when the maison understood that most lingerie had forgotten to listen.</p>
-  </header>
-
-  <article class="lecon lecon--left" data-reveal>
-    <div class="lecon__media">
-      <img src="mohra-1/SMH03117.jpg" alt="Chapter I — The birth of Mohrah"/>
-    </div>
-    <div class="lecon__text">
-      <span class="lecon__num">Chapter <em>I</em></span>
-      <h3 class="h-display">The <em>birth.</em></h3>
-      <p>After a third child, the founder understood what lingerie was missing — a garment that listens to a body's rhythms rather than reshaping them. From this realization, Mohrah was born.</p>
-      <a href="#" class="link-underline">Read chapter I ›</a>
-    </div>
-  </article>
-
-  <article class="lecon lecon--right" data-reveal>
-    <div class="lecon__media">
-      <img src="mohra-1/num%204.webp" alt="Chapter II — Purpose over decoration"/>
-    </div>
-    <div class="lecon__text">
-      <span class="lecon__num">Chapter <em>II</em></span>
-      <h3 class="h-display">Purpose over <em>decoration.</em></h3>
-      <p>Black frames strength. Gold affirms value. Nothing is ornamental — every detail is intentional, every seam a conversation with the woman who wears it.</p>
-      <a href="#" class="link-underline">Read chapter II ›</a>
-    </div>
-  </article>
-
-  <article class="lecon lecon--left" data-reveal>
-    <div class="lecon__media">
-      <img src="mohra-1/SMH07966.JPG" alt="Chapter III — Quiet confidence"/>
-    </div>
-    <div class="lecon__text">
-      <span class="lecon__num">Chapter <em>III</em></span>
-      <h3 class="h-display">Quiet <em>confidence.</em></h3>
-      <p>Femininity is not perfection — it is a quiet confidence. Mohrah honours the woman through every transformation of her life, softly, flexibly, and without demand.</p>
-      <a href="#" class="link-underline">Read chapter III ›</a>
-    </div>
-  </article>
-</section>
 
 <!-- THE PIECES — Mohrah collection, live data from dentelleriyadh.com -->
 <section class="product-grid" id="pieces" data-reveal>
