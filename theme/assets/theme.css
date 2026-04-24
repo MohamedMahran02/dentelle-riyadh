@@ -8,11 +8,18 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #F1ECE4;
+  background: #F5EFE5 url('../../loader-bg.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity .6s var(--ease-out), visibility .6s;
+  transition: opacity .7s var(--ease-out), visibility .7s;
+}
+/* subtle warm veil so logo reads cleanly against texture */
+.site-loader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 239, 229, .45);
 }
 .site-loader.is-done {
   opacity: 0;
@@ -20,50 +27,53 @@
   pointer-events: none;
 }
 .site-loader__inner {
+  position: relative; /* above ::before overlay */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.4rem;
+  gap: 2rem;
 }
 .site-loader__logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .5rem;
+  gap: .6rem;
   color: #0E0B09;
 }
 .site-loader__mark {
-  width: 44px;
-  height: 52px;
-  opacity: .85;
-  animation: loaderPulse 1.8s ease-in-out infinite;
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  animation: loaderPulse 2s ease-in-out infinite;
+  /* no background needed — transparent PNG */
 }
 @keyframes loaderPulse {
-  0%, 100% { opacity: .55; transform: scale(.97); }
-  50%       { opacity: .95; transform: scale(1.03); }
+  0%, 100% { opacity: .7;  transform: scale(.96); }
+  50%       { opacity: 1;   transform: scale(1.04); }
 }
 .site-loader__wordmark {
   font-family: var(--f-display);
-  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
   font-weight: 400;
-  letter-spacing: .18em;
+  letter-spacing: .2em;
   text-transform: uppercase;
   line-height: 1;
+  color: #0E0B09;
 }
 .site-loader__city {
   font-family: var(--f-sans);
-  font-size: clamp(.55rem, 1.2vw, .7rem);
+  font-size: clamp(.52rem, 1.1vw, .66rem);
   font-weight: 300;
-  letter-spacing: .38em;
+  letter-spacing: .42em;
   text-transform: uppercase;
   color: #A88A5C;
-  margin-top: .1rem;
+  margin-top: .05rem;
 }
 /* progress bar */
 .site-loader__bar-wrap {
-  width: clamp(120px, 22vw, 200px);
+  width: clamp(110px, 20vw, 180px);
   height: 1px;
-  background: #DCD3C4;
+  background: rgba(168,138,92,.25);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -74,11 +84,11 @@
   background-size: 200% 100%;
   border-radius: 2px;
   animation: loaderFill 1.4s var(--ease-out) forwards,
-             loaderShimmer 1.8s linear infinite;
+             loaderShimmer 2s linear infinite;
 }
 @keyframes loaderFill {
   0%   { width: 0%; }
-  60%  { width: 75%; }
+  60%  { width: 78%; }
   100% { width: 100%; }
 }
 @keyframes loaderShimmer {
