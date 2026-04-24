@@ -37,37 +37,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .6rem;
   color: #0E0B09;
 }
-.site-loader__mark {
-  width: 88px;
-  height: 88px;
-  object-fit: contain;
+/* scale up the header logo component for the splash */
+.site-loader__logo-inner {
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: .5rem !important;
   animation: loaderPulse 2s ease-in-out infinite;
-  /* no background needed — transparent PNG */
+}
+.site-loader__logo-inner .logo-mark {
+  width: 30px !important;
+  height: 38px !important;
+}
+.site-loader__logo-inner .site-logo__wordmark {
+  font-size: clamp(2rem, 4vw, 2.8rem) !important;
+  letter-spacing: .16em !important;
+}
+.site-loader__logo-inner .site-logo__city {
+  font-size: clamp(.55rem, 1.2vw, .68rem) !important;
+  letter-spacing: .44em !important;
+  color: #A88A5C !important;
+  margin-top: 0 !important;
 }
 @keyframes loaderPulse {
-  0%, 100% { opacity: .7;  transform: scale(.96); }
-  50%       { opacity: 1;   transform: scale(1.04); }
-}
-.site-loader__wordmark {
-  font-family: var(--f-display);
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  font-weight: 400;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  line-height: 1;
-  color: #0E0B09;
-}
-.site-loader__city {
-  font-family: var(--f-sans);
-  font-size: clamp(.52rem, 1.1vw, .66rem);
-  font-weight: 300;
-  letter-spacing: .42em;
-  text-transform: uppercase;
-  color: #A88A5C;
-  margin-top: .05rem;
+  0%, 100% { opacity: .7;  transform: scale(.97); }
+  50%       { opacity: 1;   transform: scale(1.03); }
 }
 /* progress bar */
 .site-loader__bar-wrap {
@@ -284,11 +279,32 @@ ul { margin: 0; padding: 0; list-style: none; }
 .top-bar {
   background: var(--c-ink);
   color: var(--c-paper);
+  overflow: hidden;
   font-family: var(--f-sans);
   font-size: .66rem;
   letter-spacing: .28em;
   text-transform: uppercase;
 }
+.top-bar__marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+.top-bar__track {
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+  white-space: nowrap;
+  width: max-content;
+  animation: topBarScroll 22s linear infinite;
+}
+.top-bar__dot { opacity: .45; font-size: .85em; }
+@keyframes topBarScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+/* keep old inner rule harmless for any remaining uses */
 .top-bar__inner {
   display: flex;
   justify-content: space-between;
@@ -564,8 +580,24 @@ ul { margin: 0; padding: 0; list-style: none; }
   display: flex; gap: .7rem; align-items: center;
   color: var(--c-muted);
 }
-.locale-btn { font: inherit; color: inherit; letter-spacing: .3em; }
-.locale-btn.is-active { color: var(--c-ink); }
+.locale-btn { font: inherit; color: inherit; letter-spacing: .3em; text-decoration: none; }
+.locale-btn.is-active { color: var(--c-ink); font-weight: 500; }
+
+/* locale switcher in header */
+.locale-switcher {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--f-sans);
+  font-size: clamp(.58rem, .9vw, .68rem);
+  font-weight: 400;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+}
+.locale-switcher .locale-btn { opacity: .55; transition: opacity var(--dur-s) var(--ease); }
+.locale-switcher .locale-btn:hover { opacity: 1; }
+.locale-switcher .locale-btn.is-active { opacity: 1; color: var(--c-ink); font-weight: 500; }
+.locale-sep { opacity: .3; font-weight: 300; }
 
 /* ---------- HERO — AUBADE STYLE ---------- */
 .hero--aubade {
@@ -1530,8 +1562,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 @media (max-width: 960px) {
-  .top-bar__side:first-child span { display: none; }
-  .top-bar__inner { justify-content: center; }
+  .top-bar__track { animation-duration: 16s; }
 
   .site-header--stack .site-header__row { padding: 1rem var(--frame-x) .8rem; }
   .nav-toggle { display: inline-block; }
@@ -1569,7 +1600,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__caption .hero__cta { gap: 1.2rem; }
   .btn { padding: 1rem 1.8rem; }
   .top-bar { font-size: .58rem; }
-  .top-bar__side a:nth-child(3) { display: none; }
   .site-logo--lg .site-logo__wordmark { font-size: 1.8rem; }
   .site-header__icons { gap: .8rem; }
 }

@@ -20,9 +20,13 @@
 <div id="siteLoader" class="site-loader" aria-hidden="true">
   <div class="site-loader__inner">
     <div class="site-loader__logo">
-      <img src="loader-logo.png" alt="Dentelle Riyadh" class="site-loader__mark" width="96" height="96" />
-      <span class="site-loader__wordmark">Dentelle</span>
-      <span class="site-loader__city">Riyadh</span>
+      <div class="site-logo site-logo--lg site-loader__logo-inner" aria-label="Dentelle Riyadh">
+        <svg class="logo-mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
+          <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
+        </svg>
+        <span class="site-logo__wordmark">Dentelle</span>
+        <span class="site-logo__city">Riyadh</span>
+      </div>
     </div>
     <div class="site-loader__bar-wrap" role="progressbar" aria-label="Loading">
       <div class="site-loader__bar"></div>
@@ -30,20 +34,18 @@
   </div>
 </div>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  <div class="top-bar__inner">
-    <div class="top-bar__side">
-      <span>Free shipping within the Kingdom · SASO certified</span>
-    </div>
-    <div class="top-bar__side top-bar__side--right">
-      <a href="https://wa.me/966546002573" target="_blank" rel="noopener">Stores</a>
-      <span class="top-bar__sep">·</span>
-      <a href="#size">Size guide</a>
-      <span class="top-bar__sep">·</span>
-      <button class="locale-btn is-active">EN</button>
-      <span class="top-bar__sep">·</span>
-      <button class="locale-btn">AR</button>
+<!-- TOP BAR — infinite marquee -->
+<div class="top-bar" aria-hidden="true">
+  <div class="top-bar__marquee">
+    <div class="top-bar__track">
+      <span>Free shipping within the Kingdom</span><span class="top-bar__dot">·</span>
+      <span>SASO certified</span><span class="top-bar__dot">·</span>
+      <span>Free shipping within the Kingdom</span><span class="top-bar__dot">·</span>
+      <span>SASO certified</span><span class="top-bar__dot">·</span>
+      <span>Free shipping within the Kingdom</span><span class="top-bar__dot">·</span>
+      <span>SASO certified</span><span class="top-bar__dot">·</span>
+      <span>Free shipping within the Kingdom</span><span class="top-bar__dot">·</span>
+      <span>SASO certified</span><span class="top-bar__dot">·</span>
     </div>
   </div>
 </div>
@@ -80,6 +82,11 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
         <span class="bag-count" data-cart-count aria-label="items in bag"></span>
       </a>
+      <div class="locale-switcher" aria-label="Language">
+        <a href="index.html" class="locale-btn is-active" aria-current="true">EN</a>
+        <span class="locale-sep">|</span>
+        <a href="index-ar.html" class="locale-btn">AR</a>
+      </div>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
         <span></span><span></span>
       </button>
@@ -95,9 +102,9 @@
     <a href="collection.html">Mohrah Collection</a>
     <a href="#size">Size Guide</a>
     <div class="mobile-panel__locale">
-      <button class="locale-btn is-active">EN</button>
+      <a href="index.html" class="locale-btn is-active" aria-current="true">EN</a>
       <span>·</span>
-      <button class="locale-btn">AR</button>
+      <a href="index-ar.html" class="locale-btn">AR</a>
     </div>
   </div>
 </aside>
