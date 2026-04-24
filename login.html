@@ -105,21 +105,20 @@
 
     <!-- LOGIN PANEL -->
     <div class="auth__panel is-active" id="panel-login" role="tabpanel">
-      <form class="auth__form" id="loginForm" novalidate>
+      <form class="auth__form" id="loginForm" action="https://dentelle-riyadh.myshopify.com/account/login" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="customer_login" />
+        <input type="hidden" name="utf8" value="✓" />
+        <input type="hidden" name="checkout_url" value="/account" />
         <div class="auth__field">
           <label class="auth__label" for="login-email">Email address</label>
-          <input class="auth__input" type="email" id="login-email" name="email" autocomplete="email" placeholder="your@email.com" required />
+          <input class="auth__input" type="email" id="login-email" name="customer[email]" autocomplete="email" placeholder="your@email.com" required />
         </div>
         <div class="auth__field">
           <label class="auth__label" for="login-password">Password</label>
-          <input class="auth__input" type="password" id="login-password" name="password" autocomplete="current-password" placeholder="••••••••" required />
+          <input class="auth__input" type="password" id="login-password" name="customer[password]" autocomplete="current-password" placeholder="••••••••" required />
         </div>
         <p class="auth__forgot"><a href="#" id="forgotLink">Forgot password?</a></p>
         <button type="submit" class="btn btn--lg auth__submit">Sign in</button>
-        <div class="auth__success" id="loginSuccess" role="alert">
-          <p>Welcome back — <strong id="loginName"></strong>.</p>
-          <p style="font-size:.82rem;color:var(--c-muted);margin-top:.4rem;">Full account dashboard available once connected to Shopify.</p>
-        </div>
       </form>
 
       <div class="auth__divider"><span>or</span></div>
@@ -134,28 +133,26 @@
 
     <!-- REGISTER PANEL -->
     <div class="auth__panel" id="panel-register" role="tabpanel">
-      <form class="auth__form" id="registerForm" novalidate>
+      <form class="auth__form" id="registerForm" action="https://dentelle-riyadh.myshopify.com/account" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="create_customer" />
+        <input type="hidden" name="utf8" value="✓" />
         <div class="auth__field">
           <label class="auth__label" for="reg-first">First name</label>
-          <input class="auth__input" type="text" id="reg-first" name="first_name" autocomplete="given-name" placeholder="Lina" required />
+          <input class="auth__input" type="text" id="reg-first" name="customer[first_name]" autocomplete="given-name" placeholder="Lina" required />
         </div>
         <div class="auth__field">
           <label class="auth__label" for="reg-last">Last name</label>
-          <input class="auth__input" type="text" id="reg-last" name="last_name" autocomplete="family-name" placeholder="Al-Rashidi" />
+          <input class="auth__input" type="text" id="reg-last" name="customer[last_name]" autocomplete="family-name" placeholder="Al-Rashidi" />
         </div>
         <div class="auth__field">
           <label class="auth__label" for="reg-email">Email address</label>
-          <input class="auth__input" type="email" id="reg-email" name="email" autocomplete="email" placeholder="your@email.com" required />
+          <input class="auth__input" type="email" id="reg-email" name="customer[email]" autocomplete="email" placeholder="your@email.com" required />
         </div>
         <div class="auth__field">
           <label class="auth__label" for="reg-password">Password <span style="font-weight:300;">(min. 8 characters)</span></label>
-          <input class="auth__input" type="password" id="reg-password" name="password" autocomplete="new-password" placeholder="••••••••" minlength="8" required />
+          <input class="auth__input" type="password" id="reg-password" name="customer[password]" autocomplete="new-password" placeholder="••••••••" minlength="8" required />
         </div>
         <button type="submit" class="btn btn--lg auth__submit">Create account</button>
-        <div class="auth__success" id="registerSuccess" role="alert">
-          <p>Account created — welcome, <strong id="registerName"></strong>.</p>
-          <p style="font-size:.82rem;color:var(--c-muted);margin-top:.4rem;">Full account dashboard (orders, addresses, wishlist) will be live once the store connects to Shopify.</p>
-        </div>
       </form>
 
       <p class="auth__note">Already have an account? <button type="button" class="link-underline" style="font-size:.72rem;letter-spacing:.12em;" data-auth-tab="login">Sign in</button></p>
@@ -163,16 +160,15 @@
 
     <!-- FORGOT PASSWORD PANEL (hidden initially) -->
     <div class="auth__panel" id="panel-forgot" role="tabpanel">
-      <form class="auth__form" id="forgotForm" novalidate>
+      <form class="auth__form" id="forgotForm" action="https://dentelle-riyadh.myshopify.com/account/recover" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="recover_customer_password" />
+        <input type="hidden" name="utf8" value="✓" />
         <p style="color:var(--c-muted);font-size:.9rem;margin-bottom:.4rem;">Enter your email and we'll send a reset link.</p>
         <div class="auth__field">
           <label class="auth__label" for="forgot-email">Email address</label>
           <input class="auth__input" type="email" id="forgot-email" name="email" autocomplete="email" placeholder="your@email.com" required />
         </div>
         <button type="submit" class="btn btn--lg auth__submit">Send reset link</button>
-        <div class="auth__success" id="forgotSuccess" role="alert">
-          <p>If an account with that email exists, a reset link has been sent.</p>
-        </div>
       </form>
       <p class="auth__note"><button type="button" class="link-underline" style="font-size:.72rem;letter-spacing:.12em;" data-auth-tab="login">← Back to sign in</button></p>
     </div>
@@ -263,42 +259,8 @@
   var forgotLink = document.getElementById('forgotLink');
   if (forgotLink) forgotLink.addEventListener('click', function (e) { e.preventDefault(); showPanel('forgot'); });
 
-  /* ---- Login form (static demo) ---- */
-  var loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email   = loginForm.querySelector('#login-email').value.trim();
-      var success = document.getElementById('loginSuccess');
-      var nameEl  = document.getElementById('loginName');
-      var name    = email.split('@')[0];
-      name = name.charAt(0).toUpperCase() + name.slice(1);
-      nameEl.textContent = name;
-      success.classList.add('is-visible');
-    });
-  }
-
-  /* ---- Register form (static demo) ---- */
-  var regForm = document.getElementById('registerForm');
-  if (regForm) {
-    regForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var first   = regForm.querySelector('#reg-first').value.trim();
-      var success = document.getElementById('registerSuccess');
-      var nameEl  = document.getElementById('registerName');
-      nameEl.textContent = first || 'dear guest';
-      success.classList.add('is-visible');
-    });
-  }
-
-  /* ---- Forgot password form (static demo) ---- */
-  var forgotForm = document.getElementById('forgotForm');
-  if (forgotForm) {
-    forgotForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      document.getElementById('forgotSuccess').classList.add('is-visible');
-    });
-  }
+  /* Forms POST natively to Shopify hosted account endpoints —
+     no JS interception needed. Shopify handles auth + redirects to /account. */
 })();
 </script>
 
