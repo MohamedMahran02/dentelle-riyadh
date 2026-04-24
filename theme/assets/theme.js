@@ -431,6 +431,9 @@
       return card.offsetWidth + gap;
     };
 
+    /* Arrow step = 2 cards at a time for a snappier feel */
+    const arrowStep = () => cardStep() * 2;
+
     const scrollToCard = (idx) => {
       const card = cards[idx];
       if (!card) return;
@@ -461,9 +464,9 @@
       getDots().forEach((dot, i) => dot.classList.toggle('is-active', i === idx));
     };
 
-    /* Arrow clicks — scroll by one card */
-    if (prevBtn) prevBtn.addEventListener('click', () => track.scrollBy({ left: -cardStep(), behavior: 'smooth' }));
-    if (nextBtn) nextBtn.addEventListener('click', () => track.scrollBy({ left:  cardStep(), behavior: 'smooth' }));
+    /* Arrow clicks — scroll by 2 cards at a time */
+    if (prevBtn) prevBtn.addEventListener('click', () => track.scrollBy({ left: -arrowStep(), behavior: 'smooth' }));
+    if (nextBtn) nextBtn.addEventListener('click', () => track.scrollBy({ left:  arrowStep(), behavior: 'smooth' }));
 
     track.addEventListener('scroll', updateState, { passive: true });
     updateState(); /* initial state */
@@ -471,9 +474,18 @@
     /* Keyboard arrow support when track is focused */
     track.setAttribute('tabindex', '0');
     track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); track.scrollBy({ left: -cardStep(), behavior: 'smooth' }); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left:  cardStep(), behavior: 'smooth' }); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); track.scrollBy({ left: -arrowStep(), behavior: 'smooth' }); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left:  arrowStep(), behavior: 'smooth' }); }
     });
+
+    /* Mouse-wheel → horizontal scroll when cursor is over the carousel */
+    track.addEventListener('wheel', (e) => {
+      /* If the user is already scrolling horizontally (trackpad swipe), let it pass */
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      /* Otherwise hijack vertical wheel and turn it into horizontal movement */
+      e.preventDefault();
+      track.scrollLeft += e.deltaY * 1.5; /* 1.5× multiplier for faster feel */
+    }, { passive: false });
 
     /* Drag-to-scroll (mouse) */
     let isDragging = false;

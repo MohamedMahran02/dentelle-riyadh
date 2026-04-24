@@ -754,7 +754,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   gap: clamp(1rem, 2vw, 2rem);
   scrollbar-width: none;
   -ms-overflow-style: none;
-  scroll-behavior: smooth;
+  /* scroll-behavior handled by JS so wheel feels instant */
   /* Let the track bleed edge-to-edge */
   padding-left:  var(--frame-x);
   padding-right: var(--frame-x);
