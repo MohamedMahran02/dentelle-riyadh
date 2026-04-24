@@ -23,14 +23,14 @@
   --f-ar-display:'Noto Naskh Arabic', 'Amiri', serif;
   --f-ar-body:   'IBM Plex Sans Arabic', system-ui, sans-serif;
 
-  /* Scale */
+  /* Scale — editorial, generous */
   --step--1: clamp(.72rem, .7rem + .12vw, .82rem);
   --step-0:  clamp(.95rem, .9rem + .2vw, 1.05rem);
-  --step-1:  clamp(1.05rem, 1rem + .3vw, 1.2rem);
-  --step-2:  clamp(1.4rem, 1.2rem + .8vw, 1.9rem);
-  --step-3:  clamp(2rem, 1.6rem + 2vw, 3.2rem);
-  --step-4:  clamp(2.6rem, 1.9rem + 3.8vw, 5.4rem);
-  --step-5:  clamp(3.4rem, 2.2rem + 6.5vw, 8rem);
+  --step-1:  clamp(1.1rem, 1rem + .3vw, 1.25rem);
+  --step-2:  clamp(1.5rem, 1.3rem + .9vw, 2.1rem);
+  --step-3:  clamp(2.2rem, 1.7rem + 2.3vw, 3.8rem);
+  --step-4:  clamp(3rem, 2.2rem + 4.8vw, 6.8rem);
+  --step-5:  clamp(4.5rem, 3rem + 12vw, 14rem);
 
   /* Space */
   --sp-xs: .5rem;
@@ -504,32 +504,65 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .hero__caption {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: end;
+  grid-template-columns: 1.5fr 1fr;
+  column-gap: clamp(2rem, 5vw, 6rem);
+  row-gap: clamp(1.2rem, 2.5vw, 2.5rem);
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: clamp(3rem, 6vw, 5rem) var(--frame-x) clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(3.5rem, 7vw, 6rem) var(--frame-x) clamp(2.5rem, 5vw, 4.5rem);
 }
-.hero--aubade .display { font-size: clamp(2.4rem, 4.5vw, 5.2rem); }
-.hero--aubade .hero__lede {
+.hero__title {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: clamp(5rem, 3.5rem + 14vw, 16rem);
+  line-height: .86;
+  letter-spacing: -.03em;
+  margin: 0;
+}
+.hero__title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--c-ink);
+}
+.hero__eyebrow {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: start;
+  margin: 0 0 .6rem;
+}
+.hero__lede {
+  grid-column: 1;
+  grid-row: 2;
   font-family: var(--f-serif);
   font-style: italic;
-  font-size: var(--step-1);
-  line-height: 1.55;
+  font-size: var(--step-2);
+  line-height: 1.5;
   max-width: 42ch;
   color: var(--c-ink-soft);
-  margin: 0 0 1.8rem;
+  margin: 0;
 }
 .hero--aubade .hero__cta {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.8rem;
   flex-wrap: wrap;
 }
-@media (max-width: 960px) {
-  .hero--aubade { grid-template-rows: 70vh auto; }
-  .hero__caption { grid-template-columns: 1fr; }
+@media (max-width: 860px) {
+  .hero--aubade { grid-template-rows: 68vh auto; }
+  .hero__caption {
+    grid-template-columns: 1fr;
+  }
+  .hero__title, .hero__eyebrow, .hero__lede, .hero--aubade .hero__cta {
+    grid-column: 1;
+    grid-row: auto;
+    align-self: auto;
+  }
+  .hero__eyebrow { order: -1; }
+  .hero__title { font-size: clamp(4rem, 14vw, 7rem); }
 }
 
 /* Stagger reveal */
