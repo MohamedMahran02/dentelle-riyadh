@@ -397,6 +397,101 @@
   window.theme.CartDrawer = CartDrawer;
 
   /* =========================================================
+     Legal Modal — Terms / Privacy / SASO / Shipping / Returns
+     ========================================================= */
+  var LEGAL_CONTENT = {
+    terms: {
+      title: 'Terms & Conditions',
+      body: '<h3>1. General</h3><p>By accessing the Dentelle Riyadh website and placing an order, you confirm that you have read, understood and agree to these Terms & Conditions. Dentelle Riyadh is a luxury lingerie maison based in Riyadh, Kingdom of Saudi Arabia.</p>' +
+            '<h3>2. Orders & Payment</h3><p>All orders are subject to availability and confirmation. Prices are displayed in Saudi Riyals (SAR) and include applicable VAT. Payment is processed securely via our approved payment partners or through our WhatsApp ordering service.</p>' +
+            '<h3>3. Delivery</h3><p>We offer complimentary delivery within the Kingdom of Saudi Arabia. Delivery times are 2–5 business days. International orders are available by arrangement. Please contact us via WhatsApp for international enquiries.</p>' +
+            '<h3>4. Returns & Exchanges</h3><p>We accept returns within 30 days of delivery for items in their original, unworn and unwashed condition with all tags attached. Due to hygiene regulations, intimate apparel cannot be returned once removed from original packaging. Custom and bespoke pieces are non-returnable.</p>' +
+            '<h3>5. Intellectual Property</h3><p>All content on this website — including imagery, copy, design and the Dentelle Riyadh name — is the exclusive property of Dentelle Riyadh. Reproduction or redistribution without written consent is strictly prohibited.</p>' +
+            '<h3>6. Governing Law</h3><p>These terms are governed by the laws of the Kingdom of Saudi Arabia. Any disputes shall be subject to the exclusive jurisdiction of the courts of Riyadh.</p>' +
+            '<h3>7. Contact</h3><p>For any enquiries regarding these terms, please contact us via <a href="https://wa.me/966546002573" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp</a>.</p>'
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      body: '<h3>1. What We Collect</h3><p>When you interact with Dentelle Riyadh, we may collect your name, email address, phone number, delivery address and payment information. We also collect browsing data to improve your experience.</p>' +
+            '<h3>2. How We Use It</h3><p>Your data is used to process orders, communicate about your purchase, personalise your experience and send you information about collections and offers (with your consent). We do not sell your personal data to third parties.</p>' +
+            '<h3>3. Data Protection</h3><p>We comply with the Saudi Personal Data Protection Law (PDPL). Your data is stored securely and only accessible to authorised personnel. We retain your data only as long as necessary for the purposes outlined above.</p>' +
+            '<h3>4. Your Rights</h3><p>You have the right to access, correct or request deletion of your personal data at any time. To exercise these rights, please contact us via WhatsApp or email.</p>' +
+            '<h3>5. Cookies</h3><p>We use essential cookies to keep your bag and wishlist functional. No third-party tracking cookies are placed without your consent.</p>' +
+            '<h3>6. Contact</h3><p>For privacy enquiries: <a href="https://wa.me/966546002573" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp +966 546 002 573</a>.</p>'
+    },
+    saso: {
+      title: 'SASO Certification',
+      body: '<p>Dentelle Riyadh is proud to be <strong>SASO certified</strong> — compliant with the standards of the Saudi Standards, Metrology and Quality Organization (SASO), the official standards body of the Kingdom of Saudi Arabia.</p>' +
+            '<h3>What SASO Certification Means</h3><p>Our certification confirms that every Dentelle Riyadh piece meets rigorous quality and safety standards for textile and apparel products sold within the Kingdom. Certified products have been tested for:</p>' +
+            '<ul style="padding-left:1.25rem;margin:.75rem 0;"><li>Textile fibre composition accuracy</li><li>Colourfastness and dye safety</li><li>Chemical safety (azo dyes, formaldehyde limits)</li><li>Labelling compliance</li></ul>' +
+            '<h3>Our Commitment</h3><p>Dentelle Riyadh sources the finest French Leavers lace from Calais and silk satin from Lyon — materials chosen not only for their beauty, but for their quality and safety. Every piece is hand-finished in our Riyadh atelier and inspected before delivery.</p>' +
+            '<p>Our SASO certificate is available for review upon request. Please contact us via <a href="https://wa.me/966546002573" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp</a>.</p>'
+    },
+    shipping: {
+      title: 'Shipping & Delivery',
+      body: '<h3>Within the Kingdom of Saudi Arabia</h3><p><strong>Complimentary shipping</strong> on all orders within KSA. Standard delivery is <strong>2–5 business days</strong> from the date of confirmation. Express delivery is available in Riyadh — please enquire via WhatsApp.</p>' +
+            '<h3>Order Tracking</h3><p>Once your order is dispatched, you will receive a tracking number via WhatsApp or email. Our team is available to assist you with any delivery queries.</p>' +
+            '<h3>International Orders</h3><p>We ship internationally by arrangement. Shipping costs and delivery times vary by destination. Please <a href="https://wa.me/966546002573" target="_blank" rel="noopener" style="text-decoration:underline;">contact us via WhatsApp</a> for an international shipping quote.</p>' +
+            '<h3>Packaging</h3><p>Every Dentelle Riyadh order arrives in our signature luxury packaging — designed to protect your piece and make the unboxing experience as refined as the garment itself.</p>'
+    },
+    returns: {
+      title: 'Returns & Exchanges',
+      body: '<h3>Return Window</h3><p>We accept returns within <strong>30 days</strong> of delivery. Items must be in their original, unworn and unwashed condition with all original tags attached.</p>' +
+            '<h3>Hygiene Policy</h3><p>For hygiene reasons, intimate apparel that has been removed from its original sealed packaging cannot be returned or exchanged. We encourage you to consult our size guide and reach out for a personal consultation before ordering.</p>' +
+            '<h3>Bespoke & Custom Orders</h3><p>Made-to-order and bespoke pieces are crafted specifically for you and cannot be returned unless there is a manufacturing defect.</p>' +
+            '<h3>How to Return</h3><p>To initiate a return, please contact our team via <a href="https://wa.me/966546002573" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp</a> with your order details. Our team will guide you through the process and arrange collection from your address within KSA.</p>' +
+            '<h3>Refunds</h3><p>Approved refunds are processed within 5–10 business days to your original payment method.</p>'
+    }
+  };
+
+  (function initLegalModal() {
+    /* Build modal DOM */
+    var overlay = document.createElement('div');
+    overlay.className = 'legal-modal';
+    overlay.id = 'legalModal';
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+
+    overlay.innerHTML =
+      '<div class="legal-modal__panel">' +
+        '<div class="legal-modal__topbar">' +
+          '<span class="legal-modal__title" id="legalModalTitle"></span>' +
+          '<button class="legal-modal__close" id="legalModalClose" aria-label="Close">&#x2715;</button>' +
+        '</div>' +
+        '<div class="legal-modal__body" id="legalModalBody"></div>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+
+    function openLegal(key) {
+      var data = LEGAL_CONTENT[key];
+      if (!data) return;
+      document.getElementById('legalModalTitle').textContent = data.title;
+      document.getElementById('legalModalBody').innerHTML = data.body;
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLegal() {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', function(e) {
+      var trigger = e.target.closest('[data-legal]');
+      if (trigger) { e.preventDefault(); openLegal(trigger.dataset.legal); return; }
+      var close = e.target.closest('#legalModalClose');
+      if (close) { closeLegal(); return; }
+      if (e.target === overlay) closeLegal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeLegal();
+    });
+  })();
+
+  /* =========================================================
      Carousel — horizontal snap-scroll with arrow buttons
      ========================================================= */
   $$('[data-carousel]').forEach((track) => {
