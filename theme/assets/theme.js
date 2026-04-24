@@ -552,45 +552,36 @@
       getDots().forEach((dot, i) => dot.classList.toggle('is-active', i === idx));
     };
 
-    /* Custom smooth scroll — fast easeOutQuart, no browser 'smooth' lag */
-    let animId = null;
-    const animateTo = (targetLeft, duration) => {
-      duration = duration || 320;
-      if (animId) cancelAnimationFrame(animId);
-      const from  = track.scrollLeft;
-      const delta = targetLeft - from;
-      if (Math.abs(delta) < 1) return;
-      const t0 = performance.now();
-      const easeOut = (x) => 1 - Math.pow(1 - x, 4); /* easeOutQuart */
-      const step = (now) => {
-        const p = Math.min((now - t0) / duration, 1);
-        track.scrollLeft = from + delta * easeOut(p);
-        if (p < 1) animId = requestAnimationFrame(step);
-        else { animId = null; updateState(); }
-      };
-      animId = requestAnimationFrame(step);
+    /* Native smooth scrollBy — respects scroll-snap, works reliably */
+    const scrollByAmount = (amount) => {
+      track.scrollBy({ left: amount, behavior: 'smooth' });
     };
 
-    /* Arrow clicks — 2 cards, fast custom animation */
-    if (prevBtn) prevBtn.addEventListener('click', () => animateTo(track.scrollLeft - arrowStep()));
-    if (nextBtn) nextBtn.addEventListener('click', () => animateTo(track.scrollLeft + arrowStep()));
+    /* Arrow clicks */
+    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); scrollByAmount(-arrowStep()); });
+    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); scrollByAmount(arrowStep()); });
 
     track.addEventListener('scroll', updateState, { passive: true });
+    window.addEventListener('resize', updateState, { passive: true });
     updateState(); /* initial state */
+    /* Re-check after layout settles (fonts, images) */
+    setTimeout(updateState, 150);
+    setTimeout(updateState, 800);
 
     /* Keyboard support */
     track.setAttribute('tabindex', '0');
     track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); animateTo(track.scrollLeft - arrowStep()); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); animateTo(track.scrollLeft + arrowStep()); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollByAmount(-arrowStep()); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); scrollByAmount(arrowStep()); }
     });
 
-    /* Dot clicks — also use custom animation */
+    /* Dot clicks — scrollTo specific card */
     getDots().forEach((dot, i) => {
       dot.addEventListener('click', () => {
         const card = cards[i];
         if (!card) return;
-        animateTo(card.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft));
+        const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+        track.scrollTo({ left: card.offsetLeft - padLeft, behavior: 'smooth' });
       });
     });
 

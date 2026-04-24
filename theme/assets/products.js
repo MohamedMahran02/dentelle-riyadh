@@ -16,7 +16,11 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp',
-      'mohra-1/num1.jpg'
+      'https://cdn.salla.sa/GYVWWE/NoqnUqjxEErfi9srZ6ypKGLGf2FKeZfBHUNh3PHm.webp',
+      'https://cdn.salla.sa/GYVWWE/fCNNtZwlwkuUFQTRuCpgcqP6G39qgPWWEjsA1VY9.webp',
+      'https://cdn.salla.sa/GYVWWE/4QrHcUO5rJJFXGWHmMXsJU5UiSGxHrNaNlIOgvDf.jpg',
+      'https://cdn.salla.sa/GYVWWE/jFEryHWSP1HYLxWfDx3qJu1yKnh2FgJZAHq4lAT7.webp',
+      'https://cdn.salla.sa/GYVWWE/yJNbrDX7fpHg53bULIdE8logCNxvgpcSwdm7mbzW.webp'
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -39,7 +43,10 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/HlD1jo8E9VIjsnXW1GMll31zIO92EmM99dozmtPU.webp',
-      'mohra-1/num2.jpg'
+      'https://cdn.salla.sa/GYVWWE/VyHni8XLTDJ2Ey9eEif98qMnSpn6OfV6kjnFaAgB.webp',
+      'https://cdn.salla.sa/GYVWWE/XNhtWI9PowJ6kOS3n0d83NNEtMMJUxknxpTUa54R.webp',
+      'https://cdn.salla.sa/GYVWWE/uzZsf2HyfeZCqXnMLYahvxBeczGll7cmnExApG6M.webp',
+      'https://cdn.salla.sa/GYVWWE/VR2pOSkGW7aoJghWt2AwkpkYX3nEdvD72xndxokC.webp'
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -62,7 +69,11 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/tSG21XYZ3ulkxriCmTZLkWVzKJREX0BXoZsAwwvd.webp',
-      'mohra-1/num3.jpg'
+      'https://cdn.salla.sa/GYVWWE/HN2ThTSUTYS4pbuZO5ZnCmuhWl0zDapA39ZYCIpJ.webp',
+      'https://cdn.salla.sa/GYVWWE/CGS3eXCQdPqZmRYYdh1Q1xzAc3wKiXsOIDthzB9w.webp',
+      'https://cdn.salla.sa/GYVWWE/rQALiSXRVR07nrSHqL1zyQUtaM6BZ48pEwpNm15g.webp',
+      'https://cdn.salla.sa/GYVWWE/UbAP60JHt6pZKbKMtMl8L0QVd5hrbffHL11kD2B5.webp',
+      'https://cdn.salla.sa/GYVWWE/5v1yi0Yh5VHtgJYTB0sGtrlRI8IFMdfcudzU5zDd.webp'
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -85,7 +96,11 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/bbd8CGQjhwbgjyHU7V2UJthyCsTq6YBUTWuSzoUc.webp',
-      'mohra-1/num4.jpg'
+      'https://cdn.salla.sa/GYVWWE/UpgiZjGGBjkQSOUsi828ChqXCtXwblXM4FFcYl0q.webp',
+      'https://cdn.salla.sa/GYVWWE/GI96hRFLCJkTtY7cjmzBubx8mXkr26Zh8stlXDkh.webp',
+      'https://cdn.salla.sa/GYVWWE/elKe2YDk0ClCHtuXSToGGh7nsFPwe8TuxdW3OwGf.webp',
+      'https://cdn.salla.sa/GYVWWE/HGceA6zE0iubToddnDjgekMlArevWkLV2wpvcI5d.webp',
+      'https://cdn.salla.sa/GYVWWE/SVkP7Rqi8Fu77SvAix2DXppfGnmNsvandexSXWuE.webp'
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -108,7 +123,10 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/j3F85l18BKcYrp7cucgTISU7Hr13hZOLiue194xA.webp',
-      'mohra-1/num%205.jpeg'
+      'https://cdn.salla.sa/GYVWWE/FQYPrKqDVurwQq7CjqcvPtmOTr59kz9s5nmlAsH9.webp',
+      'https://cdn.salla.sa/GYVWWE/bNxzUUvOxoBx8cZcr9azYYT0Yw24VBKiXkhdrn5x.webp',
+      'https://cdn.salla.sa/GYVWWE/zzIBKJJOYZQOl8Alq1XL7QGG0JYSBaukNKemsJzd.webp',
+      'https://cdn.salla.sa/GYVWWE/fRDiiJi9DadidotCTNMQpwXWCjMRkHhWFevuy3ZA.webp'
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -131,7 +149,12 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/V98LkOePXH0dPl2lRCFgbJZKHc4pDOhJJ4EJvP9a.webp',
-      'mohra-1/num6.jpg'
+      'https://cdn.salla.sa/GYVWWE/6coAPg8mIf4TFaMM5g9MUCVrz0XLnjXzMpSZi9Nf.webp',
+      'https://cdn.salla.sa/GYVWWE/bEFusoxhLGPGsyL09DXwUEMOSxoxuyH60Ye5fBCb.webp',
+      'https://cdn.salla.sa/GYVWWE/kTtwWI9pBw9gy0gYkanjkLcwRBheyOFqoIUTauYH.webp',
+      'https://cdn.salla.sa/GYVWWE/SCqnDhrCPF6PYZDLMRGQu0lbllGbxKqp5FIf22OF.webp',
+      'https://cdn.salla.sa/GYVWWE/MTSTMAmDsvVWxm2LqzbxP8fdkv17K3QNVmNjXAxa.webp',
+      'https://cdn.salla.sa/GYVWWE/0aKAnoXgbEC6CyPKltXqEzi27ti3cmrPcEGp3N0i.webp'
     ],
     is_signature: true,
     details: 'French Leavers lace · Calais. Silk satin · Lyon. Fully customisable by appointment.',
@@ -154,7 +177,11 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/YIt5M9HjmuIOTwXpSLqPhf0jJBZTb1lQpvgposHC.webp',
-      'mohra-1/SMH03117.jpg'
+      'https://cdn.salla.sa/GYVWWE/nQie4CY59SgYGDtMBHIV3U7xRF3IBk3iXaYaWTId.webp',
+      'https://cdn.salla.sa/GYVWWE/VxnXcFu8d1krHPuRgllTjLX1ITQdeQG38Q1Q9vrG.webp',
+      'https://cdn.salla.sa/GYVWWE/uSMfIqbqXFl30lqjiIIq0oE92H8Tzr6gV27iT7kK.webp',
+      'https://cdn.salla.sa/GYVWWE/sy5Ef3OJVQPMWMBo2kQHoBjKb7PzUJnuJza8lVxz.webp',
+      'https://cdn.salla.sa/GYVWWE/bxargNJkvLInH6MtunxTXMF2TRXSDGxWJKdRZF3R.webp'
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -177,7 +204,7 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/SzWAoR74F7DQexhZvcZT9570C9EnT6A2teNl45qv.webp',
-      'mohra-1/SMH07966.JPG'
+      'https://cdn.salla.sa/GYVWWE/J7538PQ46KJIfH15d2bpieWoGJuehoJ2XtiUuXm2.webp'
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
