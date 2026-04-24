@@ -164,7 +164,8 @@
 <script src="theme/assets/shopify-config.js?v=2"></script>
 <script src="theme/assets/shopify-cart.js?v=2" defer></script>
 <script src="theme/assets/products.js?v=5"></script>
-<script src="theme/assets/products-live.js?v=1"></script>
+<script src="theme/assets/products-live.js?v=2"></script>
+<script src="theme/assets/collections-live.js?v=1"></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
 <script>
@@ -176,41 +177,59 @@
     const titleEnEl = document.querySelector('[data-title-en]');
     const titleArEl = document.querySelector('[data-title-ar]');
     const eyebrowEl = document.querySelector('[data-eyebrow]');
-  
-    const params = new URLSearchParams(window.location.search);
+
+    const params  = new URLSearchParams(window.location.search);
+    const handle  = (params.get('handle') || '').toLowerCase();
     const category = (params.get('category') || 'all').toLowerCase();
-  
-    const LABELS = {
-      all:       { en: 'The Mohrah Collection', ar: 'مجموعة مُهرة', eyebrow: 'المجموعة' },
-      bras:      { en: 'Bras',      ar: 'حمّالات', eyebrow: 'الفئة' },
-      briefs:    { en: 'Briefs',    ar: 'سراويل',  eyebrow: 'الفئة' },
-      ensembles: { en: 'Ensembles', ar: 'أطقم',    eyebrow: 'الفئة' },
-      robes:     { en: 'Robes',     ar: 'أردية',   eyebrow: 'الفئة' }
+
+    const CAT_LABELS = {
+      all:       { ar: 'كل القِطَع', eyebrow: 'المجموعة' },
+      bras:      { ar: 'حمّالات',    eyebrow: 'الفئة' },
+      briefs:    { ar: 'سراويل',     eyebrow: 'الفئة' },
+      ensembles: { ar: 'أطقم',       eyebrow: 'الفئة' },
+      robes:     { ar: 'أردية',      eyebrow: 'الفئة' }
     };
-    const label = LABELS[category] || LABELS.all;
-  
-    if (eyebrowEl) eyebrowEl.textContent = label.eyebrow;
-    if (titleEnEl) titleEnEl.innerHTML = category === 'all'
-      ? 'The <em>Mohrah</em> Collection'
-      : label.en;
-    if (titleArEl) titleArEl.innerHTML = label.ar;
-  
+
     const all = window.PRODUCTS || [];
-    const products = category === 'all'
-      ? all
-      : all.filter((p) => (p.category || '').toLowerCase() === category);
-  
+    let products = all;
+    let titleEn = 'The <em>Mohrah</em> Collection';
+    let titleAr = 'مجموعة <em>مُهرة</em>';
+    let eyebrow = 'المجموعة';
+
+    if (handle) {
+      products = all.filter(p => (p.collections || []).indexOf(handle) !== -1);
+      const col = (window.COLLECTIONS_BY_HANDLE || {})[handle];
+      if (col) {
+        titleEn = col.title;
+        titleAr = col.title_ar || col.title;
+      } else {
+        titleEn = handle.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        titleAr = titleEn;
+      }
+    } else if (category !== 'all') {
+      products = all.filter(p => (p.category || '').toLowerCase() === category);
+      const lbl = CAT_LABELS[category] || CAT_LABELS.all;
+      titleEn = lbl.ar;
+      titleAr = lbl.ar;
+      eyebrow = lbl.eyebrow;
+    }
+
+    if (eyebrowEl) eyebrowEl.textContent = eyebrow;
+    if (titleEnEl) titleEnEl.innerHTML = titleEn;
+    if (titleArEl) titleArEl.innerHTML = titleAr;
+
     document.querySelectorAll('[data-filter]').forEach((a) => {
-      a.classList.toggle('is-active', a.dataset.filter === category);
+      a.classList.toggle('is-active', a.dataset.filter === (handle ? 'all' : category));
     });
-  
-    countEl.textContent = `${products.length} — قطعة`;
-  
+
+    if (countEl) countEl.textContent = `${products.length} — قطعة`;
+
+    if (!grid) return;
     if (!products.length) {
-      grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:4rem 0; color:var(--c-muted); font-style:italic;">لا توجد قطع في هذه الفئة.</p>';
+      grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:4rem 0; color:var(--c-muted); font-style:italic;">لا توجد قطع.</p>';
       return;
     }
-  
+
     grid.innerHTML = products.map((p) => `
       <article class="product-card" data-slug="${p.slug}" data-rating="${p.rating || ''}" data-reviews="${p.review_count || ''}">
         ${p.is_signature ? '<span class="product-card__badge">Signature</span>' : ''}
@@ -223,7 +242,7 @@
             <span class="product-card__title-en">${p.title_en}</span>
             <span class="product-card__title-ar" dir="rtl" lang="ar">${p.title_ar}</span>
           </h3>
-          <p>Dentelle Riyadh — مجموعة مُهره</p>
+          <p>Dentelle Riyadh</p>
           <span class="price"><span class="price__amount">SAR ${p.price}</span></span>
         </div>
       </article>
@@ -231,7 +250,7 @@
   }
   if (window.PRODUCTS && window.PRODUCTS.length) render();
   window.addEventListener('dentelle:products-updated', render);
-
+  window.addEventListener('dentelle:collections-updated', render);
 })();
 </script>
 

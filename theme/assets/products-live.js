@@ -12,7 +12,7 @@
     return;
   }
 
-  var CACHE_KEY = 'dentelle:products:v3';
+  var CACHE_KEY = 'dentelle:products:v4';
   var CACHE_TTL = 5 * 60 * 1000; // 5 min
 
   var QUERY = [
@@ -21,6 +21,7 @@
     '    edges {',
     '      node {',
     '        id handle title descriptionHtml productType tags vendor createdAt',
+    '        collections(first: 10) { edges { node { handle } } }',
     '        images(first: 10) { edges { node { url altText } } }',
     '        variants(first: 20) {',
     '          edges {',
@@ -66,6 +67,7 @@
       });
 
       var images = (n.images && n.images.edges || []).map(function (e) { return e.node.url; });
+      var collectionHandles = (n.collections && n.collections.edges || []).map(function (e) { return e.node.handle; });
       var desc_en_full = stripHtmlFirstP(n.descriptionHtml);
 
       return {
@@ -86,6 +88,7 @@
         images: images,
         is_signature: (n.tags || []).indexOf('signature') !== -1,
         tags: n.tags || [],
+        collections: collectionHandles,
         details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
         details_ar: 'دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
         care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
