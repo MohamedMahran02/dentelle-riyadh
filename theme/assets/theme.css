@@ -1629,17 +1629,18 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__caption .hero__cta { gap: 1.2rem; }
   .btn { padding: 1rem 1.8rem; }
   .top-bar { font-size: .58rem; }
-  .site-logo--lg .site-logo__wordmark { font-size: 1.8rem; }
+  .site-logo--lg .site-logo__wordmark { font-size: 1.6rem; }
 
-  /* Header icons — bigger touch targets, fewer items */
-  .site-header__icons { gap: 1rem; }
+  /* Star mark — centre-align and make it visible on mobile */
+  .site-logo { align-items: center; }
+  .site-logo--lg .logo-mark { width: 20px; height: 25px; transform: none; }
+
+  /* Header icons — all visible, bigger touch targets */
+  .site-header__icons { gap: .75rem; }
   .site-header__icons .icon-link svg { width: 20px; height: 20px; }
 
-  /* Hide search + wishlist to make room; keep account, cart, EN|AR, burger */
-  .site-header__icons a[aria-label="Search"],
-  .site-header__icons a[aria-label="Wishlist"],
-  .site-header__icons a[aria-label="بحث"],
-  .site-header__icons a[aria-label="المفضلة"] { display: none; }
+  /* Locale switcher — slightly smaller on mobile */
+  .locale-switcher { font-size: .55rem; gap: .3rem; }
 
   /* Burger — unclipped, clearly visible */
   .nav-toggle { width: 32px; height: 22px; }
