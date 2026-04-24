@@ -86,22 +86,15 @@
     <p class="collections-index__lede">لغةٌ متجدّدة من الخصوصية — فصلاً فصلاً، موسماً موسماً.</p>
   </header>
 
-  <div class="collections-index__grid">
-    <a href="collection-ar.html" class="collections-card">
-      <div class="collections-card__media">
-        <img src="https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp" alt="مجموعة مُهره" loading="eager" />
-        <img class="collections-card__media--hover" src="https://cdn.salla.sa/GYVWWE/V98LkOePXH0dPl2lRCFgbJZKHc4pDOhJJ4EJvP9a.webp" alt="مجموعة مُهره — التوقيع" loading="lazy" />
-      </div>
+  <div class="collections-index__grid" data-collections-grid>
+    <div class="collections-card collections-card--skel" aria-hidden="true">
+      <div class="collections-card__media"><div class="product-card__skel"></div></div>
       <div class="collections-card__body">
-        <span class="collections-card__index">المجموعة N°01</span>
-        <h2 class="collections-card__title">
-          <span class="collections-card__title-ar">مُهره</span>
-          <span class="collections-card__title-en"><em>Mohrah</em></span>
-        </h2>
-        <p class="collections-card__meta">٨ قِطَع · ابتداءً من ٢٥٠ ر.س</p>
-        <span class="collections-card__cta">تصفّحي المجموعة ›</span>
+        <div class="product-card__skel-line" style="width:40%"></div>
+        <div class="product-card__skel-line" style="width:70%;height:1.4em"></div>
+        <div class="product-card__skel-line" style="width:55%"></div>
       </div>
-    </a>
+    </div>
   </div>
 
   <p class="collections-index__note">فصولٌ أخرى قريباً — ابقي قريبة.</p>
@@ -156,6 +149,52 @@
 <script src="theme/assets/shopify-cart.js?v=2" defer></script>
 <script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/products-live.js?v=1"></script>
+<script src="theme/assets/collections-live.js?v=1"></script>
+<script>
+(function () {
+  var grid = document.querySelector('[data-collections-grid]');
+  if (!grid) return;
+
+  function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+  function toArabicDigits(s) {
+    var ar = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    return String(s).replace(/[0-9]/g, function (d) { return ar[+d]; });
+  }
+
+  function cardHtml(c, idx) {
+    var titleAr = c.title_ar || c.title;
+    var titleEn = c.title;
+    var count = c.product_count || 0;
+    var price = c.min_price ? ('ابتداءً من ' + toArabicDigits(c.min_price) + ' ر.س') : '';
+    var meta = toArabicDigits(count) + ' قِطَع' + (price ? ' · ' + price : '');
+    var hover = c.hover_image || c.image;
+    return '<a href="collection-ar.html?handle=' + encodeURIComponent(c.handle) + '" class="collections-card">' +
+           '<div class="collections-card__media">' +
+             '<img src="' + (c.image || '') + '" alt="' + titleAr + '" loading="eager" />' +
+             '<img class="collections-card__media--hover" src="' + hover + '" alt="' + titleAr + '" loading="lazy" />' +
+           '</div>' +
+           '<div class="collections-card__body">' +
+             '<span class="collections-card__index">المجموعة N°' + pad2(idx + 1) + '</span>' +
+             '<h2 class="collections-card__title">' +
+               '<span class="collections-card__title-ar">' + titleAr + '</span>' +
+               '<span class="collections-card__title-en"><em>' + titleEn + '</em></span>' +
+             '</h2>' +
+             '<p class="collections-card__meta">' + meta + '</p>' +
+             '<span class="collections-card__cta">تصفّحي المجموعة ›</span>' +
+           '</div>' +
+           '</a>';
+  }
+
+  function render() {
+    var list = window.COLLECTIONS || [];
+    if (!list.length) return;
+    grid.innerHTML = list.map(cardHtml).join('');
+  }
+
+  if (window.COLLECTIONS && window.COLLECTIONS.length) render();
+  window.addEventListener('dentelle:collections-updated', render);
+})();
+</script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
 </body>

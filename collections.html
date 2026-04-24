@@ -86,22 +86,15 @@
     <p class="collections-index__lede">An evolving language of intimacy — chapter by chapter, season by season.</p>
   </header>
 
-  <div class="collections-index__grid">
-    <a href="collection.html" class="collections-card">
-      <div class="collections-card__media">
-        <img src="https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp" alt="Mohrah Collection" loading="eager" />
-        <img class="collections-card__media--hover" src="https://cdn.salla.sa/GYVWWE/V98LkOePXH0dPl2lRCFgbJZKHc4pDOhJJ4EJvP9a.webp" alt="Mohrah Collection — Signature" loading="lazy" />
-      </div>
+  <div class="collections-index__grid" data-collections-grid>
+    <!-- Live from Shopify — skeleton shown while fetching -->
+    <article class="collections-card collections-card--skeleton" aria-hidden="true">
+      <div class="collections-card__media product-card__skel"></div>
       <div class="collections-card__body">
-        <span class="collections-card__index">Collection N°01</span>
-        <h2 class="collections-card__title">
-          <span class="collections-card__title-en"><em>Mohrah</em></span>
-          <span class="collections-card__title-ar" dir="rtl" lang="ar">مُهره</span>
-        </h2>
-        <p class="collections-card__meta">8 pieces · from SAR 250</p>
-        <span class="collections-card__cta">Explore the collection ›</span>
+        <div class="product-card__skel-line product-card__skel-line--short" style="margin:0 auto 1rem"></div>
+        <div class="product-card__skel-line" style="margin:0 auto;height:2.4rem;width:55%"></div>
       </div>
-    </a>
+    </article>
   </div>
 
   <p class="collections-index__note">More chapters arriving — stay close.</p>
@@ -156,7 +149,67 @@
 <script src="theme/assets/shopify-cart.js?v=2" defer></script>
 <script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/products-live.js?v=1"></script>
+<script src="theme/assets/collections-live.js?v=1"></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
+
+<script>
+/* Render collection tiles live from Shopify */
+(function () {
+  'use strict';
+  var grid = document.querySelector('[data-collections-grid]');
+  if (!grid) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function roman(n) { var R = ['','I','II','III','IV','V','VI','VII','VIII','IX','X']; return R[n] || ('N°'+n); }
+
+  function cardHtml(c, idx) {
+    var meta = '';
+    if (c.product_count) {
+      var pieces = c.product_count + (c.product_count === 1 ? ' piece' : ' pieces');
+      var price = c.min_price ? ' · from SAR ' + c.min_price : '';
+      meta = '<p class="collections-card__meta">' + pieces + price + '</p>';
+    }
+    return ''
+      + '<a href="collection.html?handle=' + esc(c.handle) + '" class="collections-card">'
+      +   '<div class="collections-card__media">'
+      +     '<img src="' + esc(c.image) + '" alt="' + esc(c.title) + '" loading="' + (idx === 0 ? 'eager' : 'lazy') + '" />'
+      +     (c.hover_image && c.hover_image !== c.image
+            ? '<img class="collections-card__media--hover" src="' + esc(c.hover_image) + '" alt="' + esc(c.title) + '" loading="lazy" />'
+            : '')
+      +   '</div>'
+      +   '<div class="collections-card__body">'
+      +     '<span class="collections-card__index">Collection N°' + pad(idx + 1) + '</span>'
+      +     '<h2 class="collections-card__title">'
+      +       '<span class="collections-card__title-en"><em>' + esc(c.title) + '</em></span>'
+      +       (c.title_ar && c.title_ar !== c.title
+            ? '<span class="collections-card__title-ar" dir="rtl" lang="ar">' + esc(c.title_ar) + '</span>'
+            : '')
+      +     '</h2>'
+      +     meta
+      +     '<span class="collections-card__cta">Explore the collection ›</span>'
+      +   '</div>'
+      + '</a>';
+  }
+
+  function render() {
+    if (!window.COLLECTIONS) return;
+    if (!window.COLLECTIONS.length) {
+      grid.innerHTML = '<p style="text-align:center; color:var(--c-muted); font-style:italic; padding:3rem;">No collections yet.</p>';
+      return;
+    }
+    grid.innerHTML = window.COLLECTIONS.map(cardHtml).join('');
+  }
+
+  if (window.COLLECTIONS) render();
+  window.addEventListener('dentelle:collections-updated', render);
+})();
+</script>
 </body>
 </html>
