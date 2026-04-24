@@ -1632,16 +1632,22 @@ ul { margin: 0; padding: 0; list-style: none; }
   .site-logo--lg .site-logo__wordmark { font-size: 1.6rem; }
 
   /* Star mark — centre-align and make it visible on mobile */
-  .site-logo { align-items: center; }
-  .site-logo--lg .logo-mark { width: 18px; height: 22px; transform: none; }
-  .site-logo--lg .site-logo__wordmark { font-size: 1.4rem; }
+  .site-logo { align-items: center; min-width: 0; }
+  .site-logo--lg .logo-mark { width: 20px; height: 24px; transform: none; flex-shrink: 0; }
+  .site-logo--lg .site-logo__wordmark { font-size: 1.35rem; }
 
-  /* Header icons — all visible */
-  .site-header__icons { gap: .55rem; }
-  .site-header__icons .icon-link svg { width: 18px !important; height: 18px !important; }
+  /* Logo grid item must be allowed to shrink below content size */
+  .site-header--single .site-logo--left { min-width: 0; overflow: hidden; }
+
+  /* Header icons — match higher specificity to actually override the 1.2rem base gap */
+  .site-header--single .site-header__icons { gap: .4rem; }
+  .site-header--single .site-header__icons .icon-link svg { width: 18px !important; height: 18px !important; }
+
+  /* Kill the extra margin-left on the burger at mobile — gap is enough */
+  .site-header--single .nav-toggle { margin-left: .2rem; }
 
   /* Hide locale switcher from header bar on mobile — keep it in the slide-out menu */
-  .site-header__icons .locale-switcher { display: none; }
+  .site-header--single .site-header__icons .locale-switcher { display: none; }
 
   /* Burger — smaller on mobile */
   .nav-toggle { width: 18px !important; height: 13px !important; padding: 2px; }
