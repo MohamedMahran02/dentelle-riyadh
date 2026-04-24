@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "details": {
+          "type": "accordion",
+          "settings": {
+            "title": "Details",
+            "body": "<p>Materials, fit and fabrication details will appear here.</p>"
+          }
+        },
+        "care": {
+          "type": "accordion",
+          "settings": {
+            "title": "Care",
+            "body": "<p>Hand wash at 30°C max. No bleach, no machine drying, low-temperature ironing only.</p>"
+          }
+        },
+        "shipping": {
+          "type": "shipping",
+          "settings": {
+            "body": "<p>Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.</p>"
+          }
+        }
+      },
+      "block_order": ["details", "care", "shipping"],
+      "settings": {
+        "show_size_guide": true
+      }
+    },
+    "related-products": {
+      "type": "product-grid",
+      "settings": {
+        "products_to_show": 4,
+        "eyebrow_en": "You may also love",
+        "heading_en": "<p>From the same <em>atelier.</em></p>",
+        "heading_ar": "<p>من نفس <em>الورشة.</em></p>"
+      }
+    }
+  },
+  "order": ["main", "related-products"]
+}

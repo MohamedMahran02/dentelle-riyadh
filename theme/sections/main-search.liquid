@@ -1,0 +1,37 @@
+<section class="search" id="MainSearch-{{ section.id }}" data-reveal>
+  <header class="search__header">
+    <span class="eyebrow">{{ 'general.search' | t }}</span>
+    <h1 class="h-display">{{ 'general.search' | t }}.</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search__form">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search' | t }}…" aria-label="{{ 'general.search' | t }}" required>
+      <button type="submit" class="btn">{{ 'general.search' | t }}</button>
+    </form>
+  </header>
+
+  {%- if search.performed -%}
+    {%- if search.results_count > 0 -%}
+      <p class="search__count">{{ search.results_count }} results for "{{ search.terms | escape }}"</p>
+      <div class="product-grid__items">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- elsif item.object_type == 'article' or item.object_type == 'page' -%}
+            <a href="{{ item.url }}" class="search-result">
+              <h3>{{ item.title | escape }}</h3>
+              <p>{{ item.content | strip_html | truncatewords: 25 }}</p>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p class="search__empty">{{ 'search.no_results' | t }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-search.name",
+  "settings": []
+}
+{% endschema %}

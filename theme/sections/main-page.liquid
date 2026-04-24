@@ -1,0 +1,24 @@
+<section class="page" id="MainPage-{{ section.id }}" data-reveal>
+  <header class="page__header">
+    <span class="eyebrow">{{ page.metafields.custom.eyebrow | default: 'Dentelle Riyadh' }}</span>
+    <h1 class="h-display">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="page__body rte">
+    {{ page.content }}
+  </div>
+
+  {%- assign body_ar = page.metafields.custom.body_ar -%}
+  {%- if body_ar != blank -%}
+    <div class="page__body page__body--ar rte body-ar" dir="rtl" lang="ar">
+      {{ body_ar }}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "settings": []
+}
+{% endschema %}

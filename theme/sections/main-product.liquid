@@ -1,0 +1,225 @@
+{%- liquid
+  assign product = product
+  assign current_variant = product.selected_or_first_available_variant
+  assign title_ar = product.metafields.custom.title_ar
+  assign description_ar = product.metafields.custom.description_ar
+-%}
+
+<section class="product" id="MainProduct-{{ section.id }}" data-reveal>
+  <div class="product__inner">
+    <div class="product__gallery">
+      {%- if product.media.size > 0 -%}
+        <div class="product__media" data-product-media-main>
+          {%- assign first_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+          {%- for media in product.media -%}
+            <figure class="product__media-item{% if media == first_media %} is-active{% endif %}" data-media-id="{{ media.id }}">
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  {{ media | image_url: width: 1400 | image_tag:
+                    loading: forloop.first,
+                    widths: '400,600,900,1200,1400,1800',
+                    sizes: '(max-width:960px) 100vw, 60vw',
+                    alt: media.alt | default: product.title,
+                    fetchpriority: forloop.first
+                  }}
+                {%- when 'video', 'external_video' -%}
+                  {{ media | video_tag: controls: true, image_size: '1400x' }}
+                {%- when 'model' -%}
+                  {{ media | model_viewer_tag }}
+              {%- endcase -%}
+            </figure>
+          {%- endfor -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="product__thumbs" data-product-thumbs>
+            {%- for media in product.media -%}
+              <button type="button" class="product__thumb{% if media == first_media %} is-active{% endif %}" data-thumb-for="{{ media.id }}" aria-label="View image {{ forloop.index }}">
+                {{ media.preview_image | image_url: width: 200 | image_tag:
+                  widths: '100,200',
+                  sizes: '80px',
+                  alt: media.alt | default: product.title,
+                  loading: 'lazy'
+                }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    <div class="product__info">
+      {%- if product.collections.first -%}
+        <a href="{{ product.collections.first.url }}" class="product__breadcrumb eyebrow">← {{ product.collections.first.title | escape }}</a>
+      {%- endif -%}
+
+      <h1 class="product__title">
+        <span class="product__title-en">{{ product.title | escape }}</span>
+        {%- if title_ar != blank -%}
+          <span class="product__title-ar" dir="rtl" lang="ar">{{ title_ar | escape }}</span>
+        {%- endif -%}
+      </h1>
+
+      <div class="product__price" data-product-price>
+        {% render 'price', variant: current_variant %}
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="product__price-note">{{ 'products.on_sale' | t }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if product.description != blank -%}
+        <div class="product__lede rte">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if description_ar != blank -%}
+        <div class="product__lede product__lede--ar rte body-ar" dir="rtl" lang="ar">
+          {{ description_ar }}
+        </div>
+      {%- endif -%}
+
+      {%- form 'product', product, class: 'product__form', id: 'ProductForm-' | append: section.id, data-product-form: '' -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
+        {%- unless product.has_only_default_variant -%}
+          <div class="product__options">
+            {%- for option in product.options_with_values -%}
+              <fieldset class="product__option" data-option-index="{{ forloop.index0 }}">
+                <legend class="product__option-name">{{ option.name | escape }}</legend>
+                <div class="product__swatches">
+                  {%- for value in option.values -%}
+                    {%- assign id = section.id | append: '-option-' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
+                    <input
+                      type="radio"
+                      name="options[{{ option.name | escape }}]"
+                      id="{{ id }}"
+                      value="{{ value | escape }}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                      data-option-input
+                    >
+                    <label for="{{ id }}" class="product__swatch">{{ value | escape }}</label>
+                  {%- endfor -%}
+                </div>
+              </fieldset>
+            {%- endfor -%}
+          </div>
+
+          {%- if section.settings.show_size_guide and section.settings.size_guide_page != blank -%}
+            <a href="{{ pages[section.settings.size_guide_page].url }}" class="product__size-guide link-underline">
+              {{ 'products.size_guide' | t }} ›
+            </a>
+          {%- endif -%}
+        {%- endunless -%}
+
+        <div class="product__quantity">
+          <label for="Quantity-{{ section.id }}" class="product__option-name">{{ 'products.quantity' | t }}</label>
+          <input
+            type="number"
+            id="Quantity-{{ section.id }}"
+            name="quantity"
+            value="1"
+            min="1"
+            step="1"
+            aria-label="{{ 'products.quantity' | t }}"
+          >
+        </div>
+
+        <button
+          type="submit"
+          name="add"
+          class="btn btn--lg product__add-to-cart"
+          {% unless current_variant.available %}disabled{% endunless %}
+          data-add-to-cart
+        >
+          <span data-add-to-cart-text>
+            {%- if current_variant.available -%}
+              {{ 'products.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.sold_out' | t }}
+            {%- endif -%}
+          </span>
+        </button>
+
+        {{ form | payment_button }}
+      {%- endform -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="product__accordions">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'accordion' -%}
+                <details class="product__accordion" {{ block.shopify_attributes }}{% if block.settings.open %} open{% endif %}>
+                  <summary>{{ block.settings.title | escape }}</summary>
+                  <div class="product__accordion-body rte">
+                    {{ block.settings.body }}
+                  </div>
+                </details>
+              {%- when 'shipping' -%}
+                <details class="product__accordion" {{ block.shopify_attributes }}>
+                  <summary>{{ 'products.shipping' | t }}</summary>
+                  <div class="product__accordion-body rte">
+                    {{ block.settings.body | default: 'Free shipping within the Kingdom · SASO certified' }}
+                  </div>
+                </details>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Variant data for theme.js {%- endcomment -%}
+  <script type="application/json" data-variant-json>
+    {{ product.variants | json }}
+  </script>
+</section>
+
+{%- comment -%} Product structured data (SEO) {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | json }},
+  "image": {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},
+  "sku": {{ current_variant.sku | json }},
+  "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": {{ current_variant.price | divided_by: 100.0 | json }},
+    "availability": {% if current_variant.available %}"https://schema.org/InStock"{% else %}"https://schema.org/OutOfStock"{% endif %},
+    "url": {{ shop.url | append: product.url | json }}
+  }
+}
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "settings": [
+    { "type": "checkbox", "id": "show_size_guide", "label": "Show size guide link", "default": true },
+    { "type": "page", "id": "size_guide_page", "label": "Size guide page" }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion row",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Details" },
+        { "type": "richtext", "id": "body", "label": "Body" },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+      ]
+    },
+    {
+      "type": "shipping",
+      "name": "Shipping",
+      "limit": 1,
+      "settings": [
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.</p>" }
+      ]
+    }
+  ]
+}
+{% endschema %}
