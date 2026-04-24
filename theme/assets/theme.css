@@ -173,6 +173,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .collection__filters {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(1rem, 2vw, 2rem);
   margin: 2rem 0 0;
   font-family: var(--f-sans);
