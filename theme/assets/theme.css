@@ -1752,20 +1752,31 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__caption .hero__cta { gap: 1.2rem; }
   .btn { padding: 1rem 1.8rem; }
   .top-bar { font-size: .58rem; }
-  .site-logo--lg .site-logo__wordmark { font-size: 1.8rem; }
+  .site-logo--lg .site-logo__wordmark { font-size: 1.6rem; }
 
-  /* Header icons — bigger touch targets, fewer items */
-  .site-header__icons { gap: 1rem; }
-  .site-header__icons .icon-link svg { width: 20px; height: 20px; }
+  /* Star mark — centre-align and make it visible on mobile */
+  .site-logo { align-items: center; min-width: 0; }
+  .site-logo--lg .logo-mark { width: 20px; height: 24px; transform: none; flex-shrink: 0; }
+  .site-logo--lg .site-logo__wordmark { font-size: 1.35rem; }
 
-  /* Hide search + wishlist to make room; keep account, cart, EN|AR, burger */
-  .site-header__icons a[aria-label="Search"],
-  .site-header__icons a[aria-label="Wishlist"],
-  .site-header__icons a[aria-label="بحث"],
-  .site-header__icons a[aria-label="المفضلة"] { display: none; }
+  /* Logo grid item must be allowed to shrink below content size */
+  .site-header--single .site-logo--left { min-width: 0; overflow: hidden; }
 
-  /* Burger — unclipped, clearly visible */
-  .nav-toggle { width: 32px; height: 22px; }
+  /* Header icons — match higher specificity to actually override the 1.2rem base gap */
+  .site-header--single .site-header__icons { gap: .4rem; }
+  .site-header--single .site-header__icons .icon-link svg { width: 18px !important; height: 18px !important; }
+
+  /* Kill the extra margin-left on the burger at mobile — gap is enough */
+  .site-header--single .nav-toggle { margin-left: .2rem; }
+
+  /* Hide locale switcher from header bar on mobile — keep it in the slide-out menu */
+  .site-header--single .site-header__icons .locale-switcher { display: none; }
+
+  /* Burger — smaller on mobile */
+  .nav-toggle { width: 18px !important; height: 13px !important; padding: 2px; }
+  .nav-toggle span { height: 1.5px; left: 0; right: 0; }
+  .nav-toggle span:nth-child(1) { top: 0; }
+  .nav-toggle span:nth-child(2) { bottom: 0; }
 }
 
 /* =========================================================
