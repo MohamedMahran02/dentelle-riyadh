@@ -4,7 +4,13 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*)\\.(webp|jpg|jpeg|png|gif|avif|svg|mov|mp4|ico|pdf)",
+      "source": "/(.*)\\.(webp|jpg|jpeg|JPG|png|gif|avif|svg|MOV|mp4|ico|pdf)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/theme/assets/(.*\\.min\\.css|.*\\.min\\.js)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
@@ -12,7 +18,13 @@
     {
       "source": "/theme/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=60, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(.*\\.html)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     }
   ]
