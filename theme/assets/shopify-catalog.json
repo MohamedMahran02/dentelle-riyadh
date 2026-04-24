@@ -1,0 +1,303 @@
+{
+  "products": [
+    {
+      "slug": "mohra-1",
+      "handle": "mohra-1",
+      "title_en": "Mohrah 1",
+      "title_ar": "مُهره ١",
+      "price": 330,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection",
+      "description_en": "A wireless lace bra designed for quiet support — soft, unlined, hand-finished in the Riyadh atelier.",
+      "description_ar": "حمّالة صدر من الدانتيل بلا إطار — دعم هادئ، غير مبطّنة، تُنهى يدوياً في ورشة الرياض.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp",
+        "https://cdn.salla.sa/GYVWWE/NoqnUqjxEErfi9srZ6ypKGLGf2FKeZfBHUNh3PHm.webp",
+        "https://cdn.salla.sa/GYVWWE/fCNNtZwlwkuUFQTRuCpgcqP6G39qgPWWEjsA1VY9.webp",
+        "https://cdn.salla.sa/GYVWWE/4QrHcUO5rJJFXGWHmMXsJU5UiSGxHrNaNlIOgvDf.jpg",
+        "https://cdn.salla.sa/GYVWWE/jFEryHWSP1HYLxWfDx3qJu1yKnh2FgJZAHq4lAT7.webp",
+        "https://cdn.salla.sa/GYVWWE/yJNbrDX7fpHg53bULIdE8logCNxvgpcSwdm7mbzW.webp"
+      ],
+      "is_signature": false,
+      "category": "bras",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688694800752",
+        "M": "gid://shopify/ProductVariant/53688694833520",
+        "L": "gid://shopify/ProductVariant/53688694866288",
+        "XL": "gid://shopify/ProductVariant/53688694899056",
+        "XXL": "gid://shopify/ProductVariant/53688694931824",
+        "XXXL": "gid://shopify/ProductVariant/53688694964592"
+      },
+      "shopify_id": "gid://shopify/Product/15096556355952"
+    },
+    {
+      "slug": "mohra-2",
+      "handle": "mohra-2",
+      "title_en": "Mohrah 2",
+      "title_ar": "مُهره ٢",
+      "price": 330,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection",
+      "description_en": "Quiet femininity, refined fit. French lace meets a supportive cut, finished by hand in Riyadh.",
+      "description_ar": "أنوثة هادئة، قصّة دقيقة. دانتيل فرنسي بدعمٍ مريح، يُنهى يدوياً في الرياض.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/HlD1jo8E9VIjsnXW1GMll31zIO92EmM99dozmtPU.webp",
+        "https://cdn.salla.sa/GYVWWE/VyHni8XLTDJ2Ey9eEif98qMnSpn6OfV6kjnFaAgB.webp",
+        "https://cdn.salla.sa/GYVWWE/XNhtWI9PowJ6kOS3n0d83NNEtMMJUxknxpTUa54R.webp",
+        "https://cdn.salla.sa/GYVWWE/uzZsf2HyfeZCqXnMLYahvxBeczGll7cmnExApG6M.webp",
+        "https://cdn.salla.sa/GYVWWE/VR2pOSkGW7aoJghWt2AwkpkYX3nEdvD72xndxokC.webp"
+      ],
+      "is_signature": false,
+      "category": "bras",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688694997360",
+        "M": "gid://shopify/ProductVariant/53688695030128",
+        "L": "gid://shopify/ProductVariant/53688695062896",
+        "XL": "gid://shopify/ProductVariant/53688695095664",
+        "XXL": "gid://shopify/ProductVariant/53688695128432",
+        "XXXL": "gid://shopify/ProductVariant/53688695161200"
+      },
+      "shopify_id": "gid://shopify/Product/15096556388720"
+    },
+    {
+      "slug": "mohra-3",
+      "handle": "mohra-3",
+      "title_en": "Mohrah 3",
+      "title_ar": "مُهره ٣",
+      "price": 250,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection",
+      "description_en": "A brief cut in the house signature lace — flexible, invisible under garments, effortlessly refined.",
+      "description_ar": "سروال دانتيل بتوقيع الدار — مرن، غير مرئي تحت الملابس، أناقة دون مجهود.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/tSG21XYZ3ulkxriCmTZLkWVzKJREX0BXoZsAwwvd.webp",
+        "https://cdn.salla.sa/GYVWWE/HN2ThTSUTYS4pbuZO5ZnCmuhWl0zDapA39ZYCIpJ.webp",
+        "https://cdn.salla.sa/GYVWWE/CGS3eXCQdPqZmRYYdh1Q1xzAc3wKiXsOIDthzB9w.webp",
+        "https://cdn.salla.sa/GYVWWE/rQALiSXRVR07nrSHqL1zyQUtaM6BZ48pEwpNm15g.webp",
+        "https://cdn.salla.sa/GYVWWE/UbAP60JHt6pZKbKMtMl8L0QVd5hrbffHL11kD2B5.webp",
+        "https://cdn.salla.sa/GYVWWE/5v1yi0Yh5VHtgJYTB0sGtrlRI8IFMdfcudzU5zDd.webp"
+      ],
+      "is_signature": false,
+      "category": "briefs",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688695193968",
+        "M": "gid://shopify/ProductVariant/53688695226736",
+        "L": "gid://shopify/ProductVariant/53688695259504",
+        "XL": "gid://shopify/ProductVariant/53688695292272",
+        "XXL": "gid://shopify/ProductVariant/53688695325040",
+        "XXXL": "gid://shopify/ProductVariant/53688695357808"
+      },
+      "shopify_id": "gid://shopify/Product/15096556421488"
+    },
+    {
+      "slug": "mohra-4",
+      "handle": "mohra-4",
+      "title_en": "Mohrah 4",
+      "title_ar": "مُهره ٤",
+      "price": 250,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection",
+      "description_en": "Softness composed in Calais lace — a quiet second skin finished in our Riyadh atelier.",
+      "description_ar": "نعومة من دانتيل كاليه — طبقة ثانية هادئة تُنهى في ورشة الرياض.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/bbd8CGQjhwbgjyHU7V2UJthyCsTq6YBUTWuSzoUc.webp",
+        "https://cdn.salla.sa/GYVWWE/UpgiZjGGBjkQSOUsi828ChqXCtXwblXM4FFcYl0q.webp",
+        "https://cdn.salla.sa/GYVWWE/GI96hRFLCJkTtY7cjmzBubx8mXkr26Zh8stlXDkh.webp",
+        "https://cdn.salla.sa/GYVWWE/elKe2YDk0ClCHtuXSToGGh7nsFPwe8TuxdW3OwGf.webp",
+        "https://cdn.salla.sa/GYVWWE/HGceA6zE0iubToddnDjgekMlArevWkLV2wpvcI5d.webp",
+        "https://cdn.salla.sa/GYVWWE/SVkP7Rqi8Fu77SvAix2DXppfGnmNsvandexSXWuE.webp"
+      ],
+      "is_signature": false,
+      "category": "briefs",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688695390576",
+        "M": "gid://shopify/ProductVariant/53688695423344",
+        "L": "gid://shopify/ProductVariant/53688695456112",
+        "XL": "gid://shopify/ProductVariant/53688695488880",
+        "XXL": "gid://shopify/ProductVariant/53688695521648",
+        "XXXL": "gid://shopify/ProductVariant/53688695554416"
+      },
+      "shopify_id": "gid://shopify/Product/15096556454256"
+    },
+    {
+      "slug": "mohra-5",
+      "handle": "mohra-5",
+      "title_en": "Mohrah 5",
+      "title_ar": "مُهره ٥",
+      "price": 250,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection",
+      "description_en": "Elegant simplicity — a piece that listens rather than reshapes.",
+      "description_ar": "بساطة أنيقة — قطعة تُصغي بدل أن تُعيد التشكيل.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/j3F85l18BKcYrp7cucgTISU7Hr13hZOLiue194xA.webp",
+        "https://cdn.salla.sa/GYVWWE/FQYPrKqDVurwQq7CjqcvPtmOTr59kz9s5nmlAsH9.webp",
+        "https://cdn.salla.sa/GYVWWE/bNxzUUvOxoBx8cZcr9azYYT0Yw24VBKiXkhdrn5x.webp",
+        "https://cdn.salla.sa/GYVWWE/zzIBKJJOYZQOl8Alq1XL7QGG0JYSBaukNKemsJzd.webp",
+        "https://cdn.salla.sa/GYVWWE/fRDiiJi9DadidotCTNMQpwXWCjMRkHhWFevuy3ZA.webp"
+      ],
+      "is_signature": false,
+      "category": "briefs",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688695587184",
+        "M": "gid://shopify/ProductVariant/53688695619952",
+        "L": "gid://shopify/ProductVariant/53688695652720",
+        "XL": "gid://shopify/ProductVariant/53688695685488",
+        "XXL": "gid://shopify/ProductVariant/53688695718256",
+        "XXXL": "gid://shopify/ProductVariant/53688695751024"
+      },
+      "shopify_id": "gid://shopify/Product/15096556487024"
+    },
+    {
+      "slug": "mohra-6",
+      "handle": "mohra-6",
+      "title_en": "Mohrah 6",
+      "title_ar": "مُهره ٦",
+      "price": 400,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection · Signature",
+      "description_en": "The signature piece of the Mohrah collection — an extended fit in French Leavers lace and silk satin.",
+      "description_ar": "القطعة الأيقونية من مجموعة مُهره — قصّة ممتدّة من دانتيل ليفرز الفرنسي والحرير.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/V98LkOePXH0dPl2lRCFgbJZKHc4pDOhJJ4EJvP9a.webp",
+        "https://cdn.salla.sa/GYVWWE/6coAPg8mIf4TFaMM5g9MUCVrz0XLnjXzMpSZi9Nf.webp",
+        "https://cdn.salla.sa/GYVWWE/bEFusoxhLGPGsyL09DXwUEMOSxoxuyH60Ye5fBCb.webp",
+        "https://cdn.salla.sa/GYVWWE/kTtwWI9pBw9gy0gYkanjkLcwRBheyOFqoIUTauYH.webp",
+        "https://cdn.salla.sa/GYVWWE/SCqnDhrCPF6PYZDLMRGQu0lbllGbxKqp5FIf22OF.webp",
+        "https://cdn.salla.sa/GYVWWE/MTSTMAmDsvVWxm2LqzbxP8fdkv17K3QNVmNjXAxa.webp",
+        "https://cdn.salla.sa/GYVWWE/0aKAnoXgbEC6CyPKltXqEzi27ti3cmrPcEGp3N0i.webp"
+      ],
+      "is_signature": true,
+      "category": "ensembles",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688695783792",
+        "M": "gid://shopify/ProductVariant/53688695816560",
+        "L": "gid://shopify/ProductVariant/53688695849328",
+        "XL": "gid://shopify/ProductVariant/53688695882096",
+        "XXL": "gid://shopify/ProductVariant/53688695914864",
+        "XXXL": "gid://shopify/ProductVariant/53688695947632"
+      },
+      "shopify_id": "gid://shopify/Product/15096556519792"
+    },
+    {
+      "slug": "mohra-7",
+      "handle": "mohra-7",
+      "title_en": "Mohrah 7",
+      "title_ar": "مُهره ٧",
+      "price": 280,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection",
+      "description_en": "A refined lace piece with a light supportive band — handwork, silk and silence.",
+      "description_ar": "قطعة من الدانتيل الدقيق بحزام دعم خفيف — صنعة يدوية، حرير وصمت.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/YIt5M9HjmuIOTwXpSLqPhf0jJBZTb1lQpvgposHC.webp",
+        "https://cdn.salla.sa/GYVWWE/nQie4CY59SgYGDtMBHIV3U7xRF3IBk3iXaYaWTId.webp",
+        "https://cdn.salla.sa/GYVWWE/VxnXcFu8d1krHPuRgllTjLX1ITQdeQG38Q1Q9vrG.webp",
+        "https://cdn.salla.sa/GYVWWE/uSMfIqbqXFl30lqjiIIq0oE92H8Tzr6gV27iT7kK.webp",
+        "https://cdn.salla.sa/GYVWWE/sy5Ef3OJVQPMWMBo2kQHoBjKb7PzUJnuJza8lVxz.webp",
+        "https://cdn.salla.sa/GYVWWE/bxargNJkvLInH6MtunxTXMF2TRXSDGxWJKdRZF3R.webp"
+      ],
+      "is_signature": false,
+      "category": "ensembles",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688696013168",
+        "M": "gid://shopify/ProductVariant/53688696045936",
+        "L": "gid://shopify/ProductVariant/53688696078704",
+        "XL": "gid://shopify/ProductVariant/53688696111472",
+        "XXL": "gid://shopify/ProductVariant/53688696144240",
+        "XXXL": "gid://shopify/ProductVariant/53688696177008"
+      },
+      "shopify_id": "gid://shopify/Product/15096556585328"
+    },
+    {
+      "slug": "mohra-8",
+      "handle": "mohra-8",
+      "title_en": "Mohrah 8",
+      "title_ar": "مُهره ٨",
+      "price": 250,
+      "currency": "SAR",
+      "subtitle": "Dentelle Riyadh — Mohrah Collection",
+      "description_en": "The softest closing note of the collection — a silk satin robe with Chantilly lace.",
+      "description_ar": "الخاتمة الأنعم للمجموعة — رداء من ساتان الحرير ودانتيل شانتيلي، يُنهى يدوياً.",
+      "images": [
+        "https://cdn.salla.sa/GYVWWE/SzWAoR74F7DQexhZvcZT9570C9EnT6A2teNl45qv.webp",
+        "https://cdn.salla.sa/GYVWWE/J7538PQ46KJIfH15d2bpieWoGJuehoJ2XtiUuXm2.webp"
+      ],
+      "is_signature": false,
+      "category": "robes",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+      ],
+      "variants": {
+        "S": "gid://shopify/ProductVariant/53688696209776",
+        "M": "gid://shopify/ProductVariant/53688696242544",
+        "L": "gid://shopify/ProductVariant/53688696275312",
+        "XL": "gid://shopify/ProductVariant/53688696308080",
+        "XXL": "gid://shopify/ProductVariant/53688696340848",
+        "XXXL": "gid://shopify/ProductVariant/53688696373616"
+      },
+      "shopify_id": "gid://shopify/Product/15096556618096"
+    }
+  ]
+}

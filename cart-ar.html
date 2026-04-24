@@ -147,7 +147,9 @@
   </div>
 </footer>
 
-<script src="theme/assets/products.js?v=4"></script>
+<script src="theme/assets/shopify-config.js?v=2"></script>
+<script src="theme/assets/shopify-cart.js?v=2" defer></script>
+<script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
 <script>
@@ -199,8 +201,8 @@
           '<div class="cart-page__summary-line"><span>المجموع الفرعي</span><span>' + fmt(subtotal) + '</span></div>' +
           '<div class="cart-page__summary-line"><span>الشحن</span><span>' + (shipping === 0 ? 'مجاني' : fmt(shipping)) + '</span></div>' +
           '<div class="cart-page__summary-total"><span>المجموع</span><span>' + fmt(subtotal + shipping) + '</span></div>' +
-          '<a href="https://wa.me/966546002573?text=' + encodeURIComponent('مرحباً، أودّ إتمام طلبي: ' + items.map(function(i){ return i.title_en + ' (المقاس: ' + i.size + ' × ' + i.qty + ')'; }).join(', ')) + '" class="btn btn--lg cart-page__checkout" target="_blank" rel="noopener">عرض الحقيبة والدفع</a>' +
-          '<p class="cart-page__note">الدفع الآمن عبر واتساب — يؤكد فريقنا طلبك خلال ٢٤ ساعة.</p>' +
+          '<button type="button" class="btn btn--lg cart-page__checkout" onclick="window.DentelleCheckout && window.DentelleCheckout.start()" style="width:100%;justify-content:center;">إتمام الدفع</button>' +
+          '<p class="cart-page__note">دفع آمن عبر Shopify — يتم معالجة الدفع والشحن والتأكيد على shopify.com.</p>' +
         '</aside>' +
       '</div>';
 

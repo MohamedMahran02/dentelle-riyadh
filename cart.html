@@ -143,7 +143,9 @@
   </div>
 </footer>
 
-<script src="theme/assets/products.js?v=4"></script>
+<script src="theme/assets/shopify-config.js?v=2"></script>
+<script src="theme/assets/shopify-cart.js?v=2" defer></script>
+<script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
 <script>
@@ -195,8 +197,8 @@
           '<div class="cart-page__summary-line"><span>Subtotal</span><span>' + fmt(subtotal) + '</span></div>' +
           '<div class="cart-page__summary-line"><span>Shipping</span><span>' + (shipping === 0 ? 'Free' : fmt(shipping)) + '</span></div>' +
           '<div class="cart-page__summary-total"><span>Total</span><span>' + fmt(subtotal + shipping) + '</span></div>' +
-          '<a href="https://wa.me/966546002573?text=' + encodeURIComponent('Hello, I would like to place an order for: ' + items.map(function(i){ return i.title_en + ' (Size: ' + i.size + ' × ' + i.qty + ')'; }).join(', ')) + '" class="btn btn--lg cart-page__checkout" target="_blank" rel="noopener">Order via WhatsApp</a>' +
-          '<p class="cart-page__note">Secure checkout via WhatsApp — our team confirms your order within 24 hours. Shopify checkout coming soon.</p>' +
+          '<button type="button" class="btn btn--lg cart-page__checkout" onclick="window.DentelleCheckout && window.DentelleCheckout.start()" style="width:100%;justify-content:center;">Checkout</button>' +
+          '<p class="cart-page__note">Secure checkout handled by Shopify — payment, shipping and confirmation processed on shopify.com.</p>' +
         '</aside>' +
       '</div>';
 
