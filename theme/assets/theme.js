@@ -409,14 +409,13 @@
     const dotsWrap = section?.querySelector('[data-carousel-dots]');
     const cards    = Array.from(track.querySelectorAll('.product-card'));
 
-    /* Build dots */
+    /* Build dots — click handlers wired after animateTo is defined */
     if (dotsWrap && cards.length) {
       cards.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
         dot.setAttribute('aria-label', 'Go to piece ' + (i + 1));
-        dot.addEventListener('click', () => scrollToCard(i));
         dotsWrap.appendChild(dot);
       });
     }
@@ -431,14 +430,8 @@
       return card.offsetWidth + gap;
     };
 
-    /* Arrow step = 2 cards at a time for a snappier feel */
+    /* Arrow step = 2 cards at a time */
     const arrowStep = () => cardStep() * 2;
-
-    const scrollToCard = (idx) => {
-      const card = cards[idx];
-      if (!card) return;
-      track.scrollTo({ left: card.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior: 'smooth' });
-    };
 
     /* Current index (which card is most visible at left) */
     const currentIndex = () => {
@@ -464,28 +457,47 @@
       getDots().forEach((dot, i) => dot.classList.toggle('is-active', i === idx));
     };
 
-    /* Arrow clicks — scroll by 2 cards at a time */
-    if (prevBtn) prevBtn.addEventListener('click', () => track.scrollBy({ left: -arrowStep(), behavior: 'smooth' }));
-    if (nextBtn) nextBtn.addEventListener('click', () => track.scrollBy({ left:  arrowStep(), behavior: 'smooth' }));
+    /* Custom smooth scroll — fast easeOutQuart, no browser 'smooth' lag */
+    let animId = null;
+    const animateTo = (targetLeft, duration) => {
+      duration = duration || 320;
+      if (animId) cancelAnimationFrame(animId);
+      const from  = track.scrollLeft;
+      const delta = targetLeft - from;
+      if (Math.abs(delta) < 1) return;
+      const t0 = performance.now();
+      const easeOut = (x) => 1 - Math.pow(1 - x, 4); /* easeOutQuart */
+      const step = (now) => {
+        const p = Math.min((now - t0) / duration, 1);
+        track.scrollLeft = from + delta * easeOut(p);
+        if (p < 1) animId = requestAnimationFrame(step);
+        else { animId = null; updateState(); }
+      };
+      animId = requestAnimationFrame(step);
+    };
+
+    /* Arrow clicks — 2 cards, fast custom animation */
+    if (prevBtn) prevBtn.addEventListener('click', () => animateTo(track.scrollLeft - arrowStep()));
+    if (nextBtn) nextBtn.addEventListener('click', () => animateTo(track.scrollLeft + arrowStep()));
 
     track.addEventListener('scroll', updateState, { passive: true });
     updateState(); /* initial state */
 
-    /* Keyboard arrow support when track is focused */
+    /* Keyboard support */
     track.setAttribute('tabindex', '0');
     track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); track.scrollBy({ left: -arrowStep(), behavior: 'smooth' }); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left:  arrowStep(), behavior: 'smooth' }); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); animateTo(track.scrollLeft - arrowStep()); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); animateTo(track.scrollLeft + arrowStep()); }
     });
 
-    /* Mouse-wheel → horizontal scroll when cursor is over the carousel */
-    track.addEventListener('wheel', (e) => {
-      /* If the user is already scrolling horizontally (trackpad swipe), let it pass */
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-      /* Otherwise hijack vertical wheel and turn it into horizontal movement */
-      e.preventDefault();
-      track.scrollLeft += e.deltaY * 1.5; /* 1.5× multiplier for faster feel */
-    }, { passive: false });
+    /* Dot clicks — also use custom animation */
+    getDots().forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        const card = cards[i];
+        if (!card) return;
+        animateTo(card.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft));
+      });
+    });
 
     /* Drag-to-scroll (mouse) */
     let isDragging = false;

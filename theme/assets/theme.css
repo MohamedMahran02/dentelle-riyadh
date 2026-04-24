@@ -781,33 +781,60 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
 }
 
-/* Arrow buttons */
+/* Arrow buttons — thin outlined circles */
 .carousel-btn {
   position: absolute;
-  top: 40%; /* vertically centred over image (image is 4/5 aspect, meta below) */
+  top: 38%; /* sits mid-image */
   transform: translateY(-50%);
   z-index: 10;
-  width: 44px; height: 44px;
+  width: 52px; height: 52px;
+  border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: var(--c-paper);
+  background: rgba(251,248,242,.82); /* --c-paper semi-transparent */
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border: 1px solid var(--c-line);
+  color: var(--c-ink);
   opacity: 0;
   pointer-events: none;
-  transition: opacity .3s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+  transition: opacity .25s var(--ease),
+              background .22s var(--ease),
+              color .22s var(--ease),
+              border-color .22s var(--ease),
+              transform .22s var(--ease);
+  /* offset inward so circle sits just inside the track edge */
 }
 .product-grid:hover .carousel-btn,
-.product-grid:focus-within .carousel-btn { opacity: 1; pointer-events: all; }
-.carousel-btn--prev { left: 0; }
-.carousel-btn--next { right: 0; }
-.carousel-btn:hover  { background: var(--c-ink); color: var(--c-paper); border-color: var(--c-ink); }
-.carousel-btn:disabled { opacity: .25 !important; pointer-events: none; }
-.carousel-btn svg { display: block; }
+.product-grid:focus-within .carousel-btn {
+  opacity: 1;
+  pointer-events: all;
+}
+.carousel-btn--prev {
+  left: calc(var(--frame-x) - 26px); /* half overlaps the first card edge */
+}
+.carousel-btn--next {
+  right: calc(var(--frame-x) - 26px);
+}
+.carousel-btn:hover {
+  background: var(--c-ink);
+  color: var(--c-paper);
+  border-color: var(--c-ink);
+  transform: translateY(-50%) scale(1.08);
+}
+.carousel-btn:active {
+  transform: translateY(-50%) scale(.96);
+}
+.carousel-btn:disabled {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+.carousel-btn svg { display: block; flex-shrink: 0; }
 
-/* Always show on touch devices (no hover) */
+/* Touch: always visible, tucked at edges */
 @media (hover: none) {
   .carousel-btn { opacity: 1; pointer-events: all; }
-  .carousel-btn--prev { left: .4rem; }
-  .carousel-btn--next { right: .4rem; }
+  .carousel-btn--prev { left: .5rem; }
+  .carousel-btn--next { right: .5rem; }
 }
 
 /* Dot progress indicator */
