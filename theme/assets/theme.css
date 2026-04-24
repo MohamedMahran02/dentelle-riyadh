@@ -3,6 +3,12 @@
    Visual direction: Aubade-inspired luxury, Arabian refinement
    ========================================================= */
 
+/* ---------- PERFORMANCE ---------- */
+img { content-visibility: auto; }
+.categories, .savoir, .story, .press, .newsletter { content-visibility: auto; contain-intrinsic-size: 0 600px; }
+.product-card__img { will-change: opacity; }
+.site-header { will-change: transform; }
+
 /* ---------- TOKENS ---------- */
 :root {
   /* Palette */

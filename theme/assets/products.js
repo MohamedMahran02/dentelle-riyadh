@@ -16,7 +16,7 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp',
-      'mohra-1/main%20photo%20number%201.webp'
+      'mohra-1/num1.jpg'
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -36,7 +36,7 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/HlD1jo8E9VIjsnXW1GMll31zIO92EmM99dozmtPU.webp',
-      'mohra-1/num%202.webp'
+      'mohra-1/num2.jpg'
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -56,7 +56,7 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/tSG21XYZ3ulkxriCmTZLkWVzKJREX0BXoZsAwwvd.webp',
-      'mohra-1/Number%203.webp'
+      'mohra-1/num3.jpg'
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -76,7 +76,7 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/bbd8CGQjhwbgjyHU7V2UJthyCsTq6YBUTWuSzoUc.webp',
-      'mohra-1/num%204.webp'
+      'mohra-1/num4.jpg'
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
@@ -116,7 +116,7 @@ window.PRODUCTS = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/V98LkOePXH0dPl2lRCFgbJZKHc4pDOhJJ4EJvP9a.webp',
-      'mohra-1/num%206.webp'
+      'mohra-1/num6.jpg'
     ],
     is_signature: true,
     details: 'French Leavers lace · Calais. Silk satin · Lyon. Fully customisable by appointment.',
