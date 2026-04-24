@@ -106,10 +106,12 @@
       <div class="product__lede product__lede--ar body-ar" dir="rtl" lang="ar" data-description-ar></div>
 
       <form class="product__form" data-product-form>
-        <fieldset class="product__option">
-          <legend class="product__option-name">Size</legend>
-          <div class="product__swatches" data-sizes></div>
-        </fieldset>
+        <div class="product__option">
+          <label class="product__option-name" for="productSizeSelect">Size</label>
+          <select class="product__size-select" id="productSizeSelect" data-sizes aria-label="Select size">
+            <option value="">Select a size</option>
+          </select>
+        </div>
 
         <div class="product__quantity">
           <label for="Quantity" class="product__option-name">Quantity</label>
@@ -301,13 +303,11 @@
 
   // ----- Sizes -----
   const sizesBox = document.querySelector('[data-sizes]');
-  product.sizes.forEach((size, i) => {
-    const id = `size-${i}`;
-    sizesBox.insertAdjacentHTML(
-      'beforeend',
-      `<input type="radio" name="size" id="${id}" value="${size}" ${i === 0 ? 'checked' : ''} />
-       <label for="${id}" class="product__swatch">${size}</label>`
-    );
+  product.sizes.forEach((size) => {
+    const opt = document.createElement('option');
+    opt.value = size;
+    opt.textContent = size;
+    sizesBox.appendChild(opt);
   });
 
   // ----- Form submit — add to localStorage cart -----
@@ -319,9 +319,14 @@
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Get selected size
-    const sizeInput = form.querySelector('input[name="size"]:checked');
-    const selectedSize = sizeInput ? sizeInput.value : (product.sizes[0] || 'One Size');
+    // Get selected size from select dropdown
+    const sizeSelect = form.querySelector('[data-sizes]');
+    const selectedSize = sizeSelect ? sizeSelect.value : (product.sizes[0] || 'One Size');
+    if (!selectedSize) {
+      sizeSelect.classList.add('needs-size');
+      setTimeout(() => sizeSelect.classList.remove('needs-size'), 700);
+      return;
+    }
     const qty = Number(form.querySelector('input[name="quantity"]')?.value || 1);
 
     // Add to cart

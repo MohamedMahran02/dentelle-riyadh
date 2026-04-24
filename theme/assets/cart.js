@@ -341,9 +341,9 @@
         media.parentNode.insertBefore(visual, media);
         visual.appendChild(media);
 
-        /* Build size buttons */
-        var sizesHtml = product ? product.sizes.map(function (s) {
-          return '<button type="button" class="product-card__size-btn" data-size="' + s + '">' + s + '</button>';
+        /* Build size options for select */
+        var sizeOptsHtml = product ? product.sizes.map(function (s) {
+          return '<option value="' + s + '">' + s + '</option>';
         }).join('') : '';
 
         /* Inject quick-add below .product-card__meta */
@@ -351,7 +351,9 @@
         if (meta) {
           meta.insertAdjacentHTML('afterend',
             '<div class="product-card__quick-add" aria-hidden="true">' +
-              '<div class="product-card__sizes">' + sizesHtml + '</div>' +
+              '<select class="product-card__size-select" aria-label="Select size">' +
+                '<option value="">Select size</option>' + sizeOptsHtml +
+              '</select>' +
               '<button type="button" class="product-card__atc-btn" data-quick-atc>Add to bag</button>' +
             '</div>'
           );
@@ -410,19 +412,6 @@
         return;
       }
 
-      /* ---- Quick-add: size button ---- */
-      var sizeBtn = e.target.closest('.product-card__size-btn');
-      if (sizeBtn) {
-        e.preventDefault();
-        e.stopPropagation();
-        var row = sizeBtn.closest('.product-card__sizes');
-        row.querySelectorAll('.product-card__size-btn').forEach(function (b) {
-          b.classList.remove('is-selected');
-        });
-        sizeBtn.classList.add('is-selected');
-        return;
-      }
-
       /* ---- Quick-add: add to bag ---- */
       var atcBtn = e.target.closest('[data-quick-atc]');
       if (atcBtn) {
@@ -431,19 +420,18 @@
         var card    = atcBtn.closest('.product-card');
         if (!card) return;
         var cardSlug = card.dataset.slug;
-        var chosen   = card.querySelector('.product-card__size-btn.is-selected');
-        if (!chosen) {
-          /* No size selected — shake the size row and prompt */
-          var sizesEl = card.querySelector('.product-card__sizes');
-          if (sizesEl) {
-            sizesEl.classList.add('needs-size');
-            setTimeout(function () { sizesEl.classList.remove('needs-size'); }, 700);
+        var sizeSelect = card.querySelector('.product-card__size-select');
+        var size = sizeSelect ? sizeSelect.value : '';
+        if (!size) {
+          /* No size selected — shake the select and prompt */
+          if (sizeSelect) {
+            sizeSelect.classList.add('needs-size');
+            setTimeout(function () { sizeSelect.classList.remove('needs-size'); }, 700);
           }
           atcBtn.textContent = 'Select a size';
           setTimeout(function () { atcBtn.textContent = 'Add to bag'; }, 1400);
           return;
         }
-        var size    = chosen.dataset.size;
         var product = window.PRODUCTS_BY_SLUG && window.PRODUCTS_BY_SLUG[cardSlug];
         if (product && window.DentelleCart) {
           window.DentelleCart.add(product, size, 1);

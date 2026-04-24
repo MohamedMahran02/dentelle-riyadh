@@ -13,7 +13,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection',
     description_en: 'A wireless lace bra designed for quiet support — soft, unlined, hand-finished in the Riyadh atelier. Long supportive cut, adjustable straps, polished elastic band.',
     description_ar: 'حمّالة صدر من الدانتيل بلا إطار — دعم هادئ، غير مبطّنة، تُنهى يدوياً في ورشة الرياض.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp',
       'mohra-1/main%20photo%20number%201.webp'
@@ -33,7 +33,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection',
     description_en: 'Quiet femininity, refined fit. French lace meets a supportive cut, finished by hand in Riyadh.',
     description_ar: 'أنوثة هادئة، قصّة دقيقة. دانتيل فرنسي بدعمٍ مريح، يُنهى يدوياً في الرياض.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/HlD1jo8E9VIjsnXW1GMll31zIO92EmM99dozmtPU.webp',
       'mohra-1/num%202.webp'
@@ -53,7 +53,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection',
     description_en: 'A brief cut in the house\'s signature lace — flexible, invisible under garments, effortlessly refined.',
     description_ar: 'سروال دانتيل بتوقيع الدار — مرن، غير مرئي تحت الملابس، أناقة دون مجهود.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/tSG21XYZ3ulkxriCmTZLkWVzKJREX0BXoZsAwwvd.webp',
       'mohra-1/Number%203.webp'
@@ -73,7 +73,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection',
     description_en: 'Softness composed in Calais lace — a quiet second skin finished in our Riyadh atelier.',
     description_ar: 'نعومة من دانتيل كاليه — طبقة ثانية هادئة تُنهى في ورشة الرياض.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/bbd8CGQjhwbgjyHU7V2UJthyCsTq6YBUTWuSzoUc.webp',
       'mohra-1/num%204.webp'
@@ -93,7 +93,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection',
     description_en: 'Elegant simplicity — a piece that listens rather than reshapes.',
     description_ar: 'بساطة أنيقة — قطعة تُصغي بدل أن تُعيد التشكيل.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/j3F85l18BKcYrp7cucgTISU7Hr13hZOLiue194xA.webp',
       'mohra-1/num%205.jpeg'
@@ -113,7 +113,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection · Signature',
     description_en: 'The signature piece of the Mohrah collection — an extended fit in French Leavers lace and silk satin, entirely customisable by appointment.',
     description_ar: 'القطعة الأيقونية من مجموعة مُهره — قصّة ممتدّة من دانتيل ليفرز الفرنسي والحرير، قابلة للتفصيل بالكامل بموعد مسبق.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/V98LkOePXH0dPl2lRCFgbJZKHc4pDOhJJ4EJvP9a.webp',
       'mohra-1/num%206.webp'
@@ -133,7 +133,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection',
     description_en: 'A refined lace piece with a light supportive band — handwork, silk and silence.',
     description_ar: 'قطعة من الدانتيل الدقيق بحزام دعم خفيف — صنعة يدوية، حرير وصمت.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/YIt5M9HjmuIOTwXpSLqPhf0jJBZTb1lQpvgposHC.webp',
       'mohra-1/SMH03117.jpg'
@@ -153,7 +153,7 @@ window.PRODUCTS = [
     subtitle: 'Dentelle Riyadh — Mohrah Collection',
     description_en: 'The softest closing note of the collection — a brief composed in Calais lace, finished by hand.',
     description_ar: 'الخاتمة الأنعم للمجموعة — سروال من دانتيل كاليه، يُنهى يدوياً.',
-    sizes: ['L', 'XL', 'XXL', 'XXXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     images: [
       'https://cdn.salla.sa/GYVWWE/SzWAoR74F7DQexhZvcZT9570C9EnT6A2teNl45qv.webp',
       'mohra-1/SMH07966.JPG'
