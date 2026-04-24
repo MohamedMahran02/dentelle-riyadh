@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Dentelle Riyadh",
-    "theme_version": "1.0.0",
+    "theme_version": "2.0.0",
     "theme_author": "Dentelle Atelier",
     "theme_documentation_url": "",
     "theme_support_url": ""
@@ -10,7 +10,8 @@
   {
     "name": "Brand",
     "settings": [
-      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" },
+      { "type": "image_picker", "id": "hero_preload_image", "label": "Hero image to preload (homepage)", "info": "Used to improve LCP. Pick the same image used in the Hero section." }
     ]
   },
   {
@@ -19,7 +20,9 @@
       { "type": "color", "id": "color_bg", "label": "Page background", "default": "#FBF8F2" },
       { "type": "color", "id": "color_ink", "label": "Ink", "default": "#0E0B09" },
       { "type": "color", "id": "color_muted", "label": "Muted", "default": "#7A726B" },
-      { "type": "color", "id": "color_gold", "label": "Accent — gold", "default": "#A88A5C" }
+      { "type": "color", "id": "color_cream", "label": "Cream", "default": "#F1ECE4" },
+      { "type": "color", "id": "color_gold", "label": "Accent — gold", "default": "#A88A5C" },
+      { "type": "color", "id": "color_rouge", "label": "Accent — rouge", "default": "#6E2A27" }
     ]
   },
   {
@@ -32,6 +35,17 @@
     "name": "Layout",
     "settings": [
       { "type": "range", "id": "max_width", "label": "Content max width (px)", "min": 1200, "max": 1600, "step": 20, "default": 1480 }
+    ]
+  },
+  {
+    "name": "Product metafields",
+    "settings": [
+      { "type": "paragraph", "content": "This theme reads the following product metafields (define in Settings → Custom data → Products):" },
+      { "type": "paragraph", "content": "• custom.title_ar (single-line text) — Arabic product title, shown alongside English on product cards." },
+      { "type": "paragraph", "content": "• custom.subtitle (single-line text) — optional subtitle under the product title." },
+      { "type": "paragraph", "content": "• custom.hover_image (file) — optional alternate image shown on hover." },
+      { "type": "paragraph", "content": "• custom.description_ar (rich text) — Arabic description used on the product page." },
+      { "type": "paragraph", "content": "Tag a product with `signature` to show the Signature badge on its card." }
     ]
   }
 ]

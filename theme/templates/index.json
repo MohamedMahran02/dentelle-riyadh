@@ -3,29 +3,98 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Haute Couture — Autumn / Winter",
-        "heading_line_1": "Dentelle",
-        "heading_line_2": "de la nuit",
-        "lede": "An Arabian atelier composed in lace, silk and silence — where every thread is drawn for the woman who dresses for herself.",
-        "button_label": "Discover the collection",
-        "link_label": "La maison",
-        "scroll_label": "Scroll"
+        "label_en": "Collection N°01 · Mohrah",
+        "label_ar": "مجموعة مُهره",
+        "heading": "Mohrah.",
+        "eyebrow": "The Mohrah Collection",
+        "lede": "A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.",
+        "button_label": "Discover the pieces",
+        "link_label": "Read the story"
       }
     },
-    "marquee": { "type": "marquee" },
-    "featured-duo": { "type": "featured-duo" },
-    "editorial": { "type": "editorial" },
-    "product-grid": { "type": "product-grid" },
-    "full-bleed": { "type": "full-bleed" },
-    "story-bilingual": { "type": "story-bilingual" }
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "b1": { "type": "item", "settings": { "text": "مُهره", "rtl": true } },
+        "b2": { "type": "item", "settings": { "text": "Mohrah Collection" } },
+        "b3": { "type": "item", "settings": { "text": "Dentelle Riyadh" } },
+        "b4": { "type": "item", "settings": { "text": "Made in the Kingdom" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "product-grid": {
+      "type": "product-grid",
+      "settings": {
+        "products_to_show": 8,
+        "eyebrow_en": "The Pieces",
+        "heading_en": "<p>The <em>Mohrah</em> collection.</p>",
+        "heading_ar": "<p>مجموعة <em>مُهرة.</em></p>",
+        "view_all_label_ar": "٨ قِطَع · تصفّحي المجموعة"
+      }
+    },
+    "categories": {
+      "type": "categories",
+      "settings": {
+        "eyebrow": "Explore by category",
+        "heading": "<p>For every <em>chapter.</em></p>"
+      },
+      "blocks": {
+        "c1": { "type": "tile", "settings": { "name_en": "Bras", "name_ar": "حمّالات" } },
+        "c2": { "type": "tile", "settings": { "name_en": "Briefs", "name_ar": "سراويل" } },
+        "c3": { "type": "tile", "settings": { "name_en": "Ensembles", "name_ar": "أطقم" } },
+        "c4": { "type": "tile", "settings": { "name_en": "Robes", "name_ar": "أردية" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"]
+    },
+    "campaign": {
+      "type": "campaign-video",
+      "settings": {
+        "eyebrow": "The Campaign · مُهره",
+        "heading": "<p><em>Of quiet</em><br>confidence.</p>",
+        "button_label": "Watch the film"
+      }
+    },
+    "savoir-faire": {
+      "type": "savoir-faire",
+      "settings": {
+        "eyebrow": "Savoir-faire · الحِرفة",
+        "heading": "<p>The Dentelle <em>atelier.</em></p>",
+        "caption_tall": "Handwork — Riyadh",
+        "lede": "<p><em>Each piece is a conversation</em> — between the atelier's hands, French silks and Calais laces, and the private rhythms of the woman who will wear it.</p>",
+        "link_label": "Book a size consultation",
+        "caption_short": "Detail — Mohrah N°01"
+      },
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "index": "01", "text": "Fully customisable by appointment" } },
+        "f2": { "type": "feature", "settings": { "index": "02", "text": "French Leavers lace · Calais" } },
+        "f3": { "type": "feature", "settings": { "index": "03", "text": "Silk satin · Lyon" } },
+        "f4": { "type": "feature", "settings": { "index": "04", "text": "SASO certified, made in the Kingdom" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
+    },
+    "story-bilingual": {
+      "type": "story-bilingual"
+    },
+    "press": {
+      "type": "press",
+      "blocks": {
+        "p1": { "type": "publication", "settings": { "name": "VOGUE ARABIA" } },
+        "p2": { "type": "publication", "settings": { "name": "Harper's BAZAAR" } },
+        "p3": { "type": "publication", "settings": { "name": "L'OFFICIEL" } },
+        "p4": { "type": "publication", "settings": { "name": "ELLE Arabia" } },
+        "p5": { "type": "publication", "settings": { "name": "Madame Figaro" } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5"]
+    }
   },
   "order": [
     "hero",
     "marquee",
-    "featured-duo",
-    "editorial",
     "product-grid",
-    "full-bleed",
-    "story-bilingual"
+    "categories",
+    "campaign",
+    "savoir-faire",
+    "story-bilingual",
+    "press"
   ]
 }

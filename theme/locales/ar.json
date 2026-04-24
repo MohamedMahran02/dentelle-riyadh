@@ -1,20 +1,71 @@
 {
   "general": {
+    "home": "الرئيسية",
     "search": "بحث",
     "cart": "السلة",
+    "wishlist": "المفضّلة",
     "close": "إغلاق",
     "menu": "القائمة"
   },
   "accessibility": {
-    "skip_to_text": "تخطي إلى المحتوى"
+    "skip_to_text": "التخطّي إلى المحتوى"
+  },
+  "customer": {
+    "account": "الحساب",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج"
+  },
+  "products": {
+    "from": "يبدأ من",
+    "sold_out": "نفدت الكمية",
+    "coming_soon": "قريباً",
+    "add_to_cart": "أضيفي إلى السلة",
+    "added": "تمت الإضافة",
+    "adding": "جارٍ الإضافة…",
+    "unavailable": "غير متوفّر",
+    "select_size": "اختاري المقاس",
+    "size_guide": "استشارة المقاس",
+    "description": "الوصف",
+    "details": "التفاصيل",
+    "care": "العناية",
+    "shipping": "الشحن",
+    "quantity": "الكمية"
+  },
+  "collection": {
+    "title": "المجموعة",
+    "sort_by": "الترتيب",
+    "items": "{{ count }} قِطَع",
+    "empty": "لا توجد قطع."
+  },
+  "cart": {
+    "title": "سلّتك",
+    "empty": "سلّتك فارغة.",
+    "continue_shopping": "متابعة التسوّق",
+    "subtotal": "المجموع",
+    "checkout": "إتمام الطلب",
+    "remove": "إزالة",
+    "taxes_note": "الضرائب والشحن تُحتسب في مرحلة الدفع."
   },
   "sections": {
-    "header-group": { "name": "الرأس" },
-    "footer-group": { "name": "التذييل" }
+    "header-group": { "name": "الترويسة" },
+    "footer-group": { "name": "التذييل" },
+    "announcement-bar": { "name": "شريط الإعلانات", "label": "إعلان" },
+    "header": { "name": "الترويسة", "navigation": "التنقّل الرئيسي" },
+    "hero": { "name": "البانر الرئيسي" },
+    "marquee": { "name": "شريط متحرّك" },
+    "product-grid": { "name": "شبكة المنتجات" },
+    "categories": { "name": "الأقسام" },
+    "campaign": { "name": "فيديو الحملة" },
+    "savoir-faire": { "name": "الحِرفة" },
+    "story-bilingual": { "name": "قصة (ثنائية اللغة)" },
+    "press": { "name": "الصحافة" },
+    "newsletter": { "name": "النشرة" },
+    "footer": { "name": "التذييل" }
   },
   "newsletter": {
     "placeholder": "بريدك الإلكتروني",
-    "submit": "اشتراك",
-    "success": "شكراً — ستصلك رسائلنا قريباً."
+    "submit": "اشتركي",
+    "success": "شكراً لكِ ✦"
   }
 }

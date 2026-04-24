@@ -1,18 +1,35 @@
-<section class="product-grid" data-reveal>
-  <header class="product-grid__head">
-    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
-    {%- if section.settings.heading != blank -%}<h2 class="h-display">{{ section.settings.heading }}</h2>{%- endif -%}
-    {%- if section.settings.view_all_label != blank -%}
-      <a href="{{ section.settings.view_all_link | default: routes.all_products_collection_url }}" class="link-underline">{{ section.settings.view_all_label }} ›</a>
+{%- liquid
+  assign col = collections[section.settings.collection]
+  assign limit = section.settings.products_to_show | default: 8
+-%}
+
+<section class="product-grid" id="shopify-section-{{ section.id }}" data-reveal>
+  <header class="product-grid__head product-grid__head--bilingual">
+    <div class="product-grid__head-en">
+      {%- if section.settings.eyebrow_en != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow_en | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading_en != blank -%}
+        <h2 class="h-display">{{ section.settings.heading_en }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.heading_ar != blank or section.settings.view_all_label_ar != blank -%}
+      <div class="product-grid__head-ar" dir="rtl" lang="ar">
+        {%- if section.settings.heading_ar != blank -%}
+          <h2 class="h-display-ar">{{ section.settings.heading_ar }}</h2>
+        {%- endif -%}
+        {%- if section.settings.view_all_label_ar != blank -%}
+          <a href="{{ section.settings.view_all_link | default: col.url | default: routes.all_products_collection_url }}" class="link-underline product-grid__shop-all">{{ section.settings.view_all_label_ar | escape }} ›</a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
   </header>
 
   <div class="product-grid__items">
-    {%- assign col = collections[section.settings.collection] -%}
-    {%- assign limit = section.settings.products_to_show | default: 4 -%}
-    {%- if col != blank -%}
+    {%- if col != blank and col.products_count > 0 -%}
       {%- for product in col.products limit: limit -%}
-        {% render 'product-card', product: product %}
+        {% render 'product-card', product: product, badge: section.settings.signature_badge_label %}
       {%- endfor -%}
     {%- else -%}
       {%- for i in (1..limit) -%}
@@ -24,15 +41,20 @@
 
 {% schema %}
 {
-  "name": "Product grid",
+  "name": "t:sections.product-grid.name",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pièces Signature" },
-    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>The <em>essentials.</em></p>" },
     { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 1, "default": 4 },
-    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "All pieces" },
-    { "type": "url", "id": "view_all_link", "label": "View all link" }
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "header", "content": "English column" },
+    { "type": "text", "id": "eyebrow_en", "label": "Eyebrow", "default": "The Pieces" },
+    { "type": "richtext", "id": "heading_en", "label": "Heading", "default": "<p>The <em>Mohrah</em> collection.</p>" },
+    { "type": "header", "content": "Arabic column" },
+    { "type": "richtext", "id": "heading_ar", "label": "Heading (AR)", "default": "<p>مجموعة <em>مُهرة.</em></p>" },
+    { "type": "text", "id": "view_all_label_ar", "label": "View-all label (AR)", "default": "٨ قِطَع · تصفّحي المجموعة" },
+    { "type": "url", "id": "view_all_link", "label": "View-all link" },
+    { "type": "header", "content": "Signature badge" },
+    { "type": "text", "id": "signature_badge_label", "label": "Badge label (shown on products tagged `signature`)", "default": "Signature" }
   ],
-  "presets": [{ "name": "Product grid" }]
+  "presets": [{ "name": "t:sections.product-grid.name" }]
 }
 {% endschema %}

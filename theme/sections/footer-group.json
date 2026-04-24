@@ -3,7 +3,21 @@
   "name": "t:sections.footer-group.name",
   "sections": {
     "newsletter": { "type": "newsletter", "settings": {} },
-    "footer": { "type": "footer", "settings": {} }
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "maison": { "type": "menu", "settings": { "title": "The Maison" } },
+        "client-care": { "type": "menu", "settings": { "title": "Client care" } },
+        "shop": { "type": "menu", "settings": { "title": "Shop" } },
+        "legal": { "type": "menu", "settings": { "title": "Legal" } }
+      },
+      "block_order": ["maison", "client-care", "shop", "legal"],
+      "settings": {
+        "tagline": "A refined language for femininity — rooted in heritage, refined by modernity.",
+        "city_line": "Riyadh · KSA · by appointment",
+        "whatsapp_url": "https://wa.me/966546002573"
+      }
+    }
   },
   "order": ["newsletter", "footer"]
 }

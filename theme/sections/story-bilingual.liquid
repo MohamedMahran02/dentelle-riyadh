@@ -1,30 +1,52 @@
-<section class="story" data-reveal>
+<section class="story" id="shopify-section-{{ section.id }}" data-reveal>
   <div class="story__column">
-    {%- if section.settings.eyebrow_en != blank -%}<span class="eyebrow">{{ section.settings.eyebrow_en }}</span>{%- endif -%}
-    {%- if section.settings.heading_en != blank -%}<h2 class="h-display">{{ section.settings.heading_en }}</h2>{%- endif -%}
-    {%- if section.settings.body_en != blank -%}<p>{{ section.settings.body_en }}</p>{%- endif -%}
+    {%- if section.settings.eyebrow_en != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow_en | escape }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading_en != blank -%}
+      <h2 class="h-display">{{ section.settings.heading_en }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body_en != blank -%}
+      <p>{{ section.settings.body_en }}</p>
+    {%- endif -%}
+    {%- if section.settings.link_label_en != blank -%}
+      <a href="{{ section.settings.link_url }}" class="link-underline">{{ section.settings.link_label_en | escape }} ›</a>
+    {%- endif -%}
   </div>
 
   <div class="story__column story__column--ar" dir="rtl" lang="ar">
-    {%- if section.settings.eyebrow_ar != blank -%}<span class="eyebrow eyebrow--ar">{{ section.settings.eyebrow_ar }}</span>{%- endif -%}
-    {%- if section.settings.heading_ar != blank -%}<h2 class="h-display-ar">{{ section.settings.heading_ar }}</h2>{%- endif -%}
-    {%- if section.settings.body_ar != blank -%}<p class="body-ar">{{ section.settings.body_ar }}</p>{%- endif -%}
+    {%- if section.settings.eyebrow_ar != blank -%}
+      <span class="eyebrow eyebrow--ar">{{ section.settings.eyebrow_ar | escape }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading_ar != blank -%}
+      <h2 class="h-display-ar">{{ section.settings.heading_ar }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body_ar != blank -%}
+      <p class="body-ar">{{ section.settings.body_ar }}</p>
+    {%- endif -%}
+    {%- if section.settings.link_label_ar != blank -%}
+      <a href="{{ section.settings.link_url }}" class="link-underline">{{ section.settings.link_label_ar | escape }} ‹</a>
+    {%- endif -%}
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Story (bilingual)",
+  "name": "t:sections.story-bilingual.name",
   "settings": [
     { "type": "header", "content": "English column" },
-    { "type": "text", "id": "eyebrow_en", "label": "Eyebrow", "default": "Notre Philosophie" },
-    { "type": "richtext", "id": "heading_en", "label": "Heading", "default": "<p>A quiet <em>intimacy.</em></p>" },
-    { "type": "textarea", "id": "body_en", "label": "Body", "default": "We believe the most refined garments are the ones no one sees. Dentelle is an act of private luxury — a devotion to craft that answers only to the woman who wears it." },
+    { "type": "text", "id": "eyebrow_en", "label": "Eyebrow", "default": "Our Philosophy" },
+    { "type": "richtext", "id": "heading_en", "label": "Heading", "default": "<p>Femininity is <em>quiet confidence.</em></p>" },
+    { "type": "richtext", "id": "body_en", "label": "Body", "default": "<p>We draw a refined language for femininity — one rooted in heritage, refined by modernity. Mohrah is not a garment that reshapes, but one that listens — to the body, to the breath, and to a woman in every chapter of her life.</p>" },
+    { "type": "text", "id": "link_label_en", "label": "Link label", "default": "Read our manifesto" },
     { "type": "header", "content": "Arabic column" },
     { "type": "text", "id": "eyebrow_ar", "label": "Eyebrow (AR)", "default": "فلسفتنا" },
-    { "type": "richtext", "id": "heading_ar", "label": "Heading (AR)", "default": "<p>هدوءٌ <em>حَميم.</em></p>" },
-    { "type": "textarea", "id": "body_ar", "label": "Body (AR)", "default": "نؤمن بأن أرقى الأناقة هي تلك التي لا تُرى. دانتيل تصوغ للمرأة لحظةً لا تخصّ سواها — حرفةٌ صامتة، وخيطٌ من الحرير لا يُجيب إلا لها." }
+    { "type": "richtext", "id": "heading_ar", "label": "Heading (AR)", "default": "<p>الأنوثة <em>ثقةٌ هادئة.</em></p>" },
+    { "type": "richtext", "id": "body_ar", "label": "Body (AR)", "default": "<p>نرسمُ لغةً راقيةً للأنوثة، تنبعُ من الإرث، وتصقلها الحداثة. مُهره ليست ثوباً يُعيد تشكيل الجسد، بل لباسٌ يُصغي — للإيقاع، للنَّفَس، وللمرأة في كلِّ فصلٍ من حياتها.</p>" },
+    { "type": "text", "id": "link_label_ar", "label": "Link label (AR)", "default": "بيانُنا" },
+    { "type": "header", "content": "Shared link" },
+    { "type": "url", "id": "link_url", "label": "Link URL" }
   ],
-  "presets": [{ "name": "Story (bilingual)" }]
+  "presets": [{ "name": "t:sections.story-bilingual.name" }]
 }
 {% endschema %}

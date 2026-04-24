@@ -1,20 +1,92 @@
 {
   "general": {
+    "home": "Home",
     "search": "Search",
     "cart": "Bag",
+    "wishlist": "Wishlist",
     "close": "Close",
     "menu": "Menu"
   },
   "accessibility": {
     "skip_to_text": "Skip to content"
   },
+  "customer": {
+    "account": "Account",
+    "login": "Log in",
+    "register": "Register",
+    "logout": "Log out"
+  },
+  "products": {
+    "from": "From",
+    "sold_out": "Sold out",
+    "coming_soon": "Coming soon",
+    "add_to_cart": "Add to bag",
+    "added": "Added",
+    "adding": "Adding…",
+    "unavailable": "Unavailable",
+    "select_size": "Select a size",
+    "size_guide": "Size consultation",
+    "description": "Description",
+    "details": "Details",
+    "care": "Care",
+    "shipping": "Shipping",
+    "quantity": "Quantity"
+  },
+  "collection": {
+    "title": "Collection",
+    "sort_by": "Sort by",
+    "items": "{{ count }} pieces",
+    "empty": "No pieces found."
+  },
+  "cart": {
+    "title": "Your bag",
+    "empty": "Your bag is empty.",
+    "continue_shopping": "Continue shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "taxes_note": "Taxes and shipping calculated at checkout."
+  },
   "sections": {
     "header-group": { "name": "Header" },
-    "footer-group": { "name": "Footer" }
+    "footer-group": { "name": "Footer" },
+    "announcement-bar": {
+      "name": "Announcement bar",
+      "label": "Announcement"
+    },
+    "header": {
+      "name": "Header",
+      "navigation": "Primary navigation"
+    },
+    "hero": { "name": "Hero" },
+    "marquee": { "name": "Marquee" },
+    "product-grid": { "name": "Product grid" },
+    "categories": { "name": "Categories" },
+    "campaign": { "name": "Campaign video" },
+    "savoir-faire": { "name": "Savoir-faire" },
+    "story-bilingual": { "name": "Story (bilingual)" },
+    "press": { "name": "Press" },
+    "newsletter": { "name": "Newsletter" },
+    "footer": { "name": "Footer" }
   },
   "newsletter": {
     "placeholder": "Your email",
     "submit": "Subscribe",
-    "success": "Thank you — letters will arrive soon."
+    "success": "Merci — letters will arrive soon."
+  },
+  "footer_links": {
+    "philosophy": "فلسفتنا",
+    "the-brand": "العلامة التجارية",
+    "mohrah-collection": "مجموعة مُهره",
+    "atelier": "الورشة",
+    "size-consultation": "إستشارة المقاس",
+    "shipping": "الشحن",
+    "returns": "الاستبدال",
+    "contact": "تواصلي معنا",
+    "the-pieces": "القِطَع",
+    "bras": "حمّالات",
+    "briefs": "سراويل",
+    "robes": "أردية",
+    "offers": "التخفيضات"
   }
 }

@@ -2,12 +2,13 @@
 <html lang="{{ request.locale.iso_code }}" dir="{% if request.locale.iso_code == 'ar' %}rtl{% else %}ltr{% endif %}">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="{{ settings.color_bg | default: '#FBF8F2' }}">
 
   <title>
     {%- if template.name == 'index' -%}
-      {{ shop.name }} — {{ shop.description | default: 'Arabian luxury lingerie' }}
+      {{ shop.name }}{% if shop.description %} — {{ shop.description }}{% endif %}
     {%- else -%}
       {{ page_title }} — {{ shop.name }}
     {%- endif -%}
@@ -16,20 +17,41 @@
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 
   <link rel="canonical" href="{{ canonical_url }}">
+
   {%- if settings.favicon -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
   {%- endif -%}
 
+  {%- comment -%} Preload hero image on homepage for faster LCP {%- endcomment -%}
+  {%- if template.name == 'index' and settings.hero_preload_image -%}
+    <link rel="preload" as="image" href="{{ settings.hero_preload_image | image_url: width: 1600 }}" fetchpriority="high">
+  {%- endif -%}
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
+  {%- comment -%} Shopify hooks — must always be present {%- endcomment -%}
   {{ content_for_header }}
+
+  <script>
+    window.theme = {
+      money_format: {{ shop.money_format | json }},
+      locale: {{ request.locale.iso_code | json }},
+      routes: {
+        cart_url: {{ routes.cart_url | json }},
+        cart_add_url: {{ routes.cart_add_url | json }},
+        cart_change_url: {{ routes.cart_change_url | json }},
+        cart_update_url: {{ routes.cart_update_url | json }},
+        predictive_search_url: {{ routes.predictive_search_url | json }}
+      }
+    };
+  </script>
 </head>
 
-<body class="template-{{ template.name }}">
+<body class="template-{{ template | replace: '.', '-' }}" data-theme="cream">
   <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
 
   {% sections 'header-group' %}
@@ -39,6 +61,8 @@
   </main>
 
   {% sections 'footer-group' %}
+
+  <div id="CartDrawer" class="cart-drawer" aria-hidden="true" data-cart-drawer></div>
 
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 </body>

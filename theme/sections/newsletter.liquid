@@ -1,26 +1,55 @@
-<section class="newsletter" data-reveal>
+<section class="newsletter" id="shopify-section-{{ section.id }}" data-reveal>
   <div class="newsletter__inner">
-    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
-    {%- if section.settings.heading != blank -%}<h2 class="h-display">{{ section.settings.heading }}</h2>{%- endif -%}
-    {%- if section.settings.body != blank -%}<p>{{ section.settings.body }}</p>{%- endif -%}
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="h-display">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <p>{{ section.settings.body | escape }}</p>
+    {%- endif -%}
 
-    {% form 'customer', class: 'newsletter__form' %}
-      <input type="hidden" name="contact[tags]" value="newsletter">
-      <input type="email" name="contact[email]" placeholder="{{ section.settings.placeholder | default: 'Your email' }}" required aria-label="Email">
-      <button type="submit">{{ section.settings.button_label | default: 'Subscribe' }}</button>
-    {% endform %}
+    {%- form 'customer', class: 'newsletter__form', id: 'Newsletter-' | append: section.id -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,{{ section.id }}">
+      <input
+        type="email"
+        name="contact[email]"
+        id="NewsletterEmail-{{ section.id }}"
+        placeholder="{{ section.settings.placeholder | default: 'Your email' }}"
+        required
+        autocomplete="email"
+        aria-label="{{ 'newsletter.placeholder' | t }}"
+        {% if form.errors %}aria-invalid="true"{% endif %}
+      >
+      <button type="submit" name="commit">
+        {{ section.settings.button_label | default: 'Subscribe' | escape }}
+      </button>
+    {%- endform -%}
+
+    {%- if form.posted_successfully? -%}
+      <p class="newsletter__success" role="status">{{ section.settings.success | default: 'Thank you — letters will arrive soon.' | escape }}</p>
+    {%- elsif form.errors -%}
+      <p class="newsletter__error" role="alert">{{ form.errors | default_errors }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.fine_print != blank -%}
+      <small class="newsletter__fine">{{ section.settings.fine_print | escape }}</small>
+    {%- endif -%}
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Newsletter",
+  "name": "t:sections.newsletter.name",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Rejoignez la Maison" },
-    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Private correspondence.</p>" },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "Invitations to private views, atelier releases, and letters from Riyadh." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join the maison" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Private <em>correspondence.</em></p>" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Invitations to private views, new Mohrah drops, and letters from the Riyadh atelier." },
     { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Your email" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" }
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "Merci ✦" },
+    { "type": "text", "id": "fine_print", "label": "Fine print", "default": "By subscribing you agree to receive correspondence from Dentelle Riyadh." }
   ]
 }
 {% endschema %}

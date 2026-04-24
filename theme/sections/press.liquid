@@ -1,0 +1,51 @@
+<section class="press" id="shopify-section-{{ section.id }}" data-reveal>
+  {%- if section.settings.eyebrow != blank -%}
+    <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+  {%- endif -%}
+  <div class="press__row">
+    {%- for block in section.blocks -%}
+      {%- if block.settings.logo != blank -%}
+        <span class="press__logo press__logo--image" {{ block.shopify_attributes }}>
+          {{ block.settings.logo | image_url: width: 320 | image_tag:
+            widths: '160,240,320',
+            sizes: '160px',
+            alt: block.settings.name,
+            loading: 'lazy'
+          }}
+        </span>
+      {%- else -%}
+        <span class="press__logo" {{ block.shopify_attributes }}>{{ block.settings.name | escape }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.press.name",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "As featured in" }
+  ],
+  "blocks": [
+    {
+      "type": "publication",
+      "name": "Publication",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "VOGUE ARABIA" },
+        { "type": "image_picker", "id": "logo", "label": "Logo (optional — overrides name)" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "publication", "settings": { "name": "VOGUE ARABIA" } },
+      { "type": "publication", "settings": { "name": "Harper's BAZAAR" } },
+      { "type": "publication", "settings": { "name": "L'OFFICIEL" } },
+      { "type": "publication", "settings": { "name": "ELLE Arabia" } },
+      { "type": "publication", "settings": { "name": "Madame Figaro" } }
+    ]
+  },
+  "presets": [{ "name": "t:sections.press.name" }]
+}
+{% endschema %}

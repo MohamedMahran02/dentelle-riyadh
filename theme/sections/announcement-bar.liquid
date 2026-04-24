@@ -1,32 +1,56 @@
-{%- if section.blocks.size > 0 -%}
-<div class="announcement" data-reveal>
-  <div class="announcement__inner">
-    {%- for block in section.blocks -%}
-      <span class="announcement__item" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
-      {%- unless forloop.last -%}<span class="announcement__sep" aria-hidden="true">·</span>{%- endunless -%}
-    {%- endfor -%}
+<div class="top-bar" role="region" aria-label="{{ 'sections.announcement.label' | t }}">
+  <div class="top-bar__inner">
+    <div class="top-bar__side">
+      {%- if section.settings.message != blank -%}
+        <span>{{ section.settings.message | escape }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="top-bar__side top-bar__side--right">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'link' -%}
+          <a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+          {%- unless forloop.last -%}<span class="top-bar__sep">·</span>{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if shop.published_locales.size > 1 -%}
+        {%- unless section.blocks.size == 0 -%}<span class="top-bar__sep">·</span>{%- endunless -%}
+        {%- for locale in shop.published_locales -%}
+          <a class="locale-btn{% if locale.iso_code == request.locale.iso_code %} is-active{% endif %}" href="{% if locale.primary %}{{ routes.root_url }}{% else %}/{{ locale.iso_code }}{% endif %}" hreflang="{{ locale.iso_code }}">{{ locale.iso_code | upcase }}</a>
+          {%- unless forloop.last -%}<span class="top-bar__sep">·</span>{%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
   </div>
 </div>
-{%- endif -%}
 
 {% schema %}
 {
-  "name": "Announcement bar",
-  "max_blocks": 6,
+  "name": "t:sections.announcement-bar.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Left message",
+      "default": "Free shipping within the Kingdom · SASO certified"
+    }
+  ],
   "blocks": [
     {
-      "type": "message",
-      "name": "Message",
+      "type": "link",
+      "name": "Right-side link",
+      "limit": 4,
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Complimentary shipping across the Gulf" }
+        { "type": "text", "id": "label", "label": "Label", "default": "Stores" },
+        { "type": "url", "id": "url", "label": "URL" }
       ]
     }
   ],
   "default": {
     "blocks": [
-      { "type": "message", "settings": { "text": "Complimentary shipping across the Gulf" } },
-      { "type": "message", "settings": { "text": "Atelier by appointment — Riyadh" } },
-      { "type": "message", "settings": { "text": "EN / AR" } }
+      { "type": "link", "settings": { "label": "Stores" } },
+      { "type": "link", "settings": { "label": "Size consultation" } }
     ]
   }
 }

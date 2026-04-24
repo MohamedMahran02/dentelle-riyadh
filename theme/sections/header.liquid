@@ -1,68 +1,87 @@
-<header class="site-header" id="siteHeader">
-  <div class="site-header__inner">
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
-      <span></span><span></span>
-    </button>
+{%- liquid
+  assign menu = section.settings.menu
+  assign wordmark = section.settings.wordmark | default: shop.name
+-%}
 
-    <nav class="site-nav site-nav--left" aria-label="Primary">
-      {%- for link in section.settings.menu_primary.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {%- endfor -%}
-    </nav>
-
-    <a href="{{ routes.root_url }}" class="site-logo" aria-label="{{ shop.name }} — Home">
+<header class="site-header site-header--single" id="siteHeader">
+  <div class="site-header__row">
+    <a href="{{ routes.root_url }}" class="site-logo site-logo--lg site-logo--left" aria-label="{{ shop.name }} — {{ 'general.home' | t }}">
       {%- if section.settings.logo != blank -%}
-        {{ section.settings.logo | image_url: width: 240 | image_tag: class: 'site-logo__image', alt: shop.name, loading: 'eager' }}
+        {{ section.settings.logo | image_url: width: 240 | image_tag:
+          class: 'site-logo__image',
+          widths: '120,180,240,360',
+          sizes: '120px',
+          alt: shop.name,
+          loading: 'eager'
+        }}
       {%- else -%}
         <svg class="logo-mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
           <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
         </svg>
-        <span class="site-logo__wordmark">{{ section.settings.wordmark | default: shop.name }}</span>
-        <span class="site-logo__city">{{ section.settings.city | default: 'Riyadh' }}</span>
+        <span class="site-logo__wordmark">{{ wordmark }}</span>
+        {%- if section.settings.city != blank -%}
+          <span class="site-logo__city">{{ section.settings.city }}</span>
+        {%- endif -%}
       {%- endif -%}
     </a>
 
-    <nav class="site-nav site-nav--right" aria-label="Secondary">
-      {%- for link in section.settings.menu_secondary.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
+    <nav class="site-nav site-nav--row" aria-label="{{ 'sections.header.navigation' | t }}">
+      {%- for link in menu.links -%}
+        <a href="{{ link.url }}"{% if link.active or link.child_active %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
       {%- endfor -%}
+    </nav>
+
+    <div class="site-header__icons">
       <a href="{{ routes.search_url }}" class="icon-link" aria-label="{{ 'general.search' | t }}">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </a>
-      <a href="{{ routes.cart_url }}" class="icon-link" aria-label="{{ 'general.cart' | t }}">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        <span class="bag-count">{{ cart.item_count }}</span>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="icon-link" aria-label="{{ 'customer.account' | t }}">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
+        </a>
+      {%- endif -%}
+      <a href="/apps/wishlist" class="icon-link" aria-label="{{ 'general.wishlist' | t }}">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/></svg>
       </a>
-    </nav>
+      <a href="{{ routes.cart_url }}" class="icon-link icon-link--cart" aria-label="{{ 'general.cart' | t }}" data-cart-toggle>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="bag-count" data-cart-count>{{ cart.item_count }}</span>
+        {%- else -%}
+          <span class="bag-count bag-count--empty" data-cart-count hidden>0</span>
+        {%- endif -%}
+      </a>
+      <button class="nav-toggle" aria-label="{{ 'general.menu' | t }}" aria-expanded="false" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
 <aside class="mobile-panel" data-menu-panel aria-hidden="true">
   <div class="mobile-panel__inner">
-    {%- for link in section.settings.menu_primary.links -%}
-      <a href="{{ link.url }}">{{ link.title }}</a>
+    {%- for link in menu.links -%}
+      <a href="{{ link.url }}">{{ link.title | escape }}</a>
     {%- endfor -%}
-    {%- for link in section.settings.menu_secondary.links -%}
-      <a href="{{ link.url }}">{{ link.title }}</a>
-    {%- endfor -%}
-    <div class="mobile-panel__locale">
-      {%- for locale in shop.published_locales -%}
-        <a class="locale-btn {% if locale.iso_code == request.locale.iso_code %}is-active{% endif %}" href="/{{ locale.iso_code }}">{{ locale.iso_code | upcase }}</a>
-        {%- unless forloop.last -%}<span>·</span>{%- endunless -%}
-      {%- endfor -%}
-    </div>
+    {%- if shop.published_locales.size > 1 -%}
+      <div class="mobile-panel__locale">
+        {%- for locale in shop.published_locales -%}
+          <a class="locale-btn{% if locale.iso_code == request.locale.iso_code %} is-active{% endif %}" href="{% if locale.primary %}{{ routes.root_url }}{% else %}/{{ locale.iso_code }}{% endif %}" hreflang="{{ locale.iso_code }}">{{ locale.iso_code | upcase }}</a>
+          {%- unless forloop.last -%}<span>·</span>{%- endunless -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </aside>
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "t:sections.header.name",
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo image (optional — leave blank to use wordmark)" },
-    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "Dentelle" },
-    { "type": "text", "id": "city", "label": "City / tagline", "default": "Riyadh" },
-    { "type": "link_list", "id": "menu_primary", "label": "Primary menu", "default": "main-menu" },
-    { "type": "link_list", "id": "menu_secondary", "label": "Secondary menu" }
+    { "type": "image_picker", "id": "logo", "label": "Logo image (optional)" },
+    { "type": "text", "id": "wordmark", "label": "Wordmark (used when no logo)", "default": "Dentelle" },
+    { "type": "text", "id": "city", "label": "City", "default": "Riyadh" },
+    { "type": "link_list", "id": "menu", "label": "Primary menu", "default": "main-menu" }
   ]
 }
 {% endschema %}

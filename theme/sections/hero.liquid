@@ -1,69 +1,73 @@
-<section class="hero" id="hero-{{ section.id }}">
+{%- liquid
+  assign img = section.settings.image
+  assign heading = section.settings.heading | default: 'Mohrah.'
+  assign label_en = section.settings.label_en
+  assign label_ar = section.settings.label_ar
+-%}
+
+<section class="hero hero--aubade" id="hero-{{ section.id }}">
   <div class="hero__media" data-parallax>
-    {%- if section.settings.image != blank -%}
-      {{ section.settings.image | image_url: width: 2400 | image_tag:
+    {%- if img != blank -%}
+      {{ img | image_url: width: 2400 | image_tag:
         loading: 'eager',
         fetchpriority: 'high',
         widths: '800,1200,1600,2000,2400',
         sizes: '100vw',
-        alt: section.settings.image.alt | default: section.settings.heading_line_1
+        alt: img.alt | default: heading
       }}
     {%- else -%}
       <div style="width:100%;height:100%;background:linear-gradient(135deg,#2A2521,#0E0B09);"></div>
     {%- endif -%}
-    <div class="hero__scrim" aria-hidden="true"></div>
+
+    {%- if label_en != blank or label_ar != blank -%}
+      <div class="hero__label reveal-stagger" style="--d:.6s">
+        {%- if label_en != blank -%}<span class="hero__label-en">{{ label_en | escape }}</span>{%- endif -%}
+        {%- if label_ar != blank -%}<span class="hero__label-ar" dir="rtl" lang="ar">{{ label_ar | escape }}</span>{%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 
-  <div class="hero__content">
-    {%- if section.settings.eyebrow != blank -%}
-      <span class="eyebrow reveal-stagger" style="--d:.1s">{{ section.settings.eyebrow }}</span>
-    {%- endif -%}
-
-    <h1 class="display reveal-stagger" style="--d:.25s">
-      {%- if section.settings.heading_line_1 != blank -%}
-        <span class="display__line"><em>{{ section.settings.heading_line_1 }}</em></span>
-      {%- endif -%}
-      {%- if section.settings.heading_line_2 != blank -%}
-        <span class="display__line">{{ section.settings.heading_line_2 }}</span>
-      {%- endif -%}
+  <div class="hero__caption">
+    <h1 class="hero__title display reveal-stagger" style="--d:.3s">
+      <em>{{ heading | escape }}</em>
     </h1>
 
-    {%- if section.settings.lede != blank -%}
-      <p class="hero__lede reveal-stagger" style="--d:.45s">{{ section.settings.lede }}</p>
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="hero__eyebrow eyebrow reveal-stagger" style="--d:.15s">{{ section.settings.eyebrow | escape }}</span>
     {%- endif -%}
 
-    <div class="hero__cta reveal-stagger" style="--d:.6s">
+    {%- if section.settings.lede != blank -%}
+      <p class="hero__lede reveal-stagger" style="--d:.5s">{{ section.settings.lede }}</p>
+    {%- endif -%}
+
+    <div class="hero__cta reveal-stagger" style="--d:.65s">
       {%- if section.settings.button_label != blank -%}
-        <a href="{{ section.settings.button_link }}" class="btn btn--light">{{ section.settings.button_label }}</a>
+        <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn">{{ section.settings.button_label | escape }}</a>
       {%- endif -%}
       {%- if section.settings.link_label != blank -%}
-        <a href="{{ section.settings.link_url }}" class="link-underline">{{ section.settings.link_label }} ›</a>
+        <a href="{{ section.settings.link_url }}" class="link-underline">{{ section.settings.link_label | escape }} ›</a>
       {%- endif -%}
     </div>
-  </div>
-
-  <div class="hero__scroll reveal-stagger" style="--d:.9s" aria-hidden="true">
-    <span>{{ section.settings.scroll_label | default: 'Scroll' }}</span>
-    <span class="hero__scroll-line"></span>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Hero",
-  "tag": "section",
+  "name": "t:sections.hero.name",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Hero image" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Haute Couture — Autumn / Winter" },
-    { "type": "text", "id": "heading_line_1", "label": "Heading line 1 (italic)", "default": "Dentelle" },
-    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "de la nuit" },
-    { "type": "textarea", "id": "lede", "label": "Lede", "default": "An Arabian atelier composed in lace, silk and silence — where every thread is drawn for the woman who dresses for herself." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Discover the collection" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "text", "id": "link_label", "label": "Secondary link label", "default": "La maison" },
-    { "type": "url", "id": "link_url", "label": "Secondary link URL" },
-    { "type": "text", "id": "scroll_label", "label": "Scroll indicator text", "default": "Scroll" }
+    { "type": "header", "content": "Overlay label" },
+    { "type": "text", "id": "label_en", "label": "Label (English)", "default": "Collection N°01 · Mohrah" },
+    { "type": "text", "id": "label_ar", "label": "Label (Arabic)", "default": "مجموعة مُهره" },
+    { "type": "header", "content": "Caption" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mohrah." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Mohrah Collection" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier." },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Discover the pieces" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "link_label", "label": "Secondary link", "default": "Read the story" },
+    { "type": "url", "id": "link_url", "label": "Secondary link URL" }
   ],
-  "presets": [{ "name": "Hero" }]
+  "presets": [{ "name": "t:sections.hero.name" }]
 }
 {% endschema %}

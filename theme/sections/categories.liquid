@@ -1,0 +1,75 @@
+<section class="categories" id="shopify-section-{{ section.id }}" data-reveal>
+  <header class="categories__header">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="h-display">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+  </header>
+
+  <div class="categories__grid">
+    {%- for block in section.blocks -%}
+      {%- assign col = collections[block.settings.collection] -%}
+      {%- assign tile_url = col.url | default: block.settings.link | default: '#' -%}
+      {%- assign tile_img = block.settings.image -%}
+      {%- if tile_img == blank and col != blank -%}
+        {%- assign tile_img = col.image | default: col.products.first.featured_image -%}
+      {%- endif -%}
+
+      <a href="{{ tile_url }}" class="category-tile" {{ block.shopify_attributes }}>
+        <div class="category-tile__media">
+          {%- if tile_img != blank -%}
+            {{ tile_img | image_url: width: 900 | image_tag:
+              widths: '320,480,640,900',
+              sizes: '(max-width:560px) 100vw, (max-width:960px) 50vw, 25vw',
+              alt: block.settings.name_en | default: col.title,
+              loading: 'lazy'
+            }}
+          {%- else -%}
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#E8E1D5,#A88A5C);"></div>
+          {%- endif -%}
+        </div>
+        <div class="category-tile__label">
+          <span class="category-tile__name">{{ block.settings.name_en | escape }}</span>
+          {%- if block.settings.name_ar != blank -%}
+            <span class="category-tile__name-ar" dir="rtl" lang="ar">{{ block.settings.name_ar | escape }}</span>
+          {%- endif -%}
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.categories.name",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Explore by category" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>For every <em>chapter.</em></p>" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Category tile",
+      "settings": [
+        { "type": "text", "id": "name_en", "label": "Name (English)", "default": "Bras" },
+        { "type": "text", "id": "name_ar", "label": "Name (Arabic)", "default": "حمّالات" },
+        { "type": "collection", "id": "collection", "label": "Collection (preferred)" },
+        { "type": "url", "id": "link", "label": "Fallback link" },
+        { "type": "image_picker", "id": "image", "label": "Image (overrides collection image)" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "tile", "settings": { "name_en": "Bras", "name_ar": "حمّالات" } },
+      { "type": "tile", "settings": { "name_en": "Briefs", "name_ar": "سراويل" } },
+      { "type": "tile", "settings": { "name_en": "Ensembles", "name_ar": "أطقم" } },
+      { "type": "tile", "settings": { "name_en": "Robes", "name_ar": "أردية" } }
+    ]
+  },
+  "presets": [{ "name": "t:sections.categories.name" }]
+}
+{% endschema %}

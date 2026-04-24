@@ -1,34 +1,91 @@
-{%- comment -%} Usage: {% render 'product-card', product: product %} {%- endcomment -%}
+{%- comment -%}
+  Renders a product card in the Mohrah editorial style.
+  Usage:
+    {% render 'product-card', product: product %}
+    {% render 'product-card', product: product, badge: 'Signature' %}
+
+  Merchant metafields (optional):
+    - product.metafields.custom.title_ar        (text)   — Arabic product title
+    - product.metafields.custom.subtitle        (text)   — subtitle under title (defaults to collection name)
+    - product.metafields.custom.hover_image     (file)   — alternate hover image (falls back to product.images[1])
+{%- endcomment -%}
+
+{%- liquid
+  if product
+    assign img_a = product.featured_image
+    assign hover_mf = product.metafields.custom.hover_image.value
+    if hover_mf
+      assign img_b = hover_mf
+    else
+      assign img_b = product.images[1] | default: img_a
+    endif
+    assign title_en = product.title
+    assign title_ar = product.metafields.custom.title_ar
+    assign subtitle = product.metafields.custom.subtitle | default: product.type
+    if subtitle == blank
+      assign subtitle = shop.name | append: ' — ' | append: product.vendor
+    endif
+    assign show_signature_badge = false
+    if badge != blank and product.tags contains 'signature'
+      assign show_signature_badge = true
+    endif
+  endif
+-%}
+
 {%- if product -%}
-  {%- assign img_a = product.featured_image -%}
-  {%- assign img_b = product.images[1] | default: img_a -%}
-  <article class="product-card">
-    <a href="{{ product.url }}" class="product-card__media" aria-label="{{ product.title }}">
+  <article class="product-card" data-product-id="{{ product.id }}">
+    {%- if show_signature_badge -%}
+      <span class="product-card__badge">{{ badge | escape }}</span>
+    {%- endif -%}
+
+    <a href="{{ product.url }}" class="product-card__media" aria-label="{{ product.title | escape }}">
       {%- if img_a -%}
-        {{ img_a | image_url: width: 900 | image_tag: class: 'product-card__img product-card__img--a', widths: '400,600,900', sizes: '(max-width:560px) 100vw, (max-width:960px) 50vw, 25vw', alt: product.title, loading: 'lazy' }}
+        {{ img_a | image_url: width: 900 | image_tag:
+          class: 'product-card__img product-card__img--a',
+          widths: '320,480,640,900,1200',
+          sizes: '(max-width:560px) 100vw, (max-width:960px) 50vw, 25vw',
+          alt: product.title,
+          loading: 'lazy'
+        }}
       {%- endif -%}
-      {%- if img_b -%}
-        {{ img_b | image_url: width: 900 | image_tag: class: 'product-card__img product-card__img--b', widths: '400,600,900', sizes: '(max-width:560px) 100vw, (max-width:960px) 50vw, 25vw', alt: product.title, loading: 'lazy' }}
+      {%- if img_b and img_b != img_a -%}
+        {{ img_b | image_url: width: 900 | image_tag:
+          class: 'product-card__img product-card__img--b',
+          widths: '320,480,640,900,1200',
+          sizes: '(max-width:560px) 100vw, (max-width:960px) 50vw, 25vw',
+          alt: product.title,
+          loading: 'lazy'
+        }}
+      {%- endif -%}
+
+      {%- if product.available == false -%}
+        <span class="product-card__soldout">{{ 'products.sold_out' | t }}</span>
       {%- endif -%}
     </a>
+
     <div class="product-card__meta">
-      <h3>{{ product.title }}</h3>
-      {%- if product.metafields.custom.subtitle != blank -%}
-        <p>{{ product.metafields.custom.subtitle }}</p>
-      {%- elsif product.type != blank -%}
-        <p>{{ product.type }}</p>
+      <h3 class="product-card__title">
+        <span class="product-card__title-en">{{ title_en | escape }}</span>
+        {%- if title_ar != blank -%}
+          <span class="product-card__title-ar" dir="rtl" lang="ar">{{ title_ar | escape }}</span>
+        {%- endif -%}
+      </h3>
+      {%- if subtitle != blank -%}
+        <p>{{ subtitle | escape }}</p>
       {%- endif -%}
-      <span class="price">{{ product.price | money_without_trailing_zeros }}</span>
+      {% render 'price', product: product %}
     </div>
   </article>
 {%- else -%}
-  <article class="product-card">
+  <article class="product-card product-card--placeholder">
     <a href="#" class="product-card__media" aria-label="Placeholder">
       <div class="product-card__img product-card__img--a" style="background:linear-gradient(135deg,#E8E1D5,#DCD3C4);"></div>
     </a>
     <div class="product-card__meta">
-      <h3>Pièce signature</h3>
-      <p>Coming soon</p>
+      <h3 class="product-card__title">
+        <span class="product-card__title-en">Pièce signature</span>
+      </h3>
+      <p>{{ 'products.coming_soon' | t }}</p>
       <span class="price">—</span>
     </div>
   </article>
