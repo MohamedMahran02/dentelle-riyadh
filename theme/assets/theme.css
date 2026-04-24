@@ -23,14 +23,14 @@
   --f-ar-display:'Noto Naskh Arabic', 'Amiri', serif;
   --f-ar-body:   'IBM Plex Sans Arabic', system-ui, sans-serif;
 
-  /* Scale — editorial, generous */
+  /* Scale — editorial, tight body / big headlines */
   --step--1: clamp(.72rem, .7rem + .12vw, .82rem);
-  --step-0:  clamp(.95rem, .9rem + .2vw, 1.05rem);
-  --step-1:  clamp(1.1rem, 1rem + .3vw, 1.25rem);
-  --step-2:  clamp(1.5rem, 1.3rem + .9vw, 2.1rem);
-  --step-3:  clamp(2.2rem, 1.7rem + 2.3vw, 3.8rem);
-  --step-4:  clamp(3rem, 2.2rem + 4.8vw, 6.8rem);
-  --step-5:  clamp(4.5rem, 3rem + 12vw, 14rem);
+  --step-0:  clamp(.92rem, .88rem + .15vw, 1rem);
+  --step-1:  clamp(1rem, .95rem + .2vw, 1.1rem);
+  --step-2:  clamp(1.2rem, 1.1rem + .4vw, 1.4rem);
+  --step-3:  clamp(1.8rem, 1.5rem + 1.4vw, 2.8rem);
+  --step-4:  clamp(2.6rem, 2rem + 3.5vw, 5.4rem);
+  --step-5:  clamp(4rem, 3rem + 8vw, 11rem);
 
   /* Space */
   --sp-xs: .5rem;
@@ -514,9 +514,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero__title {
   grid-column: 1;
   grid-row: 1;
-  font-size: clamp(5rem, 3.5rem + 14vw, 16rem);
-  line-height: .86;
-  letter-spacing: -.03em;
+  font-size: clamp(4rem, 3rem + 9vw, 11rem);
+  line-height: .88;
+  letter-spacing: -.02em;
   margin: 0;
 }
 .hero__title em {
@@ -529,16 +529,18 @@ ul { margin: 0; padding: 0; list-style: none; }
   grid-row: 1;
   align-self: end;
   justify-self: start;
-  margin: 0 0 .6rem;
+  margin: 0 0 .8rem;
+  font-size: .72rem;
+  letter-spacing: .32em;
 }
 .hero__lede {
   grid-column: 1;
   grid-row: 2;
   font-family: var(--f-serif);
   font-style: italic;
-  font-size: var(--step-2);
-  line-height: 1.5;
-  max-width: 42ch;
+  font-size: var(--step-1);
+  line-height: 1.6;
+  max-width: 44ch;
   color: var(--c-ink-soft);
   margin: 0;
 }
