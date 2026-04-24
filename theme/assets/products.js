@@ -20,8 +20,11 @@ window.PRODUCTS = [
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+    details_ar: 'تول 95% بوليستر مُعاد تدويره · دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   },
   {
     slug: 'mohra-2',
@@ -40,8 +43,11 @@ window.PRODUCTS = [
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+    details_ar: 'تول 95% بوليستر مُعاد تدويره · دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   },
   {
     slug: 'mohra-3',
@@ -60,8 +66,11 @@ window.PRODUCTS = [
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+    details_ar: 'دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   },
   {
     slug: 'mohra-4',
@@ -80,8 +89,11 @@ window.PRODUCTS = [
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+    details_ar: 'دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   },
   {
     slug: 'mohra-5',
@@ -100,8 +112,11 @@ window.PRODUCTS = [
     ],
     is_signature: false,
     details: 'Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+    details_ar: 'تول 95% بوليستر مُعاد تدويره · دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   },
   {
     slug: 'mohra-6',
@@ -120,8 +135,11 @@ window.PRODUCTS = [
     ],
     is_signature: true,
     details: 'French Leavers lace · Calais. Silk satin · Lyon. Fully customisable by appointment.',
+    details_ar: 'دانتيل ليفرز فرنسي · كاليه. حرير ساتان · ليون. قابل للتخصيص بالكامل بموعد مسبق.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   },
   {
     slug: 'mohra-7',
@@ -140,8 +158,11 @@ window.PRODUCTS = [
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+    details_ar: 'دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   },
   {
     slug: 'mohra-8',
@@ -160,8 +181,11 @@ window.PRODUCTS = [
     ],
     is_signature: false,
     details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+    details_ar: 'دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
     care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.'
+    care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+    shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
+    shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
   }
 ];
 

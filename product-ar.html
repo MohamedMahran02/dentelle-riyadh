@@ -270,9 +270,9 @@
     document.querySelector('[data-description-ar]').remove();
   }
 
-  document.querySelector('[data-details]').innerHTML = `<p>${product.details || '—'}</p>`;
-  document.querySelector('[data-care]').innerHTML = `<p>${product.care || '—'}</p>`;
-  document.querySelector('[data-shipping]').innerHTML = `<p>${product.shipping || '—'}</p>`;
+  document.querySelector('[data-details]').innerHTML = `<p>${product.details_ar || product.details || '—'}</p>`;
+  document.querySelector('[data-care]').innerHTML = `<p>${product.care_ar || product.care || '—'}</p>`;
+  document.querySelector('[data-shipping]').innerHTML = `<p>${product.shipping_ar || product.shipping || '—'}</p>`;
 
   const mediaBox = document.querySelector('[data-product-media-main]');
   const thumbsBox = document.querySelector('[data-product-thumbs]');
