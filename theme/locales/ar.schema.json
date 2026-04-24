@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "header-group": { "name": "الترويسة" },
+    "footer-group": { "name": "التذييل" },
+    "announcement-bar": { "name": "شريط الإعلانات", "label": "إعلان" },
+    "header": { "name": "الترويسة", "navigation": "التنقّل الرئيسي" },
+    "hero": { "name": "البانر الرئيسي" },
+    "marquee": { "name": "شريط متحرّك" },
+    "product-grid": { "name": "شبكة المنتجات" },
+    "categories": { "name": "الأقسام" },
+    "campaign": { "name": "فيديو الحملة" },
+    "savoir-faire": { "name": "الحِرفة" },
+    "story-bilingual": { "name": "قصة (ثنائية اللغة)" },
+    "press": { "name": "الصحافة" },
+    "newsletter": { "name": "النشرة" },
+    "footer": { "name": "التذييل" },
+    "main-product": { "name": "تفاصيل المنتج" },
+    "main-collection": { "name": "منتجات المجموعة" },
+    "main-cart": { "name": "عناصر السلة" },
+    "main-search": { "name": "نتائج البحث" },
+    "main-page": { "name": "محتوى الصفحة" },
+    "main-404": { "name": "صفحة 404" }
+  }
+}

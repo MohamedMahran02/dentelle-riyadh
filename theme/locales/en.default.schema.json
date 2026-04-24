@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "header-group": { "name": "Header" },
+    "footer-group": { "name": "Footer" },
+    "announcement-bar": { "name": "Announcement bar", "label": "Announcement" },
+    "header": { "name": "Header", "navigation": "Primary navigation" },
+    "hero": { "name": "Hero" },
+    "marquee": { "name": "Marquee" },
+    "product-grid": { "name": "Product grid" },
+    "categories": { "name": "Categories" },
+    "campaign": { "name": "Campaign video" },
+    "savoir-faire": { "name": "Savoir-faire" },
+    "story-bilingual": { "name": "Story (bilingual)" },
+    "press": { "name": "Press" },
+    "newsletter": { "name": "Newsletter" },
+    "footer": { "name": "Footer" },
+    "main-product": { "name": "Product information" },
+    "main-collection": { "name": "Collection products" },
+    "main-cart": { "name": "Cart items" },
+    "main-search": { "name": "Search results" },
+    "main-page": { "name": "Page content" },
+    "main-404": { "name": "404 page" }
+  }
+}
