@@ -1719,6 +1719,103 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .cart-drawer-overlay.is-open { opacity: 1; pointer-events: all; }
 
+/* ---------- WISHLIST DRAWER ---------- */
+.wish-drawer {
+  position: fixed;
+  top: 0; right: 0;
+  width: min(420px, 95vw);
+  height: 100dvh;
+  background: var(--c-cream);
+  z-index: 1100;
+  transform: translateX(100%);
+  transition: transform .34s var(--ease-out);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: -6px 0 40px rgba(14,11,9,.13);
+}
+.wish-drawer.is-open { transform: translateX(0); }
+.wish-drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(14,11,9,.45);
+  opacity: 0; pointer-events: none;
+  z-index: 1090;
+  transition: opacity .3s var(--ease);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.wish-drawer-overlay.is-open { opacity: 1; pointer-events: all; }
+.wish-drawer__inner {
+  display: flex; flex-direction: column;
+  min-height: 100%;
+  padding: 1.5rem;
+}
+.wish-drawer__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--c-border);
+  margin-bottom: 1.25rem;
+}
+.wish-drawer__close {
+  background: none; border: none; cursor: pointer;
+  font-size: 1rem; color: var(--c-text);
+  padding: .25rem; line-height: 1;
+}
+.wish-drawer__item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: .85rem;
+  align-items: start;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--c-border);
+}
+.wish-drawer__item:last-child { border-bottom: none; margin-bottom: 0; }
+.wish-drawer__item-img-wrap img {
+  width: 80px; height: 100px;
+  object-fit: cover; display: block;
+}
+.wish-drawer__item-body h4 {
+  font-size: .8rem; font-weight: 500;
+  margin: 0 0 .2rem;
+}
+.wish-drawer__item-body h4 a { color: inherit; text-decoration: none; }
+.wish-drawer__item-ar {
+  font-size: .75rem; color: var(--c-muted);
+  margin-bottom: .35rem;
+}
+.wish-drawer__item-price { font-size: .8rem; margin-bottom: .55rem; }
+.wish-drawer__remove {
+  background: none; border: none; cursor: pointer;
+  padding: .3rem; line-height: 1;
+  color: #b03030;
+  flex-shrink: 0;
+}
+.wish-drawer__empty {
+  color: var(--c-muted); font-size: .85rem;
+  text-align: center; padding: 2.5rem 0;
+}
+
+/* ---------- PRODUCT CARD WISH BUTTON ---------- */
+.product-card__wish-btn {
+  position: absolute;
+  top: .6rem; right: .6rem;
+  z-index: 3;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.82);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity .2s var(--ease), background .18s, transform .18s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.product-card:hover .product-card__wish-btn,
+.product-card__wish-btn.is-wished { opacity: 1; }
+.product-card__wish-btn:hover { background: #fff; transform: scale(1.08); }
+.product-card__wish-btn svg { transition: fill .18s, stroke .18s; }
+.product-card__wish-btn.is-wished svg { fill: #b03030; stroke: #b03030; }
+
 /* ---------- QTY CONTROL (drawer + cart page) ---------- */
 .qty-control {
   display: inline-flex; align-items: center;

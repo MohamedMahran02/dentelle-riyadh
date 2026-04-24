@@ -99,6 +99,92 @@
   };
 
   /* =========================================================
+     Wishlist Drawer
+     ========================================================= */
+  var WishDrawer = {
+    node   : null,
+    overlay: null,
+    isOpen : false,
+
+    init: function () {
+      var el = document.createElement('div');
+      el.id        = 'LocalWishDrawer';
+      el.className = 'wish-drawer';
+      el.setAttribute('aria-hidden', 'true');
+      el.setAttribute('role', 'dialog');
+      el.setAttribute('aria-label', 'Wishlist');
+      document.body.appendChild(el);
+      this.node = el;
+
+      var ov = document.createElement('div');
+      ov.className = 'wish-drawer-overlay';
+      var self = this;
+      ov.addEventListener('click', function () { self.close(); });
+      document.body.appendChild(ov);
+      this.overlay = ov;
+    },
+
+    buildItemHtml: function (slug) {
+      var p = window.PRODUCTS_BY_SLUG && window.PRODUCTS_BY_SLUG[slug];
+      if (!p) return '';
+      return '<article class="wish-drawer__item">' +
+        '<a href="product.html?slug=' + p.slug + '" class="wish-drawer__item-img-wrap">' +
+          '<img src="' + p.images[0] + '" alt="' + p.title_en + '" width="80" height="100" loading="lazy">' +
+        '</a>' +
+        '<div class="wish-drawer__item-body">' +
+          '<h4><a href="product.html?slug=' + p.slug + '">' + p.title_en + '</a></h4>' +
+          (p.title_ar ? '<p class="wish-drawer__item-ar" dir="rtl" lang="ar">' + p.title_ar + '</p>' : '') +
+          '<p class="wish-drawer__item-price">' + fmt(p.price) + '</p>' +
+          '<a href="product.html?slug=' + p.slug + '" class="btn btn--sm">View piece</a>' +
+        '</div>' +
+        '<button type="button" class="wish-drawer__remove" data-wish-toggle="' + p.slug + '" aria-label="Remove from wishlist">' +
+          '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/></svg>' +
+        '</button>' +
+      '</article>';
+    },
+
+    render: function () {
+      if (!this.node) return;
+      var slugs = getWish();
+      var count = slugs.length;
+      var self  = this;
+      var itemsHtml = count
+        ? slugs.map(function (s) { return self.buildItemHtml(s); }).join('')
+        : '<p class="wish-drawer__empty">Your wishlist is empty.<br>' +
+          '<a href="collection.html" class="link-underline" style="margin-top:1rem;display:inline-block;">Browse the collection ›</a></p>';
+
+      this.node.innerHTML =
+        '<div class="wish-drawer__inner">' +
+          '<header class="wish-drawer__header">' +
+            '<span class="eyebrow">Wishlist (' + count + ')</span>' +
+            '<button type="button" class="wish-drawer__close" data-wish-close aria-label="Close wishlist">&#x2715;</button>' +
+          '</header>' +
+          '<div class="wish-drawer__items">' + itemsHtml + '</div>' +
+        '</div>';
+    },
+
+    refresh: function () { if (this.isOpen) this.render(); },
+
+    open: function () {
+      this.render();
+      this.node.classList.add('is-open');
+      this.node.setAttribute('aria-hidden', 'false');
+      this.overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      this.isOpen = true;
+    },
+
+    close: function () {
+      if (!this.node) return;
+      this.node.classList.remove('is-open');
+      this.node.setAttribute('aria-hidden', 'true');
+      this.overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+      this.isOpen = false;
+    }
+  };
+
+  /* =========================================================
      Cart Drawer
      ========================================================= */
   var Drawer = {
@@ -279,6 +365,22 @@
         var meta = card.querySelector('.product-card__meta');
         if (meta) meta.insertAdjacentHTML('afterbegin', starsHtml(rating, reviews));
       }
+
+      /* Inject wish button on image (once only) */
+      if (!card.querySelector('.product-card__wish-btn')) {
+        var visual2 = card.querySelector('.product-card__visual');
+        if (visual2) {
+          var wished = window.DentelleWishlist && window.DentelleWishlist.has(slug);
+          visual2.insertAdjacentHTML('afterbegin',
+            '<button type="button" class="product-card__wish-btn' + (wished ? ' is-wished' : '') + '" ' +
+              'data-wish-toggle="' + slug + '" aria-label="Add to wishlist" aria-pressed="' + wished + '">' +
+              '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                '<path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/>' +
+              '</svg>' +
+            '</button>'
+          );
+        }
+      }
     });
   }
 
@@ -287,12 +389,26 @@
      ========================================================= */
   document.addEventListener('DOMContentLoaded', function () {
     Drawer.init();
+    WishDrawer.init();
     refreshCounts();
     window.DentelleWishlist.refreshButtons();
     initProductCards();
 
     /* Unified click delegation */
     document.addEventListener('click', function (e) {
+
+      /* ---- Open wishlist drawer (header heart icon) ---- */
+      if (e.target.closest('[data-wish-open]')) {
+        e.preventDefault();
+        WishDrawer.isOpen ? WishDrawer.close() : WishDrawer.open();
+        return;
+      }
+
+      /* ---- Close wishlist drawer ---- */
+      if (e.target.closest('[data-wish-close]')) {
+        WishDrawer.close();
+        return;
+      }
 
       /* ---- Quick-add: size button ---- */
       var sizeBtn = e.target.closest('.product-card__size-btn');
@@ -355,22 +471,34 @@
         return;
       }
 
-      /* ---- Wishlist toggle ---- */
+      /* ---- Wishlist toggle (product card + drawer remove) ---- */
       var wish = e.target.closest('[data-wish-toggle]');
       if (wish) {
         e.preventDefault();
-        var added = window.DentelleWishlist.toggle(wish.dataset.wishToggle);
-        wish.classList.toggle('is-wished', added);
-        wish.setAttribute('aria-pressed', added);
+        e.stopPropagation();
+        var wslug = wish.dataset.wishToggle;
+        if (!wslug) return;
+        var added = window.DentelleWishlist.toggle(wslug);
+        /* Update every button that targets this slug */
+        document.querySelectorAll('[data-wish-toggle="' + wslug + '"]').forEach(function (btn) {
+          btn.classList.toggle('is-wished', added);
+          btn.setAttribute('aria-pressed', added);
+        });
+        WishDrawer.refresh();
+        return;
       }
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && Drawer.isOpen) Drawer.close();
+      if (e.key === 'Escape') {
+        if (Drawer.isOpen) Drawer.close();
+        if (WishDrawer.isOpen) WishDrawer.close();
+      }
     });
   });
 
   /* Expose for other scripts */
-  window.DentelleCartDrawer = Drawer;
+  window.DentelleCartDrawer    = Drawer;
+  window.DentelleWishDrawer    = WishDrawer;
 
 })();
