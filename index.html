@@ -614,13 +614,13 @@
     setTimeout(function () { loader.style.display = 'none'; }, 700);
   }
 
-  /* Fire as soon as the page is interactive, minimum 1.4 s so the bar animation completes */
-  var minTimer = setTimeout(dismiss, 1500);
+  /* Minimum 3 s so assets have time to fully load and paint */
+  var minTimer = setTimeout(dismiss, 3000);
 
   window.addEventListener('load', function () {
     clearTimeout(minTimer);
-    /* give bar a moment to finish filling */
-    setTimeout(dismiss, 200);
+    /* Wait 900 ms after full load so first paint is complete */
+    setTimeout(dismiss, 900);
   });
 })();
 </script>

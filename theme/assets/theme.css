@@ -59,7 +59,7 @@
   background: linear-gradient(90deg, #C4A06A 0%, #A88A5C 50%, #C4A06A 100%);
   background-size: 200% 100%;
   border-radius: 2px;
-  animation: loaderFill 1.4s var(--ease-out) forwards,
+  animation: loaderFill 2.8s var(--ease-out) forwards,
              loaderShimmer 2s linear infinite;
 }
 @keyframes loaderFill {
