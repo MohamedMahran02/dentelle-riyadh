@@ -220,26 +220,132 @@
   /* =========================================================
      Init on DOMContentLoaded
      ========================================================= */
+  /* =========================================================
+     Dentelle star rating helper
+     ========================================================= */
+  var STAR_PATH = 'M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z';
+  var STAR_VB   = '20 2 80 60';
+
+  function starsHtml(rating, count) {
+    var html = '<div class="star-rating" aria-label="' + rating + ' out of 5">';
+    for (var i = 0; i < 5; i++) {
+      var cls = rating >= i + 0.75 ? 'is-filled' : rating >= i + 0.25 ? 'is-half' : '';
+      html += '<svg class="d-star ' + cls + '" viewBox="' + STAR_VB + '" aria-hidden="true"><path d="' + STAR_PATH + '"/></svg>';
+    }
+    html += '<span class="star-rating__count">(' + count + ')</span></div>';
+    return html;
+  }
+
+  /* =========================================================
+     Quick-add card initialisation
+     Reads data-slug / data-rating / data-reviews from each
+     .product-card and injects the overlay + stars.
+     ========================================================= */
+  function initProductCards() {
+    document.querySelectorAll('.product-card[data-slug]').forEach(function (card) {
+      var slug    = card.dataset.slug;
+      var product = window.PRODUCTS_BY_SLUG && window.PRODUCTS_BY_SLUG[slug];
+      var media   = card.querySelector('.product-card__media');
+      if (!media) return;
+
+      /* Wrap media in .product-card__visual (once only) */
+      if (!card.querySelector('.product-card__visual')) {
+        var visual = document.createElement('div');
+        visual.className = 'product-card__visual';
+        media.parentNode.insertBefore(visual, media);
+        visual.appendChild(media);
+
+        /* Build size buttons */
+        var sizesHtml = product ? product.sizes.map(function (s) {
+          return '<button type="button" class="product-card__size-btn" data-size="' + s + '">' + s + '</button>';
+        }).join('') : '';
+
+        /* Inject quick-add overlay */
+        visual.insertAdjacentHTML('beforeend',
+          '<div class="product-card__quick-add" aria-hidden="true">' +
+            '<div class="product-card__sizes">' + sizesHtml + '</div>' +
+            '<button type="button" class="product-card__atc-btn" data-quick-atc>Add to bag</button>' +
+          '</div>'
+        );
+      }
+
+      /* Inject star rating (once only) */
+      var rating  = parseFloat(card.dataset.rating);
+      var reviews = parseInt(card.dataset.reviews, 10);
+      if (rating && reviews && !card.querySelector('.star-rating')) {
+        var meta = card.querySelector('.product-card__meta');
+        if (meta) meta.insertAdjacentHTML('afterbegin', starsHtml(rating, reviews));
+      }
+    });
+  }
+
+  /* =========================================================
+     Init on DOMContentLoaded
+     ========================================================= */
   document.addEventListener('DOMContentLoaded', function () {
     Drawer.init();
     refreshCounts();
     window.DentelleWishlist.refreshButtons();
+    initProductCards();
 
-    /* Cart icon → open drawer */
+    /* Unified click delegation */
     document.addEventListener('click', function (e) {
-      /* Close button inside drawer */
+
+      /* ---- Quick-add: size button ---- */
+      var sizeBtn = e.target.closest('.product-card__size-btn');
+      if (sizeBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var row = sizeBtn.closest('.product-card__sizes');
+        row.querySelectorAll('.product-card__size-btn').forEach(function (b) {
+          b.classList.remove('is-selected');
+        });
+        sizeBtn.classList.add('is-selected');
+        return;
+      }
+
+      /* ---- Quick-add: add to bag ---- */
+      var atcBtn = e.target.closest('[data-quick-atc]');
+      if (atcBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var card    = atcBtn.closest('.product-card');
+        if (!card) return;
+        var cardSlug = card.dataset.slug;
+        var chosen   = card.querySelector('.product-card__size-btn.is-selected');
+        if (!chosen) {
+          chosen = card.querySelector('.product-card__size-btn');
+          if (chosen) chosen.classList.add('is-selected');
+        }
+        var size    = chosen ? chosen.dataset.size : 'One Size';
+        var product = window.PRODUCTS_BY_SLUG && window.PRODUCTS_BY_SLUG[cardSlug];
+        if (product && window.DentelleCart) {
+          window.DentelleCart.add(product, size, 1);
+          atcBtn.textContent = 'Added ✓';
+          atcBtn.disabled = true;
+          setTimeout(function () {
+            atcBtn.textContent = 'Add to bag';
+            atcBtn.disabled = false;
+          }, 1500);
+        }
+        return;
+      }
+
+      /* ---- Close cart drawer ---- */
       if (e.target.closest('[data-cart-close]')) {
         Drawer.close();
         return;
       }
-      /* Cart toggle (bag icon) */
+
+      /* ---- Cart toggle (bag icon) ---- */
       var toggle = e.target.closest('[data-cart-toggle]');
       if (toggle) {
         e.preventDefault();
         Drawer.isOpen ? Drawer.close() : Drawer.open();
         return;
       }
-      /* Wishlist toggle */
+
+      /* ---- Wishlist toggle ---- */
       var wish = e.target.closest('[data-wish-toggle]');
       if (wish) {
         e.preventDefault();

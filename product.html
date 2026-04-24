@@ -322,7 +322,7 @@
   const related = document.querySelector('[data-related]');
   const others = window.PRODUCTS.filter((p) => p.slug !== slug).slice(0, 4);
   related.innerHTML = others.map((p) => `
-    <article class="product-card">
+    <article class="product-card" data-slug="${p.slug}" data-rating="${p.rating || ''}" data-reviews="${p.review_count || ''}">
       ${p.is_signature ? '<span class="product-card__badge">Signature</span>' : ''}
       <a href="product.html?slug=${p.slug}" class="product-card__media" aria-label="${p.title_en}">
         <img class="product-card__img product-card__img--a" src="${p.images[0]}" alt="${p.title_en}" loading="lazy" />

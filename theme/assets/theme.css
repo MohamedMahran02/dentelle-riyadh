@@ -734,6 +734,89 @@ ul { margin: 0; padding: 0; list-style: none; }
     width: 100%;
   }
 }
+/* ---------- DENTELLE STAR RATING ---------- */
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: .16rem;
+  margin-bottom: .45rem;
+}
+.d-star {
+  width: 11px; height: 11px;
+  fill: var(--c-line);
+  flex-shrink: 0;
+  transition: fill .2s;
+}
+.d-star.is-filled { fill: var(--c-gold); }
+.d-star.is-half   { fill: var(--c-gold); opacity: .45; }
+.star-rating__count {
+  font-family: var(--f-sans);
+  font-size: .58rem;
+  color: var(--c-muted);
+  margin-left: .25rem;
+  letter-spacing: .06em;
+}
+
+/* ---------- QUICK-ADD OVERLAY ---------- */
+.product-card__visual {
+  position: relative;
+}
+.product-card__quick-add {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(251,248,242,.96);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  padding: .65rem .7rem .7rem;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .22s var(--ease), transform .22s var(--ease);
+  pointer-events: none;
+}
+.product-card:hover .product-card__quick-add {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.product-card__sizes {
+  display: flex;
+  gap: .25rem;
+}
+.product-card__size-btn {
+  flex: 1;
+  padding: .3rem .1rem;
+  border: 1px solid var(--c-line);
+  font-family: var(--f-sans);
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  background: transparent;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.product-card__size-btn:hover,
+.product-card__size-btn.is-selected {
+  background: var(--c-ink);
+  color: var(--c-paper);
+  border-color: var(--c-ink);
+}
+.product-card__atc-btn {
+  width: 100%;
+  padding: .5rem;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-family: var(--f-sans);
+  font-size: .62rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  transition: background .2s var(--ease), letter-spacing .2s var(--ease);
+}
+.product-card__atc-btn:hover    { background: var(--c-gold); letter-spacing: .32em; }
+.product-card__atc-btn:disabled { opacity: .65; pointer-events: none; }
+
 /* Grid layout (collection page, search results) */
 .product-grid__items {
   display: grid;
