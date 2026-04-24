@@ -16,20 +16,18 @@
 </head>
 <body data-theme="cream">
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  <div class="top-bar__inner">
-    <div class="top-bar__side">
-      <span>شحن مجاني داخل المملكة · معتمد ساسو</span>
-    </div>
-    <div class="top-bar__side top-bar__side--right">
-      <a href="https://wa.me/966546002573" target="_blank" rel="noopener">المتاجر</a>
-      <span class="top-bar__sep">·</span>
-      <a href="#size" data-size-guide>دليل المقاسات</a>
-      <span class="top-bar__sep">·</span>
-      <a href="index.html" class="locale-btn">EN</a>
-      <span class="top-bar__sep">·</span>
-      <button class="locale-btn is-active">AR</button>
+<!-- TOP BAR — infinite marquee -->
+<div class="top-bar" aria-hidden="true">
+  <div class="top-bar__marquee">
+    <div class="top-bar__track">
+      <span>شحن مجاني داخل المملكة</span><span class="top-bar__dot">·</span>
+      <span>معتمد ساسو</span><span class="top-bar__dot">·</span>
+      <span>شحن مجاني داخل المملكة</span><span class="top-bar__dot">·</span>
+      <span>معتمد ساسو</span><span class="top-bar__dot">·</span>
+      <span>شحن مجاني داخل المملكة</span><span class="top-bar__dot">·</span>
+      <span>معتمد ساسو</span><span class="top-bar__dot">·</span>
+      <span>شحن مجاني داخل المملكة</span><span class="top-bar__dot">·</span>
+      <span>معتمد ساسو</span><span class="top-bar__dot">·</span>
     </div>
   </div>
 </div>
@@ -66,6 +64,11 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
         <span class="bag-count" data-cart-count aria-label="عناصر في الحقيبة"></span>
       </a>
+            <div class="locale-switcher" aria-label="Language">
+        <a href="index.html" class="locale-btn">EN</a>
+        <span class="locale-sep">|</span>
+        <a href="index-ar.html" class="locale-btn is-active" aria-current="true">AR</a>
+      </div>
       <button class="nav-toggle" aria-label="فتح القائمة" aria-expanded="false" data-menu-toggle>
         <span></span><span></span>
       </button>
@@ -80,11 +83,7 @@
     <a href="#brand">العلامة التجارية</a>
     <a href="collection-ar.html">مجموعة مُهره</a>
     <a href="#size" data-size-guide>دليل المقاسات</a>
-    <div class="mobile-panel__locale">
-      <a href="index.html" class="locale-btn">EN</a>
-      <span>·</span>
-      <button class="locale-btn is-active">AR</button>
-    </div>
+    
   </div>
 </aside>
 

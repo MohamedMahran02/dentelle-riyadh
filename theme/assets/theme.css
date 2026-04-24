@@ -284,25 +284,30 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: .66rem;
   letter-spacing: .28em;
   text-transform: uppercase;
+  padding: 0; /* padding lives on __marquee */
 }
 .top-bar__marquee {
   display: flex;
   overflow: hidden;
-  white-space: nowrap;
   width: 100%;
+  padding: .55rem 0;
 }
 .top-bar__track {
   display: flex;
-  gap: 2.4rem;
+  gap: 3rem;
   align-items: center;
+  flex-shrink: 0;
   white-space: nowrap;
+  min-width: 100%;
   width: max-content;
-  animation: topBarScroll 22s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: topBarScroll 28s linear infinite;
 }
-.top-bar__dot { opacity: .45; font-size: .85em; }
+.top-bar__dot { opacity: .4; font-size: .8em; padding: 0 .2rem; }
 @keyframes topBarScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 /* keep old inner rule harmless for any remaining uses */
 .top-bar__inner {
