@@ -737,34 +737,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .product-grid__items {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-flow: dense;
   gap: clamp(1.2rem, 3vw, 2.6rem);
-}
-
-/* Signature piece — 2x2 hero tile */
-.product-card--signature {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.product-card--signature .product-card__badge {
-  font-size: .72rem;
-  padding: .55rem 1.1rem;
-  letter-spacing: .38em;
-  top: 1.4rem;
-  left: 1.4rem;
-}
-.product-card--signature .product-card__title-en {
-  font-size: clamp(1.6rem, 1.2rem + 1vw, 2.4rem);
-}
-.product-card--signature .product-card__title-ar {
-  font-size: clamp(1.3rem, 1rem + .8vw, 1.9rem);
-}
-.product-card--signature .product-card__meta p {
-  font-size: 1rem;
-}
-.product-card--signature .price {
-  font-size: .82rem;
-  letter-spacing: .24em;
 }
 .product-card {
   position: relative;
@@ -1267,7 +1240,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   .lecon--right { direction: ltr; }
 
   .product-grid__items { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1.2rem; }
-  .product-card--signature { grid-column: span 2; grid-row: span 1; }
 
   .categories__grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -1287,7 +1259,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 560px) {
   :root { --sp-xxl: 5.5rem; --sp-xl: 4rem; }
   .product-grid__items { grid-template-columns: 1fr; }
-  .product-card--signature { grid-column: span 1; grid-row: span 1; }
   .categories__grid { grid-template-columns: 1fr; }
   .site-footer__top { grid-template-columns: 1fr; }
   .site-footer__base { justify-content: center; text-align: center; }
