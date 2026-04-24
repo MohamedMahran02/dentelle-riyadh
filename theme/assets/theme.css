@@ -162,10 +162,12 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-family: var(--f-display);
   font-weight: 400;
   line-height: .98;
-  letter-spacing: -.02em;
+  letter-spacing: 0;
 }
-.display { font-size: var(--step-5); }
-.h-display { font-size: var(--step-4); }
+.display { font-size: var(--step-5); letter-spacing: -.02em; }
+.h-display { font-size: var(--step-4); letter-spacing: .005em; }
+/* Campaign overlay: slightly airier tracking so thin-stroke glyphs don't blend */
+.campaign__overlay .h-display { letter-spacing: .015em; word-spacing: .02em; }
 .display em, .h-display em {
   font-style: italic;
   font-weight: 400;
