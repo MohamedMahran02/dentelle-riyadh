@@ -734,11 +734,96 @@ ul { margin: 0; padding: 0; list-style: none; }
     width: 100%;
   }
 }
+/* Grid layout (collection page, search results) */
 .product-grid__items {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(1.2rem, 3vw, 2.6rem);
 }
+@media (max-width: 1024px) { .product-grid__items { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 680px)  { .product-grid__items { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---- Carousel layout (homepage pieces section) ---- */
+.product-grid__carousel-wrap {
+  position: relative;
+}
+.product-grid__items--carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: clamp(1rem, 2vw, 2rem);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  /* Let the track bleed edge-to-edge */
+  padding-left:  var(--frame-x);
+  padding-right: var(--frame-x);
+  margin-left:  calc(-1 * var(--frame-x));
+  margin-right: calc(-1 * var(--frame-x));
+  padding-bottom: .4rem; /* prevent bottom clip on hover scale */
+}
+.product-grid__items--carousel::-webkit-scrollbar { display: none; }
+
+/* Each card: 3.4 visible on desktop, 1.2 on mobile */
+.product-grid__items--carousel .product-card {
+  flex: 0 0 calc((100% - 3 * clamp(1rem, 2vw, 2rem)) / 3.4);
+  min-width: 200px;
+  scroll-snap-align: start;
+}
+@media (max-width: 1100px) {
+  .product-grid__items--carousel .product-card {
+    flex: 0 0 calc((100% - 2 * clamp(1rem, 2vw, 2rem)) / 2.4);
+  }
+}
+@media (max-width: 680px) {
+  .product-grid__items--carousel .product-card {
+    flex: 0 0 calc((100% - clamp(1rem, 2vw, 2rem)) / 1.2);
+  }
+}
+
+/* Arrow buttons */
+.carousel-btn {
+  position: absolute;
+  top: 40%; /* vertically centred over image (image is 4/5 aspect, meta below) */
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--c-paper);
+  border: 1px solid var(--c-line);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+.product-grid:hover .carousel-btn,
+.product-grid:focus-within .carousel-btn { opacity: 1; pointer-events: all; }
+.carousel-btn--prev { left: 0; }
+.carousel-btn--next { right: 0; }
+.carousel-btn:hover  { background: var(--c-ink); color: var(--c-paper); border-color: var(--c-ink); }
+.carousel-btn:disabled { opacity: .25 !important; pointer-events: none; }
+.carousel-btn svg { display: block; }
+
+/* Always show on touch devices (no hover) */
+@media (hover: none) {
+  .carousel-btn { opacity: 1; pointer-events: all; }
+  .carousel-btn--prev { left: .4rem; }
+  .carousel-btn--next { right: .4rem; }
+}
+
+/* Dot progress indicator */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 1.6rem;
+}
+.carousel-dot {
+  width: 20px; height: 2px;
+  background: var(--c-line);
+  border: none; padding: 0; cursor: pointer;
+  transition: background .3s var(--ease), width .3s var(--ease);
+}
+.carousel-dot.is-active { background: var(--c-ink); width: 36px; }
 .product-card {
   position: relative;
   display: block;

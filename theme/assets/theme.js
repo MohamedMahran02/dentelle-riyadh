@@ -395,4 +395,106 @@
   /* Expose for debugging / other scripts */
   window.theme.Cart = Cart;
   window.theme.CartDrawer = CartDrawer;
+
+  /* =========================================================
+     Carousel — horizontal snap-scroll with arrow buttons
+     ========================================================= */
+  $$('[data-carousel]').forEach((track) => {
+    const wrap    = track.closest('.product-grid__carousel-wrap');
+    if (!wrap) return;
+
+    const section  = track.closest('.product-grid');
+    const prevBtn  = wrap.querySelector('[data-carousel-prev]');
+    const nextBtn  = wrap.querySelector('[data-carousel-next]');
+    const dotsWrap = section?.querySelector('[data-carousel-dots]');
+    const cards    = Array.from(track.querySelectorAll('.product-card'));
+
+    /* Build dots */
+    if (dotsWrap && cards.length) {
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to piece ' + (i + 1));
+        dot.addEventListener('click', () => scrollToCard(i));
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    const getDots = () => dotsWrap ? Array.from(dotsWrap.querySelectorAll('.carousel-dot')) : [];
+
+    /* Scroll helpers */
+    const cardStep = () => {
+      const card = cards[0];
+      if (!card) return 300;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return card.offsetWidth + gap;
+    };
+
+    const scrollToCard = (idx) => {
+      const card = cards[idx];
+      if (!card) return;
+      track.scrollTo({ left: card.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior: 'smooth' });
+    };
+
+    /* Current index (which card is most visible at left) */
+    const currentIndex = () => {
+      const padLeft  = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+      const scrolled = track.scrollLeft;
+      let best = 0;
+      let bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const dist = Math.abs(card.offsetLeft - padLeft - scrolled);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      return best;
+    };
+
+    /* Update arrow + dot state */
+    const updateState = () => {
+      const atStart = track.scrollLeft <= 4;
+      const atEnd   = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      if (prevBtn) prevBtn.disabled = atStart;
+      if (nextBtn) nextBtn.disabled = atEnd;
+
+      const idx  = currentIndex();
+      getDots().forEach((dot, i) => dot.classList.toggle('is-active', i === idx));
+    };
+
+    /* Arrow clicks — scroll by one card */
+    if (prevBtn) prevBtn.addEventListener('click', () => track.scrollBy({ left: -cardStep(), behavior: 'smooth' }));
+    if (nextBtn) nextBtn.addEventListener('click', () => track.scrollBy({ left:  cardStep(), behavior: 'smooth' }));
+
+    track.addEventListener('scroll', updateState, { passive: true });
+    updateState(); /* initial state */
+
+    /* Keyboard arrow support when track is focused */
+    track.setAttribute('tabindex', '0');
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); track.scrollBy({ left: -cardStep(), behavior: 'smooth' }); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left:  cardStep(), behavior: 'smooth' }); }
+    });
+
+    /* Drag-to-scroll (mouse) */
+    let isDragging = false;
+    let startX = 0;
+    let startScroll = 0;
+    track.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX     = e.pageX - track.offsetLeft;
+      startScroll = track.scrollLeft;
+      track.style.cursor = 'grabbing';
+      track.style.userSelect = 'none';
+    });
+    track.addEventListener('mouseleave', () => { isDragging = false; track.style.cursor = ''; });
+    track.addEventListener('mouseup',    () => { isDragging = false; track.style.cursor = ''; track.style.userSelect = ''; });
+    track.addEventListener('mousemove',  (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x    = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      track.scrollLeft = startScroll - walk;
+    });
+  });
+
 })();
