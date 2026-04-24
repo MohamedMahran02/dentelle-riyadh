@@ -1552,23 +1552,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .product__form { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1rem; }
 .product__options { display: flex; flex-direction: column; gap: 1.4rem; }
 .product__option { border: 0; padding: 0; margin: 0; }
-.product__option-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 0;
-}
-.product__size-guide-link {
-  font-family: var(--f-sans);
-  font-size: .68rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color .18s;
-}
-.product__size-guide-link:hover { color: var(--c-text); }
 .product__option-name {
   display: block;
   font-family: var(--f-sans);
@@ -1623,6 +1606,43 @@ ul { margin: 0; padding: 0; list-style: none; }
 .product__accordion[open] summary::after { content: '–'; }
 .product__accordion-body { padding: 0 0 1.4rem; color: var(--c-ink-soft); font-size: var(--step-0); line-height: 1.7; }
 .product__accordion-body.rte p { margin-bottom: .8rem; }
+
+/* Size guide accordion content */
+.product__accordion-body--sizeguide p { margin-bottom: .75rem; font-size: .85rem; }
+.product__sizeguide-list {
+  list-style: none;
+  padding: 0;
+  margin: .5rem 0 1rem;
+}
+.product__sizeguide-list li {
+  padding: .4rem 0 .4rem 1.2rem;
+  position: relative;
+  font-size: .85rem;
+  border-bottom: 1px solid var(--c-border);
+}
+.product__sizeguide-list li:last-child { border-bottom: none; }
+.product__sizeguide-list li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--c-muted);
+  font-size: .75rem;
+}
+.product__sizeguide-chart {
+  margin: 1rem 0;
+}
+.product__sizeguide-chart img {
+  width: 100%; height: auto;
+  display: block;
+}
+.product__sizeguide-wa {
+  display: inline-block;
+  font-size: .78rem;
+  letter-spacing: .06em;
+  color: var(--c-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: .25rem;
+}
 
 .product-card__soldout {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
