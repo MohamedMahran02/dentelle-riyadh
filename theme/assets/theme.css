@@ -168,6 +168,39 @@ ul { margin: 0; padding: 0; list-style: none; }
 .h-display { font-size: var(--step-4); letter-spacing: .005em; }
 /* Campaign overlay: slightly airier tracking so thin-stroke glyphs don't blend */
 .campaign__overlay .h-display { letter-spacing: .015em; word-spacing: .02em; }
+
+/* Collection filter nav (category pills) */
+.collection__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2vw, 2rem);
+  margin: 2rem 0 0;
+  font-family: var(--f-sans);
+  font-size: .72rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+}
+.collection__filters a {
+  position: relative;
+  padding: .5rem 0;
+  color: var(--c-muted);
+  transition: color var(--dur-s) var(--ease);
+}
+.collection__filters a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s var(--ease-out);
+}
+.collection__filters a:hover { color: var(--c-ink); }
+.collection__filters a.is-active { color: var(--c-ink); }
+.collection__filters a.is-active::after,
+.collection__filters a:hover::after { transform: scaleX(1); }
+[dir="rtl"] .collection__filters a::after { transform-origin: right; }
 .display em, .h-display em {
   font-style: italic;
   font-weight: 400;

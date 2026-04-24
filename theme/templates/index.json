@@ -65,12 +65,11 @@
         "caption_short": "Detail — Mohrah N°01"
       },
       "blocks": {
-        "f1": { "type": "feature", "settings": { "index": "01", "text": "Fully customisable by appointment" } },
-        "f2": { "type": "feature", "settings": { "index": "02", "text": "French Leavers lace · Calais" } },
-        "f3": { "type": "feature", "settings": { "index": "03", "text": "Silk satin · Lyon" } },
-        "f4": { "type": "feature", "settings": { "index": "04", "text": "SASO certified, made in the Kingdom" } }
+        "f1": { "type": "feature", "settings": { "index": "01", "text": "French Leavers lace · Calais" } },
+        "f2": { "type": "feature", "settings": { "index": "02", "text": "Silk satin · Lyon" } },
+        "f3": { "type": "feature", "settings": { "index": "03", "text": "SASO certified, made in the Kingdom" } }
       },
-      "block_order": ["f1", "f2", "f3", "f4"]
+      "block_order": ["f1", "f2", "f3"]
     },
     "story-bilingual": {
       "type": "story-bilingual"

@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=15" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=16" />
 </head>
 <body data-theme="cream" class="template-collection">
 
@@ -93,13 +93,20 @@
 <main>
 <section class="collection" data-reveal>
   <header class="collection__header">
-    <span class="eyebrow">المجموعة</span>
+    <span class="eyebrow" data-eyebrow>المجموعة</span>
     <h1 class="h-display">
-      <span>The <em>Mohrah</em> Collection</span>
-      <span class="h-display-ar" dir="rtl" lang="ar">مجموعة <em>مُهرة</em></span>
+      <span data-title-en>The <em>Mohrah</em> Collection</span>
+      <span class="h-display-ar" dir="rtl" lang="ar" data-title-ar>مجموعة <em>مُهرة</em></span>
     </h1>
     <p class="collection__description">لغةٌ راقيةٌ للأنوثة — متجذّرةٌ في الموروث، مصقولةٌ بالحداثة. كلُّ قطعةٍ تُنهى يدوياً في ورشة الرياض.</p>
     <p class="collection__count" data-count>— قطعة</p>
+    <nav class="collection__filters" data-filters aria-label="تصفية حسب الفئة">
+      <a href="collection-ar.html" data-filter="all" class="is-active">الكل</a>
+      <a href="collection-ar.html?category=bras" data-filter="bras">حمّالات</a>
+      <a href="collection-ar.html?category=briefs" data-filter="briefs">سراويل</a>
+      <a href="collection-ar.html?category=ensembles" data-filter="ensembles">أطقم</a>
+      <a href="collection-ar.html?category=robes" data-filter="robes">أردية</a>
+    </nav>
   </header>
 
   <div class="product-grid__items" data-grid></div>
@@ -154,16 +161,52 @@
   </div>
 </footer>
 
-<script src="theme/assets/products.js?v=3"></script>
+<script src="theme/assets/products.js?v=4"></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
 <script>
 (function () {
   'use strict';
-  const grid = document.querySelector('[data-grid]');
-  const countEl = document.querySelector('[data-count]');
-  const products = window.PRODUCTS || [];
+  const grid      = document.querySelector('[data-grid]');
+  const countEl   = document.querySelector('[data-count]');
+  const titleEnEl = document.querySelector('[data-title-en]');
+  const titleArEl = document.querySelector('[data-title-ar]');
+  const eyebrowEl = document.querySelector('[data-eyebrow]');
+
+  const params = new URLSearchParams(window.location.search);
+  const category = (params.get('category') || 'all').toLowerCase();
+
+  const LABELS = {
+    all:       { en: 'The Mohrah Collection', ar: 'مجموعة مُهرة', eyebrow: 'المجموعة' },
+    bras:      { en: 'Bras',      ar: 'حمّالات', eyebrow: 'الفئة' },
+    briefs:    { en: 'Briefs',    ar: 'سراويل',  eyebrow: 'الفئة' },
+    ensembles: { en: 'Ensembles', ar: 'أطقم',    eyebrow: 'الفئة' },
+    robes:     { en: 'Robes',     ar: 'أردية',   eyebrow: 'الفئة' }
+  };
+  const label = LABELS[category] || LABELS.all;
+
+  if (eyebrowEl) eyebrowEl.textContent = label.eyebrow;
+  if (titleEnEl) titleEnEl.innerHTML = category === 'all'
+    ? 'The <em>Mohrah</em> Collection'
+    : label.en;
+  if (titleArEl) titleArEl.innerHTML = label.ar;
+
+  const all = window.PRODUCTS || [];
+  const products = category === 'all'
+    ? all
+    : all.filter((p) => (p.category || '').toLowerCase() === category);
+
+  document.querySelectorAll('[data-filter]').forEach((a) => {
+    a.classList.toggle('is-active', a.dataset.filter === category);
+  });
+
   countEl.textContent = `${products.length} — قطعة`;
+
+  if (!products.length) {
+    grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:4rem 0; color:var(--c-muted); font-style:italic;">لا توجد قطع في هذه الفئة.</p>';
+    return;
+  }
+
   grid.innerHTML = products.map((p) => `
     <article class="product-card" data-slug="${p.slug}" data-rating="${p.rating || ''}" data-reviews="${p.review_count || ''}">
       ${p.is_signature ? '<span class="product-card__badge">Signature</span>' : ''}

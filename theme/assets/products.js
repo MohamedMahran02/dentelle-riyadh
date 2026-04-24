@@ -5,6 +5,7 @@
 window.PRODUCTS = [
   {
     slug: 'mohra-1',
+    category: 'bras',
     title_en: 'Mohrah 1',
     title_ar: 'مُهره ١',
     price: 330,
@@ -32,6 +33,7 @@ window.PRODUCTS = [
   },
   {
     slug: 'mohra-2',
+    category: 'bras',
     title_en: 'Mohrah 2',
     title_ar: 'مُهره ٢',
     price: 330,
@@ -58,6 +60,7 @@ window.PRODUCTS = [
   },
   {
     slug: 'mohra-3',
+    category: 'briefs',
     title_en: 'Mohrah 3',
     title_ar: 'مُهره ٣',
     price: 250,
@@ -85,6 +88,7 @@ window.PRODUCTS = [
   },
   {
     slug: 'mohra-4',
+    category: 'briefs',
     title_en: 'Mohrah 4',
     title_ar: 'مُهره ٤',
     price: 250,
@@ -112,6 +116,7 @@ window.PRODUCTS = [
   },
   {
     slug: 'mohra-5',
+    category: 'briefs',
     title_en: 'Mohrah 5',
     title_ar: 'مُهره ٥',
     price: 250,
@@ -138,6 +143,7 @@ window.PRODUCTS = [
   },
   {
     slug: 'mohra-6',
+    category: 'ensembles',
     title_en: 'Mohrah 6',
     title_ar: 'مُهره ٦',
     price: 400,
@@ -166,6 +172,7 @@ window.PRODUCTS = [
   },
   {
     slug: 'mohra-7',
+    category: 'ensembles',
     title_en: 'Mohrah 7',
     title_ar: 'مُهره ٧',
     price: 280,
@@ -193,6 +200,7 @@ window.PRODUCTS = [
   },
   {
     slug: 'mohra-8',
+    category: 'robes',
     title_en: 'Mohrah 8',
     title_ar: 'مُهره ٨',
     price: 250,

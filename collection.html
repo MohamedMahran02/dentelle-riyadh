@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=15" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=16" />
 </head>
 <body data-theme="cream" class="template-collection">
 
@@ -91,13 +91,20 @@
 <main>
 <section class="collection" data-reveal>
   <header class="collection__header">
-    <span class="eyebrow">Collection</span>
+    <span class="eyebrow" data-eyebrow>Collection</span>
     <h1 class="h-display">
-      <span>The <em>Mohrah</em> Collection</span>
-      <span class="h-display-ar" dir="rtl" lang="ar">مجموعة <em>مُهرة</em></span>
+      <span data-title-en>The <em>Mohrah</em> Collection</span>
+      <span class="h-display-ar" dir="rtl" lang="ar" data-title-ar>مجموعة <em>مُهرة</em></span>
     </h1>
-    <p class="collection__description">A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.</p>
+    <p class="collection__description" data-description>A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.</p>
     <p class="collection__count" data-count>— pieces</p>
+    <nav class="collection__filters" data-filters aria-label="Filter by category">
+      <a href="collection.html" data-filter="all" class="is-active">All</a>
+      <a href="collection.html?category=bras" data-filter="bras">Bras</a>
+      <a href="collection.html?category=briefs" data-filter="briefs">Briefs</a>
+      <a href="collection.html?category=ensembles" data-filter="ensembles">Ensembles</a>
+      <a href="collection.html?category=robes" data-filter="robes">Robes</a>
+    </nav>
   </header>
 
   <div class="product-grid__items" data-grid></div>
@@ -148,16 +155,56 @@
   </div>
 </footer>
 
-<script src="theme/assets/products.js?v=3"></script>
+<script src="theme/assets/products.js?v=4"></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
 <script>
 (function () {
   'use strict';
-  const grid = document.querySelector('[data-grid]');
+  const grid    = document.querySelector('[data-grid]');
   const countEl = document.querySelector('[data-count]');
-  const products = window.PRODUCTS || [];
-  countEl.textContent = `${products.length} pieces`;
+  const titleEnEl = document.querySelector('[data-title-en]');
+  const titleArEl = document.querySelector('[data-title-ar]');
+  const eyebrowEl = document.querySelector('[data-eyebrow]');
+
+  /* Read ?category= from URL */
+  const params = new URLSearchParams(window.location.search);
+  const category = (params.get('category') || 'all').toLowerCase();
+
+  /* Category labels (EN + AR) */
+  const LABELS = {
+    all:       { en: 'The Mohrah Collection', ar: 'مجموعة مُهرة', eyebrow: 'Collection' },
+    bras:      { en: 'Bras',      ar: 'حمّالات', eyebrow: 'Category' },
+    briefs:    { en: 'Briefs',    ar: 'سراويل',  eyebrow: 'Category' },
+    ensembles: { en: 'Ensembles', ar: 'أطقم',    eyebrow: 'Category' },
+    robes:     { en: 'Robes',     ar: 'أردية',   eyebrow: 'Category' }
+  };
+  const label = LABELS[category] || LABELS.all;
+
+  /* Update heading */
+  if (eyebrowEl) eyebrowEl.textContent = label.eyebrow;
+  if (titleEnEl) titleEnEl.innerHTML = category === 'all'
+    ? 'The <em>Mohrah</em> Collection'
+    : label.en;
+  if (titleArEl) titleArEl.innerHTML = label.ar;
+
+  /* Filter + update active state on filter nav */
+  const all = window.PRODUCTS || [];
+  const products = category === 'all'
+    ? all
+    : all.filter((p) => (p.category || '').toLowerCase() === category);
+
+  document.querySelectorAll('[data-filter]').forEach((a) => {
+    a.classList.toggle('is-active', a.dataset.filter === category);
+  });
+
+  countEl.textContent = `${products.length} piece${products.length === 1 ? '' : 's'}`;
+
+  if (!products.length) {
+    grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:4rem 0; color:var(--c-muted); font-style:italic;">No pieces found in this category.</p>';
+    return;
+  }
+
   grid.innerHTML = products.map((p) => `
     <article class="product-card" data-slug="${p.slug}" data-rating="${p.rating || ''}" data-reviews="${p.review_count || ''}">
       ${p.is_signature ? '<span class="product-card__badge">Signature</span>' : ''}
