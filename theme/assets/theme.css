@@ -1633,17 +1633,21 @@ ul { margin: 0; padding: 0; list-style: none; }
 
   /* Star mark — centre-align and make it visible on mobile */
   .site-logo { align-items: center; }
-  .site-logo--lg .logo-mark { width: 20px; height: 25px; transform: none; }
+  .site-logo--lg .logo-mark { width: 18px; height: 22px; transform: none; }
+  .site-logo--lg .site-logo__wordmark { font-size: 1.4rem; }
 
-  /* Header icons — all visible, bigger touch targets */
-  .site-header__icons { gap: .75rem; }
-  .site-header__icons .icon-link svg { width: 20px; height: 20px; }
+  /* Header icons — all visible */
+  .site-header__icons { gap: .55rem; }
+  .site-header__icons .icon-link svg { width: 18px !important; height: 18px !important; }
 
-  /* Locale switcher — slightly smaller on mobile */
-  .locale-switcher { font-size: .55rem; gap: .3rem; }
+  /* Hide locale switcher from header bar on mobile — keep it in the slide-out menu */
+  .site-header__icons .locale-switcher { display: none; }
 
-  /* Burger — unclipped, clearly visible */
-  .nav-toggle { width: 32px; height: 22px; }
+  /* Burger — smaller on mobile */
+  .nav-toggle { width: 18px !important; height: 13px !important; padding: 2px; }
+  .nav-toggle span { height: 1.5px; left: 0; right: 0; }
+  .nav-toggle span:nth-child(1) { top: 0; }
+  .nav-toggle span:nth-child(2) { bottom: 0; }
 }
 
 /* =========================================================
