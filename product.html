@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=9" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=10" />
 </head>
 <body data-theme="cream" class="template-product">
 
@@ -52,17 +52,18 @@
     </nav>
 
     <div class="site-header__icons">
-      <a href="#" class="icon-link" aria-label="Search">
+      <a href="search.html" class="icon-link" aria-label="Search">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </a>
-      <a href="#" class="icon-link" aria-label="Account">
+      <a href="login.html" class="icon-link" aria-label="Account">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
       </a>
-      <a href="#" class="icon-link" aria-label="Wishlist">
+      <a href="#" class="icon-link" aria-label="Wishlist" data-wish-toggle>
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/></svg>
       </a>
-      <a href="#" class="icon-link" aria-label="Bag">
+      <a href="cart.html" class="icon-link" aria-label="Bag" style="position:relative;" data-cart-toggle>
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="bag-count" data-cart-count aria-label="items in bag"></span>
       </a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
         <span></span><span></span>
@@ -206,6 +207,7 @@
 </footer>
 
 <script src="theme/assets/products.js?v=1"></script>
+<script src="theme/assets/cart.js?v=1"></script>
 <script src="theme/assets/theme.js"></script>
 <script>
 (function () {
@@ -290,14 +292,30 @@
     );
   });
 
-  // ----- Form submit (placeholder — real add-to-cart wires to Shopify later) -----
+  // ----- Form submit — add to localStorage cart -----
   const form = document.querySelector('[data-product-form]');
   const btn = form.querySelector('[data-add-to-cart]');
   const btnText = form.querySelector('[data-add-to-cart-text]');
+  const formNote = form.querySelector('[data-form-note]');
+  if (formNote) formNote.remove(); // Remove "static preview" note
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    btnText.textContent = 'Added ✓';
-    setTimeout(() => { btnText.textContent = 'Add to bag'; }, 1600);
+    // Get selected size
+    const sizeInput = form.querySelector('input[name="size"]:checked');
+    const selectedSize = sizeInput ? sizeInput.value : (product.sizes[0] || 'One Size');
+    const qty = Number(form.querySelector('input[name="quantity"]')?.value || 1);
+
+    // Add to cart
+    if (window.DentelleCart) {
+      window.DentelleCart.add(product, selectedSize, qty);
+      btnText.textContent = 'Added ✓';
+      btn.disabled = true;
+      setTimeout(() => {
+        btnText.textContent = 'Add to bag';
+        btn.disabled = false;
+      }, 1600);
+    }
   });
 
   // ----- Related products (other items in collection) -----

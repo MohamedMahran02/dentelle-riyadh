@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Mohrah Collection — Dentelle Riyadh</title>
-<meta name="description" content="The Mohrah Collection — Arabian luxury lingerie, hand-finished in the Riyadh atelier." />
+<title>Search — Dentelle Riyadh</title>
+<meta name="description" content="Search the Mohrah Collection by Dentelle Riyadh." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="theme/assets/theme.css?v=10" />
 </head>
-<body data-theme="cream" class="template-collection">
+<body data-theme="cream" class="template-search">
 
 <div class="top-bar">
   <div class="top-bar__inner">
@@ -20,7 +19,7 @@
     <div class="top-bar__side top-bar__side--right">
       <a href="#">Stores</a>
       <span class="top-bar__sep">·</span>
-      <a href="#">Size consultation</a>
+      <a href="index.html#size">Size consultation</a>
       <span class="top-bar__sep">·</span>
       <button class="locale-btn is-active">EN</button>
       <span class="top-bar__sep">·</span>
@@ -69,18 +68,29 @@
 </aside>
 
 <main>
-<section class="collection" data-reveal>
-  <header class="collection__header">
-    <span class="eyebrow">Collection</span>
-    <h1 class="h-display">
-      <span>The <em>Mohrah</em> Collection</span>
-      <span class="h-display-ar" dir="rtl" lang="ar">مجموعة <em>مُهرة</em></span>
-    </h1>
-    <p class="collection__description">A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.</p>
-    <p class="collection__count" data-count>— pieces</p>
+<section class="search-page">
+  <header class="search-page__header">
+    <span class="eyebrow">Search</span>
+    <h1 class="h-display">Find your <em>piece.</em></h1>
   </header>
 
-  <div class="product-grid__items" data-grid></div>
+  <div class="search-page__form-wrap">
+    <input
+      type="search"
+      class="search-page__input"
+      id="searchInput"
+      placeholder="Lace, bra, brief, Mohrah…"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
+      aria-label="Search products"
+    />
+    <button type="button" class="search-page__clear" id="searchClear" aria-label="Clear search">✕</button>
+  </div>
+
+  <p class="search-page__count" id="searchCount" aria-live="polite"></p>
+  <div class="product-grid__items" id="searchResults"></div>
+  <p class="search-page__empty" id="searchEmpty" hidden>No pieces matched your search — <a href="collection.html" class="link-underline">browse the full collection</a>.</p>
 </section>
 </main>
 
@@ -132,27 +142,92 @@
 <script>
 (function () {
   'use strict';
-  const grid = document.querySelector('[data-grid]');
-  const countEl = document.querySelector('[data-count]');
-  const products = window.PRODUCTS || [];
-  countEl.textContent = `${products.length} pieces`;
-  grid.innerHTML = products.map((p) => `
-    <article class="product-card">
-      ${p.is_signature ? '<span class="product-card__badge">Signature</span>' : ''}
-      <a href="product.html?slug=${p.slug}" class="product-card__media" aria-label="${p.title_en}">
-        <img class="product-card__img product-card__img--a" src="${p.images[0]}" alt="${p.title_en}" loading="lazy" />
-        <img class="product-card__img product-card__img--b" src="${p.images[1] || p.images[0]}" alt="${p.title_en} — detail" loading="lazy" />
-      </a>
-      <div class="product-card__meta">
-        <h3 class="product-card__title">
-          <span class="product-card__title-en">${p.title_en}</span>
-          <span class="product-card__title-ar" dir="rtl" lang="ar">${p.title_ar}</span>
-        </h3>
-        <p>${p.subtitle}</p>
-        <span class="price"><span class="price__amount">SAR ${p.price}</span></span>
-      </div>
-    </article>
-  `).join('');
+
+  var input    = document.getElementById('searchInput');
+  var clearBtn = document.getElementById('searchClear');
+  var countEl  = document.getElementById('searchCount');
+  var results  = document.getElementById('searchResults');
+  var emptyEl  = document.getElementById('searchEmpty');
+  var products = window.PRODUCTS || [];
+
+  /* Pre-fill from URL ?q= */
+  var params = new URLSearchParams(window.location.search);
+  var initial = params.get('q') || '';
+  if (initial) { input.value = initial; }
+
+  function cardHtml(p) {
+    return '<article class="product-card">' +
+      (p.is_signature ? '<span class="product-card__badge">Signature</span>' : '') +
+      '<a href="product.html?slug=' + p.slug + '" class="product-card__media" aria-label="' + p.title_en + '">' +
+        '<img class="product-card__img product-card__img--a" src="' + p.images[0] + '" alt="' + p.title_en + '" loading="lazy" />' +
+        '<img class="product-card__img product-card__img--b" src="' + (p.images[1] || p.images[0]) + '" alt="' + p.title_en + ' — detail" loading="lazy" />' +
+      '</a>' +
+      '<div class="product-card__meta">' +
+        '<h3 class="product-card__title">' +
+          '<span class="product-card__title-en">' + p.title_en + '</span>' +
+          '<span class="product-card__title-ar" dir="rtl" lang="ar">' + p.title_ar + '</span>' +
+        '</h3>' +
+        '<p>' + p.subtitle + '</p>' +
+        '<span class="price"><span class="price__amount">SAR ' + p.price + '</span></span>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function doSearch(q) {
+    q = q.trim().toLowerCase();
+    clearBtn.classList.toggle('is-visible', q.length > 0);
+
+    /* Update URL without reload */
+    var url = new URL(window.location);
+    if (q) url.searchParams.set('q', q);
+    else url.searchParams.delete('q');
+    window.history.replaceState({}, '', url);
+
+    if (!q) {
+      results.innerHTML = '';
+      countEl.textContent = '';
+      emptyEl.hidden = true;
+      return;
+    }
+
+    var matched = products.filter(function (p) {
+      return (
+        p.title_en.toLowerCase().includes(q) ||
+        p.title_ar.includes(q) ||
+        (p.description_en || '').toLowerCase().includes(q) ||
+        (p.description_ar || '').includes(q) ||
+        (p.subtitle || '').toLowerCase().includes(q) ||
+        (p.details || '').toLowerCase().includes(q)
+      );
+    });
+
+    if (matched.length) {
+      results.innerHTML = matched.map(cardHtml).join('');
+      countEl.textContent = matched.length + ' piece' + (matched.length !== 1 ? 's' : '') + ' found';
+      emptyEl.hidden = true;
+    } else {
+      results.innerHTML = '';
+      countEl.textContent = '';
+      emptyEl.hidden = false;
+    }
+  }
+
+  /* Live search as user types */
+  var debounceTimer;
+  input.addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function () { doSearch(input.value); }, 200);
+  });
+
+  clearBtn.addEventListener('click', function () {
+    input.value = '';
+    input.focus();
+    doSearch('');
+  });
+
+  /* Run on load if ?q= present */
+  if (initial) doSearch(initial);
+  else input.focus();
 })();
 </script>
 </body>

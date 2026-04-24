@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Account — Dentelle Riyadh</title>
+<meta name="description" content="Sign in or create your Dentelle Riyadh account." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme/assets/theme.css?v=10" />
+</head>
+<body data-theme="cream" class="template-login">
+
+<div class="top-bar">
+  <div class="top-bar__inner">
+    <div class="top-bar__side"><span>Free shipping within the Kingdom · SASO certified</span></div>
+    <div class="top-bar__side top-bar__side--right">
+      <a href="#">Stores</a>
+      <span class="top-bar__sep">·</span>
+      <a href="index.html#size">Size consultation</a>
+      <span class="top-bar__sep">·</span>
+      <button class="locale-btn is-active">EN</button>
+      <span class="top-bar__sep">·</span>
+      <button class="locale-btn">AR</button>
+    </div>
+  </div>
+</div>
+
+<header class="site-header site-header--single" id="siteHeader">
+  <div class="site-header__row">
+    <a href="index.html" class="site-logo site-logo--lg site-logo--left" aria-label="Dentelle Riyadh — Home">
+      <svg class="logo-mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
+        <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
+      </svg>
+      <span class="site-logo__wordmark">Dentelle</span>
+      <span class="site-logo__city">Riyadh</span>
+    </a>
+    <nav class="site-nav site-nav--row" aria-label="Primary">
+      <a href="index.html#philosophy">Philosophy</a>
+      <a href="index.html#brand">The Brand</a>
+      <a href="collection.html">Mohrah Collection</a>
+      <a href="index.html#size">Size Consultation</a>
+      <a href="index.html#offers">Offers</a>
+    </nav>
+    <div class="site-header__icons">
+      <a href="search.html" class="icon-link" aria-label="Search"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+      <a href="login.html" class="icon-link" aria-label="Account"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg></a>
+      <a href="#" class="icon-link" aria-label="Wishlist" data-wish-toggle><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/></svg></a>
+      <a href="cart.html" class="icon-link" aria-label="Bag" style="position:relative;" data-cart-toggle>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="bag-count" data-cart-count aria-label="items in bag"></span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<aside class="mobile-panel" data-menu-panel aria-hidden="true">
+  <div class="mobile-panel__inner">
+    <a href="index.html#philosophy">Philosophy</a>
+    <a href="index.html#brand">The Brand</a>
+    <a href="collection.html">Mohrah Collection</a>
+    <a href="index.html#size">Size Consultation</a>
+    <a href="index.html#offers">Offers</a>
+  </div>
+</aside>
+
+<main>
+<section class="auth">
+  <div class="auth__inner">
+
+    <header class="auth__header">
+      <span class="eyebrow">Welcome</span>
+      <h1 class="h-display" style="font-size:var(--step-3);">Your <em>account</em></h1>
+      <p style="color:var(--c-muted);margin-top:.8rem;font-size:.92rem;">Access your orders, wishlist and personal details.</p>
+    </header>
+
+    <!-- Tabs -->
+    <div class="auth__tabs" role="tablist">
+      <button class="auth__tab is-active" role="tab" aria-selected="true" data-auth-tab="login">Sign in</button>
+      <button class="auth__tab" role="tab" aria-selected="false" data-auth-tab="register">Create account</button>
+    </div>
+
+    <!-- LOGIN PANEL -->
+    <div class="auth__panel is-active" id="panel-login" role="tabpanel">
+      <form class="auth__form" id="loginForm" novalidate>
+        <div class="auth__field">
+          <label class="auth__label" for="login-email">Email address</label>
+          <input class="auth__input" type="email" id="login-email" name="email" autocomplete="email" placeholder="your@email.com" required />
+        </div>
+        <div class="auth__field">
+          <label class="auth__label" for="login-password">Password</label>
+          <input class="auth__input" type="password" id="login-password" name="password" autocomplete="current-password" placeholder="••••••••" required />
+        </div>
+        <p class="auth__forgot"><a href="#" id="forgotLink">Forgot password?</a></p>
+        <button type="submit" class="btn btn--lg auth__submit">Sign in</button>
+        <div class="auth__success" id="loginSuccess" role="alert">
+          <p>Welcome back — <strong id="loginName"></strong>.</p>
+          <p style="font-size:.82rem;color:var(--c-muted);margin-top:.4rem;">Full account dashboard available once connected to Shopify.</p>
+        </div>
+      </form>
+
+      <div class="auth__divider"><span>or</span></div>
+
+      <a href="https://wa.me/966546002573?text=Hello%2C%20I%20need%20help%20with%20my%20Dentelle%20Riyadh%20account" class="auth__whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Continue via WhatsApp
+      </a>
+
+      <p class="auth__note">New to Dentelle Riyadh? <button type="button" class="link-underline" style="font-size:.72rem;letter-spacing:.12em;" data-auth-tab="register">Create an account</button></p>
+    </div>
+
+    <!-- REGISTER PANEL -->
+    <div class="auth__panel" id="panel-register" role="tabpanel">
+      <form class="auth__form" id="registerForm" novalidate>
+        <div class="auth__field">
+          <label class="auth__label" for="reg-first">First name</label>
+          <input class="auth__input" type="text" id="reg-first" name="first_name" autocomplete="given-name" placeholder="Lina" required />
+        </div>
+        <div class="auth__field">
+          <label class="auth__label" for="reg-last">Last name</label>
+          <input class="auth__input" type="text" id="reg-last" name="last_name" autocomplete="family-name" placeholder="Al-Rashidi" />
+        </div>
+        <div class="auth__field">
+          <label class="auth__label" for="reg-email">Email address</label>
+          <input class="auth__input" type="email" id="reg-email" name="email" autocomplete="email" placeholder="your@email.com" required />
+        </div>
+        <div class="auth__field">
+          <label class="auth__label" for="reg-password">Password <span style="font-weight:300;">(min. 8 characters)</span></label>
+          <input class="auth__input" type="password" id="reg-password" name="password" autocomplete="new-password" placeholder="••••••••" minlength="8" required />
+        </div>
+        <button type="submit" class="btn btn--lg auth__submit">Create account</button>
+        <div class="auth__success" id="registerSuccess" role="alert">
+          <p>Account created — welcome, <strong id="registerName"></strong>.</p>
+          <p style="font-size:.82rem;color:var(--c-muted);margin-top:.4rem;">Full account dashboard (orders, addresses, wishlist) will be live once the store connects to Shopify.</p>
+        </div>
+      </form>
+
+      <p class="auth__note">Already have an account? <button type="button" class="link-underline" style="font-size:.72rem;letter-spacing:.12em;" data-auth-tab="login">Sign in</button></p>
+    </div>
+
+    <!-- FORGOT PASSWORD PANEL (hidden initially) -->
+    <div class="auth__panel" id="panel-forgot" role="tabpanel">
+      <form class="auth__form" id="forgotForm" novalidate>
+        <p style="color:var(--c-muted);font-size:.9rem;margin-bottom:.4rem;">Enter your email and we'll send a reset link.</p>
+        <div class="auth__field">
+          <label class="auth__label" for="forgot-email">Email address</label>
+          <input class="auth__input" type="email" id="forgot-email" name="email" autocomplete="email" placeholder="your@email.com" required />
+        </div>
+        <button type="submit" class="btn btn--lg auth__submit">Send reset link</button>
+        <div class="auth__success" id="forgotSuccess" role="alert">
+          <p>If an account with that email exists, a reset link has been sent.</p>
+        </div>
+      </form>
+      <p class="auth__note"><button type="button" class="link-underline" style="font-size:.72rem;letter-spacing:.12em;" data-auth-tab="login">← Back to sign in</button></p>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__top">
+    <div class="site-footer__brand">
+      <svg class="logo-mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true"><path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/></svg>
+      <span class="site-logo__wordmark">Dentelle</span>
+      <span class="site-logo__city">Riyadh</span>
+      <p class="site-footer__tagline">A refined language for femininity — rooted in heritage, refined by modernity.</p>
+      <div class="site-footer__social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="TikTok">TT</a>
+        <a href="https://wa.me/966546002573" aria-label="WhatsApp">WA</a>
+      </div>
+    </div>
+    <div class="site-footer__col">
+      <h4>The Maison</h4>
+      <a class="bilingual-link" href="index.html#philosophy"><span>Philosophy</span><span dir="rtl" lang="ar">فلسفتنا</span></a>
+      <a class="bilingual-link" href="index.html#brand"><span>The Brand</span><span dir="rtl" lang="ar">العلامة التجارية</span></a>
+      <a class="bilingual-link" href="collection.html"><span>Mohrah Collection</span><span dir="rtl" lang="ar">مجموعة مُهره</span></a>
+    </div>
+    <div class="site-footer__col">
+      <h4>Client care</h4>
+      <a class="bilingual-link" href="index.html#size"><span>Size Consultation</span><span dir="rtl" lang="ar">إستشارة المقاس</span></a>
+      <a class="bilingual-link" href="#"><span>Shipping</span><span dir="rtl" lang="ar">الشحن</span></a>
+      <a class="bilingual-link" href="#"><span>Returns</span><span dir="rtl" lang="ar">الاستبدال</span></a>
+    </div>
+    <div class="site-footer__col">
+      <h4>Shop</h4>
+      <a class="bilingual-link" href="collection.html"><span>The Pieces</span><span dir="rtl" lang="ar">القِطَع</span></a>
+    </div>
+    <div class="site-footer__col">
+      <h4>Legal</h4>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">SASO certification</a>
+    </div>
+  </div>
+  <div class="site-footer__base">
+    <small>© MMXXVI Dentelle Riyadh — All rights reserved.</small>
+    <small>Riyadh · KSA · by appointment</small>
+  </div>
+</footer>
+
+<script src="theme/assets/cart.js?v=1"></script>
+<script src="theme/assets/theme.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---- Tab switching ---- */
+  var panels = {
+    login   : document.getElementById('panel-login'),
+    register: document.getElementById('panel-register'),
+    forgot  : document.getElementById('panel-forgot')
+  };
+  var tabs = document.querySelectorAll('[data-auth-tab]');
+
+  function showPanel(name) {
+    Object.keys(panels).forEach(function (k) {
+      var p = panels[k];
+      p.classList.toggle('is-active', k === name);
+    });
+    tabs.forEach(function (t) {
+      if (t.dataset.authTab === name) {
+        t.classList.add('is-active');
+        t.setAttribute('aria-selected', 'true');
+      } else {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      }
+    });
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { showPanel(tab.dataset.authTab); });
+  });
+
+  /* Forgot password link */
+  var forgotLink = document.getElementById('forgotLink');
+  if (forgotLink) forgotLink.addEventListener('click', function (e) { e.preventDefault(); showPanel('forgot'); });
+
+  /* ---- Login form (static demo) ---- */
+  var loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email   = loginForm.querySelector('#login-email').value.trim();
+      var success = document.getElementById('loginSuccess');
+      var nameEl  = document.getElementById('loginName');
+      var name    = email.split('@')[0];
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+      nameEl.textContent = name;
+      success.classList.add('is-visible');
+    });
+  }
+
+  /* ---- Register form (static demo) ---- */
+  var regForm = document.getElementById('registerForm');
+  if (regForm) {
+    regForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var first   = regForm.querySelector('#reg-first').value.trim();
+      var success = document.getElementById('registerSuccess');
+      var nameEl  = document.getElementById('registerName');
+      nameEl.textContent = first || 'dear guest';
+      success.classList.add('is-visible');
+    });
+  }
+
+  /* ---- Forgot password form (static demo) ---- */
+  var forgotForm = document.getElementById('forgotForm');
+  if (forgotForm) {
+    forgotForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('forgotSuccess').classList.add('is-visible');
+    });
+  }
+})();
+</script>
+</body>
+</html>

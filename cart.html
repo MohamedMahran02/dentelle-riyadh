@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Mohrah Collection — Dentelle Riyadh</title>
-<meta name="description" content="The Mohrah Collection — Arabian luxury lingerie, hand-finished in the Riyadh atelier." />
+<title>Your Bag — Dentelle Riyadh</title>
+<meta name="description" content="Review and checkout your Dentelle Riyadh order." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="theme/assets/theme.css?v=10" />
 </head>
-<body data-theme="cream" class="template-collection">
+<body data-theme="cream" class="template-cart">
 
 <div class="top-bar">
   <div class="top-bar__inner">
@@ -20,7 +19,7 @@
     <div class="top-bar__side top-bar__side--right">
       <a href="#">Stores</a>
       <span class="top-bar__sep">·</span>
-      <a href="#">Size consultation</a>
+      <a href="index.html#size">Size consultation</a>
       <span class="top-bar__sep">·</span>
       <button class="locale-btn is-active">EN</button>
       <span class="top-bar__sep">·</span>
@@ -69,18 +68,14 @@
 </aside>
 
 <main>
-<section class="collection" data-reveal>
-  <header class="collection__header">
-    <span class="eyebrow">Collection</span>
-    <h1 class="h-display">
-      <span>The <em>Mohrah</em> Collection</span>
-      <span class="h-display-ar" dir="rtl" lang="ar">مجموعة <em>مُهرة</em></span>
-    </h1>
-    <p class="collection__description">A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.</p>
-    <p class="collection__count" data-count>— pieces</p>
+<section class="cart-page">
+  <header class="cart-page__header">
+    <span class="eyebrow">Checkout</span>
+    <h1 class="h-display">Your <em>bag</em></h1>
   </header>
 
-  <div class="product-grid__items" data-grid></div>
+  <!-- Populated by JS -->
+  <div id="cartBody"></div>
 </section>
 </main>
 
@@ -132,27 +127,88 @@
 <script>
 (function () {
   'use strict';
-  const grid = document.querySelector('[data-grid]');
-  const countEl = document.querySelector('[data-count]');
-  const products = window.PRODUCTS || [];
-  countEl.textContent = `${products.length} pieces`;
-  grid.innerHTML = products.map((p) => `
-    <article class="product-card">
-      ${p.is_signature ? '<span class="product-card__badge">Signature</span>' : ''}
-      <a href="product.html?slug=${p.slug}" class="product-card__media" aria-label="${p.title_en}">
-        <img class="product-card__img product-card__img--a" src="${p.images[0]}" alt="${p.title_en}" loading="lazy" />
-        <img class="product-card__img product-card__img--b" src="${p.images[1] || p.images[0]}" alt="${p.title_en} — detail" loading="lazy" />
-      </a>
-      <div class="product-card__meta">
-        <h3 class="product-card__title">
-          <span class="product-card__title-en">${p.title_en}</span>
-          <span class="product-card__title-ar" dir="rtl" lang="ar">${p.title_ar}</span>
-        </h3>
-        <p>${p.subtitle}</p>
-        <span class="price"><span class="price__amount">SAR ${p.price}</span></span>
-      </div>
-    </article>
-  `).join('');
+
+  var fmt = function (n) { return 'SAR\u00a0' + Number(n).toFixed(0); };
+
+  function render() {
+    var items = window.DentelleCart.getAll();
+    var body  = document.getElementById('cartBody');
+
+    if (!items.length) {
+      body.innerHTML =
+        '<div class="cart-page__empty">' +
+          '<h2>Your bag is empty.</h2>' +
+          '<p style="color:var(--c-muted);margin-bottom:2rem;">Discover the Mohrah Collection.</p>' +
+          '<a href="collection.html" class="btn btn--lg">Browse the collection</a>' +
+        '</div>';
+      return;
+    }
+
+    var subtotal = items.reduce(function (s, i) { return s + i.price * i.qty; }, 0);
+    var shipping = 0; /* free within KSA */
+
+    var itemsHtml = items.map(function (item) {
+      return '<div class="cart-page__item" data-item-key="' + item.key + '">' +
+        '<img class="cart-page__item-img" src="' + item.image + '" alt="' + item.title_en + '" loading="lazy">' +
+        '<div class="cart-page__item-body">' +
+          '<p class="cart-page__item-title">' + item.title_en + '</p>' +
+          (item.title_ar ? '<p class="cart-page__item-title-ar" dir="rtl" lang="ar">' + item.title_ar + '</p>' : '') +
+          '<p class="cart-page__item-meta">Size: ' + item.size + '</p>' +
+          '<div class="qty-control" style="margin-top:.6rem;">' +
+            '<button type="button" class="qty-control__btn" data-step="' + item.key + '" data-dir="-1" aria-label="Decrease">−</button>' +
+            '<input type="number" class="qty-control__input" min="1" value="' + item.qty + '" data-qty="' + item.key + '" aria-label="Quantity">' +
+            '<button type="button" class="qty-control__btn" data-step="' + item.key + '" data-dir="1" aria-label="Increase">+</button>' +
+          '</div>' +
+          '<button class="cart-page__item-remove" data-remove="' + item.key + '">Remove</button>' +
+        '</div>' +
+        '<div class="cart-page__item-price">' + fmt(item.price * item.qty) + '</div>' +
+      '</div>';
+    }).join('');
+
+    body.innerHTML =
+      '<div class="cart-page__layout">' +
+        '<div class="cart-page__items">' + itemsHtml + '</div>' +
+        '<aside class="cart-page__summary">' +
+          '<h3>Order summary</h3>' +
+          '<div class="cart-page__summary-line"><span>Subtotal</span><span>' + fmt(subtotal) + '</span></div>' +
+          '<div class="cart-page__summary-line"><span>Shipping</span><span>' + (shipping === 0 ? 'Free' : fmt(shipping)) + '</span></div>' +
+          '<div class="cart-page__summary-total"><span>Total</span><span>' + fmt(subtotal + shipping) + '</span></div>' +
+          '<a href="https://wa.me/966546002573?text=' + encodeURIComponent('Hello, I would like to place an order for: ' + items.map(function(i){ return i.title_en + ' (Size: ' + i.size + ' × ' + i.qty + ')'; }).join(', ')) + '" class="btn btn--lg cart-page__checkout" target="_blank" rel="noopener">Order via WhatsApp</a>' +
+          '<p class="cart-page__note">Secure checkout via WhatsApp — our team confirms your order within 24 hours. Shopify checkout coming soon.</p>' +
+        '</aside>' +
+      '</div>';
+
+    /* Wire controls */
+    body.addEventListener('click', function (e) {
+      var removeBtn = e.target.closest('[data-remove]');
+      if (removeBtn) {
+        window.DentelleCart.remove(removeBtn.dataset.remove);
+        render();
+        return;
+      }
+      var stepBtn = e.target.closest('[data-step]');
+      if (stepBtn) {
+        var key  = stepBtn.dataset.step;
+        var dir  = Number(stepBtn.dataset.dir);
+        var allItems = window.DentelleCart.getAll();
+        var target   = allItems.find(function (i) { return i.key === key; });
+        if (target) {
+          window.DentelleCart.update(key, target.qty + dir);
+          render();
+        }
+      }
+    });
+
+    body.addEventListener('change', function (e) {
+      var qtyInput = e.target.closest('[data-qty]');
+      if (qtyInput) {
+        window.DentelleCart.update(qtyInput.dataset.qty, Number(qtyInput.value));
+        render();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', render);
 })();
 </script>
 </body>
