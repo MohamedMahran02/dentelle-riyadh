@@ -260,13 +260,16 @@
           return '<button type="button" class="product-card__size-btn" data-size="' + s + '">' + s + '</button>';
         }).join('') : '';
 
-        /* Inject quick-add overlay */
-        visual.insertAdjacentHTML('beforeend',
-          '<div class="product-card__quick-add" aria-hidden="true">' +
-            '<div class="product-card__sizes">' + sizesHtml + '</div>' +
-            '<button type="button" class="product-card__atc-btn" data-quick-atc>Add to bag</button>' +
-          '</div>'
-        );
+        /* Inject quick-add below .product-card__meta */
+        var meta = card.querySelector('.product-card__meta');
+        if (meta) {
+          meta.insertAdjacentHTML('afterend',
+            '<div class="product-card__quick-add" aria-hidden="true">' +
+              '<div class="product-card__sizes">' + sizesHtml + '</div>' +
+              '<button type="button" class="product-card__atc-btn" data-quick-atc>Add to bag</button>' +
+            '</div>'
+          );
+        }
       }
 
       /* Inject star rating (once only) */
@@ -314,10 +317,17 @@
         var cardSlug = card.dataset.slug;
         var chosen   = card.querySelector('.product-card__size-btn.is-selected');
         if (!chosen) {
-          chosen = card.querySelector('.product-card__size-btn');
-          if (chosen) chosen.classList.add('is-selected');
+          /* No size selected — shake the size row and prompt */
+          var sizesEl = card.querySelector('.product-card__sizes');
+          if (sizesEl) {
+            sizesEl.classList.add('needs-size');
+            setTimeout(function () { sizesEl.classList.remove('needs-size'); }, 700);
+          }
+          atcBtn.textContent = 'Select a size';
+          setTimeout(function () { atcBtn.textContent = 'Add to bag'; }, 1400);
+          return;
         }
-        var size    = chosen ? chosen.dataset.size : 'One Size';
+        var size    = chosen.dataset.size;
         var product = window.PRODUCTS_BY_SLUG && window.PRODUCTS_BY_SLUG[cardSlug];
         if (product && window.DentelleCart) {
           window.DentelleCart.add(product, size, 1);

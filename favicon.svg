@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Rounded cream background -->
+  <rect width="100" height="100" rx="22" ry="22" fill="#f5efe8"/>
+  <!-- Dentelle diamond mark, centred -->
+  <path d="M50 18 L56 38 L76 44 L56 50 L50 70 L44 50 L24 44 L44 38 Z" fill="#2c2218" opacity="0.9"/>
+</svg>
