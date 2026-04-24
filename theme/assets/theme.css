@@ -988,8 +988,13 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
 }
 @media (max-width: 680px) {
+  .product-grid__items--carousel {
+    padding-inline: 6vw;
+    scroll-padding-inline: 6vw;
+  }
   .product-grid__items--carousel .product-card {
-    flex: 0 0 calc((100% - clamp(1rem, 2vw, 2rem)) / 1.2);
+    flex: 0 0 82vw;
+    scroll-snap-align: center;
   }
 }
 
