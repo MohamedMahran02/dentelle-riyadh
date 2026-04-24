@@ -1839,15 +1839,18 @@ ul { margin: 0; padding: 0; list-style: none; }
   background: var(--c-cream);
   width: 100%;
   max-width: 680px;
-  max-height: 92dvh;
-  overflow-y: auto;
-  overscroll-behavior: contain;
   border-radius: 20px;
+  overflow: hidden; /* clips scrollbar inside rounded corners */
   transform: translateY(32px) scale(.98);
   transition: transform .38s var(--ease-out);
   box-shadow: 0 32px 100px rgba(14,11,9,.22);
 }
 .size-modal.is-open .size-modal__panel { transform: translateY(0) scale(1); }
+.size-modal__scroll {
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
 
 /* Top bar */
 .size-modal__topbar {
