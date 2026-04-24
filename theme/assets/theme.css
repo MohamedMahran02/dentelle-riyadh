@@ -33,45 +33,17 @@
   align-items: center;
   gap: 2rem;
 }
-.site-loader__logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  color: #0E0B09;
+.site-loader__logo { color: #0E0B09; }
+/* Scale up the header lockup for the splash — no other changes */
+.site-loader__logo-lockup.site-logo--lg .site-logo__wordmark {
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
 }
-/* D-mark image */
-.site-loader__mark {
-  width: 92px;
-  height: 92px;
-  object-fit: contain;
-  animation: loaderPulse 2s ease-in-out infinite;
-  margin-bottom: .6rem;
+.site-loader__logo-lockup.site-logo--lg .logo-mark {
+  width: 26px;
+  height: 32px;
 }
-/* wordmark — reuse site-logo type styles, just override size */
-.site-loader__wordmark {
-  font-family: var(--f-display) !important;
-  font-size: clamp(1.9rem, 3.8vw, 2.6rem) !important;
-  font-weight: 400 !important;
-  letter-spacing: .18em !important;
-  text-transform: uppercase !important;
-  line-height: 1 !important;
-  color: #0E0B09 !important;
-  display: block !important;
-}
-.site-loader__city {
-  font-family: var(--f-sans) !important;
-  font-size: clamp(.52rem, 1.1vw, .66rem) !important;
-  font-weight: 300 !important;
-  letter-spacing: .42em !important;
-  text-transform: uppercase !important;
-  color: #A88A5C !important;
-  display: block !important;
-  margin-top: .25rem !important;
-}
-@keyframes loaderPulse {
-  0%, 100% { opacity: .7;  transform: scale(.97); }
-  50%       { opacity: 1;   transform: scale(1.03); }
+.site-loader__logo-lockup .site-logo__city {
+  color: #A88A5C;
 }
 /* progress bar */
 .site-loader__bar-wrap {
