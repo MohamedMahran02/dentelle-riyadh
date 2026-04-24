@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme/assets/theme.css?v=23" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=24" />
 </head>
 <body data-theme="cream" class="template-search">
 
@@ -161,97 +161,103 @@
 <script src="theme/assets/shopify-config.js?v=2"></script>
 <script src="theme/assets/shopify-cart.js?v=2" defer></script>
 <script src="theme/assets/products.js?v=5"></script>
+<script src="theme/assets/products-live.js?v=1"></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js"></script>
 <script>
 (function () {
   'use strict';
 
-  var input    = document.getElementById('searchInput');
-  var clearBtn = document.getElementById('searchClear');
-  var countEl  = document.getElementById('searchCount');
-  var results  = document.getElementById('searchResults');
-  var emptyEl  = document.getElementById('searchEmpty');
-  var products = window.PRODUCTS || [];
-
-  /* Pre-fill from URL ?q= */
-  var params = new URLSearchParams(window.location.search);
-  var initial = params.get('q') || '';
-  if (initial) { input.value = initial; }
-
-  function cardHtml(p) {
-    return '<article class="product-card">' +
-      (p.is_signature ? '<span class="product-card__badge">Signature</span>' : '') +
-      '<a href="product.html?slug=' + p.slug + '" class="product-card__media" aria-label="' + p.title_en + '">' +
-        '<img class="product-card__img product-card__img--a" src="' + p.images[0] + '" alt="' + p.title_en + '" loading="lazy" />' +
-        '<img class="product-card__img product-card__img--b" src="' + (p.images[1] || p.images[0]) + '" alt="' + p.title_en + ' — detail" loading="lazy" />' +
-      '</a>' +
-      '<div class="product-card__meta">' +
-        '<h3 class="product-card__title">' +
-          '<span class="product-card__title-en">' + p.title_en + '</span>' +
-          '<span class="product-card__title-ar" dir="rtl" lang="ar">' + p.title_ar + '</span>' +
-        '</h3>' +
-        '<p>' + p.subtitle + '</p>' +
-        '<span class="price"><span class="price__amount">SAR ' + p.price + '</span></span>' +
-      '</div>' +
-    '</article>';
-  }
-
-  function doSearch(q) {
-    q = q.trim().toLowerCase();
-    clearBtn.classList.toggle('is-visible', q.length > 0);
-
-    /* Update URL without reload */
-    var url = new URL(window.location);
-    if (q) url.searchParams.set('q', q);
-    else url.searchParams.delete('q');
-    window.history.replaceState({}, '', url);
-
-    if (!q) {
-      results.innerHTML = '';
-      countEl.textContent = '';
-      emptyEl.hidden = true;
-      return;
+  function render() {
+    var input    = document.getElementById('searchInput');
+    var clearBtn = document.getElementById('searchClear');
+    var countEl  = document.getElementById('searchCount');
+    var results  = document.getElementById('searchResults');
+    var emptyEl  = document.getElementById('searchEmpty');
+    var products = window.PRODUCTS || [];
+  
+    /* Pre-fill from URL ?q= */
+    var params = new URLSearchParams(window.location.search);
+    var initial = params.get('q') || '';
+    if (initial) { input.value = initial; }
+  
+    function cardHtml(p) {
+      return '<article class="product-card">' +
+        (p.is_signature ? '<span class="product-card__badge">Signature</span>' : '') +
+        '<a href="product.html?slug=' + p.slug + '" class="product-card__media" aria-label="' + p.title_en + '">' +
+          '<img class="product-card__img product-card__img--a" src="' + p.images[0] + '" alt="' + p.title_en + '" loading="lazy" />' +
+          '<img class="product-card__img product-card__img--b" src="' + (p.images[1] || p.images[0]) + '" alt="' + p.title_en + ' — detail" loading="lazy" />' +
+        '</a>' +
+        '<div class="product-card__meta">' +
+          '<h3 class="product-card__title">' +
+            '<span class="product-card__title-en">' + p.title_en + '</span>' +
+            '<span class="product-card__title-ar" dir="rtl" lang="ar">' + p.title_ar + '</span>' +
+          '</h3>' +
+          '<p>' + p.subtitle + '</p>' +
+          '<span class="price"><span class="price__amount">SAR ' + p.price + '</span></span>' +
+        '</div>' +
+      '</article>';
     }
-
-    var matched = products.filter(function (p) {
-      return (
-        p.title_en.toLowerCase().includes(q) ||
-        p.title_ar.includes(q) ||
-        (p.description_en || '').toLowerCase().includes(q) ||
-        (p.description_ar || '').includes(q) ||
-        (p.subtitle || '').toLowerCase().includes(q) ||
-        (p.details || '').toLowerCase().includes(q)
-      );
+  
+    function doSearch(q) {
+      q = q.trim().toLowerCase();
+      clearBtn.classList.toggle('is-visible', q.length > 0);
+  
+      /* Update URL without reload */
+      var url = new URL(window.location);
+      if (q) url.searchParams.set('q', q);
+      else url.searchParams.delete('q');
+      window.history.replaceState({}, '', url);
+  
+      if (!q) {
+        results.innerHTML = '';
+        countEl.textContent = '';
+        emptyEl.hidden = true;
+        return;
+      }
+  
+      var matched = products.filter(function (p) {
+        return (
+          p.title_en.toLowerCase().includes(q) ||
+          p.title_ar.includes(q) ||
+          (p.description_en || '').toLowerCase().includes(q) ||
+          (p.description_ar || '').includes(q) ||
+          (p.subtitle || '').toLowerCase().includes(q) ||
+          (p.details || '').toLowerCase().includes(q)
+        );
+      });
+  
+      if (matched.length) {
+        results.innerHTML = matched.map(cardHtml).join('');
+        countEl.textContent = matched.length + ' piece' + (matched.length !== 1 ? 's' : '') + ' found';
+        emptyEl.hidden = true;
+      } else {
+        results.innerHTML = '';
+        countEl.textContent = '';
+        emptyEl.hidden = false;
+      }
+    }
+  
+    /* Live search as user types */
+    var debounceTimer;
+    input.addEventListener('input', function () {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () { doSearch(input.value); }, 200);
     });
-
-    if (matched.length) {
-      results.innerHTML = matched.map(cardHtml).join('');
-      countEl.textContent = matched.length + ' piece' + (matched.length !== 1 ? 's' : '') + ' found';
-      emptyEl.hidden = true;
-    } else {
-      results.innerHTML = '';
-      countEl.textContent = '';
-      emptyEl.hidden = false;
-    }
+  
+    clearBtn.addEventListener('click', function () {
+      input.value = '';
+      input.focus();
+      doSearch('');
+    });
+  
+    /* Run on load if ?q= present */
+    if (initial) doSearch(initial);
+    else input.focus();
   }
+  if (window.PRODUCTS && window.PRODUCTS.length) render();
+  window.addEventListener('dentelle:products-updated', render);
 
-  /* Live search as user types */
-  var debounceTimer;
-  input.addEventListener('input', function () {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(function () { doSearch(input.value); }, 200);
-  });
-
-  clearBtn.addEventListener('click', function () {
-    input.value = '';
-    input.focus();
-    doSearch('');
-  });
-
-  /* Run on load if ?q= present */
-  if (initial) doSearch(initial);
-  else input.focus();
 })();
 </script>
 

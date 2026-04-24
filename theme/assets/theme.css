@@ -338,6 +338,26 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 [dir="rtl"] .collections-card__body { text-align: center; }
 
+/* ── Product card skeleton (shown while live data loads) ── */
+.product-card--skeleton { pointer-events: none; }
+.product-card__skel,
+.product-card__skel-line {
+  background: linear-gradient(90deg, var(--c-cream) 0%, var(--c-cream-2) 50%, var(--c-cream) 100%);
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.6s infinite ease-in-out;
+}
+.product-card__skel { width: 100%; aspect-ratio: 4/5; }
+.product-card__skel-line {
+  height: .9rem;
+  margin: .5rem 0;
+  border-radius: 2px;
+}
+.product-card__skel-line--short { width: 55%; }
+@keyframes skel-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* ---------- SIZE CHART (HTML version) ---------- */
 .size-modal__chart {
   margin: 2.5rem 0 0;
