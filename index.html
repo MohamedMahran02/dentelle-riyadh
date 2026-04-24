@@ -12,9 +12,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=12" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=13" />
 </head>
 <body data-theme="cream">
+
+<!-- SPLASH LOADER -->
+<div id="siteLoader" class="site-loader" aria-hidden="true">
+  <div class="site-loader__inner">
+    <div class="site-loader__logo">
+      <svg class="site-loader__mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
+        <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
+      </svg>
+      <span class="site-loader__wordmark">Dentelle</span>
+      <span class="site-loader__city">Riyadh</span>
+    </div>
+    <div class="site-loader__bar-wrap" role="progressbar" aria-label="Loading">
+      <div class="site-loader__bar"></div>
+    </div>
+  </div>
+</div>
 
 <!-- TOP BAR -->
 <div class="top-bar">
@@ -93,7 +109,7 @@
 <!-- CAMPAIGN VIDEO -->
 <section class="campaign" id="offers">
   <div class="campaign__media">
-    <video autoplay muted loop playsinline preload="metadata" poster="mohra-1/SMH03117.jpg">
+    <video autoplay muted loop playsinline preload="metadata">
       <source src="mohra-1/IMG_0687.MOV" type="video/mp4">
     </video>
     <div class="campaign__scrim" aria-hidden="true"></div>
@@ -562,6 +578,28 @@
   /* Escape key */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+})();
+</script>
+
+<script>
+/* ── Splash loader dismiss ── */
+(function () {
+  var loader = document.getElementById('siteLoader');
+  if (!loader) return;
+
+  function dismiss() {
+    loader.classList.add('is-done');
+    setTimeout(function () { loader.style.display = 'none'; }, 700);
+  }
+
+  /* Fire as soon as the page is interactive, minimum 1.4 s so the bar animation completes */
+  var minTimer = setTimeout(dismiss, 1500);
+
+  window.addEventListener('load', function () {
+    clearTimeout(minTimer);
+    /* give bar a moment to finish filling */
+    setTimeout(dismiss, 200);
   });
 })();
 </script>
