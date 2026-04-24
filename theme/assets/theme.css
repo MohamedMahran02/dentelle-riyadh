@@ -1890,7 +1890,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-family: var(--f-sans);
 }
 .btn--lg { padding: 1.25rem 2.8rem; font-size: .76rem; }
-.product__add-to-cart { align-self: flex-start; }
+.product__add-to-cart {
+  width: 100%;
+  align-self: stretch;
+  justify-content: center;
+}
 .product__add-to-cart[disabled] { opacity: .5; cursor: not-allowed; }
 
 .product__accordions { margin-top: 1rem; border-top: 1px solid var(--c-line); }
