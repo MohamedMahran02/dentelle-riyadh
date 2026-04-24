@@ -2310,16 +2310,17 @@ ul { margin: 0; padding: 0; list-style: none; }
   margin: 0;
 }
 
-/* Size chart */
+/* Size chart — full-bleed, fills to the panel edges */
 .size-modal__chart {
   margin: 0;
-  padding: 1.5rem;
+  padding: 0;
   border-bottom: 1px solid var(--c-border);
+  background: var(--c-paper);
 }
 .size-modal__chart img {
   width: 100%; height: auto;
   display: block;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 /* Footer */
