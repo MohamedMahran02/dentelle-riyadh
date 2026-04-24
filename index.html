@@ -25,7 +25,7 @@
     <div class="top-bar__side top-bar__side--right">
       <a href="#">Stores</a>
       <span class="top-bar__sep">·</span>
-      <a href="#">Size consultation</a>
+      <a href="#" data-size-guide>Size guide</a>
       <span class="top-bar__sep">·</span>
       <button class="locale-btn is-active">EN</button>
       <span class="top-bar__sep">·</span>
@@ -49,7 +49,7 @@
       <a href="#philosophy">Philosophy</a>
       <a href="#brand">The Brand</a>
       <a href="collection.html">Mohrah Collection</a>
-      <a href="#size">Size Consultation</a>
+      <a href="#" data-size-guide>Size Guide</a>
       <a href="#offers">Offers</a>
     </nav>
 
@@ -80,7 +80,7 @@
     <a href="#philosophy">Philosophy</a>
     <a href="#brand">The Brand</a>
     <a href="collection.html">Mohrah Collection</a>
-    <a href="#size">Size Consultation</a>
+    <a href="#" data-size-guide>Size Guide</a>
     <a href="#offers">Offers</a>
     <div class="mobile-panel__locale">
       <button class="locale-btn is-active">EN</button>
@@ -346,7 +346,7 @@
         <li><span>03</span>Silk satin · Lyon</li>
         <li><span>04</span>SASO certified, made in the Kingdom</li>
       </ul>
-      <a href="#" class="link-underline">Book a size consultation ›</a>
+      <a href="#" class="link-underline" data-size-guide>Size guide ›</a>
     </div>
     <figure class="savoir__fig savoir__fig--short">
       <img src="mohra-1/SMH03130.jpg" alt="Finished garment detail"/>
@@ -460,5 +460,73 @@
 <script src="theme/assets/products.js?v=1"></script>
 <script src="theme/assets/cart.js?v=1"></script>
 <script src="theme/assets/theme.js"></script>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="size-modal" id="sizeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Size &amp; Fit Guide">
+  <div class="size-modal__panel">
+    <button class="size-modal__close" id="sizeModalClose" aria-label="Close">✕</button>
+    <header class="size-modal__header">
+      <svg class="logo-mark size-modal__logo" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
+        <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
+      </svg>
+      <span class="eyebrow">Dentelle Riyadh · Size &amp; Fit</span>
+      <h2 class="size-modal__title">Finding your <em>perfect fit.</em></h2>
+    </header>
+    <div class="size-modal__body">
+      <p class="size-modal__lead">Choosing the right size is the essential first step to achieving your perfect fit.</p>
+      <p>Before completing your order, we recommend consulting our size chart carefully. We are also happy to offer a personal WhatsApp consultation to help you:</p>
+      <ul class="size-modal__list">
+        <li>Take your measurements correctly</li>
+        <li>Choose the most suitable size</li>
+        <li>Determine the right style for your body shape</li>
+        <li>Recommend the most flattering pieces for your figure</li>
+      </ul>
+      <p>We are dedicated to helping you find the most beautiful and comfortable piece before you complete your purchase.</p>
+      <figure class="size-modal__chart">
+        <img src="size-guide.png" alt="Dentelle Riyadh Size Chart" loading="lazy" />
+      </figure>
+      <div class="size-modal__cta">
+        <a href="https://wa.me/966546002573?text=Hello%2C%20I%20would%20like%20a%20personal%20size%20consultation." class="btn btn--lg" target="_blank" rel="noopener">Book a consultation via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var modal    = document.getElementById('sizeModal');
+  var closeBtn = document.getElementById('sizeModalClose');
+  if (!modal) return;
+
+  function openModal() {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  /* All [data-size-guide] triggers on the page */
+  document.querySelectorAll('[data-size-guide]').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  /* Click outside panel */
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  /* Escape key */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+})();
+</script>
 </body>
 </html>
