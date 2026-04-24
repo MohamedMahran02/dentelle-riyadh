@@ -25,7 +25,7 @@
     <div class="top-bar__side top-bar__side--right">
       <a href="#">Stores</a>
       <span class="top-bar__sep">·</span>
-      <a href="#" data-size-guide>Size guide</a>
+      <a href="#size-guide">Size guide</a>
       <span class="top-bar__sep">·</span>
       <button class="locale-btn is-active">EN</button>
       <span class="top-bar__sep">·</span>
@@ -49,7 +49,7 @@
       <a href="index.html#philosophy">Philosophy</a>
       <a href="index.html#brand">The Brand</a>
       <a href="collection.html">Mohrah Collection</a>
-      <a href="#" data-size-guide>Size Guide</a>
+      <a href="#size-guide">Size Guide</a>
       <a href="index.html#offers">Offers</a>
     </nav>
 
@@ -79,7 +79,7 @@
     <a href="index.html#philosophy">Philosophy</a>
     <a href="index.html#brand">The Brand</a>
     <a href="collection.html">Mohrah Collection</a>
-    <a href="#" data-size-guide>Size Guide</a>
+    <a href="#size-guide">Size Guide</a>
     <a href="index.html#offers">Offers</a>
   </div>
 </aside>
@@ -129,7 +129,7 @@
         </p>
       </form>
 
-      <div class="product__accordions">
+      <div class="product__accordions" id="size-guide">
         <details class="product__accordion">
           <summary>Size Guide</summary>
           <div class="product__accordion-body product__accordion-body--sizeguide">
@@ -432,6 +432,11 @@
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', function(e){ if(e.target===modal) closeModal(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&modal.classList.contains('is-open')) closeModal(); });
+  /* Auto-expand the size guide accordion when arriving via #size-guide hash */
+  if (window.location.hash === '#size-guide') {
+    var sgDetail = document.querySelector('#size-guide details');
+    if (sgDetail) sgDetail.open = true;
+  }
 })();
 </script>
 </body>
