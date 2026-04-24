@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8" />
@@ -22,7 +22,7 @@
     <div class="top-bar__side top-bar__side--right">
       <a href="#">Stores</a>
       <span class="top-bar__sep">·</span>
-      <a href="#">Size consultation</a>
+      <a href="#" data-size-guide>Size guide</a>
       <span class="top-bar__sep">·</span>
       <button class="locale-btn is-active">EN</button>
       <span class="top-bar__sep">·</span>
@@ -44,7 +44,7 @@
       <a href="index.html#philosophy">Philosophy</a>
       <a href="index.html#brand">The Brand</a>
       <a href="collection.html">Mohrah Collection</a>
-      <a href="index.html#size">Size Consultation</a>
+      <a href="#" data-size-guide>Size Guide</a>
       <a href="index.html#offers">Offers</a>
     </nav>
     <div class="site-header__icons">
@@ -65,7 +65,7 @@
     <a href="index.html#philosophy">Philosophy</a>
     <a href="index.html#brand">The Brand</a>
     <a href="collection.html">Mohrah Collection</a>
-    <a href="index.html#size">Size Consultation</a>
+    <a href="#" data-size-guide>Size Guide</a>
     <a href="index.html#offers">Offers</a>
   </div>
 </aside>
@@ -156,6 +156,61 @@
     </article>
   `).join('');
 })();
+</script>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="size-modal" id="sizeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Size &amp; Fit Guide">
+  <div class="size-modal__panel">
+   <div class="size-modal__scroll">
+    <div class="size-modal__topbar">
+      <span class="size-modal__badge">Size &amp; Fit Guide</span>
+      <button class="size-modal__close" id="sizeModalClose" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="size-modal__logo-wrap">
+      <svg class="size-modal__logo-mark" viewBox="0 0 120 140" fill="currentColor" aria-hidden="true">
+        <path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".9"/>
+      </svg>
+      <span class="size-modal__logo-wordmark">Dentelle</span>
+      <span class="size-modal__logo-city">Riyadh</span>
+    </div>
+    <div class="size-modal__intro">
+      <h2 class="size-modal__title">Finding your <em>perfect fit.</em></h2>
+      <p class="size-modal__subtitle">Choosing the right size is essential. We are happy to guide you personally before you complete your order.</p>
+    </div>
+    <div class="size-modal__cards">
+      <div class="size-modal__card">
+        <div class="size-modal__card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="8" width="20" height="8" rx="1.5"/><path d="M6 8V11M10 8V13M14 8V11M18 8V13"/></svg></div>
+        <h3>Measurements</h3>
+        <p>Take your measurements correctly — bust, waist, and hip — using a soft tape measure for the best result.</p>
+      </div>
+      <div class="size-modal__card">
+        <div class="size-modal__card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+        <h3>Right Size</h3>
+        <p>Compare your measurements to our chart and select the size that matches your largest measurement.</p>
+      </div>
+      <div class="size-modal__card">
+        <div class="size-modal__card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v6M9 11h6M10 22l.8-4M14 22l-.8-4"/></svg></div>
+        <h3>Your Silhouette</h3>
+        <p>We determine the right style for your body shape so every piece flatters you naturally.</p>
+      </div>
+      <div class="size-modal__card">
+        <div class="size-modal__card-icon"><svg viewBox="20 2 80 60" width="18" height="18" fill="currentColor"><path d="M60 6 L66 26 L86 32 L66 38 L60 58 L54 38 L34 32 L54 26 Z" opacity=".85"/></svg></div>
+        <h3>Our Curation</h3>
+        <p>Our team recommends the most flattering Mohrah pieces tailored to your figure and personal taste.</p>
+      </div>
+    </div>
+    <figure class="size-modal__chart">
+      <img src="size-guide.png" alt="Dentelle Riyadh Size Chart" loading="lazy" />
+    </figure>
+    <div class="size-modal__footer">
+      <p>Need personal guidance? Our team is ready to help you find your perfect piece.</p>
+      <a href="https://wa.me/966546002573?text=Hello%2C%20I%20would%20like%20a%20personal%20size%20consultation." class="btn" target="_blank" rel="noopener">Book via WhatsApp</a>
+    </div>
+   </div>
+  </div>
+</div>
+<script>
+(function(){var m=document.getElementById('sizeModal'),c=document.getElementById('sizeModalClose');if(!m)return;function o(){m.classList.add('is-open');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function cl(){m.classList.remove('is-open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';}document.querySelectorAll('[data-size-guide]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();o();});});c.addEventListener('click',cl);m.addEventListener('click',function(e){if(e.target===m)cl();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('is-open'))cl();});})();
 </script>
 </body>
 </html>
