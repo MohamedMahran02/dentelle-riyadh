@@ -1,15 +1,15 @@
 /* =========================================================
    DENTELLE RIYADH — Newsletter signup
-   POSTs the email to Shopify's customer endpoint.
+   POSTs the email to /api/subscribe (Vercel serverless function),
+   which uses the Shopify Admin API to create the customer
+   with email_marketing_consent = subscribed.
    Subscribers appear in Shopify Admin → Customers,
-   tagged "newsletter", with "Accepts marketing" enabled.
+   tagged "newsletter", marked "Email subscribed".
    ========================================================= */
 (function () {
   'use strict';
 
-  if (!window.SHOPIFY || !window.SHOPIFY.domain) return;
-
-  var ENDPOINT = 'https://' + window.SHOPIFY.domain + '/contact';
+  var ENDPOINT = '/api/subscribe';
 
   var COPY = {
     en: { sending: 'Sending…', done: 'Merci ✦', err: 'Try again' },
@@ -31,27 +31,26 @@
       btn.disabled = true;
       btn.textContent = t.sending;
 
-      // Build Shopify-style form payload
-      var fd = new FormData();
-      fd.append('form_type', 'customer');
-      fd.append('utf8', '✓');
-      fd.append('contact[tags]', 'newsletter,prospect');
-      fd.append('contact[email]', email);
-      fd.append('contact[accepts_marketing]', 'true');
-
-      // Cross-origin POST to *.myshopify.com — use no-cors so Shopify
-      // accepts the form even though we can't read the response.
       fetch(ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
-        body: fd
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email: email })
       })
-        .then(function () {
-          btn.textContent = t.done;
-          input.value = '';
-          input.disabled = true;
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (res.ok) {
+            btn.textContent = t.done;
+            input.value = '';
+            input.disabled = true;
+          } else {
+            console.warn('[Dentelle] subscribe failed:', res.j);
+            btn.disabled = false;
+            btn.textContent = t.err;
+            setTimeout(function () { btn.textContent = origLabel; }, 2500);
+          }
         })
-        .catch(function () {
+        .catch(function (err) {
+          console.warn('[Dentelle] subscribe error:', err);
           btn.disabled = false;
           btn.textContent = t.err;
           setTimeout(function () { btn.textContent = origLabel; }, 2500);
