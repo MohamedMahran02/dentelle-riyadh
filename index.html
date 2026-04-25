@@ -315,8 +315,8 @@
     <span class="eyebrow">Join the maison</span>
     <h2 class="h-display">Private <em>correspondence.</em></h2>
     <p>Invitations to private views, new Mohrah drops, and letters from the Riyadh atelier.</p>
-    <form class="newsletter__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Merci ✦'">
-      <input type="email" placeholder="Your email" required />
+    <form class="newsletter__form" data-newsletter-form>
+      <input type="email" name="email" placeholder="Your email" required />
       <button type="submit">Subscribe</button>
     </form>
     <small class="newsletter__fine">By subscribing you agree to receive correspondence from Dentelle Riyadh.</small>
@@ -385,6 +385,7 @@
 <script src="theme/assets/shopify-cart.js?v=2" defer></script>
 <script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/products-live.js?v=2"></script>
+<script src="theme/assets/newsletter.js?v=1" defer></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js?v=15"></script>
 

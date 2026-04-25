@@ -293,8 +293,8 @@
     <span class="eyebrow">انضمّي إلى الدار</span>
     <h2 class="h-display">Private <em>correspondence.</em></h2>
     <p>دعواتٌ لعروض خاصة، وإصدارات مُهره الجديدة، ورسائل من ورشة الرياض.</p>
-    <form class="newsletter__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='شكراً ✦'">
-      <input type="email" placeholder="بريدك الإلكتروني" required />
+    <form class="newsletter__form" data-newsletter-form data-lang="ar">
+      <input type="email" name="email" placeholder="بريدك الإلكتروني" required />
       <button type="submit">اشتركي</button>
     </form>
     <small class="newsletter__fine">بالاشتراك، توافقين على تلقّي مراسلات من Dentelle Riyadh.</small>
@@ -363,6 +363,7 @@
 <script src="theme/assets/shopify-cart.js?v=2" defer></script>
 <script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/products-live.js?v=2"></script>
+<script src="theme/assets/newsletter.js?v=1" defer></script>
 <script src="theme/assets/cart.js?v=2"></script>
 <script src="theme/assets/theme.js?v=15"></script>
 
