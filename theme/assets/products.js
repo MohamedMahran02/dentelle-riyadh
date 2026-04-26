@@ -33,12 +33,12 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-1",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp",
-      "https://cdn.salla.sa/GYVWWE/NoqnUqjxEErfi9srZ6ypKGLGf2FKeZfBHUNh3PHm.webp",
-      "https://cdn.salla.sa/GYVWWE/fCNNtZwlwkuUFQTRuCpgcqP6G39qgPWWEjsA1VY9.webp",
-      "https://cdn.salla.sa/GYVWWE/4QrHcUO5rJJFXGWHmMXsJU5UiSGxHrNaNlIOgvDf.jpg",
-      "https://cdn.salla.sa/GYVWWE/jFEryHWSP1HYLxWfDx3qJu1yKnh2FgJZAHq4lAT7.webp",
-      "https://cdn.salla.sa/GYVWWE/yJNbrDX7fpHg53bULIdE8logCNxvgpcSwdm7mbzW.webp"
+      "images/products/mohra-1-1.webp",
+      "images/products/mohra-1-2.webp",
+      "images/products/mohra-1-3.webp",
+      "images/products/mohra-1-4.webp",
+      "images/products/mohra-1-5.webp",
+      "images/products/mohra-1-6.webp"
     ],
     "is_signature": false,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
@@ -78,11 +78,11 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-2",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/HlD1jo8E9VIjsnXW1GMll31zIO92EmM99dozmtPU.webp",
-      "https://cdn.salla.sa/GYVWWE/VyHni8XLTDJ2Ey9eEif98qMnSpn6OfV6kjnFaAgB.webp",
-      "https://cdn.salla.sa/GYVWWE/XNhtWI9PowJ6kOS3n0d83NNEtMMJUxknxpTUa54R.webp",
-      "https://cdn.salla.sa/GYVWWE/uzZsf2HyfeZCqXnMLYahvxBeczGll7cmnExApG6M.webp",
-      "https://cdn.salla.sa/GYVWWE/VR2pOSkGW7aoJghWt2AwkpkYX3nEdvD72xndxokC.webp"
+      "images/products/mohra-2-1.webp",
+      "images/products/mohra-2-2.webp",
+      "images/products/mohra-2-3.webp",
+      "images/products/mohra-2-4.webp",
+      "images/products/mohra-2-5.webp"
     ],
     "is_signature": false,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
@@ -122,12 +122,12 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-3",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/tSG21XYZ3ulkxriCmTZLkWVzKJREX0BXoZsAwwvd.webp",
-      "https://cdn.salla.sa/GYVWWE/HN2ThTSUTYS4pbuZO5ZnCmuhWl0zDapA39ZYCIpJ.webp",
-      "https://cdn.salla.sa/GYVWWE/CGS3eXCQdPqZmRYYdh1Q1xzAc3wKiXsOIDthzB9w.webp",
-      "https://cdn.salla.sa/GYVWWE/rQALiSXRVR07nrSHqL1zyQUtaM6BZ48pEwpNm15g.webp",
-      "https://cdn.salla.sa/GYVWWE/UbAP60JHt6pZKbKMtMl8L0QVd5hrbffHL11kD2B5.webp",
-      "https://cdn.salla.sa/GYVWWE/5v1yi0Yh5VHtgJYTB0sGtrlRI8IFMdfcudzU5zDd.webp"
+      "images/products/mohra-3-1.webp",
+      "images/products/mohra-3-2.webp",
+      "images/products/mohra-3-3.webp",
+      "images/products/mohra-3-4.webp",
+      "images/products/mohra-3-5.webp",
+      "images/products/mohra-3-6.webp"
     ],
     "is_signature": false,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
@@ -167,12 +167,12 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-4",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/bbd8CGQjhwbgjyHU7V2UJthyCsTq6YBUTWuSzoUc.webp",
-      "https://cdn.salla.sa/GYVWWE/UpgiZjGGBjkQSOUsi828ChqXCtXwblXM4FFcYl0q.webp",
-      "https://cdn.salla.sa/GYVWWE/GI96hRFLCJkTtY7cjmzBubx8mXkr26Zh8stlXDkh.webp",
-      "https://cdn.salla.sa/GYVWWE/elKe2YDk0ClCHtuXSToGGh7nsFPwe8TuxdW3OwGf.webp",
-      "https://cdn.salla.sa/GYVWWE/HGceA6zE0iubToddnDjgekMlArevWkLV2wpvcI5d.webp",
-      "https://cdn.salla.sa/GYVWWE/SVkP7Rqi8Fu77SvAix2DXppfGnmNsvandexSXWuE.webp"
+      "images/products/mohra-4-1.webp",
+      "images/products/mohra-4-2.webp",
+      "images/products/mohra-4-3.webp",
+      "images/products/mohra-4-4.webp",
+      "images/products/mohra-4-5.webp",
+      "images/products/mohra-4-6.webp"
     ],
     "is_signature": false,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
@@ -212,11 +212,11 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-5",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/j3F85l18BKcYrp7cucgTISU7Hr13hZOLiue194xA.webp",
-      "https://cdn.salla.sa/GYVWWE/FQYPrKqDVurwQq7CjqcvPtmOTr59kz9s5nmlAsH9.webp",
-      "https://cdn.salla.sa/GYVWWE/bNxzUUvOxoBx8cZcr9azYYT0Yw24VBKiXkhdrn5x.webp",
-      "https://cdn.salla.sa/GYVWWE/zzIBKJJOYZQOl8Alq1XL7QGG0JYSBaukNKemsJzd.webp",
-      "https://cdn.salla.sa/GYVWWE/fRDiiJi9DadidotCTNMQpwXWCjMRkHhWFevuy3ZA.webp"
+      "images/products/mohra-5-1.webp",
+      "images/products/mohra-5-2.webp",
+      "images/products/mohra-5-3.webp",
+      "images/products/mohra-5-4.webp",
+      "images/products/mohra-5-5.webp"
     ],
     "is_signature": false,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
@@ -256,13 +256,13 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-6",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/V98LkOePXH0dPl2lRCFgbJZKHc4pDOhJJ4EJvP9a.webp",
-      "https://cdn.salla.sa/GYVWWE/6coAPg8mIf4TFaMM5g9MUCVrz0XLnjXzMpSZi9Nf.webp",
-      "https://cdn.salla.sa/GYVWWE/bEFusoxhLGPGsyL09DXwUEMOSxoxuyH60Ye5fBCb.webp",
-      "https://cdn.salla.sa/GYVWWE/kTtwWI9pBw9gy0gYkanjkLcwRBheyOFqoIUTauYH.webp",
-      "https://cdn.salla.sa/GYVWWE/SCqnDhrCPF6PYZDLMRGQu0lbllGbxKqp5FIf22OF.webp",
-      "https://cdn.salla.sa/GYVWWE/MTSTMAmDsvVWxm2LqzbxP8fdkv17K3QNVmNjXAxa.webp",
-      "https://cdn.salla.sa/GYVWWE/0aKAnoXgbEC6CyPKltXqEzi27ti3cmrPcEGp3N0i.webp"
+      "images/products/mohra-6-1.webp",
+      "images/products/mohra-6-2.webp",
+      "images/products/mohra-6-3.webp",
+      "images/products/mohra-6-4.webp",
+      "images/products/mohra-6-5.webp",
+      "images/products/mohra-6-6.webp",
+      "images/products/mohra-6-7.webp"
     ],
     "is_signature": true,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
@@ -302,12 +302,12 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-7",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/YIt5M9HjmuIOTwXpSLqPhf0jJBZTb1lQpvgposHC.webp",
-      "https://cdn.salla.sa/GYVWWE/nQie4CY59SgYGDtMBHIV3U7xRF3IBk3iXaYaWTId.webp",
-      "https://cdn.salla.sa/GYVWWE/VxnXcFu8d1krHPuRgllTjLX1ITQdeQG38Q1Q9vrG.webp",
-      "https://cdn.salla.sa/GYVWWE/uSMfIqbqXFl30lqjiIIq0oE92H8Tzr6gV27iT7kK.webp",
-      "https://cdn.salla.sa/GYVWWE/sy5Ef3OJVQPMWMBo2kQHoBjKb7PzUJnuJza8lVxz.webp",
-      "https://cdn.salla.sa/GYVWWE/bxargNJkvLInH6MtunxTXMF2TRXSDGxWJKdRZF3R.webp"
+      "images/products/mohra-7-1.webp",
+      "images/products/mohra-7-2.webp",
+      "images/products/mohra-7-3.webp",
+      "images/products/mohra-7-4.webp",
+      "images/products/mohra-7-5.webp",
+      "images/products/mohra-7-6.webp"
     ],
     "is_signature": false,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
@@ -347,8 +347,8 @@ window.PRODUCTS = [
     },
     "shopify_handle": "mohra-8",
     "images": [
-      "https://cdn.salla.sa/GYVWWE/SzWAoR74F7DQexhZvcZT9570C9EnT6A2teNl45qv.webp",
-      "https://cdn.salla.sa/GYVWWE/J7538PQ46KJIfH15d2bpieWoGJuehoJ2XtiUuXm2.webp"
+      "images/products/mohra-8-1.webp",
+      "images/products/mohra-8-2.webp"
     ],
     "is_signature": false,
     "details": "Tulle 95% recycled polyester · Lace 78% polyamide, 15% elastane, 7% metallic fibers.",
