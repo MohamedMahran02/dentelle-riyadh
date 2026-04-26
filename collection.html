@@ -190,7 +190,11 @@
     let eyebrow = 'Collection';
 
     if (handle) {
+      // Filter by collection first, then optionally by category
       products = all.filter(p => (p.collections || []).indexOf(handle) !== -1);
+      if (category !== 'all') {
+        products = products.filter(p => (p.category || '').toLowerCase() === category);
+      }
       const col = (window.COLLECTIONS_BY_HANDLE || {})[handle];
       if (col) {
         titleEn = col.title;
@@ -218,8 +222,20 @@
     const plainTitle = titleEnEl ? titleEnEl.textContent.trim() : titleEn.replace(/<[^>]+>/g, '');
     document.title = plainTitle + ' — Dentelle Riyadh';
 
+    // Update filter links: when inside a collection, preserve the handle param
     document.querySelectorAll('[data-filter]').forEach((a) => {
-      a.classList.toggle('is-active', a.dataset.filter === (handle ? 'all' : category));
+      const cat = a.dataset.filter;
+      if (handle) {
+        // Scope filters to this collection
+        a.href = cat === 'all'
+          ? `collection.html?handle=${handle}`
+          : `collection.html?handle=${handle}&category=${cat}`;
+        a.classList.toggle('is-active', cat === category);
+      } else {
+        // Global browse: no handle
+        a.href = cat === 'all' ? 'collection.html' : `collection.html?category=${cat}`;
+        a.classList.toggle('is-active', cat === category);
+      }
     });
 
     if (countEl) countEl.textContent = `${products.length} piece${products.length === 1 ? '' : 's'}`;
