@@ -1402,7 +1402,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .product-card__img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center top;
   transition: opacity 1.1s var(--ease), transform 1.8s var(--ease-out);
 }
 .product-card__img--b { opacity: 0; }
