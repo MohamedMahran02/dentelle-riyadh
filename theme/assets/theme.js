@@ -541,10 +541,19 @@
       return best;
     };
 
+    /* RTL: scrollLeft is 0 at the rightmost position and goes negative to the left */
+    const isRTL = document.documentElement.dir === 'rtl';
+
     /* Update arrow + dot state */
     const updateState = () => {
-      const atStart = track.scrollLeft <= 4;
-      const atEnd   = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      let atStart, atEnd;
+      if (isRTL) {
+        atStart = track.scrollLeft >= -4;                                              // rightmost = beginning
+        atEnd   = track.scrollLeft <= -(track.scrollWidth - track.clientWidth - 4);   // leftmost = end
+      } else {
+        atStart = track.scrollLeft <= 4;
+        atEnd   = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      }
       if (prevBtn) prevBtn.disabled = atStart;
       if (nextBtn) nextBtn.disabled = atEnd;
 
@@ -557,7 +566,7 @@
       track.scrollBy({ left: amount, behavior: 'smooth' });
     };
 
-    /* Arrow clicks */
+    /* Arrow clicks — in RTL left arrow goes left (negative = more items), right goes back */
     if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); scrollByAmount(-arrowStep()); });
     if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); scrollByAmount(arrowStep()); });
 
