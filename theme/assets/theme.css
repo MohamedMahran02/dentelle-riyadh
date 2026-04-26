@@ -1316,14 +1316,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* Arrow buttons — hidden */
 .carousel-btn {
-  display: none;
+  display: none !important;
   position: absolute;
   top: 38%;
   transform: translateY(-50%);
   z-index: 10;
   width: 52px; height: 52px;
   border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
+  align-items: center; justify-content: center;
   background: rgba(251,248,242,.82); /* --c-paper semi-transparent */
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
