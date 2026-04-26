@@ -100,13 +100,13 @@
   --f-ar-body:   'IBM Plex Sans Arabic', system-ui, sans-serif;
 
   /* Scale — editorial, tight body / big headlines */
-  --step--1: clamp(.72rem, .7rem + .12vw, .82rem);
-  --step-0:  clamp(.92rem, .88rem + .15vw, 1rem);
-  --step-1:  clamp(1rem, .95rem + .2vw, 1.1rem);
-  --step-2:  clamp(1.2rem, 1.1rem + .4vw, 1.4rem);
-  --step-3:  clamp(1.8rem, 1.5rem + 1.4vw, 2.8rem);
-  --step-4:  clamp(2.6rem, 2rem + 3.5vw, 5.4rem);
-  --step-5:  clamp(4rem, 3rem + 8vw, 11rem);
+  --step--1: clamp(.78rem, .74rem + .15vw, .82rem);
+  --step-0:  clamp(1rem, .94rem + .18vw, 1rem);
+  --step-1:  clamp(1.06rem, 1rem + .22vw, 1.1rem);
+  --step-2:  clamp(1.28rem, 1.18rem + .42vw, 1.4rem);
+  --step-3:  clamp(2rem, 1.7rem + 1.5vw, 2.8rem);
+  --step-4:  clamp(3rem, 2.4rem + 3.6vw, 5.4rem);
+  --step-5:  clamp(4.4rem, 3.4rem + 8.4vw, 11rem);
 
   /* Space */
   --sp-xs: .5rem;
