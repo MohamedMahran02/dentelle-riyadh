@@ -68,7 +68,7 @@
       return {
         handle: n.handle,
         title: n.title,
-        title_ar: (n.titleAr && n.titleAr.value) || n.title,
+        title_ar: (n.titleAr && n.titleAr.value) || '',
         description: stripHtml(n.descriptionHtml),
         description_ar: (n.descAr && n.descAr.value) || '',
         image: heroImg,

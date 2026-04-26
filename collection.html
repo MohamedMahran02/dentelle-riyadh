@@ -194,7 +194,11 @@
       const col = (window.COLLECTIONS_BY_HANDLE || {})[handle];
       if (col) {
         titleEn = col.title;
-        titleAr = col.title_ar || col.title;
+        // Only use the Arabic title if it differs from the English one
+        // (when the Shopify metafield isn't set, collections-live.js falls back to the English title)
+        if (col.title_ar && col.title_ar !== col.title) {
+          titleAr = col.title_ar;
+        }
       } else {
         titleEn = handle.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
         titleAr = titleEn;
