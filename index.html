@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=32" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=33" />
 </head>
 <body data-theme="cream">
 
@@ -262,7 +262,7 @@
 
   <div class="savoir__grid">
     <figure class="savoir__fig savoir__fig--tall">
-      <img src="mohra-1/num4.jpg" alt="Hands at work in the Riyadh atelier"/>
+      <img src="mohra-1/num4.webp" alt="Hands at work in the Riyadh atelier"/>
       <figcaption>Handwork — Riyadh</figcaption>
     </figure>
     <div class="savoir__text">
@@ -275,7 +275,7 @@
       <a href="#" class="link-underline" data-size-guide>Size guide ›</a>
     </div>
     <figure class="savoir__fig savoir__fig--short">
-      <img src="mohra-1/SMH03130.jpg" alt="Finished garment detail"/>
+      <img src="mohra-1/SMH03130.webp" alt="Finished garment detail"/>
       <figcaption>Detail — Mohrah N°01</figcaption>
     </figure>
   </div>
@@ -530,14 +530,15 @@
   function fmtPrice(amt) { return 'SAR ' + Number(amt).toFixed(0); }
   function escAttr(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  function cardHtml(p) {
+  function cardHtml(p, idx) {
     const a = p.images[0] || '';
     const b = p.images[1] || a;
+    const eager = idx < 4; /* first 4 cards load immediately, rest lazy */
     const titleAr = p.title_ar ? '<span class="product-card__title-ar" dir="rtl" lang="ar">' + escAttr(p.title_ar) + '</span>' : '';
     return ''
       + '<article class="product-card" data-slug="' + escAttr(p.slug) + '">'
       +   '<a href="product.html?slug=' + escAttr(p.slug) + '" class="product-card__media" aria-label="' + escAttr(p.title_en) + '">'
-      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" loading="lazy" />'
+      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" loading="' + (eager ? 'eager' : 'lazy') + '" />'
       +     '<img class="product-card__img product-card__img--b" src="' + escAttr(b) + '" alt="' + escAttr(p.title_en) + ' — detail" loading="lazy" />'
       +   '</a>'
       +   '<div class="product-card__meta">'
@@ -553,7 +554,7 @@
 
   function render() {
     if (!window.PRODUCTS || !window.PRODUCTS.length) return;
-    track.innerHTML = window.PRODUCTS.map(cardHtml).join('');
+    track.innerHTML = window.PRODUCTS.map((p, i) => cardHtml(p, i)).join('');
     // re-init carousel scroll state if theme.js exposes a hook
     if (typeof window.__dentelleCarouselReinit === 'function') window.__dentelleCarouselReinit();
     // inject wish buttons + quick-add now that real cards are in the DOM
