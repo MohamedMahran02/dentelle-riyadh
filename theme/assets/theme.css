@@ -2344,12 +2344,13 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: 1.05rem; font-weight: 400;
   margin: 0;
 }
-/* Right column: heart at top, VIEW PIECE button at bottom */
+/* Right column: heart + VIEW PIECE button grouped together */
 .wish-drawer__item-actions {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
+  gap: .6rem;
 }
 .wish-drawer__remove {
   background: none; border: none; cursor: pointer;
