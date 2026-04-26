@@ -341,19 +341,19 @@
         media.parentNode.insertBefore(visual, media);
         visual.appendChild(media);
 
-        /* Build size options for select */
-        var sizeOptsHtml = product ? product.sizes.map(function (s) {
-          return '<option value="' + s + '">' + s + '</option>';
-        }).join('') : '';
+        /* Build size buttons */
+        var sizeBtnsHtml = product && product.sizes.length
+          ? product.sizes.map(function (s) {
+              return '<button type="button" class="product-card__size-btn" data-size="' + s + '">' + s + '</button>';
+            }).join('')
+          : '';
 
         /* Inject quick-add below .product-card__meta */
         var meta = card.querySelector('.product-card__meta');
         if (meta) {
           meta.insertAdjacentHTML('afterend',
             '<div class="product-card__quick-add" aria-hidden="true">' +
-              '<select class="product-card__size-select" aria-label="Select size">' +
-                '<option value="">Select size</option>' + sizeOptsHtml +
-              '</select>' +
+              (sizeBtnsHtml ? '<div class="product-card__sizes">' + sizeBtnsHtml + '</div>' : '') +
               '<button type="button" class="product-card__atc-btn" data-quick-atc>Add to bag</button>' +
             '</div>'
           );
@@ -412,6 +412,19 @@
         return;
       }
 
+      /* ---- Quick-add: size button selection ---- */
+      var sizeBtn = e.target.closest('.product-card__size-btn');
+      if (sizeBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var sizesWrap = sizeBtn.closest('.product-card__sizes');
+        if (sizesWrap) {
+          sizesWrap.querySelectorAll('.product-card__size-btn').forEach(function (b) { b.classList.remove('is-selected'); });
+        }
+        sizeBtn.classList.add('is-selected');
+        return;
+      }
+
       /* ---- Quick-add: add to bag ---- */
       var atcBtn = e.target.closest('[data-quick-atc]');
       if (atcBtn) {
@@ -420,13 +433,14 @@
         var card    = atcBtn.closest('.product-card');
         if (!card) return;
         var cardSlug = card.dataset.slug;
-        var sizeSelect = card.querySelector('.product-card__size-select');
-        var size = sizeSelect ? sizeSelect.value : '';
+        var selectedSizeBtn = card.querySelector('.product-card__size-btn.is-selected');
+        var size = selectedSizeBtn ? selectedSizeBtn.dataset.size : '';
         if (!size) {
-          /* No size selected — shake the select and prompt */
-          if (sizeSelect) {
-            sizeSelect.classList.add('needs-size');
-            setTimeout(function () { sizeSelect.classList.remove('needs-size'); }, 700);
+          /* No size selected — shake size buttons */
+          var sizesRow = card.querySelector('.product-card__sizes');
+          if (sizesRow) {
+            sizesRow.classList.add('needs-size');
+            setTimeout(function () { sizesRow.classList.remove('needs-size'); }, 700);
           }
           atcBtn.textContent = 'Select a size';
           setTimeout(function () { atcBtn.textContent = 'Add to bag'; }, 1400);

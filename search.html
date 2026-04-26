@@ -182,7 +182,6 @@
   
     function cardHtml(p) {
       return '<article class="product-card">' +
-        (p.is_signature ? '<span class="product-card__badge">Signature</span>' : '') +
         '<a href="product.html?slug=' + p.slug + '" class="product-card__media" aria-label="' + p.title_en + '">' +
           '<img class="product-card__img product-card__img--a" src="' + p.images[0] + '" alt="' + p.title_en + '" loading="lazy" />' +
           '<img class="product-card__img product-card__img--b" src="' + (p.images[1] || p.images[0]) + '" alt="' + p.title_en + ' — detail" loading="lazy" />' +
