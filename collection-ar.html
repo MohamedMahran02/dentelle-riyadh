@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=36" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=37" />
 </head>
 <body data-theme="cream" class="template-collection">
 
@@ -94,8 +94,8 @@
   <header class="collection__header">
     <span class="eyebrow" data-eyebrow>المجموعة</span>
     <h1 class="h-display">
-      <span data-title-en>The <em>Mohrah</em> Collection</span>
-      <span class="h-display-ar" dir="rtl" lang="ar" data-title-ar>مجموعة <em>مُهرة</em></span>
+      <span data-title-en>كل <em>القِطَع</em></span>
+      <span class="h-display-ar" dir="rtl" lang="ar" data-title-ar style="display:none"></span>
     </h1>
     <p class="collection__description">لغةٌ راقيةٌ للأنوثة — متجذّرةٌ في الموروث، مصقولةٌ بالحداثة. كلُّ قطعةٍ تُنهى يدوياً في ورشة الرياض.</p>
     <p class="collection__count" data-count>— قطعة</p>
@@ -191,34 +191,55 @@
 
     const all = window.PRODUCTS || [];
     let products = all;
-    let titleEn = 'The <em>Mohrah</em> Collection';
-    let titleAr = 'مجموعة <em>مُهرة</em>';
+    let titleEn = 'كل <em>القِطَع</em>';
+    let titleAr = '';
     let eyebrow = 'المجموعة';
 
     if (handle) {
+      // Filter by collection first, then optionally by category
       products = all.filter(p => (p.collections || []).indexOf(handle) !== -1);
+      if (category !== 'all') {
+        products = products.filter(p => (p.category || '').toLowerCase() === category);
+      }
       const col = (window.COLLECTIONS_BY_HANDLE || {})[handle];
       if (col) {
         titleEn = col.title;
-        titleAr = col.title_ar || col.title;
+        // Only use Arabic subtitle if a real Arabic value was set in Shopify
+        if (col.title_ar && col.title_ar !== col.title) {
+          titleAr = col.title_ar;
+        }
       } else {
         titleEn = handle.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        titleAr = titleEn;
       }
     } else if (category !== 'all') {
       products = all.filter(p => (p.category || '').toLowerCase() === category);
       const lbl = CAT_LABELS[category] || CAT_LABELS.all;
       titleEn = lbl.ar;
-      titleAr = lbl.ar;
       eyebrow = lbl.eyebrow;
     }
 
     if (eyebrowEl) eyebrowEl.textContent = eyebrow;
     if (titleEnEl) titleEnEl.innerHTML = titleEn;
-    if (titleArEl) titleArEl.innerHTML = titleAr;
+    if (titleArEl) {
+      titleArEl.innerHTML = titleAr;
+      titleArEl.style.display = titleAr ? '' : 'none';
+    }
+    // Update browser tab title
+    const plainTitle = titleEnEl ? titleEnEl.textContent.trim() : titleEn.replace(/<[^>]+>/g, '');
+    document.title = plainTitle + ' — Dentelle Riyadh';
 
+    // Update filter links: when inside a collection, preserve the handle param
     document.querySelectorAll('[data-filter]').forEach((a) => {
-      a.classList.toggle('is-active', a.dataset.filter === (handle ? 'all' : category));
+      const cat = a.dataset.filter;
+      if (handle) {
+        a.href = cat === 'all'
+          ? `collection-ar.html?handle=${handle}`
+          : `collection-ar.html?handle=${handle}&category=${cat}`;
+        a.classList.toggle('is-active', cat === category);
+      } else {
+        a.href = cat === 'all' ? 'collection-ar.html' : `collection-ar.html?category=${cat}`;
+        a.classList.toggle('is-active', cat === category);
+      }
     });
 
     if (countEl) countEl.textContent = `${products.length} — قطعة`;
