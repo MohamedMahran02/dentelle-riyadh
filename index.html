@@ -13,6 +13,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="theme/assets/theme.css?v=33" />
+
+<!-- Preload first 4 product card images so they're ready before JS renders cards -->
+<link rel="preload" as="image" href="https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp" fetchpriority="high">
+<link rel="preload" as="image" href="https://cdn.salla.sa/GYVWWE/HlD1jo8E9VIjsnXW1GMll31zIO92EmM99dozmtPU.webp" fetchpriority="high">
+<link rel="preload" as="image" href="https://cdn.salla.sa/GYVWWE/tSG21XYZ3ulkxriCmTZLkWVzKJREX0BXoZsAwwvd.webp" fetchpriority="high">
+<link rel="preload" as="image" href="https://cdn.salla.sa/GYVWWE/bbd8CGQjhwbgjyHU7V2UJthyCsTq6YBUTWuSzoUc.webp" fetchpriority="high">
 </head>
 <body data-theme="cream">
 
@@ -173,22 +179,50 @@
 
     
     <div class="product-grid__items product-grid__items--carousel" data-carousel>
-      <!-- Cards rendered live from Shopify Storefront API -->
-      <article class="product-card product-card--skeleton" aria-hidden="true">
-        <div class="product-card__media product-card__skel"></div>
-        <div class="product-card__meta"><div class="product-card__skel-line"></div><div class="product-card__skel-line product-card__skel-line--short"></div></div>
+      <!-- Static first-paint cards — JS overwrites with live data -->
+      <article class="product-card" data-slug="mohra-1">
+        <a href="product.html?slug=mohra-1" class="product-card__media" aria-label="Mohrah 1">
+          <img class="product-card__img product-card__img--a" src="https://cdn.salla.sa/GYVWWE/Q2qx3s3In4vu8fjwK1bPKRw1bclfdBNuQ74iuW7r.webp" alt="Mohrah 1" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--b" src="https://cdn.salla.sa/GYVWWE/NoqnUqjxEErfi9srZ6ypKGLGf2FKeZfBHUNh3PHm.webp" alt="Mohrah 1 — detail" loading="lazy" />
+        </a>
+        <div class="product-card__meta">
+          <h3 class="product-card__title"><span class="product-card__title-en">Mohrah 1</span></h3>
+          <p>Dentelle Riyadh — Bras</p>
+          <span class="price"><span class="price__amount">SAR 330</span></span>
+        </div>
       </article>
-      <article class="product-card product-card--skeleton" aria-hidden="true">
-        <div class="product-card__media product-card__skel"></div>
-        <div class="product-card__meta"><div class="product-card__skel-line"></div><div class="product-card__skel-line product-card__skel-line--short"></div></div>
+      <article class="product-card" data-slug="mohra-2">
+        <a href="product.html?slug=mohra-2" class="product-card__media" aria-label="Mohrah 2">
+          <img class="product-card__img product-card__img--a" src="https://cdn.salla.sa/GYVWWE/HlD1jo8E9VIjsnXW1GMll31zIO92EmM99dozmtPU.webp" alt="Mohrah 2" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--b" src="https://cdn.salla.sa/GYVWWE/VyHni8XLTDJ2Ey9eEif98qMnSpn6OfV6kjnFaAgB.webp" alt="Mohrah 2 — detail" loading="lazy" />
+        </a>
+        <div class="product-card__meta">
+          <h3 class="product-card__title"><span class="product-card__title-en">Mohrah 2</span></h3>
+          <p>Dentelle Riyadh — Bras</p>
+          <span class="price"><span class="price__amount">SAR 330</span></span>
+        </div>
       </article>
-      <article class="product-card product-card--skeleton" aria-hidden="true">
-        <div class="product-card__media product-card__skel"></div>
-        <div class="product-card__meta"><div class="product-card__skel-line"></div><div class="product-card__skel-line product-card__skel-line--short"></div></div>
+      <article class="product-card" data-slug="mohra-3">
+        <a href="product.html?slug=mohra-3" class="product-card__media" aria-label="Mohrah 3">
+          <img class="product-card__img product-card__img--a" src="https://cdn.salla.sa/GYVWWE/tSG21XYZ3ulkxriCmTZLkWVzKJREX0BXoZsAwwvd.webp" alt="Mohrah 3" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--b" src="https://cdn.salla.sa/GYVWWE/HN2ThTSUTYS4pbuZO5ZnCmuhWl0zDapA39ZYCIpJ.webp" alt="Mohrah 3 — detail" loading="lazy" />
+        </a>
+        <div class="product-card__meta">
+          <h3 class="product-card__title"><span class="product-card__title-en">Mohrah 3</span></h3>
+          <p>Dentelle Riyadh — Briefs</p>
+          <span class="price"><span class="price__amount">SAR 250</span></span>
+        </div>
       </article>
-      <article class="product-card product-card--skeleton" aria-hidden="true">
-        <div class="product-card__media product-card__skel"></div>
-        <div class="product-card__meta"><div class="product-card__skel-line"></div><div class="product-card__skel-line product-card__skel-line--short"></div></div>
+      <article class="product-card" data-slug="mohra-4">
+        <a href="product.html?slug=mohra-4" class="product-card__media" aria-label="Mohrah 4">
+          <img class="product-card__img product-card__img--a" src="https://cdn.salla.sa/GYVWWE/bbd8CGQjhwbgjyHU7V2UJthyCsTq6YBUTWuSzoUc.webp" alt="Mohrah 4" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--b" src="https://cdn.salla.sa/GYVWWE/UpgiZjGGBjkQSOUsi828ChqXCtXwblXM4FFcYl0q.webp" alt="Mohrah 4 — detail" loading="lazy" />
+        </a>
+        <div class="product-card__meta">
+          <h3 class="product-card__title"><span class="product-card__title-en">Mohrah 4</span></h3>
+          <p>Dentelle Riyadh — Briefs</p>
+          <span class="price"><span class="price__amount">SAR 250</span></span>
+        </div>
       </article>
     </div>
 
@@ -538,7 +572,7 @@
     return ''
       + '<article class="product-card" data-slug="' + escAttr(p.slug) + '">'
       +   '<a href="product.html?slug=' + escAttr(p.slug) + '" class="product-card__media" aria-label="' + escAttr(p.title_en) + '">'
-      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" loading="' + (eager ? 'eager' : 'lazy') + '" />'
+      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" loading="' + (eager ? 'eager' : 'lazy') + '"' + (eager ? ' fetchpriority="high"' : '') + ' />'
       +     '<img class="product-card__img product-card__img--b" src="' + escAttr(b) + '" alt="' + escAttr(p.title_en) + ' — detail" loading="lazy" />'
       +   '</a>'
       +   '<div class="product-card__meta">'
