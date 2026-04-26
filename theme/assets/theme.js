@@ -614,43 +614,53 @@
       const dotsWrap = section?.querySelector('[data-carousel-dots]');
       if (!dotsWrap) return;
 
-      /* Rebuild cards list from freshly rendered DOM */
-      const cards = Array.from(track.querySelectorAll('.product-card'));
-      if (!cards.length) return;
+      /* Wait one frame so layout is settled before measuring */
+      requestAnimationFrame(() => {
+        const cards = Array.from(track.querySelectorAll('.product-card'));
+        if (!cards.length) return;
 
-      /* Clear old dots */
-      dotsWrap.innerHTML = '';
+        const padLeft   = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+        const maxScroll = track.scrollWidth - track.clientWidth;
 
-      /* Repopulate dots */
-      cards.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', 'Go to piece ' + (i + 1));
-        dotsWrap.appendChild(dot);
-      });
-
-      /* Wire click → scroll to card */
-      Array.from(dotsWrap.querySelectorAll('.carousel-dot')).forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          const card = cards[i];
-          if (!card) return;
-          const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
-          track.scrollTo({ left: card.offsetLeft - padLeft, behavior: 'smooth' });
+        /* Build only the scroll targets that actually move the track */
+        const scrollTargets = [];
+        cards.forEach((card) => {
+          const target = Math.min(Math.round(card.offsetLeft - padLeft), Math.round(maxScroll));
+          if (!scrollTargets.length || target > scrollTargets[scrollTargets.length - 1]) {
+            scrollTargets.push(target);
+          }
         });
-      });
 
-      /* Sync active dot on scroll */
-      track.addEventListener('scroll', () => {
-        const padLeft  = parseFloat(getComputedStyle(track).paddingLeft) || 0;
-        let best = 0, bestDist = Infinity;
-        cards.forEach((card, i) => {
-          const dist = Math.abs(card.offsetLeft - padLeft - track.scrollLeft);
-          if (dist < bestDist) { bestDist = dist; best = i; }
+        /* Clear and rebuild dots — one per unique scroll position */
+        dotsWrap.innerHTML = '';
+        scrollTargets.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
+          dot.setAttribute('aria-label', 'Go to piece ' + (i + 1));
+          dotsWrap.appendChild(dot);
         });
-        Array.from(dotsWrap.querySelectorAll('.carousel-dot'))
-          .forEach((d, i) => d.classList.toggle('is-active', i === best));
-      }, { passive: true });
+
+        const allDots = () => Array.from(dotsWrap.querySelectorAll('.carousel-dot'));
+
+        /* Wire click → scroll to that position */
+        allDots().forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            track.scrollTo({ left: scrollTargets[i], behavior: 'smooth' });
+          });
+        });
+
+        /* Sync active dot while scrolling */
+        track.addEventListener('scroll', () => {
+          const sl = track.scrollLeft;
+          let best = 0, bestDist = Infinity;
+          scrollTargets.forEach((t, i) => {
+            const dist = Math.abs(t - sl);
+            if (dist < bestDist) { bestDist = dist; best = i; }
+          });
+          allDots().forEach((d, i) => d.classList.toggle('is-active', i === best));
+        }, { passive: true });
+      });
     });
   };
 
