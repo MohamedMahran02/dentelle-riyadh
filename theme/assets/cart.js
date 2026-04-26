@@ -134,12 +134,14 @@
         '<div class="wish-drawer__item-body">' +
           '<h4><a href="product.html?slug=' + p.slug + '">' + p.title_en + '</a></h4>' +
           (p.title_ar ? '<p class="wish-drawer__item-ar" dir="rtl" lang="ar">' + p.title_ar + '</p>' : '') +
-          '<p class="wish-drawer__item-price">' + fmt(p.price) + '</p>' +
-          '<a href="product.html?slug=' + p.slug + '" class="btn btn--sm">View piece</a>' +
         '</div>' +
-        '<button type="button" class="wish-drawer__remove" data-wish-toggle="' + p.slug + '" aria-label="Remove from wishlist">' +
-          '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/></svg>' +
-        '</button>' +
+        '<div class="wish-drawer__item-actions">' +
+          '<a href="product.html?slug=' + p.slug + '" class="btn btn--sm">View piece</a>' +
+          '<p class="wish-drawer__item-price">' + fmt(p.price) + '</p>' +
+          '<button type="button" class="wish-drawer__remove" data-wish-toggle="' + p.slug + '" aria-label="Remove from wishlist">' +
+            '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/></svg>' +
+          '</button>' +
+        '</div>' +
       '</article>';
     },
 
