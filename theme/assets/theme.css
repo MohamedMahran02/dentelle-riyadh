@@ -1832,8 +1832,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .site-footer__col a.bilingual-link:hover > span[dir="rtl"] { color: var(--c-paper); }
 
 .site-footer__base {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
@@ -1846,6 +1846,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   text-transform: uppercase;
   color: rgba(255,255,255,.45);
 }
+.site-footer__base > :last-child { text-align: right; }
 .site-footer__base .locale-btn { color: rgba(255,255,255,.45); }
 .site-footer__base .locale-btn.is-active { color: var(--c-paper); }
 
