@@ -12,17 +12,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=49" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=50" />
 
 <!-- Preload all product card images so they're ready before JS renders cards -->
 <link rel="preload" as="image" href="images/products/mohra-1-1.webp" fetchpriority="high">
 <link rel="preload" as="image" href="images/products/mohra-2-1.webp" fetchpriority="high">
 <link rel="preload" as="image" href="images/products/mohra-3-1.webp" fetchpriority="high">
-<link rel="preload" as="image" href="images/products/mohra-4-1.webp" fetchpriority="high">
-<link rel="preload" as="image" href="images/products/mohra-5-1.webp" fetchpriority="high">
-<link rel="preload" as="image" href="images/products/mohra-6-1.webp" fetchpriority="high">
-<link rel="preload" as="image" href="images/products/mohra-7-1.webp" fetchpriority="high">
-<link rel="preload" as="image" href="images/products/mohra-8-1.webp" fetchpriority="high">
 </head>
 <body data-theme="cream">
 
@@ -219,7 +214,7 @@
       </article>
       <article class="product-card" data-slug="mohra-4">
         <a href="product.html?slug=mohra-4" class="product-card__media" aria-label="Mohra 4">
-          <img class="product-card__img product-card__img--a" src="images/products/mohra-4-1.webp" alt="Mohra 4" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--a" src="images/products/mohra-4-1.webp" alt="Mohra 4" loading="lazy" />
           <img class="product-card__img product-card__img--b" src="images/products/mohra-4-2.webp" alt="Mohra 4 — detail" loading="lazy" />
         </a>
         <div class="product-card__meta">
@@ -230,7 +225,7 @@
       </article>
       <article class="product-card" data-slug="mohra-5">
         <a href="product.html?slug=mohra-5" class="product-card__media" aria-label="Mohra 5">
-          <img class="product-card__img product-card__img--a" src="images/products/mohra-5-1.webp" alt="Mohra 5" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--a" src="images/products/mohra-5-1.webp" alt="Mohra 5" loading="lazy" />
           <img class="product-card__img product-card__img--b" src="images/products/mohra-5-2.webp" alt="Mohra 5 — detail" loading="lazy" />
         </a>
         <div class="product-card__meta">
@@ -241,7 +236,7 @@
       </article>
       <article class="product-card" data-slug="mohra-6">
         <a href="product.html?slug=mohra-6" class="product-card__media" aria-label="Mohra 6">
-          <img class="product-card__img product-card__img--a" src="images/products/mohra-6-1.webp" alt="Mohra 6" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--a" src="images/products/mohra-6-1.webp" alt="Mohra 6" loading="lazy" />
           <img class="product-card__img product-card__img--b" src="images/products/mohra-6-2.webp" alt="Mohra 6 — detail" loading="lazy" />
         </a>
         <div class="product-card__meta">
@@ -252,7 +247,7 @@
       </article>
       <article class="product-card" data-slug="mohra-7">
         <a href="product.html?slug=mohra-7" class="product-card__media" aria-label="Mohra 7">
-          <img class="product-card__img product-card__img--a" src="images/products/mohra-7-1.webp" alt="Mohra 7" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--a" src="images/products/mohra-7-1.webp" alt="Mohra 7" loading="lazy" />
           <img class="product-card__img product-card__img--b" src="images/products/mohra-7-2.webp" alt="Mohra 7 — detail" loading="lazy" />
         </a>
         <div class="product-card__meta">
@@ -263,7 +258,7 @@
       </article>
       <article class="product-card" data-slug="mohra-8">
         <a href="product.html?slug=mohra-8" class="product-card__media" aria-label="Mohra 8">
-          <img class="product-card__img product-card__img--a" src="images/products/mohra-8-1.webp" alt="Mohra 8" loading="eager" fetchpriority="high" />
+          <img class="product-card__img product-card__img--a" src="images/products/mohra-8-1.webp" alt="Mohra 8" loading="lazy" />
           <img class="product-card__img product-card__img--b" src="images/products/mohra-8-2.webp" alt="Mohra 8 — detail" loading="lazy" />
         </a>
         <div class="product-card__meta">
@@ -475,7 +470,6 @@
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
 <script src="theme/assets/shopify-cart.js?v=6" defer></script>
-<script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/products-live.js?v=2"></script>
 <script src="theme/assets/newsletter.js?v=2" defer></script>
 <script src="theme/assets/cart.js?v=6"></script>
@@ -622,14 +616,16 @@
   function fmtPrice(amt) { return 'SAR ' + Number(amt).toFixed(0); }
   function escAttr(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  function cardHtml(p) {
+  function cardHtml(p, i) {
     const a = p.images[0] || '';
     const b = p.images[1] || a;
     const titleAr = p.title_ar ? '<span class="product-card__title-ar" dir="rtl" lang="ar">' + escAttr(p.title_ar) + '</span>' : '';
+    // Only first 3 cards are above-the-fold; rest can lazy-load
+    const eager = i < 3 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
     return ''
       + '<article class="product-card" data-slug="' + escAttr(p.slug) + '">'
       +   '<a href="product.html?slug=' + escAttr(p.slug) + '" class="product-card__media" aria-label="' + escAttr(p.title_en) + '">'
-      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" loading="eager" fetchpriority="high" />'
+      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" ' + eager + ' />'
       +     '<img class="product-card__img product-card__img--b" src="' + escAttr(b) + '" alt="' + escAttr(p.title_en) + ' — detail" loading="lazy" />'
       +   '</a>'
       +   '<div class="product-card__meta">'
@@ -645,7 +641,7 @@
 
   function render() {
     if (!window.PRODUCTS || !window.PRODUCTS.length) return;
-    track.innerHTML = window.PRODUCTS.map(cardHtml).join('');
+    track.innerHTML = window.PRODUCTS.map((p, i) => cardHtml(p, i)).join('');
     // re-init carousel scroll state if theme.js exposes a hook
     if (typeof window.__dentelleCarouselReinit === 'function') window.__dentelleCarouselReinit();
     // inject wish buttons + quick-add now that real cards are in the DOM

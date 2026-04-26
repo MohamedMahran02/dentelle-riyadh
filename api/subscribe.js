@@ -82,7 +82,10 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             customer: {
               id: existing.id,
-              tags: (existing.tags ? existing.tags + ', ' : '') + 'newsletter,prospect',
+              tags: Array.from(new Set(
+                (existing.tags || '').split(',').map(t => t.trim()).filter(Boolean)
+                  .concat(['newsletter', 'prospect'])
+              )).join(', '),
               email_marketing_consent: {
                 state: 'subscribed',
                 opt_in_level: 'single_opt_in',

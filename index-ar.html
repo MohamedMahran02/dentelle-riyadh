@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=49" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=50" />
 </head>
 <body data-theme="cream">
 
@@ -371,7 +371,6 @@
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
 <script src="theme/assets/shopify-cart.js?v=6" defer></script>
-<script src="theme/assets/products.js?v=5"></script>
 <script src="theme/assets/products-live.js?v=2"></script>
 <script src="theme/assets/newsletter.js?v=2" defer></script>
 <script src="theme/assets/cart.js?v=6"></script>
@@ -487,16 +486,18 @@
   function fmtPrice(amt) { return 'SAR ' + Number(amt).toFixed(0); }
   function escAttr(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-  function cardHtml(p) {
+  function cardHtml(p, i) {
     const a = p.images[0] || '';
     const b = p.images[1] || a;
     const titleAr = p.title_ar ? '<span class="product-card__title-ar" dir="rtl" lang="ar">' + escAttr(p.title_ar) + '</span>' : '';
     const badge = p.is_signature ? '<span class="product-card__badge">Signature</span>' : '';
+    // Only first 3 cards are above-the-fold; rest can lazy-load
+    const eager = i < 3 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
     return ''
       + '<article class="product-card" data-slug="' + escAttr(p.slug) + '">'
       +   badge
       +   '<a href="product.html?slug=' + escAttr(p.slug) + '" class="product-card__media" aria-label="' + escAttr(p.title_en) + '">'
-      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" loading="lazy" />'
+      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" ' + eager + ' />'
       +     '<img class="product-card__img product-card__img--b" src="' + escAttr(b) + '" alt="' + escAttr(p.title_en) + ' — تفصيل" loading="lazy" />'
       +   '</a>'
       +   '<div class="product-card__meta">'
@@ -512,7 +513,7 @@
 
   function render() {
     if (!window.PRODUCTS || !window.PRODUCTS.length) return;
-    track.innerHTML = window.PRODUCTS.map(cardHtml).join('');
+    track.innerHTML = window.PRODUCTS.map((p, i) => cardHtml(p, i)).join('');
     // re-init carousel scroll state if theme.js exposes a hook
     if (typeof window.__dentelleCarouselReinit === 'function') window.__dentelleCarouselReinit();
   }
