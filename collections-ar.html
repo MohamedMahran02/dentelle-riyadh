@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=36" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=37" />
 </head>
 <body data-theme="cream" class="template-collections">
 
@@ -160,23 +160,28 @@
     return String(s).replace(/[0-9]/g, function (d) { return ar[+d]; });
   }
 
-  function cardHtml(c, idx) {
-    var titleAr = c.title_ar || c.title;
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function cardHtml(c) {
     var titleEn = c.title;
+    // Only show Arabic title if a real AR value exists and differs from English
+    var titleArSpan = (c.title_ar && c.title_ar !== c.title)
+      ? '<span class="collections-card__title-ar" dir="rtl" lang="ar">' + esc(c.title_ar) + '</span>'
+      : '';
     var count = c.product_count || 0;
     var price = c.min_price ? ('ابتداءً من ' + toArabicDigits(c.min_price) + ' ر.س') : '';
     var meta = toArabicDigits(count) + ' قِطَع' + (price ? ' · ' + price : '');
     var hover = c.hover_image || c.image;
     return '<a href="collection-ar.html?handle=' + encodeURIComponent(c.handle) + '" class="collections-card">' +
            '<div class="collections-card__media">' +
-             '<img src="' + (c.image || '') + '" alt="' + titleAr + '" loading="eager" />' +
-             '<img class="collections-card__media--hover" src="' + hover + '" alt="' + titleAr + '" loading="lazy" />' +
+             '<img src="' + esc(c.image || '') + '" alt="' + esc(titleEn) + '" loading="eager" />' +
+             '<img class="collections-card__media--hover" src="' + esc(hover || '') + '" alt="' + esc(titleEn) + '" loading="lazy" />' +
            '</div>' +
            '<div class="collections-card__body">' +
-             '<span class="collections-card__index">المجموعة N°' + pad2(idx + 1) + '</span>' +
+             '<span class="collections-card__index">المجموعة</span>' +
              '<h2 class="collections-card__title">' +
-               '<span class="collections-card__title-ar">' + titleAr + '</span>' +
-               '<span class="collections-card__title-en"><em>' + titleEn + '</em></span>' +
+               '<span class="collections-card__title-en"><em>' + esc(titleEn) + '</em></span>' +
+               titleArSpan +
              '</h2>' +
              '<p class="collections-card__meta">' + meta + '</p>' +
              '<span class="collections-card__cta">تصفّحي المجموعة ›</span>' +
