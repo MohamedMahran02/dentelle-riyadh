@@ -93,7 +93,7 @@
     <span class="eyebrow" data-eyebrow>Collection</span>
     <h1 class="h-display">
       <span data-title-en>The <em>Mohrah</em> Collection</span>
-      <span class="h-display-ar" dir="rtl" lang="ar" data-title-ar>مجموعة <em>مُهرة</em></span>
+      <span class="h-display-ar" dir="rtl" lang="ar" data-title-ar style="display:none"></span>
     </h1>
     <p class="collection__description" data-description>A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.</p>
     <p class="collection__count" data-count>— pieces</p>
@@ -186,7 +186,7 @@
     const all = window.PRODUCTS || [];
     let products = all;
     let titleEn = 'The <em>Mohrah</em> Collection';
-    let titleAr = 'مجموعة <em>مُهرة</em>';
+    let titleAr = '';
     let eyebrow = 'Collection';
 
     if (handle) {
@@ -194,26 +194,26 @@
       const col = (window.COLLECTIONS_BY_HANDLE || {})[handle];
       if (col) {
         titleEn = col.title;
-        // Only use the Arabic title if it differs from the English one
-        // (when the Shopify metafield isn't set, collections-live.js falls back to the English title)
+        // Only use the Arabic subtitle if a real Arabic value was set in Shopify
         if (col.title_ar && col.title_ar !== col.title) {
           titleAr = col.title_ar;
         }
       } else {
         titleEn = handle.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        titleAr = titleEn;
       }
     } else if (category !== 'all') {
       products = all.filter(p => (p.category || '').toLowerCase() === category);
       const lbl = CAT_LABELS[category] || CAT_LABELS.all;
       titleEn = lbl.en;
-      titleAr = lbl.en;
       eyebrow = lbl.eyebrow;
     }
 
     if (eyebrowEl) eyebrowEl.textContent = eyebrow;
     if (titleEnEl) titleEnEl.innerHTML = titleEn;
-    if (titleArEl) titleArEl.innerHTML = titleAr;
+    if (titleArEl) {
+      titleArEl.innerHTML = titleAr;
+      titleArEl.style.display = titleAr ? '' : 'none';
+    }
 
     document.querySelectorAll('[data-filter]').forEach((a) => {
       a.classList.toggle('is-active', a.dataset.filter === (handle ? 'all' : category));
