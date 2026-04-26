@@ -1314,9 +1314,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
 }
 
-/* Arrow buttons — hidden */
+/* Arrow buttons */
 .carousel-btn {
-  display: none !important;
+  display: flex;
   position: absolute;
   top: 38%;
   transform: translateY(-50%);

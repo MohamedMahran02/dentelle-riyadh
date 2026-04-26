@@ -389,6 +389,12 @@
   /* =========================================================
      Init on DOMContentLoaded
      ========================================================= */
+  /* Re-run card init whenever live products land (async Shopify fetch) */
+  window.addEventListener('dentelle:products-updated', function () {
+    initProductCards();
+    window.DentelleWishlist.refreshButtons();
+  });
+
   document.addEventListener('DOMContentLoaded', function () {
     Drawer.init();
     WishDrawer.init();
