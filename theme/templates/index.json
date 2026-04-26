@@ -3,10 +3,10 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "label_en": "Collection N°01 · Mohrah",
+        "label_en": "Collection N°01 · Mohra",
         "label_ar": "مجموعة مُهره",
-        "heading": "Mohrah.",
-        "eyebrow": "The Mohrah Collection",
+        "heading": "Mohra.",
+        "eyebrow": "The Mohra Collection",
         "lede": "A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.",
         "button_label": "Discover the pieces",
         "link_label": "Read the story"
@@ -16,9 +16,9 @@
       "type": "marquee",
       "blocks": {
         "b1": { "type": "item", "settings": { "text": "مُهره", "rtl": true } },
-        "b2": { "type": "item", "settings": { "text": "Mohrah Collection" } },
+        "b2": { "type": "item", "settings": { "text": "Mohra Collection" } },
         "b3": { "type": "item", "settings": { "text": "Dentelle Riyadh" } },
-        "b4": { "type": "item", "settings": { "text": "Made in the Kingdom" } }
+        "b4": { "type": "item", "settings": { "text": "Designed in the Kingdom" } }
       },
       "block_order": ["b1", "b2", "b3", "b4"]
     },
@@ -27,7 +27,7 @@
       "settings": {
         "products_to_show": 8,
         "eyebrow_en": "The Pieces",
-        "heading_en": "<p>The <em>Mohrah</em> collection.</p>",
+        "heading_en": "<p>The <em>Mohra</em> collection.</p>",
         "heading_ar": "<p>مجموعة <em>مُهرة.</em></p>",
         "view_all_label_ar": "٨ قِطَع · تصفّحي المجموعة"
       }
@@ -62,7 +62,7 @@
         "caption_tall": "Handwork — Riyadh",
         "lede": "<p><em>Each piece is a conversation</em> — between the atelier's hands, French silks and Calais laces, and the private rhythms of the woman who will wear it.</p>",
         "link_label": "Book a size consultation",
-        "caption_short": "Detail — Mohrah N°01"
+        "caption_short": "Detail — Mohra N°01"
       },
       "blocks": {
         "f1": { "type": "feature", "settings": { "index": "01", "text": "French Leavers lace · Calais" } },
