@@ -1305,11 +1305,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 @media (max-width: 680px) {
   .product-grid__items--carousel {
-    padding-inline: 6vw;
-    scroll-padding-inline: 6vw;
+    /* frame-x cancels the negative margin; +1.2rem gives visible breathing room */
+    padding-inline: calc(var(--frame-x) + 1.2rem);
+    scroll-padding-inline: calc(var(--frame-x) + 1.2rem);
   }
   .product-grid__items--carousel .product-card {
-    flex: 0 0 82vw;
+    flex: 0 0 78vw;
     scroll-snap-align: center;
   }
 }
