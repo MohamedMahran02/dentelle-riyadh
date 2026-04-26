@@ -12,7 +12,7 @@
     return;
   }
 
-  var CACHE_KEY = 'dentelle:products:v4';
+  var CACHE_KEY = 'dentelle:products:v5';
   var CACHE_TTL = 5 * 60 * 1000; // 5 min
 
   var QUERY = [

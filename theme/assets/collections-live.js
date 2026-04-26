@@ -7,7 +7,7 @@
 
   if (!window.SHOPIFY || !window.SHOPIFY.storefrontToken) return;
 
-  var CACHE_KEY = 'dentelle:collections:v1';
+  var CACHE_KEY = 'dentelle:collections:v2';
   var CACHE_TTL = 5 * 60 * 1000;
 
   var QUERY = [
