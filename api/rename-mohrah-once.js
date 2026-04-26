@@ -1,5 +1,4 @@
-/* TEMPORARY one-shot endpoint — rename "Mohrah" to "Mohra" across all
-   products. Will be deleted from the repo immediately after running. */
+/* TEMPORARY one-shot endpoint — debug + rename. Will be deleted. */
 export default async function handler(req, res) {
   if ((req.query.secret || '') !== 'dentelle-rename-2026') {
     return res.status(403).json({ error: 'forbidden' });
@@ -10,31 +9,40 @@ export default async function handler(req, res) {
   const H = { 'X-Shopify-Access-Token': token, 'Content-Type': 'application/json', Accept: 'application/json' };
   const API = `https://${domain}/admin/api/2024-10`;
 
-  const log = [];
+  // Try GraphQL (more permissive on read scopes), fall back to REST
   try {
-    const list = await fetch(`${API}/products.json?limit=250`, { headers: H });
-    const data = await list.json();
-    const products = data.products || [];
-    log.push(`found ${products.length} products`);
+    const g = await fetch(`${API}/graphql.json`, {
+      method: 'POST', headers: H,
+      body: JSON.stringify({ query: `{ products(first: 50) { edges { node { id title descriptionHtml } } } }` })
+    });
+    const gd = await g.json();
+    const edges = gd?.data?.products?.edges || [];
+    if (!edges.length) return res.status(200).json({ ok: false, gql: gd });
 
-    for (const p of products) {
-      const oldTitle = p.title || '';
-      const newTitle = oldTitle.replace(/Mohrah/g, 'Mohra').replace(/mohrah/g, 'mohra').replace(/MOHRAH/g, 'MOHRA');
-      const oldBody = p.body_html || '';
-      const newBody = oldBody.replace(/Mohrah/g, 'Mohra').replace(/mohrah/g, 'mohra').replace(/MOHRAH/g, 'MOHRA');
-      if (newTitle === oldTitle && newBody === oldBody) {
-        log.push(`skip: ${oldTitle}`);
-        continue;
-      }
-      const r = await fetch(`${API}/products/${p.id}.json`, {
-        method: 'PUT', headers: H,
-        body: JSON.stringify({ product: { id: p.id, title: newTitle, body_html: newBody } })
+    const log = [];
+    for (const { node } of edges) {
+      const oldT = node.title || '';
+      const newT = oldT.replace(/Mohrah/g, 'Mohra').replace(/mohrah/g, 'mohra').replace(/MOHRAH/g, 'MOHRA');
+      const oldB = node.descriptionHtml || '';
+      const newB = oldB.replace(/Mohrah/g, 'Mohra').replace(/mohrah/g, 'mohra').replace(/MOHRAH/g, 'MOHRA');
+      if (oldT === newT && oldB === newB) { log.push(`skip: ${oldT}`); continue; }
+
+      const m = await fetch(`${API}/graphql.json`, {
+        method: 'POST', headers: H,
+        body: JSON.stringify({
+          query: `mutation($input: ProductInput!) {
+            productUpdate(input: $input) { product { id title } userErrors { field message } }
+          }`,
+          variables: { input: { id: node.id, title: newT, descriptionHtml: newB } }
+        })
       });
-      if (r.ok) log.push(`renamed: ${oldTitle} -> ${newTitle}`);
-      else log.push(`FAILED ${oldTitle}: ${r.status} ${(await r.text()).slice(0,200)}`);
+      const md = await m.json();
+      const errs = md?.data?.productUpdate?.userErrors || [];
+      if (errs.length) log.push(`FAILED ${oldT}: ${JSON.stringify(errs)}`);
+      else log.push(`renamed: ${oldT} -> ${newT}`);
     }
     return res.status(200).json({ ok: true, log });
   } catch (e) {
-    return res.status(500).json({ error: String(e), log });
+    return res.status(500).json({ error: String(e) });
   }
 }
