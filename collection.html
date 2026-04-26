@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=36" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=37" />
 </head>
 <body data-theme="cream" class="template-collection">
 
@@ -92,7 +92,7 @@
   <header class="collection__header">
     <span class="eyebrow" data-eyebrow>Collection</span>
     <h1 class="h-display">
-      <span data-title-en>The <em>Mohrah</em> Collection</span>
+      <span data-title-en>All <em>Pieces</em></span>
       <span class="h-display-ar" dir="rtl" lang="ar" data-title-ar style="display:none"></span>
     </h1>
     <p class="collection__description" data-description>A refined language for femininity — rooted in heritage, refined by modernity. Every piece is hand-finished in our Riyadh atelier.</p>
@@ -185,7 +185,7 @@
 
     const all = window.PRODUCTS || [];
     let products = all;
-    let titleEn = 'The <em>Mohrah</em> Collection';
+    let titleEn = 'All <em>Pieces</em>';
     let titleAr = '';
     let eyebrow = 'Collection';
 
@@ -214,6 +214,9 @@
       titleArEl.innerHTML = titleAr;
       titleArEl.style.display = titleAr ? '' : 'none';
     }
+    // Update browser tab title
+    const plainTitle = titleEnEl ? titleEnEl.textContent.trim() : titleEn.replace(/<[^>]+>/g, '');
+    document.title = plainTitle + ' — Dentelle Riyadh';
 
     document.querySelectorAll('[data-filter]').forEach((a) => {
       a.classList.toggle('is-active', a.dataset.filter === (handle ? 'all' : category));

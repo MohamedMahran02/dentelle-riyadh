@@ -1478,7 +1478,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .categories__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: clamp(.8rem, 1.5vw, 1.4rem);
 }
 .category-tile {
@@ -1876,7 +1876,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
   .product-grid__items { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1.2rem; }
 
-  .categories__grid { grid-template-columns: repeat(2, 1fr); }
+  .categories__grid { grid-template-columns: repeat(3, 1fr); }
 
   .campaign { min-height: 70vh; }
 
