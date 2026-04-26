@@ -87,9 +87,13 @@
           alert('Checkout is temporarily unavailable. Please try again shortly.');
           return;
         }
-        // Clear local cart (Shopify now owns it; they may abandon and retry later)
-        localStorage.setItem('dentelle_cart_checkout_url', cart.checkoutUrl);
-        window.location.href = cart.checkoutUrl;
+        // Append return_to so Shopify redirects back to our site after payment
+        var siteRoot = window.location.origin + '/';
+        var checkoutUrl = cart.checkoutUrl;
+        checkoutUrl += (checkoutUrl.indexOf('?') === -1 ? '?' : '&') +
+          'return_to=' + encodeURIComponent(siteRoot);
+        localStorage.setItem('dentelle_cart_checkout_url', checkoutUrl);
+        window.location.href = checkoutUrl;
       } catch (err) {
         console.error('[Dentelle] checkout error:', err);
         alert('Checkout failed. Please check your connection and try again.');
