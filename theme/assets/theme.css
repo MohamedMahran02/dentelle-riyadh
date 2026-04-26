@@ -1292,10 +1292,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .product-grid__items--carousel::-webkit-scrollbar { display: none; }
 
-/* Each card: 3.4 visible on desktop, 1.2 on mobile */
+/* Each card: 4.4 visible on desktop, 2.4 on tablet, 1.2 on mobile */
 .product-grid__items--carousel .product-card {
-  flex: 0 0 calc((100% - 3 * clamp(1rem, 2vw, 2rem)) / 3.4);
-  min-width: 200px;
+  flex: 0 0 calc((100% - 4 * clamp(1rem, 2vw, 2rem)) / 4.4);
+  min-width: 180px;
   scroll-snap-align: start;
 }
 @media (max-width: 1100px) {
@@ -1394,7 +1394,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .product-card__media {
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/4;
   overflow: hidden;
   background: var(--c-cream-2);
   display: block;
@@ -2031,19 +2031,62 @@ ul { margin: 0; padding: 0; list-style: none; }
 .product__swatches input:focus-visible + .product__swatch { outline: 2px solid var(--c-gold); outline-offset: 2px; }
 
 .product__size-guide { margin-top: -.6rem; }
-.product__quantity { display: flex; align-items: center; gap: 1rem; }
-.product__quantity input {
-  width: 72px; padding: .8rem; text-align: center;
-  border: 1px solid var(--c-line); background: var(--c-paper);
-  font-family: var(--f-sans);
+
+/* ---- Gallery arrows ---- */
+.product__media-wrap { position: relative; }
+.product__gallery-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 4; background: rgba(251,248,242,.85); border: 1px solid var(--c-line);
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; line-height: 1; color: var(--c-ink);
+  cursor: pointer; transition: background .2s, color .2s;
+  backdrop-filter: blur(4px);
 }
+.product__gallery-arrow:hover { background: var(--c-ink); color: var(--c-paper); }
+.product__gallery-arrow--prev { left: .75rem; }
+.product__gallery-arrow--next { right: .75rem; }
+
+/* ---- Size pills ---- */
+.product__size-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+.product__size-pill {
+  min-width: 52px; padding: .6rem 1rem;
+  font-family: var(--f-sans); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+  border: 1px solid var(--c-line); background: var(--c-paper); color: var(--c-ink);
+  cursor: pointer; transition: border-color .2s, background .2s, color .2s;
+}
+.product__size-pill:hover { border-color: var(--c-ink); }
+.product__size-pill.is-selected { border-color: var(--c-ink); background: var(--c-ink); color: var(--c-paper); }
+.product__size-pills.needs-size .product__size-pill { border-color: #b03030; animation: shake .35s; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+
+/* ---- Quantity stepper ---- */
+.product__quantity { display: flex; align-items: center; gap: 1rem; }
+.product__qty-stepper { display: flex; align-items: center; border: 1px solid var(--c-line); }
+.product__qty-btn {
+  width: 40px; height: 44px; background: none; border: none;
+  font-size: 1.2rem; color: var(--c-ink); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .18s;
+}
+.product__qty-btn:hover { background: var(--c-cream-2); }
+.product__qty-stepper input {
+  width: 48px; height: 44px; text-align: center; border: none;
+  border-left: 1px solid var(--c-line); border-right: 1px solid var(--c-line);
+  font-family: var(--f-sans); font-size: .9rem; background: var(--c-paper);
+}
+.product__qty-stepper input::-webkit-inner-spin-button,
+.product__qty-stepper input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
 .btn--lg { padding: 1.25rem 2.8rem; font-size: .76rem; }
 .btn--sm { padding: .45rem 1rem; font-size: .62rem; letter-spacing: .22em; }
-.product__add-to-cart {
-  width: 100%;
-  align-self: stretch;
-  justify-content: center;
+.product__add-to-cart, .product__buy-now {
+  width: 100%; align-self: stretch; justify-content: center;
 }
+.product__buy-now {
+  background: var(--c-ink); color: var(--c-paper); border-color: var(--c-ink);
+}
+.product__buy-now:hover { background: var(--c-ink-soft); }
 .product__add-to-cart[disabled] { opacity: .5; cursor: not-allowed; }
 
 .product__accordions { margin-top: 1rem; border-top: 1px solid var(--c-line); }

@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=33" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=34" />
 </head>
 <body data-theme="cream" class="template-product">
 
@@ -101,7 +101,11 @@
 <section class="product" id="product" data-product>
   <div class="product__inner">
     <div class="product__gallery">
-      <div class="product__media" data-product-media-main></div>
+      <div class="product__media-wrap">
+        <button type="button" class="product__gallery-arrow product__gallery-arrow--prev" data-gallery-prev aria-label="Previous image">&#8249;</button>
+        <div class="product__media" data-product-media-main></div>
+        <button type="button" class="product__gallery-arrow product__gallery-arrow--next" data-gallery-next aria-label="Next image">&#8250;</button>
+      </div>
       <div class="product__thumbs" data-product-thumbs></div>
     </div>
 
@@ -124,24 +128,25 @@
 
       <form class="product__form" data-product-form>
         <div class="product__option">
-          <label class="product__option-name" for="productSizeSelect">Size</label>
-          <select class="product__size-select" id="productSizeSelect" data-sizes aria-label="Select size">
-            <option value="">Select a size</option>
-          </select>
+          <label class="product__option-name">Size</label>
+          <div class="product__size-pills" data-sizes></div>
         </div>
 
         <div class="product__quantity">
-          <label for="Quantity" class="product__option-name">Quantity</label>
-          <input type="number" id="Quantity" name="quantity" value="1" min="1" step="1" />
+          <label class="product__option-name">Quantity</label>
+          <div class="product__qty-stepper">
+            <button type="button" class="product__qty-btn" data-qty-dec aria-label="Decrease">−</button>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1" step="1" readonly />
+            <button type="button" class="product__qty-btn" data-qty-inc aria-label="Increase">+</button>
+          </div>
         </div>
 
         <button type="submit" class="btn btn--lg product__add-to-cart" data-add-to-cart>
           <span data-add-to-cart-text>Add to bag</span>
         </button>
-
-        <p class="product__note" data-form-note style="color:var(--c-muted); font-size:.8rem; font-style:italic;">
-          Static preview — checkout is enabled once the store is connected to Shopify.
-        </p>
+        <button type="button" class="btn btn--lg product__buy-now" data-buy-now>
+          Buy it now
+        </button>
       </form>
 
       <div class="product__accordions" id="size-guide">
@@ -291,10 +296,13 @@
   document.querySelector('[data-care]').innerHTML = `<p>${product.care || '—'}</p>`;
   document.querySelector('[data-shipping]').innerHTML = `<p>${product.shipping || '—'}</p>`;
 
-  // ----- Gallery -----
-  const mediaBox = document.querySelector('[data-product-media-main]');
+  // ----- Gallery with arrows -----
+  const mediaBox  = document.querySelector('[data-product-media-main]');
   const thumbsBox = document.querySelector('[data-product-thumbs]');
-  product.images.forEach((src, i) => {
+  let currentImg  = 0;
+  const imgs = product.images;
+
+  imgs.forEach((src, i) => {
     const fig = document.createElement('figure');
     fig.className = 'product__media-item' + (i === 0 ? ' is-active' : '');
     fig.dataset.mediaId = i;
@@ -309,56 +317,83 @@
     thumb.innerHTML = `<img src="${src}" alt="" loading="lazy" />`;
     thumbsBox.appendChild(thumb);
   });
-  thumbsBox.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-thumb-for]');
-    if (!btn) return;
-    const id = btn.dataset.thumbFor;
+
+  function goToImg(idx) {
+    currentImg = (idx + imgs.length) % imgs.length;
     document.querySelectorAll('[data-media-id]').forEach((f) =>
-      f.classList.toggle('is-active', f.dataset.mediaId === id)
+      f.classList.toggle('is-active', Number(f.dataset.mediaId) === currentImg)
     );
     document.querySelectorAll('[data-thumb-for]').forEach((t) =>
-      t.classList.toggle('is-active', t.dataset.thumbFor === id)
+      t.classList.toggle('is-active', Number(t.dataset.thumbFor) === currentImg)
     );
-  });
+  }
 
-  // ----- Sizes -----
+  thumbsBox.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-thumb-for]');
+    if (btn) goToImg(Number(btn.dataset.thumbFor));
+  });
+  document.querySelector('[data-gallery-prev]')?.addEventListener('click', () => goToImg(currentImg - 1));
+  document.querySelector('[data-gallery-next]')?.addEventListener('click', () => goToImg(currentImg + 1));
+
+  // ----- Size pills -----
   const sizesBox = document.querySelector('[data-sizes]');
-  product.sizes.forEach((size) => {
-    const opt = document.createElement('option');
-    opt.value = size;
-    opt.textContent = size;
-    sizesBox.appendChild(opt);
+  let selectedSize = '';
+  product.sizes.forEach((size, i) => {
+    const pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = 'product__size-pill';
+    pill.textContent = size;
+    pill.setAttribute('aria-pressed', 'false');
+    pill.addEventListener('click', () => {
+      sizesBox.querySelectorAll('.product__size-pill').forEach(p => { p.classList.remove('is-selected'); p.setAttribute('aria-pressed','false'); });
+      pill.classList.add('is-selected');
+      pill.setAttribute('aria-pressed','true');
+      selectedSize = size;
+      sizesBox.classList.remove('needs-size');
+    });
+    sizesBox.appendChild(pill);
   });
 
-  // ----- Form submit — add to localStorage cart -----
-  const form = document.querySelector('[data-product-form]');
-  const btn = form.querySelector('[data-add-to-cart]');
+  // ----- Quantity stepper -----
+  const qtyInput = document.querySelector('input[name="quantity"]');
+  document.querySelector('[data-qty-dec]')?.addEventListener('click', () => {
+    if (Number(qtyInput.value) > 1) qtyInput.value = Number(qtyInput.value) - 1;
+  });
+  document.querySelector('[data-qty-inc]')?.addEventListener('click', () => {
+    qtyInput.value = Number(qtyInput.value) + 1;
+  });
+
+  // ----- Form submit -----
+  const form    = document.querySelector('[data-product-form]');
+  const btn     = form.querySelector('[data-add-to-cart]');
   const btnText = form.querySelector('[data-add-to-cart-text]');
-  const formNote = form.querySelector('[data-form-note]');
-  if (formNote) formNote.remove(); // Remove "static preview" note
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Get selected size from select dropdown
-    const sizeSelect = form.querySelector('[data-sizes]');
-    const selectedSize = sizeSelect ? sizeSelect.value : (product.sizes[0] || 'One Size');
     if (!selectedSize) {
-      sizeSelect.classList.add('needs-size');
-      setTimeout(() => sizeSelect.classList.remove('needs-size'), 700);
+      sizesBox.classList.add('needs-size');
+      sizesBox.querySelectorAll('.product__size-pill')[0]?.focus();
       return;
     }
-    const qty = Number(form.querySelector('input[name="quantity"]')?.value || 1);
-
-    // Add to cart
+    const qty = Number(qtyInput?.value || 1);
     if (window.DentelleCart) {
       window.DentelleCart.add(product, selectedSize, qty);
       btnText.textContent = 'Added ✓';
       btn.disabled = true;
-      setTimeout(() => {
-        btnText.textContent = 'Add to bag';
-        btn.disabled = false;
-      }, 1600);
+      setTimeout(() => { btnText.textContent = 'Add to bag'; btn.disabled = false; }, 1600);
     }
+  });
+
+  // ----- Buy it now -----
+  document.querySelector('[data-buy-now]')?.addEventListener('click', () => {
+    if (!selectedSize) {
+      sizesBox.classList.add('needs-size');
+      sizesBox.querySelectorAll('.product__size-pill')[0]?.focus();
+      return;
+    }
+    const qty = Number(qtyInput?.value || 1);
+    if (window.DentelleCart) window.DentelleCart.add(product, selectedSize, qty);
+    if (window.DentelleCheckout) window.DentelleCheckout.start();
   });
 
   // ----- Related products (other items in collection) -----
