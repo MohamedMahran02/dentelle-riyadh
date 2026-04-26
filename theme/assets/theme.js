@@ -607,4 +607,51 @@
     });
   });
 
+  /* ─── Carousel reinit after async product render ─── */
+  window.__dentelleCarouselReinit = function () {
+    $$('[data-carousel]').forEach((track) => {
+      const section  = track.closest('.product-grid');
+      const dotsWrap = section?.querySelector('[data-carousel-dots]');
+      if (!dotsWrap) return;
+
+      /* Rebuild cards list from freshly rendered DOM */
+      const cards = Array.from(track.querySelectorAll('.product-card'));
+      if (!cards.length) return;
+
+      /* Clear old dots */
+      dotsWrap.innerHTML = '';
+
+      /* Repopulate dots */
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to piece ' + (i + 1));
+        dotsWrap.appendChild(dot);
+      });
+
+      /* Wire click → scroll to card */
+      Array.from(dotsWrap.querySelectorAll('.carousel-dot')).forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          const card = cards[i];
+          if (!card) return;
+          const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+          track.scrollTo({ left: card.offsetLeft - padLeft, behavior: 'smooth' });
+        });
+      });
+
+      /* Sync active dot on scroll */
+      track.addEventListener('scroll', () => {
+        const padLeft  = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+        let best = 0, bestDist = Infinity;
+        cards.forEach((card, i) => {
+          const dist = Math.abs(card.offsetLeft - padLeft - track.scrollLeft);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        });
+        Array.from(dotsWrap.querySelectorAll('.carousel-dot'))
+          .forEach((d, i) => d.classList.toggle('is-active', i === best));
+      }, { passive: true });
+    });
+  };
+
 })();
