@@ -1962,15 +1962,16 @@ ul { margin: 0; padding: 0; list-style: none; }
 .product__gallery { position: sticky; top: calc(var(--frame-x) + 4.5rem); }
 .product__media { display: grid; gap: .5rem; }
 .product__media-item {
-  margin: 0; display: none;
+  margin: 0 auto; display: none;
   aspect-ratio: 4/5;
   max-height: calc(100vh - 7rem); /* never taller than the viewport */
+  width: 100%;
   overflow: hidden; background: var(--c-cream-2);
 }
-.product__media-item.is-active { display: block; }
+.product__media-item.is-active { display: flex; align-items: center; justify-content: center; }
 .product__media-item img,
 .product__media-item video,
-.product__media-item model-viewer { width: 100%; height: 100%; object-fit: cover; }
+.product__media-item model-viewer { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
 .product__thumbs { display: flex; gap: .4rem; margin-top: .6rem; flex-wrap: wrap; }
 .product__thumb {
   width: 80px; height: 100px;
@@ -2066,19 +2067,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
 
 /* ---- Quantity stepper ---- */
-.product__quantity { display: flex; align-items: center; gap: 1rem; }
-.product__qty-stepper { display: flex; align-items: center; border: 1px solid var(--c-line); }
+.product__quantity { display: flex; flex-direction: column; gap: .5rem; }
+.product__qty-stepper {
+  display: inline-flex; align-items: stretch;
+  border: 1px solid var(--c-line); height: 44px;
+}
 .product__qty-btn {
-  width: 40px; height: 44px; background: none; border: none;
+  width: 40px; background: none; border: none;
   font-size: 1.2rem; color: var(--c-ink); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: background .18s;
+  line-height: 1; transition: background .18s;
 }
 .product__qty-btn:hover { background: var(--c-cream-2); }
 .product__qty-stepper input {
-  width: 48px; height: 44px; text-align: center; border: none;
+  width: 48px; text-align: center; border: none;
   border-left: 1px solid var(--c-line); border-right: 1px solid var(--c-line);
   font-family: var(--f-sans); font-size: .9rem; background: var(--c-paper);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; line-height: 44px;
 }
 .product__qty-stepper input::-webkit-inner-spin-button,
 .product__qty-stepper input::-webkit-outer-spin-button { -webkit-appearance: none; }
