@@ -1314,10 +1314,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
 }
 
-/* Arrow buttons — thin outlined circles */
+/* Arrow buttons — hidden */
 .carousel-btn {
+  display: none;
   position: absolute;
-  top: 38%; /* sits mid-image */
+  top: 38%;
   transform: translateY(-50%);
   z-index: 10;
   width: 52px; height: 52px;
