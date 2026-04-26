@@ -1279,6 +1279,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  /* Offset snap point so scrolled cards don't land flush on the viewport edge */
+  scroll-padding-inline: var(--frame-x);
   gap: clamp(1rem, 2vw, 2rem);
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -1305,12 +1307,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 @media (max-width: 680px) {
   .product-grid__items--carousel {
-    /* frame-x cancels the negative margin; +1.2rem gives visible breathing room */
-    padding-inline: calc(var(--frame-x) + 1.2rem);
-    scroll-padding-inline: calc(var(--frame-x) + 1.2rem);
+    padding-inline: 6vw;
+    scroll-padding-inline: 6vw;
   }
   .product-grid__items--carousel .product-card {
-    flex: 0 0 78vw;
+    flex: 0 0 82vw;
     scroll-snap-align: center;
   }
 }
