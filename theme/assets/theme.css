@@ -2038,6 +2038,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-family: var(--f-sans);
 }
 .btn--lg { padding: 1.25rem 2.8rem; font-size: .76rem; }
+.btn--sm { padding: .45rem 1rem; font-size: .62rem; letter-spacing: .22em; }
 .product__add-to-cart {
   width: 100%;
   align-self: stretch;
