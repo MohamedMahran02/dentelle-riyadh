@@ -2902,3 +2902,34 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Upright-everywhere override (no italics) */
 em, i, cite, address, dfn, var { font-style: normal; }
 .h-display em, .h-display-ar em, .display em { font-style: normal; }
+
+/* ---------- Logo image (replaces inline SVG lockup) ---------- */
+.site-logo__img {
+  display: block;
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+.site-logo__img--lg {
+  height: 96px;
+}
+.site-loader__logo-lockup .site-logo__img {
+  height: 110px;
+  margin: 0 auto;
+}
+.site-footer__logo-img {
+  display: block;
+  width: clamp(120px, 14vw, 160px);
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+.size-modal__logo-img {
+  display: block;
+  width: clamp(80px, 10vw, 110px);
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+/* When the logo image lives inside the dark header, ensure no inherited color tint */
+.site-header .site-logo__img { filter: none; }
