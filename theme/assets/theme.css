@@ -1660,8 +1660,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   align-items: start;
 }
 .story__block + .story__block {
-  border-top: 1px solid var(--c-line);
-  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-top: clamp(1.2rem, 2.5vw, 2rem);
 }
 .story__column p {
   font-size: var(--step-1);
