@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=50" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=51" />
 
 <!-- Preload all product card images so they're ready before JS renders cards -->
 <link rel="preload" as="image" href="images/products/mohra-1-1.webp" fetchpriority="high">
@@ -86,7 +86,7 @@
       <a href="#philosophy">About the brand</a>
       <a href="collections.html">Collections</a>
       <a href="collection.html?handle=mohra">Mohra Collection</a>
-      <a href="#size">Size Guide</a>
+      <a href="#" data-size-guide>Size Guide</a>
     </nav>
 
     <div class="site-header__icons">
@@ -118,7 +118,7 @@
     <a href="#philosophy">About the brand</a>
     <a href="collections.html">Collections</a>
       <a href="collection.html?handle=mohra">Mohra Collection</a>
-    <a href="#size">Size Guide</a>
+    <a href="#" data-size-guide>Size Guide</a>
     <div class="mobile-panel__locale">
       <a href="index.html" class="locale-btn is-active" aria-current="true">EN</a>
       <span>·</span>
@@ -341,7 +341,7 @@
 
 
 <!-- SAVOIR-FAIRE -->
-<section class="savoir" id="size" data-reveal>
+<section class="savoir" id="atelier" data-reveal>
   <header class="savoir__header">
     <span class="eyebrow">Savoir-faire · الحِرفة</span>
     <h2 class="h-display">The Dentelle <em>atelier.</em></h2>
@@ -359,7 +359,6 @@
         <li><span>02</span>Silk satin · Lyon</li>
         <li><span>03</span>SASO certified, made in the Kingdom</li>
       </ul>
-      <a href="#" class="link-underline" data-size-guide>Size guide ›</a>
     </div>
     <figure class="savoir__fig savoir__fig--short">
       <img src="mohra-1/SMH03130.webp" alt="Finished garment detail"/>
@@ -434,12 +433,12 @@
       <a href="#philosophy" class="bilingual-link"><span>Philosophy</span><span dir="rtl" lang="ar">فلسفتنا</span></a>
       <a href="#brand" class="bilingual-link"><span>The Brand</span><span dir="rtl" lang="ar">العلامة التجارية</span></a>
       <a href="collection.html" class="bilingual-link"><span>Mohra Collection</span><span dir="rtl" lang="ar">مجموعة مُهره</span></a>
-      <a href="#size" class="bilingual-link"><span>Atelier</span><span dir="rtl" lang="ar">الورشة</span></a>
+      <a href="#atelier" class="bilingual-link"><span>Atelier</span><span dir="rtl" lang="ar">الورشة</span></a>
     </div>
 
     <div class="site-footer__col">
       <h4>Client care</h4>
-      <a href="#size" class="bilingual-link"><span>Size Guide</span><span dir="rtl" lang="ar">دليل المقاسات</span></a>
+      <a href="#" class="bilingual-link" data-size-guide><span>Size Guide</span><span dir="rtl" lang="ar">دليل المقاسات</span></a>
       <a href="#" class="bilingual-link" data-legal="shipping"><span>Shipping</span><span dir="rtl" lang="ar">الشحن</span></a>
       <a href="#" class="bilingual-link" data-legal="returns"><span>Returns</span><span dir="rtl" lang="ar">الاستبدال</span></a>
       <a href="https://wa.me/966546002573" class="bilingual-link" target="_blank" rel="noopener"><span>Contact</span><span dir="rtl" lang="ar">تواصلي معنا</span></a>
