@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme/assets/theme.css?v=62" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=63" />
 </head>
 <body data-theme="cream" class="template-cart">
 
@@ -170,12 +170,19 @@
     var subtotal = items.reduce(function (s, i) { return s + i.price * i.qty; }, 0);
     var shipping = 0;
 
+    var AR_DIGITS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    function arDigits(s) { return String(s).replace(/[0-9]/g, function(d){ return AR_DIGITS[+d]; }); }
+    function arItemTitle(it) {
+      if (it.title_ar) return it.title_ar;
+      var m = (it.title_en || '').match(/^Mohra\s+(\d+)$/i);
+      return m ? 'مُهرة ' + arDigits(m[1]) : (it.title_en || '');
+    }
     var itemsHtml = items.map(function (item) {
+      var arName = arItemTitle(item);
       return '<div class="cart-page__item" data-item-key="' + item.key + '">' +
-        '<img class="cart-page__item-img" src="' + item.image + '" alt="' + item.title_en + '" loading="lazy">' +
+        '<img class="cart-page__item-img" src="' + item.image + '" alt="' + arName + '" loading="lazy">' +
         '<div class="cart-page__item-body">' +
-          '<p class="cart-page__item-title">' + item.title_en + '</p>' +
-          (item.title_ar ? '<p class="cart-page__item-title-ar" dir="rtl" lang="ar">' + item.title_ar + '</p>' : '') +
+          '<p class="cart-page__item-title" dir="rtl" lang="ar">' + arName + '</p>' +
           '<p class="cart-page__item-meta">المقاس: ' + item.size + '</p>' +
           '<div class="qty-control" style="margin-top:.6rem;">' +
             '<button type="button" class="qty-control__btn" data-step="' + item.key + '" data-dir="-1" aria-label="تقليل">−</button>' +

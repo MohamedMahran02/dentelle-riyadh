@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme/assets/theme.css?v=62" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=63" />
 </head>
 <body data-theme="cream" class="template-search">
 
@@ -179,20 +179,27 @@
     var initial = params.get('q') || '';
     if (initial) { input.value = initial; }
   
+    var AR_DIGITS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    function arDigits(s) { return String(s).replace(/[0-9]/g, function(d){ return AR_DIGITS[+d]; }); }
+    function arTitle(p) {
+      if (p.title_ar) return p.title_ar;
+      var m = (p.title_en || '').match(/^Mohra\s+(\d+)$/i);
+      return m ? 'مُهرة ' + arDigits(m[1]) : (p.title_en || '');
+    }
     function cardHtml(p) {
+      var arName = arTitle(p);
       return '<article class="product-card">' +
         (p.is_signature ? '<span class="product-card__badge">Signature</span>' : '') +
-        '<a href="product-ar.html?slug=' + p.slug + '" class="product-card__media" aria-label="' + p.title_en + '">' +
-          '<img class="product-card__img product-card__img--a" src="' + p.images[0] + '" alt="' + p.title_en + '" loading="lazy" />' +
-          '<img class="product-card__img product-card__img--b" src="' + (p.images[1] || p.images[0]) + '" alt="' + p.title_en + ' — detail" loading="lazy" />' +
+        '<a href="product-ar.html?slug=' + p.slug + '" class="product-card__media" aria-label="' + arName + '">' +
+          '<img class="product-card__img product-card__img--a" src="' + p.images[0] + '" alt="' + arName + '" loading="lazy" />' +
+          '<img class="product-card__img product-card__img--b" src="' + (p.images[1] || p.images[0]) + '" alt="' + arName + ' — تفصيل" loading="lazy" />' +
         '</a>' +
         '<div class="product-card__meta">' +
           '<h3 class="product-card__title">' +
-            '<span class="product-card__title-en">' + p.title_en + '</span>' +
-            '<span class="product-card__title-ar" dir="rtl" lang="ar">' + p.title_ar + '</span>' +
+            '<span class="product-card__title-ar" dir="rtl" lang="ar">' + arName + '</span>' +
           '</h3>' +
           '<p>Dentelle Riyadh — مجموعة مُهره</p>' +
-          '<span class="price"><span class="price__amount">SAR ' + p.price + '</span></span>' +
+          '<span class="price"><span class="price__amount">SAR ' + arDigits(p.price) + '</span></span>' +
         '</div>' +
       '</article>';
     }

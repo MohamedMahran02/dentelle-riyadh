@@ -2929,3 +2929,11 @@ em, i, cite, address, dfn, var { font-style: normal; }
 }
 /* When the logo image lives inside the dark header, ensure no inherited color tint */
 .site-header .site-logo__img { filter: none; }
+
+/* ---------- Bilingual hide-the-other-side on locale pages ---------- */
+[lang="ar"] .product-grid__head-en { display: none; }
+[lang="ar"] .product-grid__head--bilingual { grid-template-columns: 1fr; }
+[lang="ar"] .product-grid__head-ar { justify-self: stretch; }
+[lang="ar"] .story__block > .story__column:not(.story__column--ar) { display: none; }
+[lang="ar"] .story__block { grid-template-columns: 1fr; }
+[lang="ar"] .story__column--ar { padding-left: 0; border-left: 0; text-align: right; }

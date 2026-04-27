@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=62" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=63" />
 </head>
 <body data-theme="cream">
 
@@ -111,7 +111,7 @@
   </div>
   <div class="campaign__overlay">
     <span class="eyebrow eyebrow--light">الحملة · مُهره</span>
-    <h2 class="h-display h-display--light"><em>Of quiet</em><br>confidence.</h2>
+    <h2 class="h-display h-display--light"><em>ثقةٌ</em><br>هادئة.</h2>
     <a href="#pieces" class="btn btn--ghost-light">ادخلي عالم مُهره</a>
   </div>
 </section>
@@ -302,7 +302,7 @@
 <section class="newsletter" data-reveal>
   <div class="newsletter__inner">
     <span class="eyebrow">انضمّي إلى الدار</span>
-    <h2 class="h-display">Private <em>correspondence.</em></h2>
+    <h2 class="h-display">مراسلات <em>خاصّة.</em></h2>
     <p>دعواتٌ لعروض خاصة، وإصدارات مُهره الجديدة، ورسائل من ورشة الرياض.</p>
     <form class="newsletter__form" data-newsletter-form data-lang="ar">
       <input type="email" name="email" placeholder="بريدك الإلكتروني" required />
@@ -479,24 +479,33 @@
   function fmtPrice(amt) { return 'SAR ' + Number(amt).toFixed(0); }
   function escAttr(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+  // Translate "Mohra N" -> "مُهرة N" (Arabic-Indic digit) when title_ar metafield is empty
+  const AR_DIGITS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  function arDigits(s) { return String(s).replace(/[0-9]/g, d => AR_DIGITS[+d]); }
+  function arTitle(p) {
+    if (p.title_ar) return p.title_ar;
+    const m = (p.title_en || '').match(/^Mohra\s+(\d+)$/i);
+    if (m) return 'مُهرة ' + arDigits(m[1]);
+    return p.title_en || '';
+  }
+
   function cardHtml(p, i) {
     const a = p.images[0] || '';
     const b = p.images[1] || a;
-    const titleAr = p.title_ar ? '<span class="product-card__title-ar" dir="rtl" lang="ar">' + escAttr(p.title_ar) + '</span>' : '';
+    const arName = arTitle(p);
     const badge = p.is_signature ? '<span class="product-card__badge">Signature</span>' : '';
     // Only first 3 cards are above-the-fold; rest can lazy-load
     const eager = i < 3 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
     return ''
       + '<article class="product-card" data-slug="' + escAttr(p.slug) + '">'
       +   badge
-      +   '<a href="product.html?slug=' + escAttr(p.slug) + '" class="product-card__media" aria-label="' + escAttr(p.title_en) + '">'
-      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(p.title_en) + '" ' + eager + ' />'
-      +     '<img class="product-card__img product-card__img--b" src="' + escAttr(b) + '" alt="' + escAttr(p.title_en) + ' — تفصيل" loading="lazy" />'
+      +   '<a href="product-ar.html?slug=' + escAttr(p.slug) + '" class="product-card__media" aria-label="' + escAttr(arName) + '">'
+      +     '<img class="product-card__img product-card__img--a" src="' + escAttr(a) + '" alt="' + escAttr(arName) + '" ' + eager + ' />'
+      +     '<img class="product-card__img product-card__img--b" src="' + escAttr(b) + '" alt="' + escAttr(arName) + ' — تفصيل" loading="lazy" />'
       +   '</a>'
       +   '<div class="product-card__meta">'
       +     '<h3 class="product-card__title">'
-      +       '<span class="product-card__title-en">' + escAttr(p.title_en) + '</span>'
-      +       titleAr
+      +       '<span class="product-card__title-ar" dir="rtl" lang="ar">' + escAttr(arName) + '</span>'
       +     '</h3>'
       +     '<p>' + escAttr(p.subtitle || 'Dentelle Riyadh — مجموعة مُهرة') + '</p>'
       +     '<span class="price"><span class="price__amount">' + fmtPrice(p.price) + '</span></span>'
