@@ -2930,10 +2930,18 @@ em, i, cite, address, dfn, var { font-style: normal; }
 /* When the logo image lives inside the dark header, ensure no inherited color tint */
 .site-header .site-logo__img { filter: none; }
 
-/* ---------- Bilingual hide-the-other-side on locale pages ---------- */
-[lang="ar"] .product-grid__head-en { display: none; }
-[lang="ar"] .product-grid__head--bilingual { grid-template-columns: 1fr; }
-[lang="ar"] .product-grid__head-ar { justify-self: stretch; }
-[lang="ar"] .story__block > .story__column:not(.story__column--ar) { display: none; }
-[lang="ar"] .story__block { grid-template-columns: 1fr; }
-[lang="ar"] .story__column--ar { padding-left: 0; border-left: 0; text-align: right; }
+/* ---------- AR page: keep both EN + AR columns visible like EN page ----------
+   With dir="rtl" on <html>, CSS grid reverses visual column order automatically:
+   what was "EN left, AR right" on EN page becomes "EN right, AR left" on AR page. */
+
+/* AR pages: nav links need their own size + zero letter-spacing because
+   Arabic glyphs don't use Latin tracking, and Naskh needs ~1.15x size to match
+   Latin perceptual size. Override the uppercase Latin styling. */
+[lang="ar"] .site-nav--row {
+  font-family: var(--f-ar-body) !important;
+  font-size: .9rem !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  gap: 1.8rem;
+}
+[lang="ar"] .site-nav--row a { padding: .25rem 0; }
