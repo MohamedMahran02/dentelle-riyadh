@@ -93,11 +93,14 @@
   --c-rouge:      #6E2A27;
 
   /* Type */
-  --f-display:   'Bodoni Moda', 'Didot', 'Playfair Display', serif;
+  /* Single-family Latin: Bodoni Moda for display, body, UI, nav, prices.
+     Optical-size axis lets the same family render at all sizes. */
+  --f-display:   'Bodoni Moda', 'Didot', Georgia, serif;
   --f-serif:     'Bodoni Moda', 'Didot', Georgia, serif;
-  --f-sans:      'Inter', ui-sans-serif, system-ui, sans-serif;
+  --f-sans:      'Bodoni Moda', 'Didot', Georgia, serif;
+  /* Single-family Arabic */
   --f-ar-display:'Noto Naskh Arabic', 'Amiri', serif;
-  --f-ar-body:   'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --f-ar-body:   'Noto Naskh Arabic', 'Amiri', serif;
 
   /* Scale — editorial, tight body / big headlines */
   --step--1: clamp(.78rem, .74rem + .15vw, .82rem);
