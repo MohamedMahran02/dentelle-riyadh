@@ -8,18 +8,11 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #F5EFE5 url('../../loader-bg.webp') center/cover no-repeat;
+  background: #EEEEEE;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity .7s var(--ease-out), visibility .7s;
-}
-/* subtle warm veil so logo reads cleanly against texture */
-.site-loader::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(245, 239, 229, .45);
 }
 .site-loader.is-done {
   opacity: 0;
