@@ -16,7 +16,61 @@
   const getWish  = () => JSON.parse(localStorage.getItem(WISH_KEY) || '[]');
   const saveWish = (items) => localStorage.setItem(WISH_KEY, JSON.stringify(items));
 
-  const fmt = (n) => 'SAR\u00a0' + Number(n).toFixed(0);
+  const IS_AR = (document.documentElement.lang || '').toLowerCase().startsWith('ar');
+  const AR_DIGITS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  const toArDigits = (s) => String(s).replace(/[0-9]/g, d => AR_DIGITS[+d]);
+  const fmt = (n) => IS_AR
+    ? (toArDigits(Number(n).toFixed(0)) + '\u00a0ر.س')
+    : ('SAR\u00a0' + Number(n).toFixed(0));
+  const productHref = (slug) => (IS_AR ? 'product-ar.html' : 'product.html') + '?slug=' + slug;
+  const collectionHref = () => IS_AR ? 'collection-ar.html' : 'collection.html';
+  const cartHref = () => IS_AR ? 'cart-ar.html' : 'cart.html';
+  const T = IS_AR ? {
+    wishlist_count: 'المفضلة',
+    wishlist_close: 'إغلاق المفضلة',
+    wishlist_empty: 'قائمة المفضلة فارغة.',
+    browse: 'تصفّحي المجموعة ›',
+    view_piece: 'عرض القطعة',
+    remove_from_wishlist: 'إزالة من المفضلة',
+    bag: 'حقيبتك',
+    bag_close: 'إغلاق الحقيبة',
+    bag_empty: 'حقيبتك فارغة.',
+    bag_aria: 'حقيبة التسوّق',
+    subtotal: 'المجموع الفرعي',
+    view_bag_checkout: 'عرض الحقيبة والدفع',
+    size: 'المقاس',
+    qty_dec: 'إنقاص',
+    qty_inc: 'زيادة',
+    qty: 'الكمية',
+    remove: 'إزالة',
+    add_to_bag: 'أضيفي للحقيبة',
+    add_to_wishlist: 'إضافة للمفضلة',
+    select_size: 'اختاري المقاس',
+    added: 'تمت الإضافة ✓'
+  } : {
+    wishlist_count: 'Wishlist',
+    wishlist_close: 'Close wishlist',
+    wishlist_empty: 'Your wishlist is empty.',
+    browse: 'Browse the collection ›',
+    view_piece: 'View piece',
+    remove_from_wishlist: 'Remove from wishlist',
+    bag: 'Your bag',
+    bag_close: 'Close bag',
+    bag_empty: 'Your bag is empty.',
+    bag_aria: 'Shopping bag',
+    subtotal: 'Subtotal',
+    view_bag_checkout: 'View bag & checkout',
+    size: 'Size',
+    qty_dec: 'Decrease',
+    qty_inc: 'Increase',
+    qty: 'Quantity',
+    remove: 'Remove',
+    add_to_bag: 'Add to bag',
+    add_to_wishlist: 'Add to wishlist',
+    select_size: 'Select a size',
+    added: 'Added ✓'
+  };
+  const arTitle = (p) => (IS_AR && p.title_ar) ? p.title_ar : p.title_en;
 
   /* ------ count badge ------ */
   function refreshCounts() {
@@ -127,20 +181,22 @@
     buildItemHtml: function (slug) {
       var p = window.PRODUCTS_BY_SLUG && window.PRODUCTS_BY_SLUG[slug];
       if (!p) return '';
+      var href = productHref(p.slug);
+      var displayTitle = arTitle(p);
       return '<article class="wish-drawer__item">' +
-        '<a href="product.html?slug=' + p.slug + '" class="wish-drawer__item-img-wrap">' +
-          '<img src="' + p.images[0] + '" alt="' + p.title_en + '" width="80" height="100" loading="lazy">' +
+        '<a href="' + href + '" class="wish-drawer__item-img-wrap">' +
+          '<img src="' + p.images[0] + '" alt="' + displayTitle + '" width="80" height="100" loading="lazy">' +
         '</a>' +
         '<div class="wish-drawer__item-body">' +
-          '<h4><a href="product.html?slug=' + p.slug + '">' + p.title_en + '</a></h4>' +
-          (p.title_ar ? '<p class="wish-drawer__item-ar" dir="rtl" lang="ar">' + p.title_ar + '</p>' : '') +
+          '<h4><a href="' + href + '">' + displayTitle + '</a></h4>' +
+          (!IS_AR && p.title_ar ? '<p class="wish-drawer__item-ar" dir="rtl" lang="ar">' + p.title_ar + '</p>' : '') +
           '<p class="wish-drawer__item-price">' + fmt(p.price) + '</p>' +
         '</div>' +
         '<div class="wish-drawer__item-actions">' +
-          '<button type="button" class="wish-drawer__remove" data-wish-toggle="' + p.slug + '" aria-label="Remove from wishlist">' +
+          '<button type="button" class="wish-drawer__remove" data-wish-toggle="' + p.slug + '" aria-label="' + T.remove_from_wishlist + '">' +
             '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/></svg>' +
           '</button>' +
-          '<a href="product.html?slug=' + p.slug + '" class="btn btn--sm">View piece</a>' +
+          '<a href="' + href + '" class="btn btn--sm">' + T.view_piece + '</a>' +
         '</div>' +
       '</article>';
     },
@@ -152,14 +208,15 @@
       var self  = this;
       var itemsHtml = count
         ? slugs.map(function (s) { return self.buildItemHtml(s); }).join('')
-        : '<p class="wish-drawer__empty">Your wishlist is empty.<br>' +
-          '<a href="collection.html" class="link-underline" style="margin-top:1rem;display:inline-block;">Browse the collection ›</a></p>';
+        : '<p class="wish-drawer__empty">' + T.wishlist_empty + '<br>' +
+          '<a href="' + collectionHref() + '" class="link-underline" style="margin-top:1rem;display:inline-block;">' + T.browse + '</a></p>';
 
+      var displayCount = IS_AR ? toArDigits(count) : count;
       this.node.innerHTML =
-        '<div class="wish-drawer__inner">' +
+        '<div class="wish-drawer__inner"' + (IS_AR ? ' dir="rtl" lang="ar"' : '') + '>' +
           '<header class="wish-drawer__header">' +
-            '<span class="eyebrow">Wishlist (' + count + ')</span>' +
-            '<button type="button" class="wish-drawer__close" data-wish-close aria-label="Close wishlist">&#x2715;</button>' +
+            '<span class="eyebrow">' + T.wishlist_count + ' (' + displayCount + ')</span>' +
+            '<button type="button" class="wish-drawer__close" data-wish-close aria-label="' + T.wishlist_close + '">&#x2715;</button>' +
           '</header>' +
           '<div class="wish-drawer__items">' + itemsHtml + '</div>' +
         '</div>';
@@ -201,7 +258,7 @@
       el.className = 'cart-drawer';
       el.setAttribute('aria-hidden', 'true');
       el.setAttribute('role', 'dialog');
-      el.setAttribute('aria-label', 'Shopping bag');
+      el.setAttribute('aria-label', T.bag_aria);
       document.body.appendChild(el);
       this.node = el;
 
@@ -215,19 +272,22 @@
     },
 
     buildItemHtml: function (item) {
+      var displayTitle = (IS_AR && item.title_ar) ? item.title_ar : item.title_en;
+      var displayQty = IS_AR ? toArDigits(item.qty) : item.qty;
+      var displaySize = IS_AR ? toArDigits(item.size) : item.size;
       return '<article class="cart-drawer__item">' +
-        '<img src="' + item.image + '" alt="' + item.title_en + '" width="80" height="100" loading="lazy">' +
+        '<img src="' + item.image + '" alt="' + displayTitle + '" width="80" height="100" loading="lazy">' +
         '<div class="cart-drawer__item-body">' +
-          '<h4>' + item.title_en + '</h4>' +
-          (item.title_ar ? '<p class="cart-drawer__item-ar" dir="rtl" lang="ar">' + item.title_ar + '</p>' : '') +
-          '<p class="cart-drawer__item-meta">Size: ' + item.size + ' &nbsp;·&nbsp; ' + fmt(item.price) + '</p>' +
+          '<h4>' + displayTitle + '</h4>' +
+          (!IS_AR && item.title_ar ? '<p class="cart-drawer__item-ar" dir="rtl" lang="ar">' + item.title_ar + '</p>' : '') +
+          '<p class="cart-drawer__item-meta">' + T.size + ': ' + displaySize + ' &nbsp;·&nbsp; ' + fmt(item.price) + '</p>' +
           '<div class="cart-drawer__item-actions">' +
             '<div class="qty-control">' +
-              '<button type="button" class="qty-control__btn" data-drawer-step="' + item.key + '" data-drawer-dir="-1" aria-label="Decrease">−</button>' +
-              '<input type="number" class="qty-control__input" min="1" value="' + item.qty + '" data-drawer-qty="' + item.key + '" aria-label="Quantity">' +
-              '<button type="button" class="qty-control__btn" data-drawer-step="' + item.key + '" data-drawer-dir="1" aria-label="Increase">+</button>' +
+              '<button type="button" class="qty-control__btn" data-drawer-step="' + item.key + '" data-drawer-dir="-1" aria-label="' + T.qty_dec + '">−</button>' +
+              '<input type="number" class="qty-control__input" min="1" value="' + item.qty + '" data-drawer-qty="' + item.key + '" aria-label="' + T.qty + '">' +
+              '<button type="button" class="qty-control__btn" data-drawer-step="' + item.key + '" data-drawer-dir="1" aria-label="' + T.qty_inc + '">+</button>' +
             '</div>' +
-            '<button type="button" class="cart-drawer__remove" data-cart-remove="' + item.key + '">Remove</button>' +
+            '<button type="button" class="cart-drawer__remove" data-cart-remove="' + item.key + '">' + T.remove + '</button>' +
           '</div>' +
         '</div>' +
       '</article>';
@@ -240,23 +300,25 @@
 
       var itemsHtml = items.length
         ? items.map(this.buildItemHtml).join('')
-        : '<p class="cart-drawer__empty">Your bag is empty.<br><a href="collection.html" class="link-underline" style="margin-top:1rem;display:inline-block;">Browse the collection ›</a></p>';
+        : '<p class="cart-drawer__empty">' + T.bag_empty + '<br><a href="' + collectionHref() + '" class="link-underline" style="margin-top:1rem;display:inline-block;">' + T.browse + '</a></p>';
 
       var footerHtml = items.length
         ? '<footer class="cart-drawer__footer">' +
             '<div class="cart-drawer__subtotal">' +
-              '<span class="eyebrow">Subtotal</span>' +
+              '<span class="eyebrow">' + T.subtotal + '</span>' +
               '<span class="cart-drawer__total-price">' + fmt(total) + '</span>' +
             '</div>' +
-            '<a href="cart.html" class="btn btn--lg" style="justify-content:center;width:100%;">View bag &amp; checkout</a>' +
+            '<a href="' + cartHref() + '" class="btn btn--lg" style="justify-content:center;width:100%;">' + T.view_bag_checkout + '</a>' +
           '</footer>'
         : '';
 
+      var totalQty = items.reduce(function (s, i) { return s + i.qty; }, 0);
+      var displayTotalQty = IS_AR ? toArDigits(totalQty) : totalQty;
       this.node.innerHTML =
-        '<div class="cart-drawer__inner">' +
+        '<div class="cart-drawer__inner"' + (IS_AR ? ' dir="rtl" lang="ar"' : '') + '>' +
           '<header class="cart-drawer__header">' +
-            '<span class="eyebrow">Your bag (' + items.reduce(function (s, i) { return s + i.qty; }, 0) + ')</span>' +
-            '<button type="button" class="cart-drawer__close" data-cart-close aria-label="Close bag">&#x2715;</button>' +
+            '<span class="eyebrow">' + T.bag + ' (' + displayTotalQty + ')</span>' +
+            '<button type="button" class="cart-drawer__close" data-cart-close aria-label="' + T.bag_close + '">&#x2715;</button>' +
           '</header>' +
           '<div class="cart-drawer__items">' + itemsHtml + '</div>' +
           footerHtml +
@@ -356,7 +418,7 @@
           meta.insertAdjacentHTML('afterend',
             '<div class="product-card__quick-add" aria-hidden="true">' +
               (sizeBtnsHtml ? '<div class="product-card__sizes">' + sizeBtnsHtml + '</div>' : '') +
-              '<button type="button" class="product-card__atc-btn" data-quick-atc>Add to bag</button>' +
+              '<button type="button" class="product-card__atc-btn" data-quick-atc>' + T.add_to_bag + '</button>' +
             '</div>'
           );
         }
@@ -377,7 +439,7 @@
           var wished = window.DentelleWishlist && window.DentelleWishlist.has(slug);
           visual2.insertAdjacentHTML('afterbegin',
             '<button type="button" class="product-card__wish-btn' + (wished ? ' is-wished' : '') + '" ' +
-              'data-wish-toggle="' + slug + '" aria-label="Add to wishlist" aria-pressed="' + wished + '">' +
+              'data-wish-toggle="' + slug + '" aria-label="' + T.add_to_wishlist + '" aria-pressed="' + wished + '">' +
               '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5">' +
                 '<path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/>' +
               '</svg>' +
@@ -450,17 +512,17 @@
             sizesRow.classList.add('needs-size');
             setTimeout(function () { sizesRow.classList.remove('needs-size'); }, 700);
           }
-          atcBtn.textContent = 'Select a size';
-          setTimeout(function () { atcBtn.textContent = 'Add to bag'; }, 1400);
+          atcBtn.textContent = T.select_size;
+          setTimeout(function () { atcBtn.textContent = T.add_to_bag; }, 1400);
           return;
         }
         var product = window.PRODUCTS_BY_SLUG && window.PRODUCTS_BY_SLUG[cardSlug];
         if (product && window.DentelleCart) {
           window.DentelleCart.add(product, size, 1);
-          atcBtn.textContent = 'Added ✓';
+          atcBtn.textContent = T.added;
           atcBtn.disabled = true;
           setTimeout(function () {
-            atcBtn.textContent = 'Add to bag';
+            atcBtn.textContent = T.add_to_bag;
             atcBtn.disabled = false;
           }, 1500);
         }
