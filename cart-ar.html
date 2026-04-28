@@ -154,7 +154,7 @@
   var fmt = function (n) {
     var s = String(Math.round(Number(n) || 0));
     var ar = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-    return 'SAR\u00a0' + s.replace(/[0-9]/g, function(c){ return ar[+c]; });
+    return s.replace(/[0-9]/g, function(c){ return ar[+c]; }) + '\u00a0ر.س';
   };
 
   function render() {

@@ -479,7 +479,7 @@
   function fmtPrice(amt) {
     var n = String(Math.round(Number(amt) || 0));
     var ar = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-    return 'SAR ' + n.replace(/[0-9]/g, function(c){ return ar[+c]; });
+    return n.replace(/[0-9]/g, function(c){ return ar[+c]; }) + ' ر.س';
   }
   function escAttr(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
