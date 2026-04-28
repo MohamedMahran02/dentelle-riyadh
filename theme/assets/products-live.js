@@ -12,7 +12,7 @@
     return;
   }
 
-  var CACHE_KEY = 'dentelle:products:v8';
+  var CACHE_KEY = 'dentelle:products:v9';
   var CACHE_TTL = 5 * 60 * 1000; // 5 min
 
   var QUERY = [
@@ -118,11 +118,11 @@
         tags: n.tags || [],
         collections: collectionHandles,
         details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
-        details_ar: 'دانتيل 78% بولياميد، 15% إيلاستين، 7% ألياف معدنية.',
+        details_ar: 'دانتيل ٧٨٪ بولياميد، ١٥٪ إيلاستين، ٧٪ ألياف معدنية.',
         care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-        care_ar: 'غسيل يدوي بحد أقصى 30 درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+        care_ar: 'غسيل يدوي بحد أقصى ٣٠ درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
         shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
-        shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من 2 إلى 5 أيام عمل.'
+        shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من ٢ إلى ٥ أيام عمل.'
       };
     });
   }
