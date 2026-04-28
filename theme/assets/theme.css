@@ -2930,9 +2930,17 @@ em, i, cite, address, dfn, var { font-style: normal; }
 /* When the logo image lives inside the dark header, ensure no inherited color tint */
 .site-header .site-logo__img { filter: none; }
 
-/* ---------- AR page: keep both EN + AR columns visible like EN page ----------
-   With dir="rtl" on <html>, CSS grid reverses visual column order automatically:
-   what was "EN left, AR right" on EN page becomes "EN right, AR left" on AR page. */
+/* ---------- AR page: keep bilingual sections in EN-page layout ---------- */
+/* By default <html dir="rtl"> reverses CSS-grid column order. For the
+   editorial bilingual blocks (Pieces header + the three philosophy blocks)
+   we want the same visual order as the EN page: EN column on the left,
+   AR column on the right. Force LTR direction on these sections only. */
+[lang="ar"] .product-grid__head--bilingual,
+[lang="ar"] .story__block { direction: ltr; }
+[lang="ar"] .product-grid__head-en,
+[lang="ar"] .story__block > .story__column:not(.story__column--ar) { text-align: left; }
+[lang="ar"] .product-grid__head-ar,
+[lang="ar"] .story__block > .story__column--ar { direction: rtl; text-align: right; }
 
 /* AR pages: nav links need their own size + zero letter-spacing because
    Arabic glyphs don't use Latin tracking, and Naskh needs ~1.15x size to match

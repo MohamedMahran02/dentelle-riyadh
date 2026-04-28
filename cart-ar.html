@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme/assets/theme.css?v=64" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=65" />
 </head>
 <body data-theme="cream" class="template-cart">
 
@@ -151,7 +151,11 @@
 (function () {
   'use strict';
 
-  var fmt = function (n) { return 'SAR\u00a0' + Number(n).toFixed(0); };
+  var fmt = function (n) {
+    var s = String(Math.round(Number(n) || 0));
+    var ar = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    return 'SAR\u00a0' + s.replace(/[0-9]/g, function(c){ return ar[+c]; });
+  };
 
   function render() {
     var items = window.DentelleCart.getAll();
