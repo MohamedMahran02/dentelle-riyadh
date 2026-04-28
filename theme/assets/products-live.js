@@ -12,7 +12,7 @@
     return;
   }
 
-  var CACHE_KEY = 'dentelle:products:v6';
+  var CACHE_KEY = 'dentelle:products:v7';
   var CACHE_TTL = 5 * 60 * 1000; // 5 min
 
   var QUERY = [
@@ -49,21 +49,25 @@
     if (!html) return out;
     var tmp = document.createElement('div');
     tmp.innerHTML = html;
-    var blocks = tmp.querySelectorAll('p, li, h1, h2, h3, h4, h5, h6');
+    var blocks = tmp.querySelectorAll('p, li');
     if (!blocks.length) {
       var t = (tmp.textContent || '').trim();
       if (AR_RE.test(t)) out.ar = t; else out.en = t;
       return out;
     }
+    // Pick the LONGEST paragraph per language — skips short headings/subtitles.
     for (var i = 0; i < blocks.length; i++) {
-      var txt = (blocks[i].textContent || '').trim();
+      var b = blocks[i];
+      // Skip blocks that are only a heading-style strong (e.g. <p><strong>title</strong></p>)
+      var onlyStrong = b.children.length === 1 && b.children[0].tagName === 'STRONG' && b.children[0].textContent.trim() === b.textContent.trim();
+      if (onlyStrong) continue;
+      var txt = (b.textContent || '').trim();
       if (!txt) continue;
       if (AR_RE.test(txt)) {
-        if (!out.ar) out.ar = txt;
+        if (txt.length > out.ar.length) out.ar = txt;
       } else {
-        if (!out.en) out.en = txt;
+        if (txt.length > out.en.length) out.en = txt;
       }
-      if (out.en && out.ar) break;
     }
     return out;
   }
