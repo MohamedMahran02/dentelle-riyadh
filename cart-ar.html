@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme/assets/theme.css?v=68" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=69" />
 </head>
 <body data-theme="cream" class="template-cart">
 
@@ -143,18 +143,19 @@
 </footer>
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
-<script src="theme/assets/shopify-cart.js?v=8" defer></script>
+<script src="theme/assets/shopify-cart.js?v=9" defer></script>
 <script src="theme/assets/products-live.js?v=7"></script>
-<script src="theme/assets/cart.js?v=8"></script>
+<script src="theme/assets/cart.js?v=9"></script>
 <script src="theme/assets/theme.js?v=22"></script>
 <script>
 (function () {
   'use strict';
 
+  var SAR_HTML = '<span class="sar-symbol" aria-label="SAR"><img src="images/sar-symbol.svg" alt="" width="16" height="16"></span>';
   var fmt = function (n) {
     var s = String(Math.round(Number(n) || 0));
     var ar = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-    return s.replace(/[0-9]/g, function(c){ return ar[+c]; }) + '\u00a0ر.س';
+    return s.replace(/[0-9]/g, function(c){ return ar[+c]; }) + '\u00a0' + SAR_HTML;
   };
 
   function render() {

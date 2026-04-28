@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=68" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=69" />
 </head>
 <body data-theme="cream">
 
@@ -111,7 +111,8 @@
   </div>
   <div class="campaign__overlay">
     <span class="eyebrow eyebrow--light">الحملة · مُهره</span>
-    <h2 class="h-display h-display--light"><em>ثقةٌ</em><br>هادئة.</h2>
+    <h2 class="h-display h-display--light"><em>Of quiet</em><br>confidence.</h2>
+    <h2 class="h-display-ar h-display--light" dir="rtl" lang="ar"><em>ثقةٌ</em> هادئة.</h2>
     <a href="#pieces" class="btn btn--ghost-light">تسوّقي الآن</a>
   </div>
 </section>
@@ -182,7 +183,8 @@
 <section class="categories" id="brand" data-reveal>
   <header class="categories__header">
     <span class="eyebrow">استكشفي حسب الفئة</span>
-    <h2 class="h-display">لكل <em>فصلٍ.</em></h2>
+    <h2 class="h-display">For every <em>chapter.</em></h2>
+    <h2 class="h-display-ar" dir="rtl" lang="ar">لكلّ <em>فصل.</em></h2>
   </header>
 
   <div class="categories__grid">
@@ -302,7 +304,8 @@
 <section class="newsletter" data-reveal>
   <div class="newsletter__inner">
     <span class="eyebrow">انضمّي إلى الدار</span>
-    <h2 class="h-display">مراسلات <em>خاصّة.</em></h2>
+    <h2 class="h-display">Private <em>correspondence.</em></h2>
+    <h2 class="h-display-ar" dir="rtl" lang="ar">مراسلات <em>خاصّة.</em></h2>
     <p>دعواتٌ لعروض خاصة، وإصدارات مُهره الجديدة، ورسائل من ورشة الرياض.</p>
     <form class="newsletter__form" data-newsletter-form data-lang="ar">
       <input type="email" name="email" placeholder="بريدك الإلكتروني" required />
@@ -367,10 +370,10 @@
 </footer>
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
-<script src="theme/assets/shopify-cart.js?v=8" defer></script>
+<script src="theme/assets/shopify-cart.js?v=9" defer></script>
 <script src="theme/assets/products-live.js?v=7"></script>
 <script src="theme/assets/newsletter.js?v=2" defer></script>
-<script src="theme/assets/cart.js?v=8"></script>
+<script src="theme/assets/cart.js?v=9"></script>
 <script src="theme/assets/theme.js?v=22"></script>
 
 <!-- SIZE GUIDE MODAL -->
@@ -479,7 +482,7 @@
   function fmtPrice(amt) {
     var n = String(Math.round(Number(amt) || 0));
     var ar = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-    return n.replace(/[0-9]/g, function(c){ return ar[+c]; }) + ' ر.س';
+    return n.replace(/[0-9]/g, function(c){ return ar[+c]; }) + ' <span class="sar-symbol" aria-label="SAR"><img src="images/sar-symbol.svg" alt="" width="16" height="16"></span>';
   }
   function escAttr(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 

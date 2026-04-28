@@ -19,9 +19,11 @@
   const IS_AR = (document.documentElement.lang || '').toLowerCase().startsWith('ar');
   const AR_DIGITS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
   const toArDigits = (s) => String(s).replace(/[0-9]/g, d => AR_DIGITS[+d]);
-  const fmt = (n) => IS_AR
-    ? (toArDigits(Number(n).toFixed(0)) + '\u00a0ر.س')
-    : ('SAR\u00a0' + Number(n).toFixed(0));
+  const SAR_HTML = '<span class="sar-symbol" aria-label="SAR"><img src="images/sar-symbol.svg" alt="" width="16" height="16"></span>';
+  const fmt = (n) => {
+    const num = IS_AR ? toArDigits(Number(n).toFixed(0)) : Number(n).toFixed(0);
+    return IS_AR ? (num + '\u00a0' + SAR_HTML) : (num + '\u00a0' + SAR_HTML);
+  };
   const productHref = (slug) => (IS_AR ? 'product-ar.html' : 'product.html') + '?slug=' + slug;
   const collectionHref = () => IS_AR ? 'collection-ar.html' : 'collection.html';
   const cartHref = () => IS_AR ? 'cart-ar.html' : 'cart.html';
