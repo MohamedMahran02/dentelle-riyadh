@@ -247,10 +247,10 @@
 </footer>
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
-<script src="theme/assets/shopify-cart.js?v=7" defer></script>
+<script src="theme/assets/shopify-cart.js?v=8" defer></script>
 <script src="theme/assets/products-live.js?v=6"></script>
-<script src="theme/assets/cart.js?v=7"></script>
-<script src="theme/assets/theme.js?v=21"></script>
+<script src="theme/assets/cart.js?v=8"></script>
+<script src="theme/assets/theme.js?v=22"></script>
 <script>
 (function () {
   'use strict';
@@ -269,16 +269,17 @@
     return;
   }
 
-  document.querySelector('[data-meta-title]').textContent =
-    `${product.title_en} — Dentelle Riyadh`;
-  document.querySelector('[data-meta-description]').content = product.description_en;
-
   // Generate Arabic title fallback if metafield empty
   const _AR_DIGITS_ = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
   const _arDigits = s => String(s).replace(/[0-9]/g, d => _AR_DIGITS_[+d]);
   const _arName = product.title_ar || ((product.title_en || '').match(/^Mohra\s+(\d+)$/i)
     ? 'مُهرة ' + _arDigits((product.title_en.match(/^Mohra\s+(\d+)$/i))[1])
     : (product.title_en || ''));
+
+  document.querySelector('[data-meta-title]').textContent =
+    `${_arName} — Dentelle Riyadh`;
+  document.querySelector('[data-meta-description]').content = product.description_ar || product.description_en;
+
   document.querySelector('[data-title-en]').textContent = _arName;
   document.querySelector('[data-title-ar]').textContent = '';
   document.querySelector('[data-subtitle]').textContent = product.subtitle || '';

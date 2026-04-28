@@ -157,11 +157,11 @@
 </footer>
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
-<script src="theme/assets/shopify-cart.js?v=7" defer></script>
+<script src="theme/assets/shopify-cart.js?v=8" defer></script>
 <script src="theme/assets/products-live.js?v=6"></script>
 <script src="theme/assets/collections-live.js?v=2"></script>
-<script src="theme/assets/cart.js?v=7"></script>
-<script src="theme/assets/theme.js?v=21"></script>
+<script src="theme/assets/cart.js?v=8"></script>
+<script src="theme/assets/theme.js?v=22"></script>
 <script>
 (function () {
   'use strict';
@@ -197,14 +197,17 @@
         products = products.filter(p => (p.category || '').toLowerCase() === category);
       }
       const col = (window.COLLECTIONS_BY_HANDLE || {})[handle];
+      const HANDLE_AR = { mohra: 'مُهره' };
       if (col) {
         titleEn = col.title;
-        // Only use Arabic subtitle if a real Arabic value was set in Shopify
         if (col.title_ar && col.title_ar !== col.title) {
           titleAr = col.title_ar;
+        } else if (HANDLE_AR[handle]) {
+          titleAr = HANDLE_AR[handle];
         }
       } else {
         titleEn = handle.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        if (HANDLE_AR[handle]) titleAr = HANDLE_AR[handle];
       }
     } else if (category !== 'all') {
       products = all.filter(p => (p.category || '').toLowerCase() === category);
@@ -219,8 +222,8 @@
       titleArEl.innerHTML = titleAr;
       titleArEl.style.display = titleAr ? '' : 'none';
     }
-    // Update browser tab title
-    const plainTitle = titleEnEl ? titleEnEl.textContent.trim() : titleEn.replace(/<[^>]+>/g, '');
+    // Update browser tab title — prefer Arabic title for AR locale.
+    const plainTitle = (titleAr || titleEn).replace(/<[^>]+>/g, '').trim();
     document.title = plainTitle + ' — Dentelle Riyadh';
 
     // Update filter links: when inside a collection, preserve the handle param

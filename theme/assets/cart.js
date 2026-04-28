@@ -75,8 +75,9 @@
   /* ------ count badge ------ */
   function refreshCounts() {
     const count = getCart().reduce((s, i) => s + i.qty, 0);
+    const display = count > 0 ? (IS_AR ? toArDigits(count) : String(count)) : '';
     document.querySelectorAll('[data-cart-count]').forEach(function (el) {
-      el.textContent = count > 0 ? count : '';
+      el.textContent = display;
       el.style.display = count > 0 ? 'flex' : 'none';
     });
   }

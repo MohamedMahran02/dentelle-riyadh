@@ -162,7 +162,10 @@
      Product page — variant picker + add-to-cart
      ========================================================= */
   const productForm = $('[data-product-form]');
-  if (productForm) {
+  if (productForm && $('[data-variant-id]', productForm)) {
+    // Legacy Shopify-rendered product form path. The static storefront uses
+    // shopify-cart.js instead and does NOT include [data-variant-id]; bail out
+    // here to avoid a TypeError on submit.
     const variantJsonNode = $('[data-variant-json]');
     const variants = variantJsonNode ? JSON.parse(variantJsonNode.textContent) : [];
     const variantInput = $('[data-variant-id]', productForm);
