@@ -12,7 +12,7 @@
     return;
   }
 
-  var CACHE_KEY = 'dentelle:products:v5';
+  var CACHE_KEY = 'dentelle:products:v6';
   var CACHE_TTL = 5 * 60 * 1000; // 5 min
 
   var QUERY = [
@@ -42,12 +42,30 @@
     '}'
   ].join('\n');
 
-  function stripHtmlFirstP(html) {
-    if (!html) return '';
+  var AR_RE = /[\u0600-\u06FF]/;
+
+  function splitDescriptionByLang(html) {
+    var out = { en: '', ar: '' };
+    if (!html) return out;
     var tmp = document.createElement('div');
     tmp.innerHTML = html;
-    var p = tmp.querySelector('p');
-    return (p ? p.textContent : tmp.textContent || '').trim();
+    var blocks = tmp.querySelectorAll('p, li, h1, h2, h3, h4, h5, h6');
+    if (!blocks.length) {
+      var t = (tmp.textContent || '').trim();
+      if (AR_RE.test(t)) out.ar = t; else out.en = t;
+      return out;
+    }
+    for (var i = 0; i < blocks.length; i++) {
+      var txt = (blocks[i].textContent || '').trim();
+      if (!txt) continue;
+      if (AR_RE.test(txt)) {
+        if (!out.ar) out.ar = txt;
+      } else {
+        if (!out.en) out.en = txt;
+      }
+      if (out.en && out.ar) break;
+    }
+    return out;
   }
 
   function transform(edges) {
@@ -68,7 +86,10 @@
 
       var images = (n.images && n.images.edges || []).map(function (e) { return e.node.url; });
       var collectionHandles = (n.collections && n.collections.edges || []).map(function (e) { return e.node.handle; });
-      var desc_en_full = stripHtmlFirstP(n.descriptionHtml);
+      var desc_split = splitDescriptionByLang(n.descriptionHtml);
+      var desc_en_full = desc_split.en;
+      var desc_ar_meta = (n.descAr && n.descAr.value) || '';
+      var desc_ar_full = desc_ar_meta || desc_split.ar;
 
       return {
         slug: n.handle,
@@ -79,7 +100,7 @@
         title_ar: (n.titleAr && n.titleAr.value) || '',
         subtitle: (n.subtitle && n.subtitle.value) || ((n.vendor || '') + (n.productType ? ' — ' + n.productType : '')),
         description_en: desc_en_full,
-        description_ar: (n.descAr && n.descAr.value) || '',
+        description_ar: desc_ar_full,
         price: Math.round(firstPrice || 0),
         compare_at: null,
         rating: 4.7, review_count: 20,
