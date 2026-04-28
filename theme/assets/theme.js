@@ -399,6 +399,28 @@
   /* =========================================================
      Legal Modal — Terms / Privacy / SASO / Shipping / Returns
      ========================================================= */
+  /* =========================================================
+     Locale switcher — preserve query string when swapping
+     between EN ↔ AR pages (e.g. ?slug=mohra-6, ?handle=mohra)
+     ========================================================= */
+  (function preserveQueryOnLocaleSwitch() {
+    var search = window.location.search || '';
+    if (!search) return;
+    var links = document.querySelectorAll('.locale-switcher a.locale-btn');
+    links.forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      // Only touch links pointing to a sibling html page; leave fully-qualified ones alone.
+      if (!href || href.indexOf('://') !== -1) return;
+      var hashIdx = href.indexOf('#');
+      var hash = hashIdx === -1 ? '' : href.slice(hashIdx);
+      var base = hashIdx === -1 ? href : href.slice(0, hashIdx);
+      // Strip any pre-existing query string on the link itself
+      var qIdx = base.indexOf('?');
+      if (qIdx !== -1) base = base.slice(0, qIdx);
+      a.setAttribute('href', base + search + hash);
+    });
+  })();
+
   var __LEGAL_IS_AR = (document.documentElement.lang || '').toLowerCase().startsWith('ar');
   var LEGAL_CONTENT_AR = {
     terms: {
