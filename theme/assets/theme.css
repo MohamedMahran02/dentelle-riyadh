@@ -2587,7 +2587,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Size chart — full-bleed, fills to the panel edges */
 .size-modal__chart {
   margin: 0;
-  padding: 0;
+  padding: 1.4rem 1.5rem 1.6rem;
   border-bottom: 1px solid var(--c-border);
   background: var(--c-paper);
 }
@@ -2595,6 +2595,79 @@ ul { margin: 0; padding: 0; list-style: none; }
   width: 100%; height: auto;
   display: block;
   border-radius: 0;
+}
+.size-modal__chart-heading {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: .08em;
+  color: var(--c-ink);
+  margin: 0 0 .7rem;
+}
+.size-modal__chart-heading + .size-table-wrap { margin-bottom: 1.4rem; }
+.size-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1.6rem;
+}
+.size-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-family: var(--f-sans);
+  font-size: 1rem;
+  background: #fff;
+}
+.size-table th,
+.size-table td {
+  border: 1px solid var(--c-line);
+  padding: .85rem .7rem;
+  text-align: center;
+  vertical-align: middle;
+}
+.size-table thead th {
+  font-weight: 600;
+  font-size: .82rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  background: var(--c-cream-2);
+}
+.size-table tbody th[scope="row"] {
+  text-align: left;
+  font-weight: 500;
+  background: var(--c-cream);
+  letter-spacing: .04em;
+  white-space: nowrap;
+  font-size: .92rem;
+}
+[dir="rtl"] .size-table tbody th[scope="row"],
+[lang="ar"] .size-table tbody th[scope="row"] { text-align: right; }
+.size-table tbody td { font-variant-numeric: tabular-nums; }
+.size-modal__chart-note,
+.product__sizeguide-chart-note {
+  margin: -.6rem 0 0;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.product__sizeguide-chart-heading {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: .08em;
+  color: var(--c-ink);
+  margin: 1rem 0 .55rem;
+}
+.product__sizeguide-section:first-child .product__sizeguide-chart-heading { margin-top: 0; }
+@media (max-width: 600px) {
+  .size-modal__chart { padding: 1rem 1rem 1.2rem; }
+  .size-modal__chart-heading { font-size: 1.05rem; }
+  .size-table { font-size: .9rem; }
+  .size-table th, .size-table td { padding: .55rem .45rem; }
+  .size-table tbody th[scope="row"] { font-size: .82rem; }
 }
 
 /* Footer */
