@@ -3,6 +3,16 @@
    Visual direction: Aubade-inspired luxury, Arabian refinement
    ========================================================= */
 
+/* ---------- FONTS — self-hosted Arabic ---------- */
+@font-face {
+  font-family: 'Milligram Arabic';
+  src: url('fonts/MilligramArabicLight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
 /* ---------- SPLASH LOADER ---------- */
 .site-loader {
   position: fixed;
@@ -91,9 +101,9 @@
   --f-display:   'Bodoni Moda', 'Didot', Georgia, serif;
   --f-serif:     'Bodoni Moda', 'Didot', Georgia, serif;
   --f-sans:      'Bodoni Moda', 'Didot', Georgia, serif;
-  /* Single-family Arabic */
-  --f-ar-display:'Noto Naskh Arabic', 'Amiri', serif;
-  --f-ar-body:   'Noto Naskh Arabic', 'Amiri', serif;
+  /* Single-family Arabic — self-hosted Milligram Arabic Light */
+  --f-ar-display:'Milligram Arabic', 'Noto Naskh Arabic', 'Amiri', serif;
+  --f-ar-body:   'Milligram Arabic', 'Noto Naskh Arabic', 'Amiri', serif;
 
   /* Scale — editorial, tight body / big headlines */
   --step--1: clamp(.78rem, .74rem + .15vw, .82rem);
