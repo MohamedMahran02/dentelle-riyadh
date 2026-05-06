@@ -3,7 +3,7 @@
    Visual direction: Aubade-inspired luxury, Arabian refinement
    ========================================================= */
 
-/* ---------- FONTS — self-hosted Arabic ---------- */
+/* ---------- FONTS — self-hosted ---------- */
 @font-face {
   font-family: 'Milligram Arabic';
   src: url('fonts/MilligramArabicLight.ttf') format('truetype');
@@ -11,6 +11,20 @@
   font-style: normal;
   font-display: swap;
   unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('fonts/CormorantGaramond.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('fonts/CormorantGaramond.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* ---------- SPLASH LOADER ---------- */
@@ -2593,10 +2607,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .size-modal__chart-heading,
 .product__sizeguide-chart-heading {
-  font-family: var(--f-display);
+  font-family: 'Cormorant Garamond', 'Garamond', 'Didot', Georgia, serif;
   font-weight: 500;
-  font-size: 1.15rem;
-  letter-spacing: .04em;
+  font-size: 1.3rem;
+  letter-spacing: .03em;
   color: var(--c-ink);
   margin: 0 0 .75rem;
 }
@@ -2615,8 +2629,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .size-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: var(--f-sans);
-  font-size: .95rem;
+  font-family: 'Cormorant Garamond', 'Garamond', 'Didot', Georgia, serif;
+  font-size: 1.05rem;
   background: #FFFFFF;
   table-layout: auto;
 }
@@ -2654,9 +2668,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 .size-modal__chart-note,
 .product__sizeguide-chart-note {
   margin: 0;
-  font-size: .72rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+  font-family: 'Cormorant Garamond', 'Garamond', 'Didot', Georgia, serif;
+  font-size: .85rem;
+  font-style: italic;
+  letter-spacing: .04em;
+  text-transform: none;
   color: var(--c-muted);
   text-align: center;
 }
