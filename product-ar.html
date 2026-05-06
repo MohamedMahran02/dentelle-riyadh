@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=70" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=71" />
 </head>
 <body data-theme="cream" class="template-product">
 
@@ -124,6 +124,11 @@
 
       <div class="product__lede" data-description-en></div>
       <div class="product__lede product__lede--ar body-ar" dir="rtl" lang="ar" data-description-ar></div>
+
+      <aside class="product__fit-notes" data-fit-notes hidden>
+        <span class="product__fit-notes-label">ملاحظات الملاءمة</span>
+        <p class="product__fit-notes-text" dir="rtl" lang="ar" data-fit-notes-ar></p>
+      </aside>
 
       <form class="product__form" data-product-form>
         <div class="product__option">
@@ -248,7 +253,7 @@
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
 <script src="theme/assets/shopify-cart.js?v=10" defer></script>
-<script src="theme/assets/products-live.js?v=9"></script>
+<script src="theme/assets/products-live.js?v=10"></script>
 <script src="theme/assets/cart.js?v=10"></script>
 <script src="theme/assets/theme.js?v=22"></script>
 <script>
@@ -296,6 +301,19 @@
       `<p>${product.description_ar}</p>`;
   } else {
     document.querySelector('[data-description-ar]').remove();
+  }
+
+  // ----- Fit notes -----
+  const fitWrap = document.querySelector('[data-fit-notes]');
+  const fitArEl = document.querySelector('[data-fit-notes-ar]');
+  if (fitWrap && fitArEl) {
+    const fitText = product.fit_notes_ar || product.fit_notes;
+    if (fitText) {
+      fitArEl.textContent = fitText;
+      fitWrap.hidden = false;
+    } else {
+      fitWrap.remove();
+    }
   }
 
   document.querySelector('[data-details]').innerHTML = `<p>${product.details_ar || product.details || '—'}</p>`;

@@ -12,7 +12,7 @@
     return;
   }
 
-  var CACHE_KEY = 'dentelle:products:v11';
+  var CACHE_KEY = 'dentelle:products:v12';
   var CACHE_TTL = 5 * 60 * 1000; // 5 min
 
   var QUERY = [
@@ -40,6 +40,8 @@
     '        detailsAr: metafield(namespace: "custom", key: "details_ar") { value }',
     '        careEn:    metafield(namespace: "custom", key: "care_en") { value }',
     '        careAr:    metafield(namespace: "custom", key: "care_ar") { value }',
+    '        fitEn:     metafield(namespace: "custom", key: "fit_notes_en") { value }',
+    '        fitAr:     metafield(namespace: "custom", key: "fit_notes_ar") { value }',
     '      }',
     '    }',
     '  }',
@@ -125,6 +127,8 @@
         details_ar: (n.detailsAr && n.detailsAr.value) || 'دانتيل ٧٨٪ بولياميد، ١٥٪ إيلاستين، ٧٪ ألياف معدنية.',
         care: (n.careEn && n.careEn.value) || 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
         care_ar: (n.careAr && n.careAr.value) || 'غسيل يدوي بحد أقصى ٣٠ درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+        fit_notes: (n.fitEn && n.fitEn.value) || '',
+        fit_notes_ar: (n.fitAr && n.fitAr.value) || '',
         shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
         shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من ٢ إلى ٥ أيام عمل.'
       };

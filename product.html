@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="theme/assets/theme.css?v=70" />
+<link rel="stylesheet" href="theme/assets/theme.css?v=71" />
 </head>
 <body data-theme="cream" class="template-product">
 
@@ -121,6 +121,11 @@
 
       <div class="product__lede" data-description-en></div>
       <div class="product__lede product__lede--ar body-ar" dir="rtl" lang="ar" data-description-ar></div>
+
+      <aside class="product__fit-notes" data-fit-notes hidden>
+        <span class="product__fit-notes-label">Fit notes</span>
+        <p class="product__fit-notes-text" data-fit-notes-en></p>
+      </aside>
 
       <form class="product__form" data-product-form>
         <div class="product__option">
@@ -241,7 +246,7 @@
 
 <script src="theme/assets/shopify-config.js?v=2"></script>
 <script src="theme/assets/shopify-cart.js?v=10" defer></script>
-<script src="theme/assets/products-live.js?v=9"></script>
+<script src="theme/assets/products-live.js?v=10"></script>
 <script src="theme/assets/cart.js?v=10"></script>
 <script src="theme/assets/theme.js?v=22"></script>
 <script>
@@ -280,6 +285,18 @@
       `<p>${product.description_ar}</p>`;
   } else {
     document.querySelector('[data-description-ar]').remove();
+  }
+
+  // ----- Fit notes -----
+  const fitWrap = document.querySelector('[data-fit-notes]');
+  const fitEnEl = document.querySelector('[data-fit-notes-en]');
+  if (fitWrap && fitEnEl) {
+    if (product.fit_notes) {
+      fitEnEl.textContent = product.fit_notes;
+      fitWrap.hidden = false;
+    } else {
+      fitWrap.remove();
+    }
   }
 
   // ----- Accordions -----

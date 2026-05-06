@@ -2018,6 +2018,34 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .product__lede { color: var(--c-ink-soft); font-size: .88rem; line-height: 1.6; }
 .product__lede--ar { border-top: 1px solid var(--c-line); padding-top: .85rem; }
+
+/* Fit notes — small bilingual callout above the size selector */
+.product__fit-notes {
+  display: block;
+  margin: .25rem 0 .35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--c-line);
+  border-left: 3px solid var(--c-gold);
+  background: rgba(196, 160, 106, .04);
+  border-radius: 2px;
+}
+[dir="rtl"] .product__fit-notes,
+[lang="ar"] .product__fit-notes { border-left: 1px solid var(--c-line); border-right: 3px solid var(--c-gold); }
+.product__fit-notes-label {
+  display: block;
+  font-family: var(--f-sans);
+  font-size: .68rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: .35rem;
+}
+.product__fit-notes-text {
+  margin: 0;
+  font-size: .86rem;
+  line-height: 1.55;
+  color: var(--c-ink-soft);
+}
 .product__form { display: flex; flex-direction: column; gap: .85rem; margin-top: .5rem; }
 .product__options { display: flex; flex-direction: column; gap: 1.4rem; }
 .product__option { border: 0; padding: 0; margin: 0; }
