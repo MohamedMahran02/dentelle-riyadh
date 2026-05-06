@@ -2957,6 +2957,34 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding: .75rem 2.2rem .75rem 1rem;
   margin-bottom: .2rem;
 }
+/* ---------- MOBILE: collapse bilingual sections to active locale only ----------
+   On phones, show only the EN side when the page is EN, and only the AR side
+   when the page is AR. Desktop keeps the bilingual EN+AR layout intact. */
+@media (max-width: 760px) {
+  /* EN page → hide AR siblings */
+  html[lang="en"] .product-grid__head--bilingual .product-grid__head-ar,
+  html[lang="en"] .story__block > .story__column--ar,
+  html[lang="en"] .category-tile__name-ar,
+  html[lang="en"] .campaign__overlay .h-display-ar,
+  html[lang="en"] .newsletter .h-display-ar { display: none !important; }
+
+  /* AR page → hide EN siblings */
+  html[lang="ar"] .product-grid__head--bilingual .product-grid__head-en,
+  html[lang="ar"] .story__block > .story__column:not(.story__column--ar),
+  html[lang="ar"] .category-tile__name,
+  html[lang="ar"] .campaign__overlay .h-display:not(.h-display-ar),
+  html[lang="ar"] .newsletter .h-display:not(.h-display-ar) { display: none !important; }
+
+  /* Strip the divider/padding that separates the two columns when only one shows */
+  html[lang="en"] .story__block > .story__column:not(.story__column--ar),
+  html[lang="ar"] .story__block > .story__column--ar {
+    border-top: 0 !important;
+    padding-top: 0 !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
 /* ---------- SCROLLBAR ---------- */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: var(--c-cream); }
