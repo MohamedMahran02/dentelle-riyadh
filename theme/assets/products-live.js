@@ -12,7 +12,7 @@
     return;
   }
 
-  var CACHE_KEY = 'dentelle:products:v10';
+  var CACHE_KEY = 'dentelle:products:v11';
   var CACHE_TTL = 5 * 60 * 1000; // 5 min
 
   var QUERY = [
@@ -33,9 +33,13 @@
     '            }',
     '          }',
     '        }',
-    '        titleAr: metafield(namespace: "custom", key: "title_ar") { value }',
-    '        subtitle: metafield(namespace: "custom", key: "subtitle") { value }',
-    '        descAr:  metafield(namespace: "custom", key: "description_ar") { value }',
+    '        titleAr:   metafield(namespace: "custom", key: "title_ar") { value }',
+    '        subtitle:  metafield(namespace: "custom", key: "subtitle") { value }',
+    '        descAr:    metafield(namespace: "custom", key: "description_ar") { value }',
+    '        detailsEn: metafield(namespace: "custom", key: "details_en") { value }',
+    '        detailsAr: metafield(namespace: "custom", key: "details_ar") { value }',
+    '        careEn:    metafield(namespace: "custom", key: "care_en") { value }',
+    '        careAr:    metafield(namespace: "custom", key: "care_ar") { value }',
     '      }',
     '    }',
     '  }',
@@ -117,10 +121,10 @@
         is_signature: (n.tags || []).indexOf('signature') !== -1,
         tags: n.tags || [],
         collections: collectionHandles,
-        details: 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
-        details_ar: 'دانتيل ٧٨٪ بولياميد، ١٥٪ إيلاستين، ٧٪ ألياف معدنية.',
-        care: 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
-        care_ar: 'غسيل يدوي بحد أقصى ٣٠ درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
+        details: (n.detailsEn && n.detailsEn.value) || 'Lace 78% polyamide, 15% elastane, 7% metallic fibers.',
+        details_ar: (n.detailsAr && n.detailsAr.value) || 'دانتيل ٧٨٪ بولياميد، ١٥٪ إيلاستين، ٧٪ ألياف معدنية.',
+        care: (n.careEn && n.careEn.value) || 'Hand wash at 30°C max. No bleach, no machine drying. Low-temperature ironing only.',
+        care_ar: (n.careAr && n.careAr.value) || 'غسيل يدوي بحد أقصى ٣٠ درجة. بدون مُبيّض، بدون تجفيف آلي. كيّ على درجة حرارة منخفضة فقط.',
         shipping: 'Free shipping within the Kingdom · SASO certified · Delivery 2–5 working days.',
         shipping_ar: 'شحن مجاني داخل المملكة · معتمد ساسو · التوصيل من ٢ إلى ٥ أيام عمل.'
       };
