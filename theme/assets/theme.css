@@ -152,7 +152,7 @@
 
 /* ---------- RESET ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: hidden; }
 body {
   margin: 0;
   background: var(--c-paper);
@@ -926,15 +926,26 @@ ul { margin: 0; padding: 0; list-style: none; }
   align-items: center;
   gap: .4rem;
   font-family: var(--f-sans);
-  font-size: clamp(.58rem, .9vw, .68rem);
+  font-size: clamp(.66rem, .9vw, .72rem);
   font-weight: 400;
-  letter-spacing: .28em;
+  letter-spacing: .24em;
   text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
-.locale-switcher .locale-btn { opacity: .55; transition: opacity var(--dur-s) var(--ease); }
+.locale-switcher .locale-btn {
+  opacity: .85;
+  padding: .25rem .15rem;
+  transition: opacity var(--dur-s) var(--ease);
+}
 .locale-switcher .locale-btn:hover { opacity: 1; }
 .locale-switcher .locale-btn.is-active { opacity: 1; color: var(--c-ink); font-weight: 500; }
-.locale-sep { opacity: .3; font-weight: 300; }
+.locale-sep { opacity: .55; font-weight: 300; }
+@media (max-width: 480px) {
+  .locale-switcher { gap: .25rem; font-size: .68rem; }
+  .locale-switcher .locale-btn { opacity: 1; padding: .2rem .1rem; }
+  .site-header__icons { gap: .8rem !important; }
+}
 
 /* ---------- HERO — AUBADE STYLE ---------- */
 .hero--aubade {
