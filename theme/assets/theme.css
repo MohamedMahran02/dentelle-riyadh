@@ -2949,13 +2949,13 @@ em, i, cite, address, dfn, var { font-style: normal; }
 /* ---------- Logo image (replaces inline SVG lockup) ---------- */
 .site-logo__img {
   display: block;
-  height: 52px;
+  height: 60px;
   width: auto;
   object-fit: contain;
-  margin: -6px 0;          /* lets the logo grow without pushing header height */
+  margin: -10px 0;         /* lets the logo grow without pushing header height */
 }
 @media (max-width: 760px) {
-  .site-logo__img { height: 40px; margin: -4px 0; }
+  .site-logo__img { height: 44px; margin: -6px 0; }
 }
 .site-logo__img--lg {
   height: 160px;
