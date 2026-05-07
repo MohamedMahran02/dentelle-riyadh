@@ -26,6 +26,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('fonts/CormorantGaramond-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('fonts/CormorantGaramond-Italic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* ---------- SPLASH LOADER ---------- */
 .site-loader {
@@ -110,11 +124,12 @@
   --c-rouge:      #6E2A27;
 
   /* Type */
-  /* Single-family Latin: Bodoni Moda for display, body, UI, nav, prices.
-     Optical-size axis lets the same family render at all sizes. */
-  --f-display:   'Bodoni Moda', 'Didot', Georgia, serif;
-  --f-serif:     'Bodoni Moda', 'Didot', Georgia, serif;
-  --f-sans:      'Bodoni Moda', 'Didot', Georgia, serif;
+  /* Single-family Latin: Cormorant Garamond — self-hosted in /theme/assets/fonts/.
+     Bodoni Moda kept in the fallback chain so that if the TTF fails to
+     load the layout still gets a refined serif (not Georgia). */
+  --f-display:   'Cormorant Garamond', 'Bodoni Moda', 'Garamond', 'Didot', Georgia, serif;
+  --f-serif:     'Cormorant Garamond', 'Bodoni Moda', 'Garamond', 'Didot', Georgia, serif;
+  --f-sans:      'Cormorant Garamond', 'Bodoni Moda', 'Garamond', 'Didot', Georgia, serif;
   /* Single-family Arabic — self-hosted Milligram Arabic Light */
   --f-ar-display:'Milligram Arabic', 'Noto Naskh Arabic', 'Amiri', serif;
   --f-ar-body:   'Milligram Arabic', 'Noto Naskh Arabic', 'Amiri', serif;
